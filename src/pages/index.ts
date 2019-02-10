@@ -1,0 +1,6 @@
+export * from '@pages/error/Error'
+export * from '@pages/home/Home'
+export * from '@pages/admin/Admin'
+export * from '@pages/admin/addarticle/AddArticle'
+export * from '@pages/home/articledetail/ArticleDetail'
+export * from '@pages/admin/editarticle/EditArticle'

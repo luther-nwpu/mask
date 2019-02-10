@@ -1,0 +1,79 @@
+.artilcelist-app {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.articles {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.articles-item {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    border: 10px solid black;
+    border-style:dotted; 
+}
+.articles-item-img {
+    width: 30%;
+}
+.articles-item-detail {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.articles-item-detail-title {
+    width: 95%;
+    line-height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.articles-item-detail-title-text {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+.articles-item-detail-title-time {
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.articles-item-detail-description {
+    width: 95%;
+    margin-top: -20px;
+    font-size: 13.5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    p {
+        position:relative;
+        line-height:1.4em;
+        /* 3 times the line-height to show 3 lines */
+        height:8.4em;
+        overflow:hidden;
+    }
+}
+p::after {
+    content:"...";
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 20px 1px 45px;
+    background:url(http://newimg88.b0.upaiyun.com/newimg88/2014/09/ellipsis_bg.png) repeat-y;
+}
+.articles-item-detail-bottom {
+    width: 95%;
+    margin-top: -5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.svg-size {
+    width: 25px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
