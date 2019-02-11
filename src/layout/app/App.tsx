@@ -17,6 +17,7 @@ export class App extends React.Component {
   public render() {
     return (
       <div className="page">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
         <Route path={`${this.state.match}`} component={BlogApp}/>
         <Route path={`${this.state.match}admin`} component={AdminApp} />
       </div>

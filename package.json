@@ -1,11 +1,13 @@
 {
-  "name": "nwpuorderadmin",
+  "name": "mask",
   "version": "1.0.0",
   "main": "./src/start.js",
   "description": "Finish The Nwpu Order Admin.",
   "author": "luther(luthernpu@gmail.com)",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
     "@types/history": "^4.6.2",
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.12",
