@@ -1,9 +1,9 @@
 import * as React from 'react'
-import {Home} from '@pages'
+import { Frame } from '../Frame'
 import { Route, Switch } from 'react-router-dom'
 import './App.scss'
-import { ArticleDetail } from '@pages'
-import { BlogApp, AdminApp } from '@layout'
+
+import { MaskApp, AdminApp } from '@layout'
 export class App extends React.Component {
   public state = {
     match: '',
@@ -17,10 +17,11 @@ export class App extends React.Component {
   public render() {
     return (
       <div className="page">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
-        <Route path={`${this.state.match}`} component={BlogApp}/>
+        <Frame></Frame>
+        <Route path={`${this.state.match}`} component={MaskApp}/>
         <Route path={`${this.state.match}admin`} component={AdminApp} />
       </div>
     )
   }
 }
+

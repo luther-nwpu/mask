@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {Home} from '@pages'
 import { Route, Switch } from 'react-router-dom'
-import './BlogApp.scss'
+import './MaskApp.scss'
 import { ArticleDetail } from '@pages'
-export class BlogApp extends React.Component {
+export class MaskApp extends React.Component {
   public state = {
     match: '',
   }
