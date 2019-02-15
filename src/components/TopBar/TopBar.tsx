@@ -14,15 +14,22 @@ export class TopBar extends Component {
                         首页
                     </div>
                     <div className="item">
-                        <div> 分类     </div>
+                        <div> 分类 </div>
                         <span className="closeBox" >
                         </span>
                     </div>
                     <div className="item">
                         热门
+                        <span className="closeBox" >
+                        </span>
                     </div>
                     <div className="item">
                         排行榜
+                        <span className="closeBox">
+                        </span>
+                    </div>
+                    <div className = "item">
+                        <input type = "text" />
                     </div>
                     <div className="item">
                         历史
