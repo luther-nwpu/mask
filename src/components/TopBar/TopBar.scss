@@ -23,7 +23,17 @@
             padding-right: 10px;
             display: flex;
             flex-direction: row;
-            img {
+            align-items: center;
+            justify-content: center;
+            .closeBox{
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                transition: transform 0.5s;
+                background-image: url('../../assets/arrow.svg');
+                background-size: 10px 10px;
+            }
+            .closeBox img{
                 width: 10px;
                 height: 10px;
             }
@@ -31,7 +41,7 @@
               border-radius: 10px;
               background-color: aqua;
               transition: transform .25s linear;
-              img {
+              .closeBox {
                 transform: rotate(180deg);
               }
             }

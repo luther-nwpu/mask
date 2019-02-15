@@ -14,7 +14,9 @@ export class TopBar extends Component {
                         首页
                     </div>
                     <div className="item">
-                        <div> 分类 <img src={arrow}/> </div>
+                        <div> 分类     </div>
+                        <span className="closeBox" >
+                        </span>
                     </div>
                     <div className="item">
                         热门
