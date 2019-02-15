@@ -15,7 +15,7 @@ export class MaskApp extends React.Component {
   }
   public render() {
     return (
-      <div className="page">
+      <div className="maskapp">
         <Switch>
           <Route exact={true} path={`${this.state.match}`} component={Home} />
           <Route path={`${this.state.match}article/:id`} component={ ArticleDetail } />`
