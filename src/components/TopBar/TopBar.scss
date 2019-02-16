@@ -9,80 +9,88 @@
         width: 80%;
         display: flex;
         flex-direction: row;
-        a {
-            height: 50px;
-        }
-        img {
-            width: 180px;
-            height: 50px;
-        }      
-        .item {
-            font-size: 15px;
-            line-height: 40px;
-            padding-left: 10px;
-            padding-right: 10px;
+        justify-content: space-around;
+        .left {
             display: flex;
             flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            .closeBox{
-                margin-left: 5px;
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                transition: transform 0.5s;
-                background-image: url('../../assets/arrow.svg');
-                background-size: 10px 10px;
+            a {
+                height: 50px;
             }
-            .closeBox img{
-                width: 10px;
-                height: 10px;
-            }
-            &:hover {
-              border-radius: 10px;
-              background-color: aqua;
-              transition: transform .25s linear;
-              .closeBox {
-                transform: rotate(180deg);
-              }
-            }
-        }
-        .input {
-            box-sizing: content-box;
-            padding-left: 10px;
-            padding-right: 10px;
-            border-radius: 10px;
-            font-size: 15px;
-            background: #e4e6ea;
-            display: flex;
-            flex-direction: row;
-            justify-items: center;
-            align-items: center;
-            input {
-                height: 30px;
-                border-radius: 10px;
-                border: none;
-                outline: none;
-                background: #e4e6ea;
-            }
-            &:hover {
-                background: white;
-                border: 1px solid aqua;
-                input {
-                    background: white;
-                    border: none;
+            img {
+                width: 180px;
+                height: 50px;
+            }      
+            .item {
+                font-size: 15px;
+                line-height: 40px;
+                padding-left: 10px;
+                padding-right: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                .closeBox{
+                    margin-left: 5px;
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    transition: transform 0.5s;
+                    background-image: url('../../assets/arrow.svg');
+                    background-size: 10px 10px;
+                }
+                .closeBox img{
+                    width: 10px;
+                    height: 10px;
+                }
+                &:hover {
+                  border-radius: 10px;
+                  background-color: aqua;
+                  transition: transform .25s linear;
+                  .closeBox {
+                    transform: rotate(180deg);
+                  }
                 }
             }
-            .icon {
-                width: 10px;
-                height: 10px;
-                background-size: 30px 30px;
-                background-image: url('../../assets/search_btn_1.png')
+            .input {
+                box-sizing: content-box;
+                padding-left: 10px;
+                padding-right: 10px;
+                border-radius: 10px;
+                font-size: 15px;
+                background: #e4e6ea;
+                display: flex;
+                flex-direction: row;
+                justify-items: center;
+                align-items: center;
+                input {
+                    height: 30px;
+                    border-radius: 10px;
+                    border: none;
+                    outline: none;
+                    background: #e4e6ea;
+                }
+                &:hover {
+                    background: white;
+                    border: 1px solid aqua;
+                    input {
+                        background: white;
+                        border: none;
+                    }
+                }
+                .icon {
+                    width: 10px;
+                    height: 10px;
+                    background-size: 30px 30px;
+                    background-image: url('../../assets/search_btn_1.png')
+                }
+                &:hover .icon {
+                    background-size: 30px 30px;
+                    background-image: url('../../assets/search_btn_0.png')
+                }
             }
-            &:hover .icon {
-                background-size: 30px 30px;
-                background-image: url('../../assets/search_btn_0.png')
-            }
+        }
+        .right {
+            display: flex;
         }
     }
 }
