@@ -47,5 +47,42 @@
               }
             }
         }
+        .input {
+            box-sizing: content-box;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #e4e6ea;
+            display: flex;
+            flex-direction: row;
+            justify-items: center;
+            align-items: center;
+            input {
+                height: 30px;
+                border-radius: 10px;
+                border: none;
+                outline: none;
+                background: #e4e6ea;
+            }
+            &:hover {
+                background: white;
+                border: 1px solid aqua;
+                input {
+                    background: white;
+                    border: none;
+                }
+            }
+            .icon {
+                width: 10px;
+                height: 10px;
+                background-size: 30px 30px;
+                background-image: url('../../assets/search_btn_1.png')
+            }
+            &:hover .icon {
+                background-size: 30px 30px;
+                background-image: url('../../assets/search_btn_0.png')
+            }
+        }
     }
 }

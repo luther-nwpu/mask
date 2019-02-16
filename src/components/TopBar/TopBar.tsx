@@ -28,8 +28,10 @@ export class TopBar extends Component {
                         <span className="closeBox">
                         </span>
                     </div>
-                    <div className = "item">
+                    <div className="input">
                         <input type = "text" />
+                        <div className="icon">
+                        </div>
                     </div>
                     <div className="item">
                         历史
