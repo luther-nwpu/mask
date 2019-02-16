@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Component } from 'react'
 import './TopBar.scss'
 import logo from '@assets/logo.png'
-import arrow from '@assets/arrow.svg'
+import { Auth } from '@components'
 export class TopBar extends Component {
     render() {
         return (
@@ -57,6 +57,7 @@ export class TopBar extends Component {
                         </div>
                     </div>
                 </div>
+                <Auth></Auth>
             </div>
         )
     }

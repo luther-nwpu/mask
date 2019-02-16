@@ -1,13 +1,18 @@
 .auth-component {
     position: fixed;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
+    overflow: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    transform: none;
-    opacity:0.3; 
-    filter: alpha(opacity=30); 
-    background-color:#000;
+    background:rgba(0,0,0,0.3);
+    .modal {
+        width: 500px;
+        height: 300px;
+        background-color: white;
+    }
 }
