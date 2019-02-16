@@ -6,10 +6,10 @@
     align-content: center;
     justify-content: center;
     .topbar-content {
-        width: 80%;
+        width: 70%;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         .left {
             display: flex;
             flex-direction: row;
@@ -44,7 +44,7 @@
                 }
                 &:hover {
                   border-radius: 10px;
-                  background-color: aqua;
+                  background-color: #ff9600;
                   transition: transform .25s linear;
                   .closeBox {
                     transform: rotate(180deg);
@@ -71,26 +71,60 @@
                 }
                 &:hover {
                     background: white;
-                    border: 1px solid aqua;
+                    border: 1px solid #ff9600;
                     input {
                         background: white;
                         border: none;
                     }
                 }
                 .icon {
-                    width: 10px;
-                    height: 10px;
-                    background-size: 30px 30px;
+                    width: 15px;
+                    height: 15px;
+                    background-size: 15px 15px;
                     background-image: url('../../assets/search_btn_1.png')
                 }
                 &:hover .icon {
-                    background-size: 30px 30px;
                     background-image: url('../../assets/search_btn_0.png')
                 }
             }
         }
         .right {
             display: flex;
+            flex-direction: row;
+            .item {
+                font-size: 15px;
+                line-height: 40px;
+                padding-left: 10px;
+                padding-right: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                    color: #ff9600;
+                }
+                .item-text {
+                    margin-left: 5px;
+                }
+                .icon {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px 18px;
+                    background-image: url('../../assets/history_btn_0.svg');
+                }
+                &:hover .icon {
+                    background-image: url('../../assets/history_btn_1.svg');
+                }
+                .icon-account {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px 18px;
+                    background-image: url('../../assets/account_btn_0.svg');
+                }
+                &:hover .icon-account {
+                    background-image: url('../../assets/account_btn_1.svg');
+                }
+            }
         }
     }
 }

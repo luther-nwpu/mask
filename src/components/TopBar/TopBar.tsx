@@ -36,12 +36,23 @@ export class TopBar extends Component {
                     </div>
                     <div className="right">
                         <div className="item">
-                            历史
+                            <div className="icon">
+                            </div>
+                            <div className="item-text">
+                                历史
+                            </div>
+                        </div>
+                        <div className="item">
+                            <div className="icon-account">
+                            </div>
+                            <div className="item-text">    
+                                登录
+                            </div>
                         </div>
                         <div>
-                            登录
+                            |
                         </div>
-                        <div>
+                        <div className="item">
                             注册
                         </div>
                     </div>
