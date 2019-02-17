@@ -13,24 +13,35 @@ export class TopBar extends Component {
                         <div className="item">
                             首页
                         </div>
-                        <div className="item">
-                            <div> 分类 </div>
-                            <span className="closeBox" >
-                            </span>
+                        <div className="dropitem">
+                            <div className="item">
+                                <div> 分类 </div>
+                                <span className="closeBox" >
+                                </span>
+                            </div>
+                            <div className="dropitem-content">
+                                    HelloWorld
+                            </div>
                         </div>
-                        <div className="item">
-                            热门
-                            <span className="closeBox" >
-                            </span>
+                        <div className="dropitem">
+                            <div className="item">
+                                热门
+                                <span className="closeBox" >
+                                </span>
+                            </div>
                         </div>
-                        <div className="item">
-                            排行榜
-                            <span className="closeBox">
-                            </span>
+                        <div className="dropitem">
+                            <div className="item">
+                                排行榜
+                                <span className="closeBox">
+                                </span>
+                            </div>
                         </div>
-                        <div className="input">
-                            <input type = "text" />
-                            <div className="icon">
+                        <div className="dropitem">
+                            <div className="input">
+                                <input type = "text" />
+                                <div className="icon">
+                                </div>
                             </div>
                         </div>
                     </div>
