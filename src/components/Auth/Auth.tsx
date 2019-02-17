@@ -87,7 +87,7 @@ export class Auth extends React.Component {
                                         <input placeholder="请输入验证码"/> 
                                         <button>获取验证码</button>
                                     </div>
-                                    <div className="item">
+                                    <div className="account-item">
                                         <input type="checkBox" />
                                         我已经阅读用户协议书。
                                     </div>
