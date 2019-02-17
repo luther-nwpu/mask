@@ -57,7 +57,7 @@ export class TopBar extends Component {
                         </div>
                     </div>
                 </div>
-                <Auth></Auth>
+                {/* <Auth></Auth> */}
             </div>
         )
     }
