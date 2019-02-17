@@ -11,11 +11,37 @@
     align-items: center;
     background:rgba(0,0,0,0.3);
     .modal {
-        width: 500px;
-        height: 300px;
+        min-width: 500px;
+        min-height: 300px;
         border-radius: 10px;
         background-color: white;
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
         position: relative;
+        .title {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 2px solid #e4e6ea;
+            line-height: 30px;
+            font-size: 15px;
+            .item {
+                padding-left: 10px;
+                padding-right: 10px;
+                color: black;
+            }
+            .item_select {
+                box-sizing: content-box;
+                padding-left: 10px;
+                padding-right: 10px;
+                color: #ff9600;
+                border-bottom: 2px solid #ff9600;
+            }
+        }
         .close {
             position: absolute;
             width: 30px;
@@ -26,7 +52,7 @@
             background-size: 30px 30px;
             &:hover {
                 background-image: url('../../assets/close_btn_1.svg');
-                background-size: 30px 30px;
+                background-size: 100% 100%;
                 transform:rotate(180deg);
                 transition:transform 1s ease;
             }
