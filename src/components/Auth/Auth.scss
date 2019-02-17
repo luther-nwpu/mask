@@ -54,6 +54,11 @@
                 .login {
                     display: flex;
                     flex-direction: column;
+                    line-height: normal;
+                    margin-top: 10px;
+                    .login-item {
+                        line-height: normal;
+                    }
                     .item {
                         margin-top: 20px;
                         display: flex;
@@ -96,7 +101,7 @@
                     flex-direction: column;
                     line-height: normal;
                     .item-username {  
-                        margin-top: 20px;
+                        margin-top: 10px;
                         line-height: normal;
                         select {
                             height: 100%;

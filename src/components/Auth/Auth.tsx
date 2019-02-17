@@ -46,7 +46,7 @@ export class Auth extends React.Component {
                         <div className="left">
                             { this.state.tabNum === AuthTab.LOGIN ? (
                                 <div className="login">
-                                    <div className="item">
+                                    <div className="login-item">
                                         账号登录
                                     </div>
                                     <div className="item">
