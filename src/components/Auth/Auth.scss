@@ -13,6 +13,23 @@
     .modal {
         width: 500px;
         height: 300px;
+        border-radius: 10px;
         background-color: white;
+        position: relative;
+        .close {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: 10px;
+            top: 10px;
+            background-image: url('../../assets/close_btn_0.svg');
+            background-size: 30px 30px;
+            &:hover {
+                background-image: url('../../assets/close_btn_1.svg');
+                background-size: 30px 30px;
+                transform:rotate(180deg);
+                transition:transform 1s ease;
+            }
+        }
     }
 }
