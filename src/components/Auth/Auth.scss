@@ -91,6 +91,51 @@
                         }
                     }
                 }
+                .register {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: normal;
+                    .item-username {  
+                        margin-top: 20px;
+                        line-height: normal;
+                        select {
+                            height: 100%;
+                        }
+                        input {
+                            width: 108px;
+                        }
+                    }
+                    .item {                    
+                        margin-top: 20px;
+                        line-height: normal;
+                    }
+                    .check {
+                        margin-top: 20px;
+                        display: flex;
+                        flex-direction: row;
+                        input {
+                            width: 79px;
+                        }
+                        button {
+                            width: 85px;
+                        }
+                    }
+                    .register-item {
+                        button {
+                            line-height: 30px;
+                            text-align: center;
+                            border: none;
+                            width: 100%;
+                            border-radius: 10px;
+                            color: white;
+                            background: #ff9600;
+                            &:hover {
+                                opacity: 0.9;
+                            }
+                        }
+                    }
+
+                }
             }
             .right {
                 margin-left: 30px;

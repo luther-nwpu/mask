@@ -6,7 +6,7 @@ export class Auth extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            tabNum: AuthTab.LOGIN,
+            tabNum: AuthTab.REGISTER,
             login: {
                 username: '',
                 password: ''
@@ -14,7 +14,7 @@ export class Auth extends React.Component {
         }
     }
     public state = {
-        tabNum: AuthTab.LOGIN,
+        tabNum: AuthTab.REGISTER,
         login: {
             username: '',
             password: ''
@@ -69,26 +69,30 @@ export class Auth extends React.Component {
                                     </div>
                                 </div>       
                             ) : (
-                                <div>
-                                    <div>
-                                        <div> 手机/邮箱</div>
+                                <div className="register">
+                                    <div className="item-username">
+                                        <select> 
+                                            <option value="0">邮箱</option>
+                                            <option value="1">手机</option>
+                                        </select>
                                         <input />
                                     </div>
-                                    <div>
-                                        <input />
+                                    <div className="item">
+                                        <input type="password" placeholder="请输入密码"/>
                                     </div>
-                                    <div>
-                                        <input />
+                                    <div className="item">
+                                        <input type="password" placeholder="重新输入密码"/>
                                     </div>
-                                    <div>
-                                        <input /> 点击获取验证码
+                                    <div className="check">
+                                        <input placeholder="请输入验证码"/> 
+                                        <button>获取验证码</button>
                                     </div>
-                                    <div>
+                                    <div className="item">
                                         <input type="checkBox" />
-                                        你已经阅读用户协议书上。
+                                        我已经阅读用户协议书。
                                     </div>
-                                    <div>
-                                        注册
+                                    <div className="register-item">
+                                        <button> 注册 </button>
                                     </div>
                                 </div>
                             )}
