@@ -10,8 +10,10 @@ export class TopBar extends Component {
                 <div className="topbar-content">
                     <div className="left">
                         <a href ="/"> <img src={logo} /> </a>
-                        <div className="item">
-                            首页
+                        <div className="dropitem">
+                            <div className="item">
+                                首页
+                            </div>
                         </div>
                         <div className="dropitem">
                             <div className="item">
