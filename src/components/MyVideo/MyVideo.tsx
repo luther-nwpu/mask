@@ -6,8 +6,8 @@ export class MyVideo extends React.Component {
     }
     public render() {
         return (
-            <div>
-
+            <div className="myvideo-component">
+                
             </div>
         )
     }

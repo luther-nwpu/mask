@@ -21,3 +21,8 @@ export enum UserMenu {
     HISTORY = 4,
     MESSAGE = 5
 }
+
+export enum Sex {
+    MAN = 0,
+    WOMAN = 1
+}
