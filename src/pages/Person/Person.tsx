@@ -6,6 +6,7 @@ import message from '@assets/message_btn_0.svg'
 import subscription from '@assets/subscription_btn_0.svg'
 import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
+import video from '@assets/video_btn_0.svg'
 export class Person extends React.Component {
     constructor(props) {
         super(props)
@@ -16,6 +17,9 @@ export class Person extends React.Component {
     public state = {
         tabNum: UserMenu.MYUSERINFO
     }
+    public changeTabNum(value: any) {
+        this.setState({ tabNum: value})
+    }
     public render() {
         return (
             <div className="person-component">
@@ -24,28 +28,40 @@ export class Person extends React.Component {
                         <div className="title">
                             个人中心
                         </div>
-                        <div className={this.state.tabNum === UserMenu.MYUSERINFO ? 'item-select' : 'item' }>
+                        <div className={this.state.tabNum === UserMenu.MYUSERINFO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYUSERINFO)}>
                             <img src={userinfo}/>
                             <div className="contentText"> 我的信息 </div>
                         </div>
-                        <div className="item">
+                        <div className={this.state.tabNum === UserMenu.MYVIDEO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYVIDEO)}>
+                            <img src={video} />
+                            <div className="contentText"> 我的视频 </div>
+                        </div>
+                        <div className={this.state.tabNum === UserMenu.MYDYNAMIC ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYDYNAMIC)}>
                             <img src={dynamic} />
                             <div className="contentText"> 我的动态 </div>
                         </div>
-                        <div className="item">
+                        <div className={this.state.tabNum === UserMenu.SUBSCRIPTION ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.SUBSCRIPTION)}>
                             <img src={subscription}/>
                             <div className="contentText"> 我的订阅 </div>
                         </div>
-                        <div className="item">
+                        <div className={this.state.tabNum === UserMenu.HISTORY ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.HISTORY)}>
                             <img src={histroyimg}/>
                             <div className="contentText"> 历史记录 </div>
                         </div>
-                        <div className="item">
+                        <div className={this.state.tabNum === UserMenu.MESSAGE ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MESSAGE)}>
                             <img src={message} />
                             <div className="contentText"> 我的消息 </div>
                         </div>
                     </div>
                     <div className="right">
+                        { 
+                            () => {
+                                switch(this.state.tabNum) {
+                                    case UserMenu.MESSAGE:
+                                        return 
+                                }
+                            }
+                        }
                     </div>
                 </div>
 

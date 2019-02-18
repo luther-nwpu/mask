@@ -15,8 +15,9 @@ export enum AccountType {
 
 export enum UserMenu {
     MYUSERINFO = 0,
-    MYDYNAMIC = 1,
-    SUBSCRIPTION = 2,
-    HISTORY = 3,
-    MESSAGE = 4
+    MYVIDEO = 1,
+    MYDYNAMIC = 2,
+    SUBSCRIPTION = 3,
+    HISTORY = 4,
+    MESSAGE = 5
 }
