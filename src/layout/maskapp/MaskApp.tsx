@@ -18,10 +18,12 @@ export class MaskApp extends React.Component {
     return (
       <div className="maskapp">
         <TopBar></TopBar>
-        <Switch>
-          <Route exact={true} path={`${this.state.match}`} component={Home} />
-          <Route path={`${this.state.match}article/:id`} component={ ArticleDetail } />`
-        </Switch>
+        <div className="content">          
+          <Switch>
+            <Route exact={true} path={`${this.state.match}`} component={Home} />
+            <Route path={`${this.state.match}article/:id`} component={ ArticleDetail } />`
+          </Switch>
+        </div>
         <Footer></Footer>
       </div>
     )
