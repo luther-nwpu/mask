@@ -1,0 +1,25 @@
+.footer-component {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    box-sizing: border-box;
+    padding-right: 20px;
+    line-height: 20px;
+    padding-bottom: 10px;
+    .middle {
+        text-align: center;
+    }
+    a {
+        line-height: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+    img {
+        width: 20px;
+        height: 20px;
+    }
+}
