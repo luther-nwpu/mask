@@ -47,10 +47,10 @@ export class Auth extends React.Component {
         this.setState({ login: { ...this.state.login, password: event.target.value }})
     }
     public handleRegisterSelect(event: any) {
-        this.setState({register: {...this.state.register, accountType: event.target.value }})
+        this.setState({register: { ...this.state.register, accountType: event.target.value }})
     }
     public handleRegisterPassword(event: any) {
-        this.setState({register: {...this.state.register, password: event.target.value }})    
+        this.setState({register: { ...this.state.register, password: event.target.value }})    
     }
     public handleRegisterPasswordConfirm(event: any) {
         this.setState({register: { ...this.state.register, passwordConfirm: event.target.value }})
