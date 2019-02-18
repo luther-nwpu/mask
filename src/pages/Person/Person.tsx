@@ -16,23 +16,23 @@ export class Person extends React.Component {
                         </div>
                         <div className="item">
                             <img src={userinfo}/>
-                           <div> 我的信息 </div>
+                           <div className="contentText"> 我的信息 </div>
                         </div>
                         <div className="item">
                             <img src={dynamic} />
-                            <div> 我的动态 </div>
+                            <div className="contentText"> 我的动态 </div>
                         </div>
                         <div className="item">
                             <img src={subscription}/>
-                            <div> 我的订阅 </div>
+                            <div className="contentText"> 我的订阅 </div>
                         </div>
                         <div className="item">
                             <img src={histroyimg}/>
-                            <div> 历史记录 </div>
+                            <div className="contentText"> 历史记录 </div>
                         </div>
                         <div className="item">
                             <img src={message} />
-                            <div> 我的消息 </div>
+                            <div className="contentText"> 我的消息 </div>
                         </div>
                     </div>
                     <div className="right">

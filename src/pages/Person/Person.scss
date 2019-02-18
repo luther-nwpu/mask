@@ -16,14 +16,27 @@
             padding-top: 10px;
             line-height: 40px;
             .title {
-                padding-left: 10px;
+                padding-left: 15px;
                 width: 100%;
                 font-size: 14px;
                 font-weight: bolder;
             }
             .item {
-                padding-left: 10px;
+                padding-left: 15px;
                 font-size: 15px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                .contentText {
+                    margin-left: 10px;
+                }
+                &:hover {
+                    background-color: rgb(224, 240, 255);
+                }
             }
         }
         .right {
