@@ -5,7 +5,17 @@ import histroyimg from '@assets/history_btn_3.svg'
 import message from '@assets/message_btn_0.svg'
 import subscription from '@assets/subscription_btn_0.svg'
 import userinfo from '@assets/userinfo_btn_0.svg'
+import { UserMenu } from '@config'
 export class Person extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            tabNum: UserMenu.MYUSERINFO
+        }
+    }
+    public state = {
+        tabNum: UserMenu.MYUSERINFO
+    }
     public render() {
         return (
             <div className="person-component">
@@ -14,9 +24,9 @@ export class Person extends React.Component {
                         <div className="title">
                             个人中心
                         </div>
-                        <div className="item">
+                        <div className={this.state.tabNum === UserMenu.MYUSERINFO ? 'item-select' : 'item' }>
                             <img src={userinfo}/>
-                           <div className="contentText"> 我的信息 </div>
+                            <div className="contentText"> 我的信息 </div>
                         </div>
                         <div className="item">
                             <img src={dynamic} />
