@@ -3,6 +3,7 @@ import {Home} from '@pages'
 import { Route, Switch } from 'react-router-dom'
 import './MaskApp.scss'
 import { ArticleDetail } from '@pages'
+import {TopBar, Footer} from '@components'
 export class MaskApp extends React.Component {
   public state = {
     match: '',
@@ -16,10 +17,12 @@ export class MaskApp extends React.Component {
   public render() {
     return (
       <div className="maskapp">
+        <TopBar></TopBar>
         <Switch>
           <Route exact={true} path={`${this.state.match}`} component={Home} />
           <Route path={`${this.state.match}article/:id`} component={ ArticleDetail } />`
         </Switch>
+        <Footer></Footer>
       </div>
     )
   }
