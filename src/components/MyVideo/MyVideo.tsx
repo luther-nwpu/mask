@@ -4,7 +4,7 @@ export class MyVideo extends React.Component {
     constructor(props: any) {
         super(props)
     }
-    public rnnder() {
+    public render() {
         return (
             <div>
 

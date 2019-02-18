@@ -6,7 +6,7 @@ export class MyInfo extends React.Component {
     }
     public render() {
         return (
-            <div>
+            <div className="myinfo-component">
 
             </div>
         )

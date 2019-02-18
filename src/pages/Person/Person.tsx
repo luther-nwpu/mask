@@ -6,6 +6,7 @@ import message from '@assets/message_btn_0.svg'
 import subscription from '@assets/subscription_btn_0.svg'
 import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
+import { MyInfo, MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo } from '@components'
 import video from '@assets/video_btn_0.svg'
 export class Person extends React.Component {
     constructor(props) {
@@ -19,6 +20,24 @@ export class Person extends React.Component {
     }
     public changeTabNum(value: any) {
         this.setState({ tabNum: value})
+    }
+    public rightelements = () => {
+        switch(this.state.tabNum) {
+            case UserMenu.MYUSERINFO:
+                return (<MyInfo />)
+            case UserMenu.HISTORY:
+                return (<MyHistory />)
+            case UserMenu.MESSAGE:
+                return (<MyMessage />)
+            case UserMenu.MYDYNAMIC:
+                return (<MyDynamic />)
+            case UserMenu.SUBSCRIPTION:
+                return (<MySubscription />)
+            case UserMenu.MYVIDEO:
+                return (<MyVideo />)
+            default:
+                return null
+        }
     }
     public render() {
         return (
@@ -54,14 +73,9 @@ export class Person extends React.Component {
                         </div>
                     </div>
                     <div className="right">
-                        { 
-                            () => {
-                                switch(this.state.tabNum) {
-                                    case UserMenu.MESSAGE:
-                                        return 
-                                }
-                            }
-                        }
+                    { 
+                        this.rightelements()
+                    }
                     </div>
                 </div>
 
