@@ -7,6 +7,10 @@ import edit from '@assets/edit_btn_0.svg'
 import age from '@assets/icon_age.png'
 import autograph from '@assets/icon_autograph.png'
 import location from '@assets/icon_location.png'
+import editInfo from '@assets/edit-information-icon.png'
+import uploadVideo from '@assets/upload-video-icon.png'
+import newPhone from '@assets/new_phone_icon.png'
+import email from '@assets/email_icon.svg'
 
 export class MyInfo extends React.Component {
     constructor(props) {
@@ -20,6 +24,7 @@ export class MyInfo extends React.Component {
             location: '火星',
             age: '20岁',
             autograph: '我',
+            email: '2424733678@qq.com',
             bindTelePhone: '18829589407'
         }
     }
@@ -40,16 +45,31 @@ export class MyInfo extends React.Component {
                                 修改昵称
                             </div>
                         </div>
-                        <div>
-                            <img src={age} /> { this.state.userinfo.age }
-                            <img src={autograph} />{ this.state.userinfo.location }
-                            <img src={location} />{ this.state.userinfo.autograph }
+                        <div className="infocontent">
+                            <img src={age} /> <span className="infocontent-text"> { this.state.userinfo.age } </span>
+                            <img src={autograph} /> <span  className="infocontent-text"> { this.state.userinfo.location } </span>
+                            <img src={location} /><span  className="infocontent-text"> { this.state.userinfo.autograph } </span>
+                            <span className="infodetailcontent">
+                                <img src = {editInfo} />
+                                编辑资料
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        修改绑定手机
+                <div className="account-bind">
+                    <div className="bind-title">
+                        账号管理 <span className="bind-email"> (Email: {this.state.userinfo.email}) </span>
+                    </div>
+                    <div className="bind-detail">
+                        <div className="item">
+                            修改绑定邮箱
+                        </div>
+                        <div className="item">
+                            修改绑定手机
+                        </div>
+                        <div className="item">
+                            上传视频
+                        </div>
                     </div>
                 </div>
             </div>
