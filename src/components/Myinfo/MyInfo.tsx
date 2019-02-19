@@ -4,6 +4,10 @@ import { Sex } from '@config'
 import woman from '@assets/woman_btn_0.svg'
 import man from '@assets/man_btn_0.svg'
 import edit from '@assets/edit_btn_0.svg'
+import age from '@assets/icon_age.png'
+import autograph from '@assets/icon_autograph.png'
+import location from '@assets/icon_location.png'
+
 export class MyInfo extends React.Component {
     constructor(props) {
         super(props)
@@ -37,9 +41,9 @@ export class MyInfo extends React.Component {
                             </div>
                         </div>
                         <div>
-                            { this.state.userinfo.age }
-                            { this.state.userinfo.location }
-                            { this.state.userinfo.autograph }
+                            <img src={age} /> { this.state.userinfo.age }
+                            <img src={autograph} />{ this.state.userinfo.location }
+                            <img src={location} />{ this.state.userinfo.autograph }
                         </div>
                     </div>
                 </div>
