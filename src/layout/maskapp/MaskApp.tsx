@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Home} from '@pages'
 import { Route, Switch } from 'react-router-dom'
 import './MaskApp.scss'
-import { ArticleDetail, Person } from '@pages'
+import { ArticleDetail, Person, VideoPage } from '@pages'
 import {TopBar, Footer} from '@components'
 export class MaskApp extends React.Component {
   public state = {
@@ -21,6 +21,7 @@ export class MaskApp extends React.Component {
         <div className="content">
           <Route exact={true} path={`${this.state.match}`} component={ Home } />
           <Route path={`${this.state.match}personinfo`} component={ Person } />
+          <Route path={`${this.state.match}video/:id`} component = { VideoPage }/>
           <Route path={`${this.state.match}article/:id`} component={ ArticleDetail } />
         </div>
         <Footer></Footer>
