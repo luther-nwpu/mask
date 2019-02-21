@@ -62,13 +62,43 @@ export class MyInfo extends React.Component {
                     </div>
                     <div className="bind-detail">
                         <div className="item">
-                            修改绑定邮箱
+                            <div className="leftitem">                         
+                                <img src={email} className="emailImg" />
+                                <div className="leftdescription">
+                                    修改绑定邮箱
+                                    <div className="leftdetail">
+                                        { `已绑定:${this.state.userinfo.email}` }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="goImg">
+                            </div>                            
                         </div>
                         <div className="item">
-                            修改绑定手机
+                            <div className="leftitem">
+                                <img src={newPhone} />
+                                <div className="leftdescription">
+                                    修改绑定手机
+                                    <div className="leftdetail">
+                                        { `已绑定:${this.state.userinfo.bindTelePhone}` }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="goImg">
+                            </div>
                         </div>
                         <div className="item">
-                            上传视频
+                            <div className="leftitem">
+                                <img src={uploadVideo} /> 
+                                <div className="leftdescription">
+                                    上传视频
+                                    <div className="leftdetail">
+                                        想要好嗨哟，那就赶紧上传视频吧
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="goImg">
+                            </div>
                         </div>
                     </div>
                 </div>
