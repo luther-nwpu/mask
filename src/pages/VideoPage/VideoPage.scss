@@ -1,0 +1,78 @@
+.videopage-component {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .left-video {
+        border: 1px solid #e2e2e2;
+        padding: 20px;
+        background: white;
+        margin-left: 60px;
+        width: 63%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        .video-title {
+
+        }
+    }
+    .right-user {
+        border: 1px solid #e2e2e2;
+        width: 20%;
+        border-radius: 10px;
+        background: white;
+        padding: 20px;
+        margin-right: 60px;
+        display: flex;
+        flex-direction: column;
+        .user-detail {
+            display: flex;
+            flex-direction: row;
+            .avator {
+                border-radius: 35px;
+                width: 70px;
+                height: 70px;
+            }
+            .user-detail-description {
+                margin-left: 20px;
+                .username {
+                    line-height: 30px;
+                    font-weight: bolder;
+                    font-size: 15px;
+                }
+                .send-message {
+                    margin-left: 20px;
+                    background-size: 20px 20px;
+                    line-height: 30px;
+                    background-position-y: -3px;
+                    padding-left: 20px;
+                    background-repeat: no-repeat;
+                    background-image: url('../../assets/send-mail-btn.svg');
+                    &:hover {
+                        color: #ff9600;
+                        background-image: url('../../assets/send-mail-btn-0.svg');
+                    }
+                }
+                .follow {
+                    margin-top: 10px;
+                    border-radius: 10px;
+                    line-height: 30px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    text-align: center;
+                    color: white;
+                    width: 65%;
+                    background-color: #ff9600;
+                    img {
+                        vertical-align: middle;
+                        width: 20px;
+                        height: 20px;
+                    };
+                    &:hover {
+                        opacity: 0.9;
+                    }
+                }
+            }
+        }
+    }
+}
