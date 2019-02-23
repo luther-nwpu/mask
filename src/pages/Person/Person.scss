@@ -9,7 +9,8 @@
     .person-content {
         width: 70%;
         display: flex;
-        flex-direction: row;
+        flex-direction: row;    
+        min-height: 750px;
         .left {
             width: 150px;
             min-width: 120px;
