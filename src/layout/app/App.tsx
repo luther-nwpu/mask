@@ -16,7 +16,7 @@ export class App extends React.Component {
   }
   public render() {
     return (
-      <div className="page">
+      <div className="app-page">
         <Frame></Frame>
         <Route path={`${this.state.match}`} component={MaskApp}/>
         <Route path={`${this.state.match}admin`} component={AdminApp} />

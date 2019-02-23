@@ -29,7 +29,11 @@ html {
   height: 100%;
 }
 body {
+  height: 100%;
   line-height: 1;
+}
+#root {
+  height: 100%;
 }
 ol, ul {
 	list-style: none;
@@ -46,12 +50,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-.page {
+.app-page {
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
 }
