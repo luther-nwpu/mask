@@ -5,10 +5,32 @@ import uploadImg from '@assets/bg-upload-video.jpg'
 export class UploadVideo extends React.Component {
     constructor(props) {
         super(props)
+        document.addEventListener('dragover', function(e) {
+            e.preventDefault()
+            e.stopPropagation()
+        })
+        document.addEventListener('dragenter', function(e) {
+            e.preventDefault()
+            e.stopPropagation()
+        })
+        document.addEventListener('drop', function(e) {
+            // 必须要禁用浏览器默认事件
+            e.preventDefault()
+            e.stopPropagation()
+            const files = e.dataTransfer.files
+            let reader = new FileReader()
+            reader.readAsText(files[0], 'utf-8')
+            reader.onload = function (evt) {
+                console.log(evt)
+            }
+        })
+    }
+    public uploadVideo() {
+        console.log('111')
     }
     public render() {
         return (
-            <div className="upload-video-component">
+            <div id="dashboard" className="upload-video-component">
                 <img src={uploadImg} />
                 <div className="upload-video">
                     上传视频
