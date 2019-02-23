@@ -13,7 +13,13 @@
         display: flex;
         flex-direction: column;
         .video-title {
-
+            font-size: 17px;
+            font-weight: 500;
+        }
+        .video-description {
+            .time {
+                margin-left: 20px;
+            }
         }
     }
     .right-user {

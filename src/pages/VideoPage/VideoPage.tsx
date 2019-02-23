@@ -3,6 +3,7 @@ import './VideoPage.scss'
 import { Video } from '@components'
 import support from '@assets/follow-btn-0.svg'
 import alreadtySupport from '@assets/follow-btn-1.svg'
+import * as _ from 'lodash'
 
 export class VideoPage extends React.Component {
     public state = {
@@ -15,8 +16,16 @@ export class VideoPage extends React.Component {
         },
         video: {
             title: '[你好]，我爱你姚菊',
-            category: '',
-            time: '',
+            category: {
+                name: '游戏',
+                id: 0,
+                category: {
+                    name: '竞技',
+                    id: 1,
+                    category: null
+                }
+            },
+            time: '2019-02-22 11:00:13',
             playNum: 4000,
             barrage: [],
             videoUrl: '',
@@ -34,7 +43,31 @@ export class VideoPage extends React.Component {
                         {this.state.video.title}
                     </div>
                     <div className="video-description">
-
+                        <span>
+                            {
+                                (() => {
+                                    const sear = (obj: Object, arr: any) => {
+                                       if (obj['category'] === undefined || obj['category'] === null) {
+                                           return arr
+                                       }
+                                       arr.push({name:obj['category'].name, id: obj['category'].id})
+                                       return sear(obj['category'], arr)
+                                    }
+                                    const result = sear(this.state.video, [])
+                                    console.log(result)
+                                    return (<span>{ result.reduce(function(accumulator: string, value: any, key: Number) {
+                                        if(key === result.length - 1) {
+                                            return accumulator + value.name
+                                        } else {
+                                            return accumulator + value.name + '>'
+                                        } 
+                                    }, '')} </span>)
+                                })()   
+                            }
+                        </span>
+                        <span className="time">
+                            {this.state.video.time}
+                        </span>
                     </div>
                     <div className="video-video">
                         <Video></Video>
