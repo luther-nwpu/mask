@@ -25,7 +25,6 @@ export class MaskApp extends React.Component {
           <Route path={`${this.state.match}article/:id`} component={ ArticleDetail } />
           <Route path={`${this.state.match}uploadfile`} component={ UploadVideo } />
         </div>
-        <Footer></Footer>
       </div>
     )
   }
