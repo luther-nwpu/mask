@@ -25,5 +25,10 @@ export enum UserMenu {
 
 export enum Sex {
     MAN = 0,
-    WOMAN = 1
+    WOMAN = 1,
+}
+
+export enum UploadState {
+    NOUPLOAD = 0,
+    UPLOADING = 1,
 }
