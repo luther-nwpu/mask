@@ -19,7 +19,8 @@ export enum UserMenu {
     MYDYNAMIC = 2,
     SUBSCRIPTION = 3,
     HISTORY = 4,
-    MESSAGE = 5
+    MESSAGE = 5,
+    MYDRAFTS = 6,
 }
 
 export enum Sex {

@@ -6,7 +6,7 @@ import message from '@assets/message_btn_0.svg'
 import subscription from '@assets/subscription_btn_0.svg'
 import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
-import { MyInfo, MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo } from '@components'
+import { MyInfo, MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo, MyDrafts } from '@components'
 import video from '@assets/video_btn_0.svg'
 export class Person extends React.Component {
     constructor(props) {
@@ -35,6 +35,8 @@ export class Person extends React.Component {
                 return (<MySubscription />)
             case UserMenu.MYVIDEO:
                 return (<MyVideo />)
+            case UserMenu.MYDRAFTS: 
+                return (<MyDrafts />)
             default:
                 return null
         }
