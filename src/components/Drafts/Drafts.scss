@@ -172,5 +172,21 @@
                 }
             }
         }
+        .video-title-info {
+            font-size: 20px;
+            .video-start {
+                font-size: 20px;
+                color: red;
+            }
+        }
+        input {
+            border-radius: 5px;
+            line-height: 30px;
+            padding-left: 10px;
+            outline: none;
+        }
+        input[type=text]:focus {
+            box-shadow: 0 0 0 2px #ff9600;
+        }
     }
 }

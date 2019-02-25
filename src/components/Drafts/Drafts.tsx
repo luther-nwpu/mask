@@ -89,9 +89,10 @@ export class Drafts extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        标题* <input />
+                    <div className="video-title-info">
+                        <span className="video-start">*</span> 标题 
                     </div>
+                    <input type="text"/>
                     <div>
                         类型* <input type="radio" /> 原创 <input type="radio" /> 转载 <input /> 
                     </div>
