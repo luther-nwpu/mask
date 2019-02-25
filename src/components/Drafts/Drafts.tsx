@@ -82,7 +82,7 @@ export class Drafts extends React.Component {
                             <div className="cover-img-right-imgs">
                                 {
                                     this.state.videoImgs.map(function(value) {
-                                        return (<img src={value} />)
+                                        return (<div><img src={value} /> </div>)
                                     })
                                 }
                             </div>
