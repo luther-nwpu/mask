@@ -93,24 +93,23 @@ export class Drafts extends React.Component {
                         <span className="video-start">*</span> 标题 
                     </div>
                     <input type="text"/>
-                    <div>
-                        类型* <input type="radio" /> 原创 <input type="radio" /> 转载 <input /> 
+                    <div className="video-title-info">
+                        <span className="video-start">*</span> 类型
                     </div>
-                    <div>
-                        分区
-                        <div>
-                            <input />
-                        </div>
+                    <input type="radio" /> 原创 <input type="radio" /> 转载
+                    <div className="video-title-info">
+                        <span className="video-start">*</span> 分区
                     </div>
-                    <div>
-                        标签
+                    {/**
+                        <select size={2} multiple></select>
+                    */}
+                    <div className="video-title-info">
+                        <span className="video-start">*</span> 标签
                     </div>
-                    <div>
+                    <div className="video-title-info">
                         简介
-                        <div>
-                            <input />
-                        </div>
                     </div>
+                    <textarea />
                 </div>
             </div>
         )
