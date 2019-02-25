@@ -232,5 +232,37 @@
                 box-shadow: none;
             }
         }
+        .drop-item {
+            position: relative;
+            width: 200px;
+            padding-left: 10px;
+            font-size: 15px;
+            border: 1px solid #ccd0d7;
+            line-height: 30px;
+            font-weight: bolder;
+            border-radius: 5px;
+            .drop-item-down {
+                position: absolute;
+                right: 4px;
+                top: 6px;
+                width: 20px;
+                height: 20px;
+                background-size: 20px 20px;
+                transform: rotate(180deg);
+                transition: transform .25s linear;
+                background-image: url('../../assets/down-arrow.svg')
+            }
+            .drop-item-up {
+                position: absolute;
+                right: 4px;
+                top: 6px;
+                width: 20px;
+                height: 20px;
+                transition: transform .25s linear;
+                transform: none;
+                background-size: 20px 20px;
+                background-image: url('../../assets/down-arrow.svg')
+            }
+        }
     }
 }

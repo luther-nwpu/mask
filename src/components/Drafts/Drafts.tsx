@@ -14,7 +14,12 @@ export class Drafts extends React.Component {
     constructor(props) {
         super(props)
     }
+    public openSignTab = function() {
+        this.state.openTab ? this.setState({openTab: false}) : this.setState({openTab: true})
+        console.log(this.state.openTab)
+    }
     public state = {
+        openTab: false,
         uploadVideos: [{
             videoId: 0,
             videoName: '高兴的睡不着了',
@@ -30,6 +35,8 @@ export class Drafts extends React.Component {
             '高兴',
             '伤心'
         ],
+        one: '你好',
+        two: '我不好',
         videoImgs: [
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
@@ -103,6 +110,9 @@ export class Drafts extends React.Component {
                     <input type="radio" /> 原创 <input type="radio" /> 转载
                     <div className="video-title-info">
                         <span className="video-start">*</span> 分区
+                    </div>
+                    <div className="drop-item" onClick={() => this.openSignTab()}>
+                        {this.state.one} → {this.state.two} <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
                     </div>
                     {/**
                         <select size={2} multiple></select>
