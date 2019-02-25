@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './Drafts.scss'
-import videoImg from '@assets/upload-video-icon.png'
+import videoImg from '@assets/download-video.png'
 import downloadSuccess from '@assets/download-success.png'
 const processStyle = {
     width: '100%',

@@ -15,8 +15,13 @@
         .file-description {
             margin-top: 20px;    
             .file-detail {
+                img {
+                    width: 45px;
+                    height: 30px;
+                }
                 display: flex;
                 flex-direction: row;
+                align-items: center;
                 margin-bottom: 20px;
                 .file-upload {
                     flex: 1;
