@@ -6,7 +6,44 @@
         background-color: white;
         border: 1px solid #EAEAEA;
         border-radius: 10px;
-        padding: 30px;
-        text-align: center;
+        padding: 60px;
+        padding-top: 30px;
+        .file-title {
+            font-size: 20px;
+            font-weight: bolder;
+        }
+        .file-description {
+            margin-top: 20px;    
+            .file-detail {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 20px;
+                .file-upload {
+                    flex: 1;
+                    margin-left: 20px;
+                    line-height: 20px;
+                    font-size: 15px;
+                    .file-video-name {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                    }
+                    img {
+                        width: 15px;
+                        vertical-align: middle;
+                    }
+                    .upload-percent {
+                        font-size: 13px;
+                        color: gray;
+                    }
+                }
+                .file-delete {
+                    display: none;
+                }
+                &:hover .file-delete{
+                    display: inline-block;
+                }
+            }
+        }
     }
 }

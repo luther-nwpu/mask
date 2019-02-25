@@ -1,5 +1,12 @@
 import * as React from 'react'
 import './Drafts.scss'
+import videoImg from '@assets/upload-video-icon.png'
+import downloadSuccess from '@assets/download-success.png'
+const processStyle = {
+    width: '100%',
+    height: '1px',
+    background: '#43ce5b'
+}
 
 export class Drafts extends React.Component {
     constructor(props) {
@@ -23,9 +30,14 @@ export class Drafts extends React.Component {
             <div className="drafts-component">
                 <div className="drafts-content">
                     <div>
-                        文件上传 （视频上传必须是mp4, avi, flv 格式）
+                        <span className="file-title">文件上传 </span> （视频上传必须是mp4, avi, flv 格式）
                     </div>
-                    <div>
+                    <div className="file-description">
+                        {
+                            this.state.uploadVideos.map(function(value) {
+                                return (<div className="file-detail"><img src={videoImg} /> <div className="file-upload"> <div className="file-video-name"><span> {value.videoName} </span> <span className="upload-right"> <span className="file-delete"> 删除 </span> <img src={downloadSuccess} /> </span> </div><div className="upload-percent"> 上传成功 </div> <div style={ processStyle }></div> </div> </div>)
+                            })
+                        }
                     </div>
                     <div>
 
