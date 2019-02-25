@@ -2,6 +2,7 @@ import * as React from 'react'
 import './Drafts.scss'
 import videoImg from '@assets/download-video.png'
 import downloadSuccess from '@assets/download-success.png'
+import coverImg from '@assets/video-img.png'
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -35,7 +36,20 @@ export class Drafts extends React.Component {
                     <div className="file-description">
                         {
                             this.state.uploadVideos.map(function(value) {
-                                return (<div className="file-detail"><img src={videoImg} /> <div className="file-upload"> <div className="file-video-name"><span> {value.videoName} </span> <span className="upload-right"> <span className="file-delete"> 删除 </span> <img src={downloadSuccess} /> </span> </div><div className="upload-percent"> 上传成功 </div> <div style={ processStyle }></div> </div> </div>)
+                                return (<div className="file-detail">
+                                            <img src={videoImg} /> 
+                                            <div className="file-upload"> 
+                                                <div className="file-video-name">
+                                                    <span> {value.videoName} </span> 
+                                                    <span className="upload-right"> 
+                                                        <span className="file-delete"> 删除 </span> 
+                                                        <img className="file-finish-img" src={downloadSuccess} /> 
+                                                    </span> 
+                                                </div>
+                                                <div className="upload-percent"> 上传成功 </div> 
+                                                <div style={ processStyle }></div> 
+                                            </div> 
+                                        </div>)
                             })
                         }
                     </div>
@@ -46,8 +60,11 @@ export class Drafts extends React.Component {
                     <div className="base-info">
                         基本信息
                     </div>
-                    <div>
-                        <span>视频封面</span> <span>（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600） </span>
+                    <div className="video-cover">
+                        <span className="video-cover-text">视频封面</span> <span>（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600） </span>
+                    </div>
+                    <div className="cover-img">
+                        <div className="cover-img-left"> <img src={coverImg} /> <div className="right-bottom"> 上传图片 </div> </div>
                     </div>
                     <div>
                         标题* <input />

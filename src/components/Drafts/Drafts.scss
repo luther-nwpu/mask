@@ -42,7 +42,12 @@
                         color: gray;
                     }
                 }
+                .file-finish-img {
+                    width: 15px;
+                    height: auto;
+                }
                 .file-delete {
+                    margin-right: 10px;
                     display: none;
                 }
                 &:hover .file-delete{
@@ -74,6 +79,42 @@
             font-size: 20px;
             font-weight: bolder;
             margin-bottom: 10px;
+        }
+        .video-cover {
+            margin-bottom: 10px;
+            .video-cover-text {
+                font-size: 15px;
+            }
+        }
+        .cover-img {
+            margin-bottom: 10px;
+            .cover-img-left {
+                border: 1px dashed #99a2aa;
+                border-radius: 4px;
+                width: 200px;
+                height: 126px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                img {
+                    width: 30px;
+                }
+                &:hover {
+                    opacity: 0.7;
+                }
+                .right-bottom {
+                    bottom: 5px;
+                    right: 5px;
+                    background: rgba(0, 0, 0, 0.5);
+                    position: absolute;
+                    border-radius: 3px;
+                    line-height: 20px;
+                    color: white;
+                    padding: 3px 3px 3px 3px;
+                }
+            }
         }
     }
 }
