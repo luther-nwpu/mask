@@ -125,6 +125,7 @@
                 flex-direction: column;
                 border: 1px solid #ccd0d7;
                 border-radius: 4px;
+                position: relative;
                 .cover-img-right-text {
                     color: gray;
                     margin-bottom: 3px;
@@ -157,6 +158,17 @@
                     &::-webkit-scrollbar {
                         display: none;
                     }
+                }
+                &:before {
+                    display:block;
+                    content:'';
+                    border-width:10px 10px 10px 10px;
+                    border-style:solid;
+                    border-color:transparent #ccd0d7 transparent  transparent;
+                    /* 定位 */
+                    position:absolute;
+                    left: -20px;
+                    top: 55px;
                 }
             }
         }
