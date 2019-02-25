@@ -113,7 +113,7 @@ export class Drafts extends React.Component {
                     <div className="label">
                         { 
                             this.state.labels.map(function(value) {
-                                return (<div className="label-div"> {value} </div>)
+                                return (<div className="label-div"> {value} <span className="close"> × </span> </div>)
                             })
                         }
                         <input />
