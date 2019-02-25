@@ -26,6 +26,10 @@ export class Drafts extends React.Component {
             videoUrl: '',
             uploadPercent: '50%'
         }],
+        labels: [
+            '高兴',
+            '伤心'
+        ],
         videoImgs: [
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
@@ -105,6 +109,14 @@ export class Drafts extends React.Component {
                     */}
                     <div className="video-title-info">
                         <span className="video-start">*</span> 标签
+                    </div>
+                    <div className="label">
+                        { 
+                            this.state.labels.map(function(value) {
+                                return (<div className="label-div"> {value} </div>)
+                            })
+                        }
+                        <input />
                     </div>
                     <div className="video-title-info">
                         简介

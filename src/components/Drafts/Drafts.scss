@@ -205,5 +205,20 @@
                 box-shadow: 0 0 0 2px #ff9600;
             }
         }
+        .label {
+            border: 1px solid #ff9600;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            .label-div {
+                padding: 0 10px 0 10px;
+                border-radius: 3px;
+                background: #ff9600;
+                line-height: 20px;
+            }
+            input {
+                width: auto;
+            }
+        }
     }
 }
