@@ -113,6 +113,7 @@ export class Drafts extends React.Component {
                     </div>
                     <div className="drop-item" onClick={() => this.openSignTab()}>
                         {this.state.one} → {this.state.two} <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
+                        <div className="drop-item-content"> Hello World</div>
                     </div>
                     {/**
                         <select size={2} multiple></select>
