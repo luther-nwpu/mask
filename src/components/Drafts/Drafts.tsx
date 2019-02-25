@@ -39,14 +39,15 @@ export class Drafts extends React.Component {
                             })
                         }
                     </div>
-                    <div>
-
+                    <div className="add-upload-video">
+                       + 添加视频
+                    </div>
+                    <div className="line"></div>
+                    <div className="base-info">
+                        基本信息
                     </div>
                     <div>
-                        基本信息（*为必填项）
-                    </div>
-                    <div>
-                        视频封面
+                        <span>视频封面</span> <span>（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600） </span>
                     </div>
                     <div>
                         标题* <input />
