@@ -24,7 +24,19 @@ export class Drafts extends React.Component {
             videoName: '你好啊',
             videoUrl: '',
             uploadPercent: '50%'
-        }]
+        }],
+        videoImgs: [
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+        ]
     }
     public render () {
         return (
@@ -65,6 +77,16 @@ export class Drafts extends React.Component {
                     </div>
                     <div className="cover-img">
                         <div className="cover-img-left"> <img src={coverImg} /> <div className="right-bottom"> 上传图片 </div> </div>
+                        <div className="cover-img-right">
+                            <div className="cover-img-right-text"> 可选择以下封面 </div>
+                            <div className="cover-img-right-imgs">
+                                {
+                                    this.state.videoImgs.map(function(value) {
+                                        return (<img src={value} />)
+                                    })
+                                }
+                            </div>
+                        </div>
                     </div>
                     <div>
                         标题* <input />
