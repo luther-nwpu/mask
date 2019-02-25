@@ -220,8 +220,8 @@
                 line-height: 25px;
                 background: #ff9600;
                 color: white;
-                .close {
-                    margin-top: 3px;
+                &:hover {
+                    opacity: 0.9;
                 }
             }
             input {
