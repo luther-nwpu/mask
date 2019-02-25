@@ -3,6 +3,7 @@ import './Drafts.scss'
 import videoImg from '@assets/download-video.png'
 import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
+import selectImg from '@assets/select-img-btn.png'
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -82,7 +83,7 @@ export class Drafts extends React.Component {
                             <div className="cover-img-right-imgs">
                                 {
                                     this.state.videoImgs.map(function(value) {
-                                        return (<div><img src={value} /> </div>)
+                                        return (<div className="cover-img-right-imgs-value"><img src={value} /> <div className="select-img"> <img src={selectImg} /> </div> </div>)
                                     })
                                 }
                             </div>
