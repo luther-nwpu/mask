@@ -173,10 +173,14 @@ export class Drafts extends React.Component {
                     <div className="drop-item" onClick={() => this.openSignTab()}>
                         {this.state.one} → {this.state.two} <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
                         <div className="drop-item-content"> 
-                            <div>
-
+                            <div className="drop-item-content-left">
+                                {
+                                    Object.keys(this.state.categorys).map(function(value) {
+                                        return (<div className="item">{value}</div>)
+                                    })
+                                }
                             </div>
-                            <div>
+                            <div className="drop-item-content-right">
 
                             </div>
                         </div>
