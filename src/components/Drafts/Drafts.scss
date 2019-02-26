@@ -265,7 +265,7 @@
                 background-image: url('../../assets/down-arrow.svg')
             }
             .drop-item-content {
-                display: block;
+                display: flex;
                 position: absolute;
                 background-color: #fff;
                 min-width: 400px;

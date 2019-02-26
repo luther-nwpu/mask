@@ -32,9 +32,68 @@ export class Drafts extends React.Component {
             uploadPercent: '50%'
         }],
         labels: [
-            '高兴',
+            '开心',
             '伤心'
         ],
+        categorys: {
+            '游戏': {    
+                '单机游戏': '以单机或其联机模式为主要内容的相关视频',
+                '网络游戏': '多人在线游戏为主要内容的相关视频',
+                '音游': '通过配合音乐与节奏而进行的音乐类游戏',
+                '电子竞技': '电子竞技游戏项目为主要内容的相关视频',
+                '手机游戏': '手机及平板设备平台上的游戏相关视频',
+                '桌游棋牌': '桌游、棋牌、卡牌对战等为主要内容的相关视频'
+            },
+            '生活': {
+                '日常': '一般日常向的生活类视频',
+                '动物圈': '可爱的、萌萌哒的宠物相关视频'
+            },
+            '娱乐': [
+
+            ],
+            '影视': [
+
+            ],
+            '音乐': [
+
+            ],
+            '科技': [
+
+            ],
+            '数码': [
+
+            ],
+            '动画': [
+
+            ],
+            '时尚': [
+
+            ],
+            '舞蹈': [
+
+            ],
+            '番剧': [
+
+            ],
+            '纪录片': [
+
+            ],
+            '鬼畜': [
+
+            ],
+            '广告': [
+
+            ],
+            '国创': [
+
+            ],
+            '电视剧': [
+
+            ],
+            '电影': [
+
+            ]
+        },
         one: '你好',
         two: '我不好',
         videoImgs: [
@@ -113,7 +172,14 @@ export class Drafts extends React.Component {
                     </div>
                     <div className="drop-item" onClick={() => this.openSignTab()}>
                         {this.state.one} → {this.state.two} <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
-                        <div className="drop-item-content"> Hello World</div>
+                        <div className="drop-item-content"> 
+                            <div>
+
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
                     </div>
                     {/**
                         <select size={2} multiple></select>
