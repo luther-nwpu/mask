@@ -94,7 +94,7 @@ export class Drafts extends React.Component {
 
             ]
         },
-        one: '你好',
+        one: '游戏',
         two: '我不好',
         videoImgs: [
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
@@ -181,7 +181,12 @@ export class Drafts extends React.Component {
                                 }
                             </div>
                             <div className="drop-item-content-right">
+                                {
 
+                                    Object.keys(this.state.categorys[this.state.one]).map((value) => {
+                                        return (<div className="item"><span className="title"> { value } </span> <span className="description"> {this.state.categorys[this.state.one][value]} </span> </div>)
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
