@@ -171,8 +171,9 @@ export class Drafts extends React.Component {
                         <span className="video-start">*</span> 分区
                     </div>
                     <div className="drop-item" onClick={() => this.openSignTab()}>
-                        {this.state.one} → {this.state.two} <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
-                        <div className="drop-item-content"> 
+                        {this.state.one} → {this.state.two} 
+                        <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
+                        <div className={this.state.openTab ? 'drop-item-content' : 'drop-item-none'}> 
                             <div className="drop-item-content-left">
                                 {
                                     Object.keys(this.state.categorys).map(function(value) {
