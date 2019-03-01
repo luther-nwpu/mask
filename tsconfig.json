@@ -51,6 +51,7 @@
       "@pages/*": ["pages/*"],
       "@pages": ["pages/index"],
       "@store/*": ["store/*"],
+      "@store": ["store/index"],
       "@assets/*": ["assets/*"],
       "@router": ["router/history"],
       "@config": ["config"],
