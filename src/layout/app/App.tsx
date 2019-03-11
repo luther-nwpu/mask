@@ -19,9 +19,10 @@ class App extends React.Component {
     super(props)
     const { cookies } = props
     this.state.cookies = cookies.cookies.user
-    storeUserInfo(cookies)
+    console.log(cookies)
+    props.storeUserInfo(cookies)
   }
-
+  
   public render() {
     return (
       <div className="app-page">
@@ -33,5 +34,8 @@ class App extends React.Component {
     )
   }
 }
+const mapDispatchToProps = dispatch => ({
+  storeUserInfo: userinfo => dispatch(storeUserInfo(userinfo))
+})
 
-export default withCookies(connect(null, null)(App))
+export default withCookies(connect(null, mapDispatchToProps)(App))

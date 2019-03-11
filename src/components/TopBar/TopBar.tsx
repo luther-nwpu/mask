@@ -2,8 +2,17 @@ import * as React from 'react'
 import { Component } from 'react'
 import './TopBar.scss'
 import logo from '@assets/logo.png'
+import { connect } from 'react-redux'
 import { Auth } from '@components'
-export class TopBar extends Component {
+class TopBar extends Component {
+    state = {
+        userinfo: null
+    }
+    props
+    constructor(props: any) {
+        super(props)
+        this.state.userinfo = props.userinfo
+    }
     render() {
         return (
             <div className="topbar">
@@ -13,6 +22,7 @@ export class TopBar extends Component {
                         <div className="dropitem">
                             <div className="item">
                                 首页
+                                {/* {JSON.stringify(this.props.userinfo)} */}
                             </div>
                         </div>
                         <div className="dropitem">
@@ -75,3 +85,11 @@ export class TopBar extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    const { userinfo } = state.todoApp
+    console.log(state.todoApp)
+    return {
+        userinfo: userinfo
+    }
+}
+export default connect(mapStateToProps)(TopBar)

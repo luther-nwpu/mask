@@ -3,7 +3,8 @@ import {Home} from '@pages'
 import { Route, Switch } from 'react-router-dom'
 import './MaskApp.scss'
 import { ArticleDetail, Person, VideoPage, UploadVideo } from '@pages'
-import {TopBar, Footer} from '@components'
+import { Footer } from '@components'
+import TopBar from '@components/TopBar/TopBar'
 export class MaskApp extends React.Component {
   public state = {
     match: '',
