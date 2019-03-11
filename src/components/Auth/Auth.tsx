@@ -2,11 +2,14 @@ import * as React from 'react'
 import './Auth.scss'
 import { AuthTab, AccountType } from '@config'
 import  mylogo from '@assets/mylogo.png'
-export class Auth extends React.Component {
+import { connect } from 'react-redux'
+import { displayAuth } from '@store/actions'
+
+class Auth extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            tabNum: AuthTab.REGISTER,
+            tabNum: props.authTab,
             login: {
                 username: '',
                 password: '',    
@@ -21,6 +24,7 @@ export class Auth extends React.Component {
             },
         }
     }
+    props
     public state = {
         tabNum: AuthTab.REGISTER,
         login: {
@@ -67,11 +71,14 @@ export class Auth extends React.Component {
     public handleLoginOneWeekLogin(event: any) {
         this.setState({login: {...this.state.register, oneWeekLogin: event.target.value, }})
     }
+    closeModal() {
+        this.props.displayAuth(false, AuthTab.LOGIN)
+    }
     public render() {
         return (
             <div className="auth-component">
                 <div className="modal">
-                    <div className="close"></div>
+                    <div className="close" onClick={() => this.closeModal()}></div>
                     <div className="title">
                         <div className={ this.state.tabNum === AuthTab.LOGIN ? 'item_select' : 'item'} onClick={() => this.changeTab(AuthTab.LOGIN)}>                        
                             登录
@@ -144,3 +151,14 @@ export class Auth extends React.Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    const { authTab } = state.auth
+    return {
+        authTab: authTab
+    }
+}
+const mapDispatchToProps = dispatch => ({
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

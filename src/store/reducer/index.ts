@@ -16,7 +16,8 @@ const auth = (state = {
     switch (action.type) {
         case DISPLAYAUTH:
             return Object.assign({}, state, {
-                isDisplay: action.isDisplay
+                isDisplay: action.isDisplay,
+                authTab: action.authTab
             })
         default:
             return state

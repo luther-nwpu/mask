@@ -3,8 +3,9 @@ import { Component } from 'react'
 import './TopBar.scss'
 import logo from '@assets/logo.png'
 import { connect } from 'react-redux'
-import { Auth } from '@components'
+import Auth from '@components/Auth/Auth'
 import { displayAuth } from '@store/actions'
+import { AuthTab } from '@config'
 class TopBar extends Component {
     state = {
         userinfo: null
@@ -15,7 +16,10 @@ class TopBar extends Component {
         this.state.userinfo = props.userinfo
     }
     login() {
-        this.props.displayAuth(true)
+        this.props.displayAuth(true, AuthTab.LOGIN)
+    }
+    register() {
+        this.props.displayAuth(true, AuthTab.REGISTER)
     }
     render() {
         return (
@@ -78,7 +82,7 @@ class TopBar extends Component {
                         <div>
                             |
                         </div>
-                        <div className="item">
+                        <div className="item" onClick={()=>this.register()}>
                             注册
                         </div>
                     </div>
@@ -95,15 +99,12 @@ class TopBar extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    const { userinfo } = state.todoApp
     const { isDisplay } = state.auth
-    console.log(state.todoApp)
     return {
-        userinfo: userinfo,
         isDisplay: isDisplay
     }
 }
 const mapDispatchToProps = dispatch => ({
-    displayAuth: isDisplay => dispatch(displayAuth(isDisplay))
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

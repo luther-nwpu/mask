@@ -6,6 +6,6 @@ export const storeUserInfo = function(text) {
     return { type: STOREUSERINFO, userinfo: text }
 }
 
-export const displayAuth = function(isDisplay: Boolean) {
-    return { type: DISPLAYAUTH, isDisplay: isDisplay}
+export const displayAuth = function(isDisplay: Boolean, authTab: Number) {
+    return { type: DISPLAYAUTH, isDisplay: isDisplay, authTab: authTab }
 }
