@@ -1,4 +1,4 @@
-import { STOREUSERINFO } from '../actions'
+import { STOREUSERINFO, DISPLAYAUTH } from '../actions'
 import { combineReducers } from 'redux'
 function todoApp(state = {}, action) {
     switch (action.type) {
@@ -10,7 +10,20 @@ function todoApp(state = {}, action) {
             return state
     }
 }
+const auth = (state = {
+    isDisplay: false
+}, action) => {
+    switch (action.type) {
+        case DISPLAYAUTH:
+            return Object.assign({}, state, {
+                isDisplay: action.isDisplay
+            })
+        default:
+            return state
+    }
+}
 const reducer = combineReducers({
+    auth,
     todoApp
 })
 export default reducer

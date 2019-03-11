@@ -12,12 +12,12 @@
     background:rgba(0,0,0,0.3);
     .modal {
         min-width: 500px;
-        min-height: 300px;
         border-radius: 10px;
         background-color: white;
         padding-right: 30px;
         padding-left: 30px;
         padding-top: 10px;
+        padding-bottom: 20px;
         display: flex;
         flex-direction: column;
         position: relative;
@@ -44,11 +44,12 @@
                 border-bottom: 2px solid #ff9600;
             }
         }
-        .content {
-            margin-top: 10px;
+        .auth-content {
+            padding-top: 20px;
             display: flex;
             flex-direction: row;
             .left {
+                width: 170px;
                 display: flex;
                 flex-direction: column;
                 .login {
@@ -102,7 +103,7 @@
                     flex-direction: column;
                     line-height: normal;
                     .item-username {  
-                        margin-top: 10px;
+                        margin-top: 5px;
                         line-height: normal;
                         select {
                             height: 100%;
@@ -112,11 +113,11 @@
                         }
                     }
                     .item {                    
-                        margin-top: 20px;
+                        margin-top: 13px;
                         line-height: normal;
                     }
                     .check {
-                        margin-top: 20px;
+                        margin-top: 13px;
                         display: flex;
                         flex-direction: row;
                         input {

@@ -80,7 +80,7 @@ export class Auth extends React.Component {
                             注册
                         </div>
                     </div>
-                    <div className="content">
+                    <div className="auth-content">
                         <div className="left">
                             { this.state.tabNum === AuthTab.LOGIN ? (
                                 <div className="login">
