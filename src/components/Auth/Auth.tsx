@@ -4,8 +4,9 @@ import { AuthTab, AccountType } from '@config'
 import mylogo from '@assets/mylogo.png'
 import warningImg from '@assets/warning_btn_0.svg'
 import { connect } from 'react-redux'
-import { displayAuth } from '@store/actions'
+import { displayAuth, storeUserInfo } from '@store/actions'
 import { Post } from '@lib/helper'
+import { withCookies } from 'react-cookie'
 
 class Auth extends React.Component {
     constructor(props) {
@@ -132,7 +133,16 @@ class Auth extends React.Component {
                 password: this.state.login.password
             })
             if(res.success) {
-                console.log(res.result.token)
+                const cookies = this.props
+                const maxAge = this.state.login.oneWeekLogin ?　7*24*60*60 : 1*24*60*60
+                cookies.set('Authorization', `Bearer ${res.result.token}`, {
+                    maxAge: maxAge
+                })
+                cookies.set('userinfo', res.result.userinfo, {
+                    maxAge: maxAge
+                })
+                this.props.storeUserInfo(res.result.userInfo)
+                this.closeModal()
             } else {
                 this.setState({
                     error: {
@@ -252,7 +262,8 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab)),
+    storeUserInfo: (userInfo) => dispatch(storeUserInfo(userInfo))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth)
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(Auth))
