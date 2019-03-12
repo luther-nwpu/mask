@@ -67,6 +67,24 @@
                         line-height: normal;
                         align-items: center;
                         justify-content: space-between;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
                         .judgelogin {
                             display: flex;
                             flex-direction: row;
@@ -105,21 +123,75 @@
                     .item-username {  
                         margin-top: 5px;
                         line-height: normal;
+                        position: relative;
                         select {
                             height: 100%;
                         }
                         input {
                             width: 108px;
                         }
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
                     }
                     .item {                    
                         margin-top: 13px;
                         line-height: normal;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
                     }
                     .check {
                         margin-top: 13px;
                         display: flex;
                         flex-direction: row;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
                         input {
                             width: 79px;
                         }

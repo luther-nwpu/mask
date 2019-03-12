@@ -1,9 +1,11 @@
 import * as React from 'react'
 import './Auth.scss'
 import { AuthTab, AccountType } from '@config'
-import  mylogo from '@assets/mylogo.png'
+import mylogo from '@assets/mylogo.png'
+import warningImg from '@assets/warning_btn_0.svg'
 import { connect } from 'react-redux'
 import { displayAuth } from '@store/actions'
+import { Post } from '@lib/helper'
 
 class Auth extends React.Component {
     constructor(props) {
@@ -22,6 +24,10 @@ class Auth extends React.Component {
                 passwordConfirm: '',
                 checkCode: ''
             },
+            error: {
+                id: '',
+                message: ''
+            }
         }
     }
     props
@@ -38,6 +44,10 @@ class Auth extends React.Component {
             password: '',
             passwordConfirm: '',
             checkCode: ''
+        },
+        error: {
+            id: '',
+            message: ''
         }
     }
     alreadyRead: false
@@ -74,6 +84,72 @@ class Auth extends React.Component {
     closeModal() {
         this.props.displayAuth(false, AuthTab.LOGIN)
     }
+    clearError() {
+        this.setState({
+            error: {
+                id: '',
+                message: ''
+            }
+        })
+    }
+    async login() {
+        if (this.state.login.username === '') {
+            this.setState({
+                error: {
+                    id: 'login-email',
+                    message: '请输入邮箱'
+                }
+            })
+            setTimeout(() => {
+                this.clearError()
+            }, 3000)
+            return
+        } else if (!(/^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/.test(this.state.login.username))) {
+            this.setState({
+                error: {
+                    id: 'login-email',
+                    message: '邮箱格式不正确'
+                }
+            })
+            setTimeout(() => {
+                this.clearError()
+            }, 3000)
+            return
+        } else if (this.state.login.password === '') {
+            this.setState({
+                error: {
+                    id: 'login-password',
+                    message: '请输入密码'
+                }
+            })
+            setTimeout(() => {
+                this.clearError()
+            }, 3000)
+            return
+        } else {
+            const res = await Post('auth/login', {
+                email: this.state.login.username,
+                password: this.state.login.password
+            })
+            if(res.success) {
+                console.log(res.result.token)
+            } else {
+                this.setState({
+                    error: {
+                        id: 'login-password',
+                        message: '用户不存在或者密码错误'
+                    }
+                })
+                setTimeout(() => {
+                    this.clearError()
+                }, 3000)
+                return
+            }
+        }
+    }
+    async register() {
+        await Post('api/auth/register', this.state.register)
+    }
     public render() {
         return (
             <div className="auth-component">
@@ -95,9 +171,15 @@ class Auth extends React.Component {
                                         账号登录
                                     </div>
                                     <div className="item">
+                                        <div className={this.state.error.id === 'login-email' ? 'item-error' : 'item-noerror'}>
+                                            <img src={warningImg} /> {this.state.error.message}
+                                        </div>
                                         <input value={this.state.login.username} onChange={() => this.handleLoginUsername(event)} placeholder="请输入邮箱/手机/账号"/>
                                     </div>
                                     <div className="item">
+                                        <div className={this.state.error.id === 'login-password' ? 'item-error' : 'item-noerror'}>
+                                            <img src={warningImg} /> {this.state.error.message}
+                                        </div>
                                         <input type="password" value={this.state.login.password} onChange={() => this.handleLoginPassword(event)} placeholder="请输入密码"/>
                                     </div>
                                     <div className="item">   
@@ -110,12 +192,15 @@ class Auth extends React.Component {
                                         </div>
                                     </div>
                                     <div className="item">
-                                        <button> 登录 </button>
+                                        <button onClick={() => this.login()}> 登录 </button>
                                     </div>
                                 </div>       
                             ) : (
                                 <div className="register">
                                     <div className="item-username">
+                                        <div className={this.state.error.id === 'register-username' ? 'item-error' : 'item-noerror'}>
+                                            <img src={warningImg} /> {this.state.error.message}
+                                        </div>
                                         <select value={this.state.register.accountType} onChange={() => this.handleRegisterSelect(event)}> 
                                             <option value={AccountType.EMAIL}>邮箱</option>
                                             <option value={AccountType.TELEPHONE}>手机</option>
@@ -123,12 +208,21 @@ class Auth extends React.Component {
                                         <input value={this.state.register.account} onChange={() => this.handleRegisterAccount(event)} placeholder={this.state.register.accountType === AccountType.EMAIL ? '请输入邮箱' : '请输入手机号'} />
                                     </div>
                                     <div className="item">
+                                        <div className={this.state.error.id === 'register-password' ? 'item-error' : 'item-noerror'}>
+                                            <img src={warningImg} /> {this.state.error.message}
+                                        </div>
                                         <input type="password" value={this.state.register.password} onChange={() => this.handleRegisterPassword(event)} placeholder="请输入密码"/>
                                     </div>
                                     <div className="item">
+                                        <div className={this.state.error.id === 'register-confirmpassword' ? 'item-error' : 'item-noerror'}>
+                                            <img src={warningImg} /> {this.state.error.message}
+                                        </div>
                                         <input type="password" value={this.state.register.passwordConfirm} onChange={() => this.handleRegisterPasswordConfirm(event)} placeholder="重新输入密码"/>
                                     </div>
                                     <div className="check">
+                                    <   div className={this.state.error.id === 'register-checkcode' ? 'item-error' : 'item-noerror'}>
+                                            <img src={warningImg} /> {this.state.error.message}
+                                        </div>
                                         <input value={this.state.register.checkCode} onChange={() => this.handleRegisterCheckcode(event)} placeholder="请输入验证码"/> 
                                         <button>获取验证码</button>
                                     </div>
@@ -137,7 +231,7 @@ class Auth extends React.Component {
                                         我已经阅读用户协议书。
                                     </div>
                                     <div className="register-item">
-                                        <button> 注册 </button>
+                                        <button onChange={() => this}> 注册 </button>
                                     </div>
                                 </div>
                             )}

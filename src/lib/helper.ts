@@ -20,6 +20,9 @@ export function Post(url: string, params: any): Promise<any> {
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(params),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
     }).then((response) => response.json())
       .then((data: IResponse) => resolve(data))
       .catch((err) => reject(err))
