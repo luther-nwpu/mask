@@ -8,11 +8,6 @@ export enum AuthTab {
     REGISTER = 1,
 }
 
-export enum AccountType {
-    EMAIL = 0,
-    TELEPHONE = 1
-}
-
 export enum UserMenu {
     MYUSERINFO = 0,
     MYVIDEO = 1,

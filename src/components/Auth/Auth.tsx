@@ -1,11 +1,11 @@
 import * as React from 'react'
 import './Auth.scss'
-import { AuthTab, AccountType } from '@config'
+import { AuthTab } from '@config'
 import mylogo from '@assets/mylogo.png'
 import warningImg from '@assets/warning_btn_0.svg'
 import { connect } from 'react-redux'
 import { displayAuth, storeUserInfo } from '@store/actions'
-import { Post } from '@lib/helper'
+import { Post, tryCatch } from '@lib/helper'
 import { withCookies } from 'react-cookie'
 
 class Auth extends React.Component {
@@ -19,7 +19,6 @@ class Auth extends React.Component {
                 oneWeekLogin: true
             },
             register: {
-                accountType: AccountType.EMAIL,
                 account: '',
                 password: '',
                 passwordConfirm: '',
@@ -40,7 +39,6 @@ class Auth extends React.Component {
             oneWeekLogin: true
         },
         register: {
-            accountType: AccountType.EMAIL,
             account: '',
             password: '',
             passwordConfirm: '',
@@ -52,6 +50,17 @@ class Auth extends React.Component {
         }
     }
     alreadyRead: false
+    dealError(id, message) {
+        this.setState({
+            error: {
+                id: id,
+                message: message
+            }
+        })
+        setTimeout(() => {
+            this.clearError()
+        }, 3000)
+    }
     public changeTab(tabNum: Number) {
         this.setState({ tabNum })
     }
@@ -60,9 +69,6 @@ class Auth extends React.Component {
     }
     public handleLoginPassword(event: any) {
         this.setState({ login: { ...this.state.login, password: event.target.value }})
-    }
-    public handleRegisterSelect(event: any) {
-        this.setState({register: { ...this.state.register, accountType: event.target.value }})
     }
     public handleRegisterPassword(event: any) {
         this.setState({register: { ...this.state.register, password: event.target.value }})    
@@ -93,39 +99,31 @@ class Auth extends React.Component {
             }
         })
     }
+    async sendEmail() {
+        if (this.state.register.account === '') {
+            this.dealError('register-username', '请输入邮箱')
+            return
+        } else if (!(/^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/.test(this.state.register.account))) {
+            this.dealError('register-username', '邮箱格式不正确')
+            return
+        } else {
+            const [res, error] = await tryCatch(Post('api/auth/sendEmail', this.state.register.account))
+            if (error) {
+                alert(error)
+            } else {
+                console.log('发送成功')
+            }
+        }
+    }
     async login() {
         if (this.state.login.username === '') {
-            this.setState({
-                error: {
-                    id: 'login-email',
-                    message: '请输入邮箱'
-                }
-            })
-            setTimeout(() => {
-                this.clearError()
-            }, 3000)
+            this.dealError('login-email', '请输入邮箱')
             return
         } else if (!(/^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/.test(this.state.login.username))) {
-            this.setState({
-                error: {
-                    id: 'login-email',
-                    message: '邮箱格式不正确'
-                }
-            })
-            setTimeout(() => {
-                this.clearError()
-            }, 3000)
+            this.dealError('login-email', '邮箱格式不正确')
             return
         } else if (this.state.login.password === '') {
-            this.setState({
-                error: {
-                    id: 'login-password',
-                    message: '请输入密码'
-                }
-            })
-            setTimeout(() => {
-                this.clearError()
-            }, 3000)
+            this.dealError('login-password', '请输入密码')
             return
         } else {
             const res = await Post('auth/login', {
@@ -144,21 +142,44 @@ class Auth extends React.Component {
                 this.props.storeUserInfo(res.result.userInfo)
                 this.closeModal()
             } else {
-                this.setState({
-                    error: {
-                        id: 'login-password',
-                        message: '用户不存在或者密码错误'
-                    }
-                })
-                setTimeout(() => {
-                    this.clearError()
-                }, 3000)
+                this.dealError('login-password', '用户不存在或者密码错误')
                 return
             }
         }
     }
     async register() {
-        await Post('api/auth/register', this.state.register)
+        if (this.state.register.account === '') {
+            this.dealError('register-username', '请输入邮箱')
+            return
+        } else if (!(/^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/.test(this.state.register.account))) {
+            this.dealError('register-username', '邮箱格式不正确')
+            return
+        } else if (this.state.register.password === '') {
+            this.dealError('register-password', '请输入密码')
+            return
+        } else if (!(/^(?!([A-Z]*|[a-z]*|[0-9]*|[!-/:-@\[-`{-~]*|[A-Za-z]*|[A-Z0-9]*|[A-Z!-/:-@\[-`{-~]*|[a-z0-9]*|[a-z!-/:-@\[-`{-~]*|[0-9!-/:-@\[-`{-~]*)$)[A-Za-z0-9!-/:-@\[-`{-~]{8,20}$/.test(this.state.register.password))) {
+            this.dealError('register-password', '三种，并且8-20')
+            return
+        } else if (this.state.register.password !== this.state.register.passwordConfirm) {
+           this.dealError('register-confirmpassword', '两次密码不一致')
+        } else if(this.state.register.checkCode === '') {
+            this.dealError('register-checkcode', '请输入验证码')
+        } else {
+           const [res, error] = await tryCatch(Post('api/auth/register', {
+               email: this.state.register.account,
+               checkcode: this.state.register.checkCode,
+               password: this.state.register.password
+           }))
+           if (error) {
+               alert(error)
+           } else {
+               if(res.success) {
+                   this.changeTab(AuthTab.LOGIN)
+               } else {
+                   this.dealError(res.result.id, res.result.message)
+               }
+           }
+        }        
     }
     public render() {
         return (
@@ -211,11 +232,7 @@ class Auth extends React.Component {
                                         <div className={this.state.error.id === 'register-username' ? 'item-error' : 'item-noerror'}>
                                             <img src={warningImg} /> {this.state.error.message}
                                         </div>
-                                        <select value={this.state.register.accountType} onChange={() => this.handleRegisterSelect(event)}> 
-                                            <option value={AccountType.EMAIL}>邮箱</option>
-                                            <option value={AccountType.TELEPHONE}>手机</option>
-                                        </select>
-                                        <input value={this.state.register.account} onChange={() => this.handleRegisterAccount(event)} placeholder={this.state.register.accountType === AccountType.EMAIL ? '请输入邮箱' : '请输入手机号'} />
+                                        <input value={this.state.register.account} onChange={() => this.handleRegisterAccount(event)} placeholder="请输入邮箱" />
                                     </div>
                                     <div className="item">
                                         <div className={this.state.error.id === 'register-password' ? 'item-error' : 'item-noerror'}>
@@ -234,14 +251,14 @@ class Auth extends React.Component {
                                             <img src={warningImg} /> {this.state.error.message}
                                         </div>
                                         <input value={this.state.register.checkCode} onChange={() => this.handleRegisterCheckcode(event)} placeholder="请输入验证码"/> 
-                                        <button>获取验证码</button>
+                                        <button onClick={() => this.sendEmail()}>获取验证码</button>
                                     </div>
                                     <div className="account-item">
                                         <input defaultChecked={this.alreadyRead} onChange = {() => this.handleRegisterAlreadRead(event)} type="checkBox" />
                                         我已经阅读用户协议书。
                                     </div>
                                     <div className="register-item">
-                                        <button onChange={() => this}> 注册 </button>
+                                        <button onClick={() => this.register()}> 注册 </button>
                                     </div>
                                 </div>
                             )}
