@@ -8,7 +8,7 @@ export class UploadVideo extends React.Component {
         super(props)
     }
     public state = {
-        currentTab: UploadState.UPLOADING
+        currentTab: UploadState.NOUPLOAD
     }
     public render() {
         return (
