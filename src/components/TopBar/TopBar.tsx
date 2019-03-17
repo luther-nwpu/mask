@@ -4,7 +4,7 @@ import './TopBar.scss'
 import logo from '@assets/logo.png'
 import { connect } from 'react-redux'
 import Auth from '@components/Auth/Auth'
-import { displayAuth } from '@store/actions'
+import { displayAuth } from '@store/actions/auth'
 import { AuthTab } from '@config'
 class TopBar extends Component {
     state = {

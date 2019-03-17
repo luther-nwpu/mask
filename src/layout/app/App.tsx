@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import './App.scss'
 import { MaskApp, AdminApp } from '@layout'
 import { Footer } from '@components'
-import { storeUserInfo } from '@store/actions'
+import { storeUserInfo } from '@store/actions/todoApp'
 class App extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
