@@ -1,14 +1,15 @@
 import * as React from 'react'
 import './UploadVideo.scss'
 import { UploadState } from '@config'
-import { UploadVideoComponent, Drafts } from '@components'
+import Drafts from '@components/Drafts/Drafts'
+import UploadVideoComponent from '@components/UploadVideoComponent/UploadVideoComponent'
 
 export class UploadVideo extends React.Component {
     constructor(props) {
         super(props)
     }
     public state = {
-        currentTab: UploadState.NOUPLOAD
+        currentTab: UploadState.UPLOADING
     }
     public render() {
         return (

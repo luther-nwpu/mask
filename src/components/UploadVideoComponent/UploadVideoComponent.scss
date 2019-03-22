@@ -11,6 +11,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .upload-input {
+        display: none;
+    }
     img {
         line-height: 400px;
     }

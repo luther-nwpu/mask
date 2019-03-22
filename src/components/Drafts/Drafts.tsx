@@ -4,13 +4,14 @@ import videoImg from '@assets/download-video.png'
 import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
+import { connect } from 'react-redux'
 const processStyle = {
     width: '100%',
     height: '1px',
     background: '#43ce5b'
 }
 
-export class Drafts extends React.Component {
+class Drafts extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -118,8 +119,8 @@ export class Drafts extends React.Component {
                     </div>
                     <div className="file-description">
                         {
-                            this.state.uploadVideos.map(function(value) {
-                                return (<div className="file-detail">
+                            this.state.uploadVideos.map(function(value, key) {
+                                return (<div className="file-detail" key={key}>
                                             <img src={videoImg} /> 
                                             <div className="file-upload"> 
                                                 <div className="file-video-name">
@@ -152,8 +153,8 @@ export class Drafts extends React.Component {
                             <div className="cover-img-right-text"> 可选择以下封面 </div>
                             <div className="cover-img-right-imgs">
                                 {
-                                    this.state.videoImgs.map(function(value) {
-                                        return (<div className="cover-img-right-imgs-value"><img src={value} /> <div className="select-img"> <img src={selectImg} /> </div> </div>)
+                                    this.state.videoImgs.map(function(value, key) {
+                                        return (<div key={key} className="cover-img-right-imgs-value"><img src={value} /> <div className="select-img"> <img src={selectImg} /> </div> </div>)
                                     })
                                 }
                             </div>
@@ -176,16 +177,16 @@ export class Drafts extends React.Component {
                         <div className={this.state.openTab ? 'drop-item-content' : 'drop-item-none'}> 
                             <div className="drop-item-content-left">
                                 {
-                                    Object.keys(this.state.categorys).map(function(value) {
-                                        return (<div className="item">{value}</div>)
+                                    Object.keys(this.state.categorys).map(function(value, key) {
+                                        return (<div className="item" key={key}>{value}</div>)
                                     })
                                 }
                             </div>
                             <div className="drop-item-content-right">
                                 {
 
-                                    Object.keys(this.state.categorys[this.state.one]).map((value) => {
-                                        return (<div className="item"><span className="title"> { value } </span> <span className="description"> {this.state.categorys[this.state.one][value]} </span> </div>)
+                                    Object.keys(this.state.categorys[this.state.one]).map((value, key) => {
+                                        return (<div className="item" key={key}><span className="title"> { value } </span> <span className="description"> {this.state.categorys[this.state.one][value]} </span> </div>)
                                     })
                                 }
                             </div>
@@ -199,8 +200,8 @@ export class Drafts extends React.Component {
                     </div>
                     <div className="label">
                         { 
-                            this.state.labels.map(function(value) {
-                                return (<div className="label-div"> {value} <span className="close"> × </span> </div>)
+                            this.state.labels.map(function(value, key) {
+                                return (<div className="label-div" key={key}> {value} <span className="close"> × </span> </div>)
                             })
                         }
                         <input />
@@ -214,3 +215,5 @@ export class Drafts extends React.Component {
         )
     }
 }
+
+export default connect(null, null)(Drafts)
