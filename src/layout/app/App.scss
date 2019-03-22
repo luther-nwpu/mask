@@ -54,9 +54,13 @@ table {
   background-color: #f4f5f8;
   position: relative;
   width: 100%;
-  height: stretch;
   display: flex;
   flex-direction: column;
   align-items: center;
   font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+}
+Footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
 }
