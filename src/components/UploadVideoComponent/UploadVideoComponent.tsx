@@ -8,7 +8,6 @@ import { UploadState } from '@config'
 class UploadVideoComponent extends React.Component {
     constructor(props) {
         super(props)
-        this.props.uploadFile(UploadState.NOUPLOAD, null)
         document.addEventListener('dragover', function(e) {
             e.preventDefault()
             e.stopPropagation()

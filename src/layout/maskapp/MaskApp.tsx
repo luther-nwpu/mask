@@ -2,8 +2,8 @@ import * as React from 'react'
 import {Home} from '@pages'
 import { Route, Switch } from 'react-router-dom'
 import './MaskApp.scss'
-import { ArticleDetail, Person, VideoPage, UploadVideo } from '@pages'
-import { Footer } from '@components'
+import { ArticleDetail, Person, VideoPage } from '@pages'
+import UploadVideo from '@pages/UploadVideo/UploadVideo'
 import TopBar from '@components/TopBar/TopBar'
 export class MaskApp extends React.Component {
   public state = {

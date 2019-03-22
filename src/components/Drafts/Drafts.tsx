@@ -14,11 +14,13 @@ const processStyle = {
 class Drafts extends React.Component {
     constructor(props) {
         super(props)
+        console.log(props.firstFile)
     }
     public openSignTab = function() {
         this.state.openTab ? this.setState({openTab: false}) : this.setState({openTab: true})
         console.log(this.state.openTab)
     }
+    props
     public state = {
         openTab: false,
         uploadVideos: [{
@@ -216,4 +218,11 @@ class Drafts extends React.Component {
     }
 }
 
-export default connect(null, null)(Drafts)
+const mapStateToProps = (state) => {
+    const { firstFile } = state.upload
+    return {
+        firstFile: firstFile
+    }
+}
+
+export default connect(mapStateToProps, null)(Drafts)

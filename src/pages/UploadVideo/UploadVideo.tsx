@@ -3,20 +3,24 @@ import './UploadVideo.scss'
 import { UploadState } from '@config'
 import Drafts from '@components/Drafts/Drafts'
 import UploadVideoComponent from '@components/UploadVideoComponent/UploadVideoComponent'
+import { connect } from 'react-redux'
+import { uploadFirstFile } from '@store/actions/upload'
 
-export class UploadVideo extends React.Component {
+class UploadVideo extends React.Component {
     constructor(props) {
         super(props)
+        props.uploadFile(UploadState.NOUPLOAD, null)
     }
+    props
     public state = {
-        currentTab: UploadState.UPLOADING
+        currentTab: UploadState.NOUPLOAD
     }
     public render() {
         return (
             <div className="upload-video-page">
                 {
                     (() => {       
-                        if(UploadState.NOUPLOAD === this.state.currentTab) {
+                        if(UploadState.NOUPLOAD ===  this.props.uploadType  || this.state.currentTab) {
                             return <UploadVideoComponent />
                         } else {
                             return <Drafts />
@@ -27,3 +31,15 @@ export class UploadVideo extends React.Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    const { uploadType } = state.upload
+    return {
+        uploadType: uploadType
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    uploadFile: (uploadType, firstFile) => dispatch(uploadFirstFile(uploadType, firstFile))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UploadVideo)
