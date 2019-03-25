@@ -12,9 +12,41 @@ const processStyle = {
 }
 
 class Drafts extends React.Component {
+
+    xhr:XMLHttpRequest
+    uploadProgress = (e) => {
+        console.log('e', e)
+        if (e.lengthComputable) {
+            const progress = Math.round((e.loaded / e.total) * 100)
+            console.log('process', progress)
+        }
+    }
     constructor(props) {
         super(props)
         console.log(props.firstFile)
+        if(props.firstFile !== null) {
+            const url = 'upload/video'
+            const form = new FormData()        
+            form.append('file', props.firstFile)
+            const xhr = new XMLHttpRequest()
+            this.xhr = xhr
+            xhr.upload.addEventListener('progress', this.uploadProgress, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
+        
+            // xhr.addEventListener('load', uploadComplete, false);
+            // xhr.addEventListener('error',uploadFail,false);
+            // xhr.addEventListener('abort',uploadCancel,false)
+        
+            xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
+            xhr.send(form)
+            const self = this 
+            xhr.onload = function () {
+                //如果请求成功
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    const res = JSON.parse(xhr.responseText)
+                    console.log(res)
+                }
+            }
+        }
     }
     public openSignTab = function() {
         this.state.openTab ? this.setState({openTab: false}) : this.setState({openTab: true})
@@ -27,12 +59,20 @@ class Drafts extends React.Component {
             videoId: 0,
             videoName: '高兴的睡不着了',
             videoUrl: '',
-            uploadPercent: '50%',
+            uploadState: {
+              percent: '',
+              total: 0,
+              loaded: 0
+            }
         },{
             videoId: 1,
             videoName: '你好啊',
             videoUrl: '',
-            uploadPercent: '50%'
+            uploadState: {
+              percent: '',
+              total: 0,
+              loaded: 0
+            }
         }],
         labels: [
             '开心',
