@@ -1,5 +1,22 @@
 .swiper-component {
-    .imgScroll {
-        
+    .showContainer {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        margin:100px auto 0 auto;
+        box-shadow: 0 0 5px green;
+        overflow: hidden;
+        .container {
+            position: absolute;
+            width: 4200px;
+            height: 400px;
+            z-index: 1;
+            transition: transform 1s;
+            img {
+                float: left;
+                width: 600px;
+                height: 400px;
+            }
+        }
     }
 }
