@@ -65,27 +65,48 @@ export class Swiper extends React.Component {
     public render() {
         return (
             <div className="swiper-component">
-                <div className="showContainer">
-                    <div className="container" style={{ left: `${this.state.left}px` }}>
-                        {
-                            this.state.thumbers.map((value) => {
-                                return (<div className="dd"> <img src={value.imgUrl} /> </div>)
-                            })
-                        }
+                <div className="wrap">
+                    <div className="cube">
+                        <div className="out_front">
+                            <img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" className="pic" />
+                        </div>
+                        <div className="out_back">
+                            <img src="https://img-blog.csdn.net/20170716094334594" className="pic" />
+                        </div>
+                        <div className="out_left">
+                            <img src="https://img-blog.csdn.net/20170716094400013" className="pic" />
+                        </div>
+                        <div className="out_right">
+                            <img src="https://img-blog.csdn.net/20170716094422331" className="pic" />
+                        </div>
+                        <div className="out_top">
+                            <img src="https://img-blog.csdn.net/20170716094444434" className="pic" />
+                        </div>
+                        <div className="out_bottom">
+                            <img src="https://img-blog.csdn.net/20170716094504432" className="pic" />
+                        </div>
+                        <span className="in_front">
+                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
+                        </span>
+                        <span className="in_back">
+                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
+                        </span>
+                        <span className="in_left">
+                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
+                        </span>
+                        <span className="in_right">
+                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
+                        </span>
+                        <span className="in_top">
+                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
+                        </span>
+                        <span className="in_bottom">
+                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
+                        </span>
                     </div>
+
                 </div>
-                <div className="dots">
-                    <span className="dot active"></span>
-                    <span className="dot"></span>
-                    <span className="dot"></span>
-                </div>
-                <div className="left-triangle triangle">
-                    <span>&lt;</span>
-                </div>
-                <div className="right-triangle triangle">
-                    <span>&gt;</span>
-                </div>
-            </div>
+    </div>
         )
     }
 }
