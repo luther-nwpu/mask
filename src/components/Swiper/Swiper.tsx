@@ -65,48 +65,49 @@ export class Swiper extends React.Component {
     public render() {
         return (
             <div className="swiper-component">
-                <div className="wrap">
-                    <div className="cube">
-                        <div className="out_front">
-                            <img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" className="pic" />
+                <div className="container">
+                    <div className="cube-wrap">
+                            <input type="radio" name="cuber" className="controller" id="1" checked />
+                            <input type="radio" name="cuber" className="controller" id="2" />
+                            <input type="radio" name="cuber" className="controller" id="3" />
+                            <input type="radio" name="cuber" className="controller" id="4" />
+                            <input type="radio" name="cuber" className="controller" id="5" />
+                            <input type="radio" name="cuber" className="controller" id="6" />
+                            <div className="cube">
+                                <div className="cube-face front"><img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" /></div>
+                                <div className="cube-face back"><img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" /></div>
+                                <div className="cube-face left"><img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" /></div>
+                                <div className="cube-face right"><img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" /></div>
+                                <div className="cube-face top"><img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" /></div>
+                                <div className="cube-face bottom"><img src="https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg" /></div>
+                            </div>
+                            <div className="cube_left">
+                                <label htmlFor="6" className="cube_action"></label>
+                                <label htmlFor="1" className="cube_action"></label>
+                                <label htmlFor="2" className="cube_action"></label>
+                                <label htmlFor="3" className="cube_action"></label>
+                                <label htmlFor="4" className="cube_action"></label>
+                                <label htmlFor="5" className="cube_action"></label>
+                            </div>
+                            <div className="cube_right">
+                                <label htmlFor="2" className="cube_action"></label>
+                                <label htmlFor="3" className="cube_action"></label>
+                                <label htmlFor="4" className="cube_action"></label>
+                                <label htmlFor="5" className="cube_action"></label>
+                                <label htmlFor="6" className="cube_action"></label>
+                                <label htmlFor="1" className="cube_action"></label>
+                            </div>
+                            <div className="indicators">
+                                <label htmlFor="1" className="indicator"></label>
+                                <label htmlFor="2" className="indicator"></label>
+                                <label htmlFor="3" className="indicator"></label>
+                                <label htmlFor="4" className="indicator"></label>
+                                <label htmlFor="5" className="indicator"></label>
+                                <label htmlFor="6" className="indicator"></label>
+                            </div>
                         </div>
-                        <div className="out_back">
-                            <img src="https://img-blog.csdn.net/20170716094334594" className="pic" />
-                        </div>
-                        <div className="out_left">
-                            <img src="https://img-blog.csdn.net/20170716094400013" className="pic" />
-                        </div>
-                        <div className="out_right">
-                            <img src="https://img-blog.csdn.net/20170716094422331" className="pic" />
-                        </div>
-                        <div className="out_top">
-                            <img src="https://img-blog.csdn.net/20170716094444434" className="pic" />
-                        </div>
-                        <div className="out_bottom">
-                            <img src="https://img-blog.csdn.net/20170716094504432" className="pic" />
-                        </div>
-                        <span className="in_front">
-                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
-                        </span>
-                        <span className="in_back">
-                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
-                        </span>
-                        <span className="in_left">
-                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
-                        </span>
-                        <span className="in_right">
-                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
-                        </span>
-                        <span className="in_top">
-                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
-                        </span>
-                        <span className="in_bottom">
-                            <img src="https://img-blog.csdn.net/20170716120759718" className="in_pic" />
-                        </span>
                     </div>
-
                 </div>
-    </div>
         )
     }
 }
