@@ -1,5 +1,8 @@
 .drafts-component {
     width: 100%;
+    .upload-input {
+        display: none;
+    }
     .drafts-content {
         width: 70%;
         margin: auto;

@@ -70,7 +70,7 @@ export class VideoPage extends React.Component {
                         </span>
                     </div>
                     <div className="video-video">
-                        <Video></Video>
+                        <Video src=""></Video>
                     </div>
                     <div className="video-support">
 

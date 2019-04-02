@@ -9,7 +9,7 @@ import { uploadFirstFile } from '@store/actions/upload'
 class UploadVideo extends React.Component {
     constructor(props) {
         super(props)
-        props.uploadFile(UploadState.NOUPLOAD, null)
+        props.uploadFile(UploadState.UPLOADING, null)
     }
     props
     public state = {

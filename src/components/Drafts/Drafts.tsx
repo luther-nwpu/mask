@@ -152,6 +152,35 @@ class Drafts extends React.Component {
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
         ]
     }
+    public uploadVideo() {
+        document.getElementById('uploadVideo').click()
+    }
+    public uploadFile(e) {
+        const url = 'upload/video'
+        const form = new FormData()        
+        form.append('file', e.files[0])
+        const xhr = new XMLHttpRequest()
+        this.xhr = xhr
+        xhr.upload.addEventListener('progress', this.uploadProgress, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
+    
+        // xhr.addEventListener('load', uploadComplete, false);
+        // xhr.addEventListener('error',uploadFail,false);
+        // xhr.addEventListener('abort',uploadCancel,false)
+    
+        xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
+        xhr.send(form)
+        const self = this 
+        xhr.onload = function () {
+            //如果请求成功
+            if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                const res = JSON.parse(xhr.responseText)
+                console.log(res)
+            }
+        }
+    }
+    public deleteVideo(videoId) {
+        console.log(videoId)
+    }
     public render () {
         return (
             <div className="drafts-component">
@@ -168,7 +197,7 @@ class Drafts extends React.Component {
                                                 <div className="file-video-name">
                                                     <span> {value.videoName} </span> 
                                                     <span className="upload-right"> 
-                                                        <span className="file-delete"> 删除 </span> 
+                                                        <span className="file-delete" onClick={() => this.deleteVideo(value.videoId)}> 删除 </span> 
                                                         <img className="file-finish-img" src={downloadSuccess} /> 
                                                     </span> 
                                                 </div>
@@ -179,9 +208,10 @@ class Drafts extends React.Component {
                             })
                         }
                     </div>
-                    <div className="add-upload-video">
+                    <div className="add-upload-video" onClick={() => this.uploadVideo()}>
                        + 添加视频
                     </div>
+                    <input id="uploadVideo" type="file" className="upload-input" onChange={(e) => this.uploadFile(e)}/>
                     <div className="line"></div>
                     <div className="base-info">
                         基本信息
