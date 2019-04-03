@@ -3,6 +3,9 @@ import './Video.scss'
 import big_svg from '@assets/big_btn_0.svg'
 import sound_svg from '@assets/sound_btn_0.svg'
 import nosound_svg from '@assets/nosound_btn_0.svg'
+import pause_svg from '@assets/pause_btn_0.svg'
+import playing_svg from '@assets/playing_btn_0.svg'
+
 interface IProp {
     src: string,
     type?: any
@@ -49,6 +52,7 @@ export class Video extends React.Component<IProp, IState> {
             // Automatic playback started!
             // Show playing UI.
             console.log(_)
+            this.setState({})
           })
           .catch(error => {
             // Auto-play was prevented
@@ -62,10 +66,10 @@ export class Video extends React.Component<IProp, IState> {
         console.log(error)
     }
     public addVolume() {
-        if(this.state.video.muted) {
-            this.state.video.muted = false
+        if(this.video.muted) {
+            this.video.muted = false
         } else {
-            this.state.video.muted = true
+            this.video.muted = true
         }
         this.setState({})
     }
@@ -83,12 +87,30 @@ export class Video extends React.Component<IProp, IState> {
         return h === '00' ? m + ':' + s : h + ':' + m + ':' + s
     }
 
+    public playOrPause() {
+        if(!(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) {
+            this.video.pause()
+        } else {
+            this.video.play()
+        }
+        this.setState({})
+    }
+
+    public getVideoStateClassName() {
+        if(this.video && this.video.paused) {
+            return 'mark loading'
+        } else if(this.video &&  this.video.seeking) {
+            return 'mark loading'
+        } else {
+            return ''
+        }
+    }
     public render() {
         return (
             <div className="video-component">
                 <div className="eplayer">
-                    <video  ref={(video) => this.video = video} className="video" src={this.props.src}></video>
-                    <div id="mark" className="mark loading"></div>
+                    <video ref={(video) => this.video = video} className="video" src={this.props.src}></video>
+                    <div className={(() => this.getVideoStateClassName())()}></div>
                     <div className="controls">
                         <div className="progress" >
                             <b className="bg"></b>
@@ -100,13 +122,14 @@ export class Video extends React.Component<IProp, IState> {
                         </div>
                         <div className="options">
                             <div className="left">
+                                <img src={ this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA) ? pause_svg : playing_svg } className="playing-img" onClick={ () => this.playOrPause() }/>
                                 <span className="time">
-                                    <b className="now">00:00 </b> / <b className="total">00:00</b>
+                                    <b className="now">00:00 {this.video && this.video.playing} </b> / <b className="total">00:00</b>
                                 </span>
                             </div>
                             <input/>                
                             <div className="right">
-                                <img src={ sound_svg } onClick={() => this.addVolume() } className="sound-img" />
+                                <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.addVolume() } className="sound-img" />
                                 <div className="sound-progress">
                                     <span className="line"></span> 
                                     <div className="current">
