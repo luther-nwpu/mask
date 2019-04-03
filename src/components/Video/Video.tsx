@@ -20,7 +20,7 @@ export class Video extends React.Component<IProp, IState> {
         super(props)
     }
     public state: IState = {
-        video: document.getElementById('video'),
+        video: '',
         barrage: {        
             barrageText: '',
             barrageColor: '',
@@ -39,8 +39,20 @@ export class Video extends React.Component<IProp, IState> {
     public sendBarrage() {
         console.log(this.state.barrage.barrageText)
     }
-    public onload() {
-        this.state.video.play()
+    public componentDidMount() {
+        const video: any = document.getElementById('video')
+        video.play()
+        this.setState({video: video}, () => {
+            console.log('state', this.state.video)
+        })
+    }
+    public addVolume() {
+        if(this.state.video.muted) {
+            this.state.video.muted = false
+        } else {
+            this.state.video.muted = true
+        }
+        this.setState({})
     }
     public render() {
         return (
@@ -61,18 +73,19 @@ export class Video extends React.Component<IProp, IState> {
                         <div className="left">
                             <i className="epicon ep-play is-play"></i>
                             <span className="time">
-                                <b className="now">00:00</b> / <b className="total">00:00</b>
+                                <b className="now">00:00 </b> / <b className="total">00:00</b>
                             </span>
                         </div>
-                        <input/>
+                        <input/>                
                         <div className="right">
-                            <img src={ this.state.video && this.state.video.volume == 0 ? sound_svg : nosound_svg } className="sound-img" />
-                            <span className="line"></span>
-                            
-                            <div className="current">
-                                <div className="dot"></div>
-                                <div className="cycle"></div>
-                            </div>
+                            <img src={ this.state.video.muted ? nosound_svg : sound_svg } onClick={() => this.addVolume() } className="sound-img" />
+                            <div className="sound-progress">
+                                <span className="line"></span> 
+                                <div className="current">
+                                    <div className="dot"></div>
+                                    <div className="cycle"></div>
+                                </div>
+                            </div>                        
                             <img src={big_svg} className="big-img"/>
                         </div>
                         </div>
