@@ -61,6 +61,8 @@ export class Video extends React.Component<IProp, IState> {
 
     public componentDidMount() {
         this.video.ontimeupdate = () => this.updateVideo()
+        this.progressDom.onmousedown = e => this.progress(e)
+        document.onkeydown = e => this.keydown(e)
         let playPromise = this.video.play()
         if (playPromise !== undefined) {
           playPromise.then(_ => {
@@ -72,10 +74,26 @@ export class Video extends React.Component<IProp, IState> {
           .catch(error => {
             // Auto-play was prevented
             // Show paused UI.
-            console.log('不允许自动播放')
-            console.log(error)
+            this.video.muted = true
+            let playPromise = this.video.play()
+            playPromise.then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+                this.video.muted = false
+                this.setState({})
+            })
+            
+            this.setState({})
           })
         }
+    }
+
+    public keydown(e) {
+        if (e && e.keyCode == 37) this.video.currentTime -= 10
+        if (e && e.keyCode == 39) this.video.currentTime += 10
+        if (e && e.keyCode == 32) this.videoPlayer.play()
+        this.setState({})
+        return false
     }
 
     public updateVideo() {
@@ -98,8 +116,9 @@ export class Video extends React.Component<IProp, IState> {
     }
 
     public progress(e) {
-        let offset = e.offsetX / document.getElementById('progress').offsetWidth
+        let offset = e.offsetX / this.progressDom.offsetWidth
         this.state.video.currentTime = this.state.video.duration * offset
+        this.setState({})
     }
 
     public getTimeStr(time) {
