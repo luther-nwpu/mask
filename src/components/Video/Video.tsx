@@ -29,6 +29,7 @@ export class Video extends React.Component<IProp, IState> {
     processCurrentWidth: string
     progressDom: any
     bgDom: any
+    soundWidth: string
 
     public constructor(props) {
         super(props)
@@ -205,10 +206,10 @@ export class Video extends React.Component<IProp, IState> {
                             <div className="right">
                                 <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.addVolume() } className="sound-img" />
                                 <div className="sound-progress">
-                                    <span className="line"></span> 
-                                    <div className="current">
-                                        <div className="dot"></div>
-                                        <div className="cycle"></div>
+                                    <span className="sound-line"></span> 
+                                    <div className="sound-current" style={{width: (this.video && this.video.volume || 0) * 100  + 'px'}}>
+                                        <div className="sound-dot"></div>
+                                        <div className="sound-cycle"></div>
                                     </div>
                                 </div>                        
                                 <img src={ fullscreen ? exit_full_svg : big_svg } className="big-img" onClick={() => this.full()}/>
