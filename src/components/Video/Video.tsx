@@ -24,7 +24,12 @@ export class Video extends React.Component<IProp, IState> {
     props: IProp
     video:any
     videoPlayer: any
-    
+    // 设置progress 的宽度
+    processWidth: any
+    processCurrentWidth: string
+    progressDom: any
+    bgDom: any
+
     public constructor(props) {
         super(props)
     }
@@ -55,6 +60,7 @@ export class Video extends React.Component<IProp, IState> {
     }
 
     public componentDidMount() {
+        this.video.ontimeupdate = () => this.updateVideo()
         let playPromise = this.video.play()
         if (playPromise !== undefined) {
           playPromise.then(_ => {
@@ -69,6 +75,16 @@ export class Video extends React.Component<IProp, IState> {
             console.log('不允许自动播放')
             console.log(error)
           })
+        }
+    }
+
+    public updateVideo() {
+        if (this.video.buffered.length) {
+            let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
+            this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
+            let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
+            this.processCurrentWidth = offset + 'px'
+            this.setState({})
         }
     }
     
@@ -125,11 +141,18 @@ export class Video extends React.Component<IProp, IState> {
                 document.exitFullscreen()
             }
         } else {
-          let el = this.videoPlayer
-          let rfs = el.requestFullScreen
-          return rfs.call(el)
+            if(this.videoPlayer.requestFullscreen){
+                return this.videoPlayer.requestFullscreen()
+            } else if(this.videoPlayer.webkitRequestFullScreen){
+                return this.videoPlayer.webkitRequestFullScreen()
+            } else if(this.videoPlayer.mozRequestFullScreen){
+                return this.videoPlayer.mozRequestFullScreen()
+            } else {
+                return this.videoPlayer.msRequestFullscreen()
+            }
         }
-      }
+        this.setState({})
+    }
     public continuePlay() {
         if(this.video && this.video.paused) {
             this.video.play()
@@ -144,10 +167,10 @@ export class Video extends React.Component<IProp, IState> {
                     <video ref={(video) => this.video = video} className="video" src={this.props.src}></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls">
-                        <div className="progress" >
-                            <b className="bg"></b>
-                            <b className="buffer"></b>
-                            <div className="current">
+                        <div className="progress" ref={(progress) => this.progressDom = progress}>
+                            <b className="bg" ref={(bg) => this.bgDom = bg}></b>
+                            <b className="buffer" style={{ width: this.processWidth }}></b>
+                            <div className="current" style={{ width: this.processCurrentWidth }}>
                                 <div className="dot"></div>
                                 <div className="cycle"></div>
                             </div>
@@ -156,7 +179,7 @@ export class Video extends React.Component<IProp, IState> {
                             <div className="left">
                                 <img src={ this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA) ? pause_svg : playing_svg } className="playing-img" onClick={ () => this.playOrPause() }/>
                                 <span className="time">
-                                    <b className="now">00:00 {this.video && this.video.playing} </b> / <b className="total">00:00</b>
+                                    <b className="now"> {this.video && this.getTimeStr(this.video.currentTime) || '00:00'} </b> / <b className="total"> {this.video && this.getTimeStr(this.video.duration) || '00:00'}</b>
                                 </span>
                             </div>
                             <input/>                
@@ -169,7 +192,7 @@ export class Video extends React.Component<IProp, IState> {
                                         <div className="cycle"></div>
                                     </div>
                                 </div>                        
-                                <img src={ fullscreen ? big_svg : exit_full_svg } className="big-img" onClick={() => this.full()}/>
+                                <img src={ fullscreen ? exit_full_svg : big_svg } className="big-img" onClick={() => this.full()}/>
                             </div>
                         </div>
                         <div className="epicon ep-video"></div>
