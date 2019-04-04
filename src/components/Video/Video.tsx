@@ -5,6 +5,7 @@ import sound_svg from '@assets/sound_btn_0.svg'
 import nosound_svg from '@assets/nosound_btn_0.svg'
 import pause_svg from '@assets/pause_btn_0.svg'
 import playing_svg from '@assets/playing_btn_0.svg'
+import exit_full_svg from '@assets/exit_screen_btn_0.svg'
 
 interface IProp {
     src: string,
@@ -18,12 +19,16 @@ interface IState {
         barrageRange: ''
     }
 }
+
 export class Video extends React.Component<IProp, IState> {
     props: IProp
     video:any
+    videoPlayer: any
+    
     public constructor(props) {
         super(props)
     }
+
     public state: IState = {
         video: '',
         barrage: {        
@@ -32,20 +37,24 @@ export class Video extends React.Component<IProp, IState> {
             barrageRange: ''
         }
     }
+
     public handleBarrageText(event) {
         this.setState({barrage: { ...this.state.barrage, barrageText: event.target.value }})
     }
+
     public handleBarrageColor(event) {
         this.setState({barrage: { ...this.state.barrage, barrageColor: event.target.value }})
     }
+
     public handleBarrageRange(event) {
         this.setState({barrage: { ...this.state.barrage, barrageRange: event.target.value }})
     }
+
     public sendBarrage() {
         console.log(this.state.barrage.barrageText)
     }
+
     public componentDidMount() {
-        console.log('video', this.video)
         let playPromise = this.video.play()
         if (playPromise !== undefined) {
           playPromise.then(_ => {
@@ -62,9 +71,7 @@ export class Video extends React.Component<IProp, IState> {
           })
         }
     }
-    public componentDidCatch(error, info) {
-        console.log(error)
-    }
+    
     public addVolume() {
         if(this.video.muted) {
             this.video.muted = false
@@ -73,10 +80,12 @@ export class Video extends React.Component<IProp, IState> {
         }
         this.setState({})
     }
+
     public progress(e) {
         let offset = e.offsetX / document.getElementById('progress').offsetWidth
         this.state.video.currentTime = this.state.video.duration * offset
     }
+
     public getTimeStr(time) {
         let h:any = Math.floor(time / 3600)
         let m:any = Math.floor((time % 3600) / 60)
@@ -98,19 +107,42 @@ export class Video extends React.Component<IProp, IState> {
 
     public getVideoStateClassName() {
         if(this.video && this.video.paused) {
-            return 'mark loading'
+            return 'mark pause'
         } else if(this.video &&  this.video.seeking) {
             return 'mark loading'
         } else {
             return ''
         }
     }
+    public isFullScreen() {
+        return (
+            document.fullscreen
+        )
+    }
+    public full() {
+        if (this.isFullScreen()) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen()
+            }
+        } else {
+          let el = this.videoPlayer
+          let rfs = el.requestFullScreen
+          return rfs.call(el)
+        }
+      }
+    public continuePlay() {
+        if(this.video && this.video.paused) {
+            this.video.play()
+            this.setState({})
+        }
+    }
     public render() {
+        const fullscreen = document.fullscreen
         return (
             <div className="video-component">
-                <div className="eplayer">
+                <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer">
                     <video ref={(video) => this.video = video} className="video" src={this.props.src}></video>
-                    <div className={(() => this.getVideoStateClassName())()}></div>
+                    <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls">
                         <div className="progress" >
                             <b className="bg"></b>
@@ -137,7 +169,7 @@ export class Video extends React.Component<IProp, IState> {
                                         <div className="cycle"></div>
                                     </div>
                                 </div>                        
-                                <img src={big_svg} className="big-img"/>
+                                <img src={ fullscreen ? big_svg : exit_full_svg } className="big-img" onClick={() => this.full()}/>
                             </div>
                         </div>
                         <div className="epicon ep-video"></div>
