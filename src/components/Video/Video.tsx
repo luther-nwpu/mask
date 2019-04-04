@@ -30,6 +30,7 @@ export class Video extends React.Component<IProp, IState> {
     progressDom: any
     bgDom: any
     soundWidth: string
+    soundDom: any
 
     public constructor(props) {
         super(props)
@@ -63,6 +64,7 @@ export class Video extends React.Component<IProp, IState> {
     public componentDidMount() {
         this.video.ontimeupdate = () => this.updateVideo()
         this.progressDom.onmousedown = e => this.progress(e)
+        this.soundDom.onmousedown = e => this.soundProgress(e)
         document.onkeydown = e => this.keydown(e)
         let playPromise = this.video.play()
         if (playPromise !== undefined) {
@@ -76,14 +78,7 @@ export class Video extends React.Component<IProp, IState> {
             // Auto-play was prevented
             // Show paused UI.
             this.video.muted = true
-            let playPromise = this.video.play()
-            playPromise.then(_ => {
-                // Automatic playback started!
-                // Show playing UI.
-                this.video.muted = false
-                this.setState({})
-            })
-            
+            this.video.play()
             this.setState({})
           })
         }
@@ -106,8 +101,8 @@ export class Video extends React.Component<IProp, IState> {
             this.setState({})
         }
     }
-    
-    public addVolume() {
+
+    public onOffVolume() {
         if(this.video.muted) {
             this.video.muted = false
         } else {
@@ -122,6 +117,11 @@ export class Video extends React.Component<IProp, IState> {
         this.setState({})
     }
 
+    public soundProgress(e) {
+        let offset = e.offsetX / 100
+        this.video.volume = offset
+        this.setState({})
+    }
     public getTimeStr(time) {
         let h:any = Math.floor(time / 3600)
         let m:any = Math.floor((time % 3600) / 60)
@@ -204,10 +204,10 @@ export class Video extends React.Component<IProp, IState> {
                             </div>
                             <input/>                
                             <div className="right">
-                                <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.addVolume() } className="sound-img" />
-                                <div className="sound-progress">
+                                <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.onOffVolume() } className="sound-img" />
+                                <div className="sound-progress" ref={(sound) => this.soundDom = sound}>
                                     <span className="sound-line"></span> 
-                                    <div className="sound-current" style={{width: (this.video && this.video.volume || 0) * 100  + 'px'}}>
+                                    <div className="sound-current" style={{width: ((this.video && this.video.muted == false && this.video.volume) || 0) * 100  + 'px'}}>
                                         <div className="sound-dot"></div>
                                         <div className="sound-cycle"></div>
                                     </div>
