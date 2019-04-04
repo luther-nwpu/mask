@@ -117,7 +117,7 @@ export class Video extends React.Component<IProp, IState> {
 
     public progress(e) {
         let offset = e.offsetX / this.progressDom.offsetWidth
-        this.state.video.currentTime = this.state.video.duration * offset
+        this.video.currentTime = this.video.duration * offset
         this.setState({})
     }
 
