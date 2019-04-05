@@ -135,7 +135,6 @@ export class Video extends React.Component<IProp, IState> {
         this.video.volume = offset
         this.setState({})
         document.onmousemove = (event) => {
-            console.log(event.offsetX)
             let offset = event.offsetX / 100
             if(offset > 1) {
                 offset = 1
