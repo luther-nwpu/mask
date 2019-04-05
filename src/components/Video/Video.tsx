@@ -115,12 +115,40 @@ export class Video extends React.Component<IProp, IState> {
         let offset = e.offsetX / this.progressDom.offsetWidth
         this.video.currentTime = this.video.duration * offset
         this.setState({})
+        document.onmousemove = (event) => {
+            console.log(event)
+            let offset = event.offsetX / this.progressDom.offsetWidth
+            this.video.currentTime = this.video.duration * offset
+            this.setState({})
+            // 清除拖动 --- 防止鼠标已经弹起时还在拖动
+            window.getSelection ? window.getSelection().removeAllRanges() : document.getSelection().empty()
+        }   
+        // 鼠标抬起停止拖动
+        document.onmouseup = function(){
+            document.onmousemove = null
+        }
     }
 
     public soundProgress(e) {
+        this.video.muted = false
         let offset = e.offsetX / 100
         this.video.volume = offset
         this.setState({})
+        document.onmousemove = (event) => {
+            console.log(event.offsetX)
+            let offset = event.offsetX / 100
+            if(offset > 1) {
+                offset = 1
+            }
+            this.video.volume = offset
+            this.setState({})
+            // 清除拖动 --- 防止鼠标已经弹起时还在拖动
+            window.getSelection ? window.getSelection().removeAllRanges() : document.getSelection().empty()
+        }   
+        // 鼠标抬起停止拖动
+        document.onmouseup = function(){
+            document.onmousemove = null
+        }
     }
     public getTimeStr(time) {
         let h:any = Math.floor(time / 3600)
