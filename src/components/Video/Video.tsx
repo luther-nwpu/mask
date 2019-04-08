@@ -6,6 +6,9 @@ import nosound_svg from '@assets/nosound_btn_0.svg'
 import pause_svg from '@assets/pause_btn_0.svg'
 import playing_svg from '@assets/playing_btn_0.svg'
 import exit_full_svg from '@assets/exit_screen_btn_0.svg'
+import { BarrageBase } from '@models' 
+import Barrage from 'barrage-ui'
+import websocket from '@lib/Websocket'
 
 interface IProp {
     src: string,
@@ -31,6 +34,7 @@ export class Video extends React.Component<IProp, IState> {
     bgDom: any
     soundWidth: string
     soundDom: any
+    canvas: any
 
     public constructor(props) {
         super(props)
@@ -62,6 +66,7 @@ export class Video extends React.Component<IProp, IState> {
     }
 
     public componentDidMount() {
+        websocket().acceptMessage()
         this.video.ontimeupdate = () => this.updateVideo()
         this.progressDom.onmousedown = e => this.progress(e)
         this.soundDom.onmousedown = e => this.soundProgress(e)
@@ -82,12 +87,153 @@ export class Video extends React.Component<IProp, IState> {
             this.setState({})
           })
         }
+        this.loadBarrage()
     }
 
+    public loadBarrage() {
+        const barrage = new Barrage({
+            container: this.videoPlayer, // 父级容器或ID
+            data: [
+                {
+                  'key': '7g43mm0rpp1l67eh6qjo8',
+                  'time': 500,
+                  'text': '绿色走一波',
+                  'color': '#0f0',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'n8alq5l22d8qqbuhgst68g',
+                  'time': 1200,
+                  'text': '我膨胀了',
+                  'fontFamily': 'SimSun',
+                  'fontSize': 32,
+                  'color': 'yellow',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'atb8ctt81egh8hf45u7n2g',
+                  'time': 2500,
+                  'text': '妈妈咪呀',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'bl9a602defoehsiahgi7vo',
+                  'time': 3300,
+                  'text': '富贵使我们相遇',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'p0su7gh4s88fjtqv0bmdog',
+                  'time': 4000,
+                  'text': '要想生活过得去',
+                  'color': '#0f0',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'udfel3ppv5ggrfqo4nlbng',
+                  'time': 4400,
+                  'text': '你且在这里不要走动，待我去买两斤橘子',
+                  'color': '#f00',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': '68ts93rle7gtv1i9die5ig',
+                  'time': 4800,
+                  'text': '我们都一样',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'dcprmrcmdcg4btqej0mung',
+                  'time': 5200,
+                  'text': 'Remember me',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': '9jgn02iii6b8qmkq2v2hg',
+                  'time': 5680,
+                  'text': 'LoL',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'im73i1lka0ooavb86gb048',
+                  'time': 6600,
+                  'text': '(-_-)|||',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'hrbvbcuekoqm7aacufgk8',
+                  'time': 7200,
+                  'text': '天哪噜',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'f95vsgh50qob6ip3r617b',
+                  'time': 8300,
+                  'text': '富强 民主 文明 和谐 自由 平等 公正 法治 爱国 敬业 诚信 友善',
+                  'color': '#f00',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'u7bo393jvv8dkccb2ml0e',
+                  'time': 9210,
+                  'text': '啦啦啦啦啦啦啦拉',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'muafgllnsg20op35brg9',
+                  'time': 10000,
+                  'text': '我是谁 我从哪里来 我为什么要看这个',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'hjv3sllm12tbh85r2qor8',
+                  'time': 12000,
+                  'text': '2333333333333333',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'r7u5mvu1l7g1hk7cvnddig',
+                  'time': 12000,
+                  'text': '2333333333333333',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': '0o51j9psnj8qn3bnfq9kag',
+                  'time': 12000,
+                  'text': '2333333333333333',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                },
+                {
+                  'key': 'fkgm2nerakgr71jloi9d38',
+                  'time': 12000,
+                  'text': '2333333333333333',
+                  'createdAt': '2019-01-13T13:34:47.126Z'
+                }
+              ], // 弹幕数据
+            config: {
+              // 全局配置项
+              duration: 20000, // 弹幕循环周期(单位：毫秒)
+              defaultColor: '#fff', // 弹幕默认颜色
+            },
+        })
+        console.log('777777777777777777777777')
+        // 新增一条弹幕
+        barrage.add({
+            key: 'fctc651a9pm2j20bia8j', // 弹幕的唯一标识
+            time: 1000, // 弹幕出现的时间(单位：毫秒)
+            text: '这是新增的一条弹幕', // 弹幕文本内容
+            fontSize: 24, // 该条弹幕的字号大小(单位：像素)，会覆盖全局设置
+            color: '#0ff', // 该条弹幕的颜色，会覆盖全局设置
+        })
+        
+        // 播放弹幕
+        barrage.play()
+    }
     public keydown(e) {
         if (e && e.keyCode == 37) this.video.currentTime -= 10
         if (e && e.keyCode == 39) this.video.currentTime += 10
-        if (e && e.keyCode == 32) this.videoPlayer.play()
+        if (e && e.keyCode == 32 || e.keyCode == 13) this.playOrPause()
+
         this.setState({})
         return false
     }
@@ -149,6 +295,7 @@ export class Video extends React.Component<IProp, IState> {
             document.onmousemove = null
         }
     }
+    
     public getTimeStr(time) {
         let h:any = Math.floor(time / 3600)
         let m:any = Math.floor((time % 3600) / 60)
@@ -211,7 +358,7 @@ export class Video extends React.Component<IProp, IState> {
         return (
             <div className="video-component">
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer">
-                    <video ref={(video) => this.video = video} className="video" src={this.props.src}></video>
+                    <video id="video" ref={(video) => this.video = video} className="video" src={this.props.src}></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls">
                         <div className="progress" ref={(progress) => this.progressDom = progress}>

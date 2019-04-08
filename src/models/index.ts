@@ -1,1 +1,1 @@
-export * from '@models/Barrage'
+export * from '@models/BarrageBase'

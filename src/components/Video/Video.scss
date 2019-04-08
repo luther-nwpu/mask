@@ -3,6 +3,10 @@
     margin-left: 10px;
     width: 700px;
     height: 400px;
+    .barrage-canvas {
+        position: absolute;
+        z-index: 1000;
+    }
     .sound-img {
         left: 13px;
         height: 13px;
