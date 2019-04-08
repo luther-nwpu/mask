@@ -49,8 +49,7 @@ class Drafts extends React.Component {
         }
     }
     public openSignTab = function() {
-        this.state.openTab ? this.setState({openTab: false}) : this.setState({openTab: true})
-        console.log(this.state.openTab)
+        this.setState({openTab: true})
     }
     props
     public state = {
@@ -137,6 +136,10 @@ class Drafts extends React.Component {
 
             ]
         },
+        myCategory: {
+            one: '游戏',
+            two: '单机游戏'
+        },
         one: '游戏',
         two: '我不好',
         videoImgs: [
@@ -181,10 +184,31 @@ class Drafts extends React.Component {
     public deleteVideo(videoId) {
         console.log(videoId)
     }
+    public selectCategory(one, two) {
+        this.setState({myCategory:{one:one, two: two}}, () => {
+            this.closeOpenTab()
+        })
+        
+    }
+    public selectOne(one) {
+        this.setState({one: one})
+    }
+    public closeOpenTab() {
+        this.setState({
+            one: this.state.myCategory.one,
+            two: this.state.myCategory.two
+        })
+        this.setState({openTab: false})
+    }
+
     public render () {
         return (
             <div className="drafts-component">
                 <div className="drafts-content">
+                    {
+                        this.state.openTab ? (<div onClick={() => this.closeOpenTab()} className="fixed-mask"> </div>) : ''
+                    }
+                    <div className="fix-openTab"> </div>
                     <div>
                         <span className="file-title">文件上传 </span> （视频上传必须是mp4, avi, flv 格式）
                     </div>
@@ -244,21 +268,22 @@ class Drafts extends React.Component {
                         <span className="video-start">*</span> 分区
                     </div>
                     <div className="drop-item" onClick={() => this.openSignTab()}>
-                        {this.state.one} → {this.state.two} 
+                        {this.state.myCategory.one} → {this.state.myCategory.two}
                         <div className={this.state.openTab ? 'drop-item-down' : 'drop-item-up'}> </div>
                         <div className={this.state.openTab ? 'drop-item-content' : 'drop-item-none'}> 
                             <div className="drop-item-content-left">
                                 {
-                                    Object.keys(this.state.categorys).map(function(value, key) {
-                                        return (<div className="item" key={key}>{value}</div>)
+                                    Object.keys(this.state.categorys).map((value, key) => {
+                                        return (<div className={
+                                            this.state.myCategory.one == value ? 'item-select-0' : (this.state.one == value ? 'item-select-1' : 'item')
+                                        } onClick={() => this.selectOne(value)} key={key}>{value}</div>)
                                     })
                                 }
                             </div>
                             <div className="drop-item-content-right">
                                 {
-
                                     Object.keys(this.state.categorys[this.state.one]).map((value, key) => {
-                                        return (<div className="item" key={key}><span className="title"> { value } </span> <span className="description"> {this.state.categorys[this.state.one][value]} </span> </div>)
+                                        return (<div className={this.state.one == this.state.myCategory.one && this.state.myCategory.two == value ? 'item-select' :'item'} key={key} onClick={()=> this.selectCategory(this.state.one, value)}><span className="title"> { value } </span> <span className="description"> {this.state.categorys[this.state.one][value]} </span> </div>)
                                     })
                                 }
                             </div>
