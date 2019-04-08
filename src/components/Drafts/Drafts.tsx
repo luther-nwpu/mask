@@ -19,6 +19,7 @@ class Drafts extends React.Component {
         if (e.lengthComputable) {
             const progress = Math.round((e.loaded / e.total) * 100)
             console.log('process', progress)
+            this.setState({})
         }
     }
     constructor(props) {
@@ -53,6 +54,10 @@ class Drafts extends React.Component {
     }
     props
     public state = {
+        input: {
+            labelInput: '',
+            titleInput: ''
+        },
         openTab: false,
         uploadVideos: [{
             videoId: 0,
@@ -141,7 +146,7 @@ class Drafts extends React.Component {
             two: '单机游戏'
         },
         one: '游戏',
-        two: '我不好',
+        two: '单机游戏',
         videoImgs: [
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
             'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
@@ -160,8 +165,18 @@ class Drafts extends React.Component {
     }
     public uploadFile(e) {
         const url = 'upload/video'
-        const form = new FormData()        
-        form.append('file', e.files[0])
+        const form = new FormData()
+        form.append('file', e.target.files[0])
+        this.state.uploadVideos.push({
+            videoId: 0,
+            videoName: e.target.files[0].name.split('.')[0],
+            videoUrl: '',
+            uploadState: {
+              percent: '',
+              total: 0,
+              loaded: 0
+            }
+        })
         const xhr = new XMLHttpRequest()
         this.xhr = xhr
         xhr.upload.addEventListener('progress', this.uploadProgress, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
@@ -172,7 +187,6 @@ class Drafts extends React.Component {
     
         xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
         xhr.send(form)
-        const self = this 
         xhr.onload = function () {
             //如果请求成功
             if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
@@ -201,6 +215,29 @@ class Drafts extends React.Component {
         this.setState({openTab: false})
     }
 
+    public deleteLabel(key) {
+        this.state.labels.splice(key, 1)
+        this.setState({labels: this.state.labels})
+    }
+
+    public handleChangeLabel(event) {
+        this.setState({input: { ...this.state.input, labelInput: event.target.value }})    
+    }
+    public _handleChangeTitle(event) {
+        this.setState({input: { ...this.state.input, titleInput: event.target.value }})
+    }
+    public _handleLabelPress(event) {
+        if(event.key == 'Enter' && this.state.input.labelInput != '') {
+            this.state.labels.push(this.state.input.labelInput)
+            this.setState({
+                labels: this.state.labels,
+                input: {
+                    ...this.state.input,
+                    labelInput: ''
+                }
+            })
+        }
+    }
     public render () {
         return (
             <div className="drafts-component">
@@ -222,10 +259,10 @@ class Drafts extends React.Component {
                                                     <span> {value.videoName} </span> 
                                                     <span className="upload-right"> 
                                                         <span className="file-delete" onClick={() => this.deleteVideo(value.videoId)}> 删除 </span> 
-                                                        <img className="file-finish-img" src={downloadSuccess} /> 
+                                                        <img className="file-finish-img" style={{ display: value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? 'inline' : 'none' }} src={downloadSuccess} /> 
                                                     </span> 
                                                 </div>
-                                                <div className="upload-percent"> 上传成功 </div> 
+                                                <div className="upload-percent"> { value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? '上传成功' : `${value.uploadState.loaded} / ${value.uploadState.total} ------ ${value.uploadState.percent}` } </div> 
                                                 <div style={ processStyle }></div> 
                                             </div> 
                                         </div>)
@@ -259,7 +296,7 @@ class Drafts extends React.Component {
                     <div className="video-title-info">
                         <span className="video-start">*</span> 标题 
                     </div>
-                    <input type="text"/>
+                    <input type="text" value={this.state.input.titleInput} onChange={(e) => this._handleChangeTitle(e)}/>
                     <div className="video-title-info">
                         <span className="video-start">*</span> 类型
                     </div>
@@ -297,11 +334,11 @@ class Drafts extends React.Component {
                     </div>
                     <div className="label">
                         { 
-                            this.state.labels.map(function(value, key) {
-                                return (<div className="label-div" key={key}> {value} <span className="close"> × </span> </div>)
+                            this.state.labels.map((value, key) => {
+                                return (<div className="label-div" key={key}> {value} <span className="close" onClick={()=>this.deleteLabel(key)}> × </span> </div>)
                             })
                         }
-                        <input />
+                        <input value={this.state.input.labelInput} onChange={(e)=>this.handleChangeLabel(e)} onKeyPress={(event)=> this._handleLabelPress(event) }/>
                     </div>
                     <div className="video-title-info">
                         简介
