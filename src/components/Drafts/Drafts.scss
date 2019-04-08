@@ -369,6 +369,7 @@
                     border-radius: 3px;
                     line-height: 40px;
                     .item {
+                        width: 100%;
                         &:hover {
                             background: #f0f3f8;
                         }    
@@ -383,6 +384,7 @@
                         }
                     }
                     .item-select {
+                        width: 100%;
                         background-color: #ff9600;
                         .title {
                             padding-left: 10px;
