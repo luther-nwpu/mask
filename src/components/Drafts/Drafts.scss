@@ -130,11 +130,15 @@
                 border-radius: 4px;
                 width: 200px;
                 height: 126px;
+                padding: 0px 10px 0px 10px;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 position: relative;
+                .select-cover {
+                    width: 100%;
+                }
                 img {
                     width: 30px;
                 }

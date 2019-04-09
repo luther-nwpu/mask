@@ -170,6 +170,7 @@ class Drafts extends React.Component {
             one: '游戏',
             two: '单机游戏'
         },
+        selectCover: null,
         one: '游戏',
         two: '单机游戏',
         videoImgs: [
@@ -283,6 +284,11 @@ class Drafts extends React.Component {
             })
         }
     }
+    public selectCover(key) {
+        this.setState({
+            selectCover: this.state.videoImgs[key]
+        })
+    }
     public render () {
         return (
             <div className="drafts-component">
@@ -327,13 +333,13 @@ class Drafts extends React.Component {
                         <span className="video-cover-text">视频封面</span> <span>（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600） </span>
                     </div>
                     <div className="cover-img">
-                        <div className="cover-img-left"> <img src={coverImg} /> <div className="right-bottom"> 上传图片 </div> </div>
+                        <div className="cover-img-left"> <img src={ this.state.selectCover==null ? coverImg : this.state.selectCover } className={ this.state.selectCover==null ? '' : 'select-cover' } /> <div className="right-bottom"> 上传图片 </div> </div>
                         <div className="cover-img-right">
                             <div className="cover-img-right-text"> 可选择以下封面 </div>
                             <div className="cover-img-right-imgs">
                                 {
-                                    this.state.videoImgs.map(function(value, key) {
-                                        return (<div key={key} className="cover-img-right-imgs-value"><img src={value} /> <div className="select-img"> <img src={selectImg} /> </div> </div>)
+                                    this.state.videoImgs.map((value, key) => {
+                                        return (<div key={key} className="cover-img-right-imgs-value" onClick={() => this.selectCover(key)}><img src={value} /> <div className="select-img"> <img src={selectImg} /> </div> </div>)
                                     })
                                 }
                             </div>
