@@ -12,7 +12,6 @@ const processStyle = {
 }
 
 class Drafts extends React.Component {
-
     xhr:XMLHttpRequest
     constructor(props) {
         super(props)
@@ -62,12 +61,13 @@ class Drafts extends React.Component {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
                     const res = JSON.parse(xhr.responseText)
                     if(res.success) {
-                        this.state.uploadVideos[addIndex].videoId = res.result[1].id
-                        this.state.uploadVideos[addIndex].videoName = res.result[1].name
-                        this.state.uploadVideos[addIndex].videoUrl = res.result[1].url
+                        this.state.uploadVideos[addIndex].videoId = res.result.uploadVideo.id
+                        this.state.uploadVideos[addIndex].videoName = res.result.uploadVideo.name
+                        this.state.uploadVideos[addIndex].videoUrl = res.result.uploadVideo.url
                         this.setState({
+                            draftId: res.result.draft.id,
                             uploadVideos: this.state.uploadVideos,
-                            videoImgs: res.result[0]
+                            videoImgs: res.result.imgArr
                         })
                     }
                 }
@@ -79,6 +79,7 @@ class Drafts extends React.Component {
     }
     props
     public state = {
+        draftId: 0,
         input: {
             labelInput: '',
             titleInput: ''
