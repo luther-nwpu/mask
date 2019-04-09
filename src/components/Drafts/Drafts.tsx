@@ -14,14 +14,6 @@ const processStyle = {
 class Drafts extends React.Component {
 
     xhr:XMLHttpRequest
-    uploadProgress = (e) => {
-        console.log('e', e)
-        if (e.lengthComputable) {
-            const progress = Math.round((e.loaded / e.total) * 100)
-            console.log('process', progress)
-            this.setState({})
-        }
-    }
     constructor(props) {
         super(props)
         console.log(props.firstFile)
@@ -29,11 +21,37 @@ class Drafts extends React.Component {
             const url = 'upload/video'
             const form = new FormData()        
             form.append('file', props.firstFile)
+            this.state.uploadVideos.push({
+                videoId: 0,
+                videoName: props.firstFile.name.split('.')[0],
+                videoUrl: '',
+                uploadState: {
+                  percent: '',
+                  total: 0,
+                  loaded: 0
+                }
+            })
+            const addIndex = this.state.uploadVideos.length - 1
             const xhr = new XMLHttpRequest()
             this.xhr = xhr
-            xhr.upload.addEventListener('progress', this.uploadProgress, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const progress = Math.round((e.loaded / e.total) * 100)
+                    console.log('process', progress)
+                    this.state.uploadVideos[addIndex].uploadState = {
+                        loaded: e.loaded,
+                        total: e.total,
+                        percent: progress + '%'
+                    }
+                    this.setState({
+                        uploadVideos: this.state.uploadVideos
+                    })
+                }
+            }, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
         
-            // xhr.addEventListener('load', uploadComplete, false);
+            xhr.addEventListener('load', (res) => {
+                console.log(res)
+            }, false)
             // xhr.addEventListener('error',uploadFail,false);
             // xhr.addEventListener('abort',uploadCancel,false)
         
@@ -177,11 +195,27 @@ class Drafts extends React.Component {
               loaded: 0
             }
         })
+        const addIndex = this.state.uploadVideos.length - 1
         const xhr = new XMLHttpRequest()
         this.xhr = xhr
-        xhr.upload.addEventListener('progress', this.uploadProgress, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
+        xhr.upload.addEventListener('progress', (e) => {
+            if (e.lengthComputable) {
+                const progress = Math.round((e.loaded / e.total) * 100)
+                console.log('process', progress)
+                this.state.uploadVideos[addIndex].uploadState = {
+                    loaded: e.loaded,
+                    total: e.total,
+                    percent: progress + '%'
+                }
+                this.setState({
+                    uploadVideos: this.state.uploadVideos
+                })
+            }
+        }, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
     
-        // xhr.addEventListener('load', uploadComplete, false);
+        xhr.addEventListener('load', (res) => {
+            console.log(res)
+        }, false)
         // xhr.addEventListener('error',uploadFail,false);
         // xhr.addEventListener('abort',uploadCancel,false)
     
