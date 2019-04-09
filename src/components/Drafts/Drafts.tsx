@@ -226,6 +226,7 @@ class Drafts extends React.Component {
         // xhr.addEventListener('abort',uploadCancel,false)
     
         xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
+        xhr.withCredentials = true
         xhr.send(form)
         xhr.onload = () => {
             //如果请求成功
