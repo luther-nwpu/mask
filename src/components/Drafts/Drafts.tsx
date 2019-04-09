@@ -176,16 +176,10 @@ class Drafts extends React.Component {
         one: '游戏',
         two: '单机游戏',
         videoImgs: [
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
-            'https://pub-static.haozhaopian.net/static/web/site/features/cn/crop/images/crop_20a7dc7fbd29d679b456fa0f77bd9525d.jpg',
+            {
+                name: '',
+                url: '',
+            }
         ]
     }
     public uploadVideo() {
@@ -340,13 +334,13 @@ class Drafts extends React.Component {
                         <span className="video-cover-text">视频封面</span> <span>（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600） </span>
                     </div>
                     <div className="cover-img">
-                        <div className="cover-img-left"> <img src={ this.state.selectCover==null ? coverImg : this.state.selectCover } className={ this.state.selectCover==null ? '' : 'select-cover' } /> <div className="right-bottom"> 上传图片 </div> </div>
+                        <div className="cover-img-left"> <img src={ this.state.selectCover==null ? coverImg : this.state.selectCover.url } className={ this.state.selectCover==null ? '' : 'select-cover' } /> <div className="right-bottom"> 上传图片 </div> </div>
                         <div className="cover-img-right">
                             <div className="cover-img-right-text"> 可选择以下封面 </div>
                             <div className="cover-img-right-imgs">
                                 {
                                     this.state.videoImgs.map((value, key) => {
-                                        return (<div key={key} className="cover-img-right-imgs-value" onClick={() => this.selectCover(key)}><img src={value} /> <div className="select-img" style={{display: this.state.selectCover == value ? 'inline-block' : 'none'}}> <img src={selectImg} /> </div> </div>)
+                                        return (<div key={key} className="cover-img-right-imgs-value" onClick={() => this.selectCover(key)}><img src={value.url} /> <div className="select-img" style={{display: this.state.selectCover == value ? 'inline-block' : 'none'}}> <img src={selectImg} /> </div> </div>)
                                     })
                                 }
                             </div>
