@@ -303,10 +303,11 @@ class Drafts extends React.Component {
                                                     <span> {value.videoName} </span> 
                                                     <span className="upload-right"> 
                                                         <span className="file-delete" onClick={() => this.deleteVideo(key)}> 删除 </span> 
+                                                        {value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? '' : value.uploadState.percent}
                                                         <img className="file-finish-img" style={{ display: value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? 'inline' : 'none' }} src={downloadSuccess} /> 
                                                     </span> 
                                                 </div>
-                                                <div className="upload-percent"> { value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? '上传成功' : `${value.uploadState.loaded} / ${value.uploadState.total} ------ ${value.uploadState.percent}` } </div> 
+                                                <div className="upload-percent"> { value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? '上传成功' : `${value.uploadState.loaded} / ${value.uploadState.total}`} </div> 
                                                 <div style={ processStyle }></div> 
                                             </div> 
                                         </div>)
