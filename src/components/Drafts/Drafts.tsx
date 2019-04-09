@@ -84,25 +84,27 @@ class Drafts extends React.Component {
             titleInput: ''
         },
         openTab: false,
-        uploadVideos: [{
-            videoId: 0,
-            videoName: '高兴的睡不着了',
-            videoUrl: '',
-            uploadState: {
-              percent: '',
-              total: 0,
-              loaded: 0
-            }
-        },{
-            videoId: 1,
-            videoName: '你好啊',
-            videoUrl: '',
-            uploadState: {
-              percent: '',
-              total: 0,
-              loaded: 0
-            }
-        }],
+        uploadVideos: [
+            // {
+            //     videoId: 0,
+            //     videoName: '高兴的睡不着了',
+            //     videoUrl: '',
+            //     uploadState: {
+            //     percent: '',
+            //     total: 0,
+            //     loaded: 0
+            //     }
+            // },{
+            //     videoId: 1,
+            //     videoName: '你好啊',
+            //     videoUrl: '',
+            //     uploadState: {
+            //     percent: '',
+            //     total: 0,
+            //     loaded: 0
+            //     }
+            // }
+        ],
         labels: [
             '开心',
             '伤心'
@@ -289,6 +291,10 @@ class Drafts extends React.Component {
             selectCover: this.state.videoImgs[key]
         })
     }
+    public commit() {
+        console.log('www')
+    }
+
     public render () {
         return (
             <div className="drafts-component">
@@ -339,7 +345,7 @@ class Drafts extends React.Component {
                             <div className="cover-img-right-imgs">
                                 {
                                     this.state.videoImgs.map((value, key) => {
-                                        return (<div key={key} className="cover-img-right-imgs-value" onClick={() => this.selectCover(key)}><img src={value} /> <div className="select-img"> <img src={selectImg} /> </div> </div>)
+                                        return (<div key={key} className="cover-img-right-imgs-value" onClick={() => this.selectCover(key)}><img src={value} /> <div className="select-img" style={{display: this.state.selectCover == value ? 'inline-block' : 'none'}}> <img src={selectImg} /> </div> </div>)
                                     })
                                 }
                             </div>
@@ -396,7 +402,7 @@ class Drafts extends React.Component {
                         简介
                     </div>
                     <textarea />
-                    <button className="button-commit"> 提交 </button>
+                    <button className="button-commit" onClick={()=> this.commit()}> 提交 </button>
                     <button className="button-save"> 保存 </button>
                 </div>
             </div>
