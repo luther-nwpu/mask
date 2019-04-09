@@ -18,7 +18,7 @@ class Drafts extends React.Component {
         super(props)
         console.log(props.firstFile)
         if(props.firstFile !== null) {
-            const url = 'upload/video'
+            const url = 'upload/firstvideo'
             const form = new FormData()        
             form.append('file', props.firstFile)
             this.state.uploadVideos.push({
@@ -57,12 +57,19 @@ class Drafts extends React.Component {
         
             xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
             xhr.send(form)
-            const self = this 
-            xhr.onload = function () {
+            xhr.onload = () => {
                 //如果请求成功
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
                     const res = JSON.parse(xhr.responseText)
-                    console.log(res)
+                    if(res.success) {
+                        this.state.uploadVideos[addIndex].videoId = res.result[1].id
+                        this.state.uploadVideos[addIndex].videoName = res.result[1].name
+                        this.state.uploadVideos[addIndex].videoUrl = res.result[1].url
+                        this.setState({
+                            uploadVideos: this.state.uploadVideos,
+                            videoImgs: res.result[0]
+                        })
+                    }
                 }
             }
         }
@@ -201,7 +208,6 @@ class Drafts extends React.Component {
         xhr.upload.addEventListener('progress', (e) => {
             if (e.lengthComputable) {
                 const progress = Math.round((e.loaded / e.total) * 100)
-                console.log('process', progress)
                 this.state.uploadVideos[addIndex].uploadState = {
                     loaded: e.loaded,
                     total: e.total,
@@ -213,19 +219,23 @@ class Drafts extends React.Component {
             }
         }, false)  // 第三个参数为useCapture?，是否使用事件捕获/冒泡
     
-        xhr.addEventListener('load', (res) => {
-            console.log(res)
-        }, false)
         // xhr.addEventListener('error',uploadFail,false);
         // xhr.addEventListener('abort',uploadCancel,false)
     
         xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
         xhr.send(form)
-        xhr.onload = function () {
+        xhr.onload = () => {
             //如果请求成功
             if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
                 const res = JSON.parse(xhr.responseText)
-                console.log(res)
+                if(res.success) {
+                    this.state.uploadVideos[addIndex].videoId = res.result.id
+                    this.state.uploadVideos[addIndex].videoName = res.result.name
+                    this.state.uploadVideos[addIndex].videoUrl = res.result.url
+                    this.setState({
+                        uploadVideos: this.state.uploadVideos
+                    })
+                }
             }
         }
     }
@@ -285,14 +295,14 @@ class Drafts extends React.Component {
                     </div>
                     <div className="file-description">
                         {
-                            this.state.uploadVideos.map(function(value, key) {
+                            this.state.uploadVideos.map((value, key) => {
                                 return (<div className="file-detail" key={key}>
                                             <img src={videoImg} /> 
                                             <div className="file-upload"> 
                                                 <div className="file-video-name">
                                                     <span> {value.videoName} </span> 
                                                     <span className="upload-right"> 
-                                                        <span className="file-delete" onClick={() => this.deleteVideo(value.videoId)}> 删除 </span> 
+                                                        <span className="file-delete" onClick={() => this.deleteVideo(key)}> 删除 </span> 
                                                         <img className="file-finish-img" style={{ display: value.uploadState.loaded == value.uploadState.total && value.uploadState.total != 0 ? 'inline' : 'none' }} src={downloadSuccess} /> 
                                                     </span> 
                                                 </div>
