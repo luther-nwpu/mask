@@ -239,8 +239,9 @@ class Drafts extends React.Component {
             }
         }
     }
-    public deleteVideo(videoId) {
-        console.log(videoId)
+    public deleteVideo(key) {
+        this.state.uploadVideos.splice(key, 1)
+        this.setState({uploadVideos: this.state.uploadVideos})
     }
     public selectCategory(one, two) {
         this.setState({myCategory:{one:one, two: two}}, () => {
@@ -389,6 +390,8 @@ class Drafts extends React.Component {
                         简介
                     </div>
                     <textarea />
+                    <button className="button-commit"> 提交 </button>
+                    <button className="button-save"> 保存 </button>
                 </div>
             </div>
         )

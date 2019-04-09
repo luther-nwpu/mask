@@ -17,6 +17,32 @@
         padding: 60px;
         padding-top: 30px;
         min-width: 840px;
+        .button-commit {
+            margin-top: 20px;
+            background:#ff9600;
+            line-height: 30px;
+            width: 70px;
+            border: 0px;
+            text-align: center;
+            border-radius: 10px;
+            color: white;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+        .button-save {
+            margin-left: 10px;
+            background: #00a1d6;
+            line-height: 30px;
+            border: 0px;
+            text-align: center;
+            width: 70px;
+            border-radius: 10px;
+            color: white;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
         .file-title {
             font-size: 20px;
             font-weight: bolder;
