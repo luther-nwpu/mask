@@ -85,6 +85,7 @@ class Drafts extends React.Component {
             labelInput: '',
             titleInput: '',
             reprint: null,
+            descriptionInput: ''
         },
         openTab: false,
         uploadVideos: [
@@ -180,6 +181,7 @@ class Drafts extends React.Component {
         two: '单机游戏',
         videoImgs: [
             {
+                id: '',
                 name: '',
                 url: '',
             }
@@ -291,16 +293,23 @@ class Drafts extends React.Component {
     }
     public async commit() {
         const res = await TokenPost('haiyou/commitHaiyou', {
-            video_id: '1_1',
-            picture_id: '1_1',
-            title:'',
-            type: '',
-            reprint: '',
-            partition: '',
-            label: '',
-            description: ''
+            video_id: this.state.uploadVideos.reduce((total, value) => {
+                total.push(value.id)
+                return total
+            }, []).join('_'),
+            picture_id: this.state.selectCover && this.state.selectCover.id,
+            title: this.state.input.titleInput,
+            type: this.state.input.reprint == null,
+            reprint:  this.state.input.reprint == null ? '' : this.state.input.reprint,
+            partition: this.state.myCategory.one + '_' + this.state.myCategory.two,
+            label: this.state.labels.join('_'),
+            description: this.state.input.descriptionInput,
+            draft_id: this.state.draftId
         })
         console.log(res)
+    }
+    public _handleChangeDescription(e) {
+        this.setState({input: {...this.state.input, descriptionInput: e.target.value}})
     }
     public handleOptionChange(type) {
         if(type) {
@@ -311,6 +320,28 @@ class Drafts extends React.Component {
     }
     public _handleChangeReprint(e) {
         this.setState({input: { ...this.state.input, reprint: e.target.value }})
+    }
+    public async saveDraft() {
+        await TokenPost('drafts/updateDraft', {
+            id: this.state.draftId,
+            picture_id: this.state.videoImgs.reduce((total, value) => {
+                if(value.id != this.state.selectCover.id) {
+                    total.push(value)
+                }
+                return total
+            }, []).join('_') + '_' + this.state.selectCover.id,
+            video_id: this.state.uploadVideos.reduce((total, value) => {
+                total.push(value.id)
+                return total
+            }, []).join('_'),
+            title: this.state.input.titleInput,
+            type: this.state.input.reprint == null,
+            reprint:  this.state.input.reprint == null ? '' : this.state.input.reprint,
+            partition: this.state.myCategory.one + '_' + this.state.myCategory.two,
+            label: this.state.labels.join('_'),
+            description: this.state.input.descriptionInput,
+            select_picture: this.state.selectCover.id
+        })
     }
 
     public render () {
@@ -376,7 +407,7 @@ class Drafts extends React.Component {
                     <div className="video-title-info">
                         <span className="video-start">*</span> 类型
                     </div>
-                    <input type="radio" className="radio" onChange={() => this.handleOptionChange(true)} checked={this.state.input.reprint == null}/> 原创 <input type="radio" onChange={() => this.handleOptionChange(false)} checked={this.state.input.reprint != null}/> 转载 <input className="reprint" style={{ display: this.state.input.reprint == null ? 'none' : 'inline-block' }} placeholder="请输入转载链接" value={this.state.input.reprint} onChange={(e) => this._handleChangeReprint(e)}/>
+                    <input type="radio" className="radio" onChange={() => this.handleOptionChange(true)} checked={this.state.input.reprint == null}/> 原创 <input type="radio" onChange={() => this.handleOptionChange(false)} checked={this.state.input.reprint != null}/> 转载 <input className="reprint" style={{ display: this.state.input.reprint == null ? 'none' : 'inline-block' }} placeholder="请输入转载链接" value={this.state.input.reprint == null ? '' : this.state.input.reprint} onChange={(e) => this._handleChangeReprint(e)}/>
                     <div className="video-title-info">
                         <span className="video-start">*</span> 分区
                     </div>
@@ -419,7 +450,7 @@ class Drafts extends React.Component {
                     <div className="video-title-info">
                         简介
                     </div>
-                    <textarea />
+                    <textarea value={this.state.input.descriptionInput} onChange={(e) => this._handleChangeDescription(e)}/>
                     <button className="button-commit" onClick={()=> this.commit()}> 提交 </button>
                     <button className="button-save"> 保存 </button>
                 </div>
