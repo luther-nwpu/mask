@@ -7,6 +7,7 @@ import subscription from '@assets/subscription_btn_0.svg'
 import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
 import { MyInfo, MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo, MyDrafts } from '@components'
+import ModifyNickName from '@components/ModifyNickName/ModifyNickName'
 import video from '@assets/video_btn_0.svg'
 import * as queryString from 'query-string'
 import history from '@router'
@@ -26,10 +27,9 @@ export class Person extends React.Component {
     }
     public changeTabNum(value: any) {
         history.replace(`personinfo?id=${value}`)
-        this.setState({ tabNum: value })
     }
     public rightelements = () => {
-        switch(this.state.tabNum) {
+        switch(parseInt(queryString.parse(this.props.location.search).id) || UserMenu.MYUSERINFO) {
             case UserMenu.MYUSERINFO:
                 return (<MyInfo />)
             case UserMenu.HISTORY:
@@ -44,11 +44,14 @@ export class Person extends React.Component {
                 return (<MyVideo />)
             case UserMenu.MYDRAFTS: 
                 return (<MyDrafts />)
+            case UserMenu.MODIFYNICKBANE:
+                return (<ModifyNickName />)
             default:
                 return null
         }
     }
     public render() {
+        const tabNum = parseInt(queryString.parse(this.props.location.search).id) || UserMenu.MYUSERINFO
         return (
             <div className="person-component">
                 <div className="person-content">
@@ -56,27 +59,27 @@ export class Person extends React.Component {
                         <div className="title">
                             个人中心
                         </div>
-                        <div className={this.state.tabNum === UserMenu.MYUSERINFO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYUSERINFO)}>
+                        <div className={tabNum === UserMenu.MYUSERINFO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYUSERINFO)}>
                             <img src={userinfo}/>
                             <div className="contentText"> 我的信息 </div>
                         </div>
-                        <div className={this.state.tabNum === UserMenu.MYVIDEO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYVIDEO)}>
+                        <div className={tabNum === UserMenu.MYVIDEO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYVIDEO)}>
                             <img src={video} />
                             <div className="contentText"> 我的视频 </div>
                         </div>
-                        <div className={this.state.tabNum === UserMenu.MYDYNAMIC ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYDYNAMIC)}>
+                        <div className={tabNum === UserMenu.MYDYNAMIC ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYDYNAMIC)}>
                             <img src={dynamic} />
                             <div className="contentText"> 我的动态 </div>
                         </div>
-                        <div className={this.state.tabNum === UserMenu.SUBSCRIPTION ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.SUBSCRIPTION)}>
+                        <div className={tabNum === UserMenu.SUBSCRIPTION ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.SUBSCRIPTION)}>
                             <img src={subscription}/>
                             <div className="contentText"> 我的订阅 </div>
                         </div>
-                        <div className={this.state.tabNum === UserMenu.HISTORY ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.HISTORY)}>
+                        <div className={tabNum === UserMenu.HISTORY ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.HISTORY)}>
                             <img src={histroyimg}/>
                             <div className="contentText"> 历史记录 </div>
                         </div>
-                        <div className={this.state.tabNum === UserMenu.MESSAGE ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MESSAGE)}>
+                        <div className={tabNum === UserMenu.MESSAGE ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MESSAGE)}>
                             <img src={message} />
                             <div className="contentText"> 我的消息 </div>
                         </div>
@@ -87,7 +90,6 @@ export class Person extends React.Component {
                     }
                     </div>
                 </div>
-
             </div>
         )
     }   

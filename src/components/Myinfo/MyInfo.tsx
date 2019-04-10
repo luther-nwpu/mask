@@ -11,6 +11,7 @@ import editInfo from '@assets/edit-information-icon.png'
 import uploadVideo from '@assets/upload-video-icon.png'
 import newPhone from '@assets/new_phone_icon.png'
 import email from '@assets/email_icon.svg'
+import history from '@router'
 
 export class MyInfo extends React.Component {
     constructor(props) {
@@ -28,7 +29,9 @@ export class MyInfo extends React.Component {
             bindTelePhone: '18829589407'
         }
     }
-
+    public switchUploadVideo(link) {
+        history.replace(link)
+    }
     public render() {
         return (
             <div className="myinfo-component">
@@ -40,7 +43,7 @@ export class MyInfo extends React.Component {
                                 { this.state.userinfo.nickname }
                                 <img src={ this.state.userinfo.sex === Sex.MAN ? man : woman }/>
                             </div>
-                            <div className="editinfo">
+                            <div className="editinfo" onClick={() => this.switchUploadVideo('personinfo?id=7')}>
                                 <img src={edit} />
                                 修改昵称
                             </div>
@@ -87,7 +90,7 @@ export class MyInfo extends React.Component {
                             <div className="goImg">
                             </div>
                         </div>
-                        <div className="item">
+                        <div className="item" onClick={() => this.switchUploadVideo('uploadfile')}>
                             <div className="leftitem">
                                 <img src={uploadVideo} /> 
                                 <div className="leftdescription">

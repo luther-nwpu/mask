@@ -16,6 +16,7 @@ export enum UserMenu {
     HISTORY = 4,
     MESSAGE = 5,
     MYDRAFTS = 6,
+    MODIFYNICKBANE = 7
 }
 
 export enum Sex {

@@ -19,8 +19,7 @@ class App extends React.Component {
     super(props)
     const { cookies } = props
     this.state.cookies = cookies.cookies.user
-    console.log(cookies)
-    props.storeUserInfo(cookies)
+    props.storeUserInfo( cookies.cookies.userinfo != 'undefined' ? JSON.parse(cookies.cookies.userinfo) : {})
   }
   
   public render() {
