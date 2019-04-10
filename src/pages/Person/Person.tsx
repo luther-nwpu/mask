@@ -8,18 +8,25 @@ import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
 import { MyInfo, MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo, MyDrafts } from '@components'
 import video from '@assets/video_btn_0.svg'
+import * as queryString from 'query-string'
+import history from '@router'
+
 export class Person extends React.Component {
     constructor(props) {
         super(props)
+        const search = queryString.parse(props.location.search)
+        console.log((search && search.id) || UserMenu.MYUSERINFO)
         this.state = {
-            tabNum: UserMenu.MYUSERINFO
+            tabNum: parseInt(search && search.id) || UserMenu.MYUSERINFO
         }
     }
+    props: any
     public state = {
         tabNum: UserMenu.MYUSERINFO
     }
     public changeTabNum(value: any) {
-        this.setState({ tabNum: value})
+        history.replace(`personinfo?id=${value}`)
+        this.setState({ tabNum: value })
     }
     public rightelements = () => {
         switch(this.state.tabNum) {

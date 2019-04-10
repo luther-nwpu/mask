@@ -9,6 +9,7 @@
     "@types/history": "^4.6.2",
     "@types/js-cookie": "^2.2.2",
     "@types/lodash": "^4.14.121",
+    "@types/query-string": "^6.3.0",
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.12",
     "@types/react-router": "^4.0.30",
