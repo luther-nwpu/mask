@@ -1,0 +1,30 @@
+.modifyuserinfo-component {
+    width: 100%;
+    padding-left: 30px;
+    padding-top: 30px;
+    .title {
+        display: flex;
+        align-items: center;
+        .return-img {
+            width: 40px;
+        }
+        .title-text {
+            margin-left: 5px;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+
+    button {
+        margin-left: 50px;
+        margin-top: 15px;
+        padding: 10px 30px 10px 30px;
+        font-size: 15px;
+        font-weight: 600;
+        background-color: #ff9600;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+    }
+}

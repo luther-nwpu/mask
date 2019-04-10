@@ -8,6 +8,7 @@ import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
 import { MyInfo, MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo, MyDrafts } from '@components'
 import ModifyNickName from '@components/ModifyNickName/ModifyNickName'
+import ModifyUserInfo from '@components/ModifyUserInfo/ModifyUserInfo'
 import video from '@assets/video_btn_0.svg'
 import * as queryString from 'query-string'
 import history from '@router'
@@ -46,6 +47,8 @@ export class Person extends React.Component {
                 return (<MyDrafts />)
             case UserMenu.MODIFYNICKBANE:
                 return (<ModifyNickName />)
+            case UserMenu.MODIFYUSERINFO:
+                return (<ModifyUserInfo />)
             default:
                 return null
         }
