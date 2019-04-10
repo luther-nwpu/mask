@@ -17,6 +17,13 @@
         padding: 60px;
         padding-top: 30px;
         min-width: 840px;
+        input[type="radio"] {
+            line-height: 30px;
+        }
+        .reprint {
+            margin-left: 10px;
+            width: 500px;
+        }
         .button-commit {
             margin-top: 20px;
             background:#ff9600;

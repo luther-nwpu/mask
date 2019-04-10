@@ -5,6 +5,7 @@ import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
 import { connect } from 'react-redux'
+import { Post, TokenPost } from '@lib/helper'
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -82,7 +83,8 @@ class Drafts extends React.Component {
         draftId: 0,
         input: {
             labelInput: '',
-            titleInput: ''
+            titleInput: '',
+            reprint: null,
         },
         openTab: false,
         uploadVideos: [
@@ -287,8 +289,28 @@ class Drafts extends React.Component {
             selectCover: this.state.videoImgs[key]
         })
     }
-    public commit() {
-        console.log('www')
+    public async commit() {
+        const res = await TokenPost('haiyou/commitHaiyou', {
+            video_id: '1_1',
+            picture_id: '1_1',
+            title:'',
+            type: '',
+            reprint: '',
+            partition: '',
+            label: '',
+            description: ''
+        })
+        console.log(res)
+    }
+    public handleOptionChange(type) {
+        if(type) {
+            this.setState({input: { ...this.state.input, reprint: null }})
+        } else {
+            this.setState({input: { ...this.state.input, reprint: '' }})
+        }
+    }
+    public _handleChangeReprint(e) {
+        this.setState({input: { ...this.state.input, reprint: e.target.value }})
     }
 
     public render () {
@@ -354,7 +376,7 @@ class Drafts extends React.Component {
                     <div className="video-title-info">
                         <span className="video-start">*</span> 类型
                     </div>
-                    <input type="radio" /> 原创 <input type="radio" /> 转载
+                    <input type="radio" className="radio" onChange={() => this.handleOptionChange(true)} checked={this.state.input.reprint == null}/> 原创 <input type="radio" onChange={() => this.handleOptionChange(false)} checked={this.state.input.reprint != null}/> 转载 <input className="reprint" style={{ display: this.state.input.reprint == null ? 'none' : 'inline-block' }} placeholder="请输入转载链接" value={this.state.input.reprint} onChange={(e) => this._handleChangeReprint(e)}/>
                     <div className="video-title-info">
                         <span className="video-start">*</span> 分区
                     </div>
