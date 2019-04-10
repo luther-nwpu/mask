@@ -14,15 +14,15 @@ const processStyle = {
 
 class Drafts extends React.Component {
     xhr:XMLHttpRequest
+    hiddenFileInput: any
     constructor(props) {
         super(props)
-        console.log(props.firstFile)
         if(props.firstFile !== null) {
             const url = 'upload/firstvideo'
             const form = new FormData()        
             form.append('file', props.firstFile)
             this.state.uploadVideos.push({
-                videoId: 0,
+                id: 0,
                 videoName: props.firstFile.name.split('.')[0],
                 videoUrl: '',
                 uploadState: {
@@ -62,7 +62,7 @@ class Drafts extends React.Component {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
                     const res = JSON.parse(xhr.responseText)
                     if(res.success) {
-                        this.state.uploadVideos[addIndex].videoId = res.result.uploadVideo.id
+                        this.state.uploadVideos[addIndex].id = res.result.uploadVideo.id
                         this.state.uploadVideos[addIndex].videoName = res.result.uploadVideo.name
                         this.state.uploadVideos[addIndex].videoUrl = res.result.uploadVideo.url
                         this.setState({
@@ -109,10 +109,7 @@ class Drafts extends React.Component {
             //     }
             // }
         ],
-        labels: [
-            '开心',
-            '伤心'
-        ],
+        labels: [],
         categorys: {
             '游戏': {    
                 '单机游戏': '以单机或其联机模式为主要内容的相关视频',
@@ -190,12 +187,15 @@ class Drafts extends React.Component {
     public uploadVideo() {
         document.getElementById('uploadVideo').click()
     }
+    public uploadCover() {
+        this.hiddenFileInput.click()
+    }
     public uploadFile(e) {
         const url = 'upload/video'
         const form = new FormData()
         form.append('file', e.target.files[0])
         this.state.uploadVideos.push({
-            videoId: 0,
+            id: 0,
             videoName: e.target.files[0].name.split('.')[0],
             videoUrl: '',
             uploadState: {
@@ -232,7 +232,7 @@ class Drafts extends React.Component {
             if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
                 const res = JSON.parse(xhr.responseText)
                 if(res.success) {
-                    this.state.uploadVideos[addIndex].videoId = res.result.id
+                    this.state.uploadVideos[addIndex].id = res.result.id
                     this.state.uploadVideos[addIndex].videoName = res.result.name
                     this.state.uploadVideos[addIndex].videoUrl = res.result.url
                     this.setState({
@@ -326,7 +326,7 @@ class Drafts extends React.Component {
             id: this.state.draftId,
             picture_id: this.state.videoImgs.reduce((total, value) => {
                 if(value.id != this.state.selectCover.id) {
-                    total.push(value)
+                    total.push(value.id)
                 }
                 return total
             }, []).join('_') + '_' + this.state.selectCover.id,
@@ -342,6 +342,34 @@ class Drafts extends React.Component {
             description: this.state.input.descriptionInput,
             select_picture: this.state.selectCover.id
         })
+    }
+    public uploadCoveFile(e) {
+        const url = 'upload/uploadImg'
+        const form = new FormData()
+        form.append('file', e.target.files[0])
+        // 此处的file字段由上传的api决定，可以是其它值
+        const xhr = new XMLHttpRequest()
+        this.xhr = xhr
+        xhr.withCredentials = true
+        // xhr.addEventListener('load',uploadComplete,false);
+        // xhr.addEventListener('error',uploadFail,false);
+        // xhr.addEventListener('abort',uploadCancel,false)
+    
+        xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
+        xhr.send(form) 
+        xhr.onload = () => {
+            //如果请求成功
+            if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                const res = JSON.parse(xhr.responseText)
+                if(res.success) {
+                    this.setState({
+                        selectCover: res.result
+                    })
+                } else {
+                    alert('上传失败')
+                }
+            }
+        }
     }
 
     public render () {
@@ -388,7 +416,8 @@ class Drafts extends React.Component {
                         <span className="video-cover-text">视频封面</span> <span>（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600） </span>
                     </div>
                     <div className="cover-img">
-                        <div className="cover-img-left"> <img src={ this.state.selectCover==null ? coverImg : this.state.selectCover.url } className={ this.state.selectCover==null ? '' : 'select-cover' } /> <div className="right-bottom"> 上传图片 </div> </div>
+                        <div className="cover-img-left"> <img src={ this.state.selectCover==null ? coverImg : this.state.selectCover.url } className={ this.state.selectCover==null ? '' : 'select-cover' } /> <div className="right-bottom" onClick={() => this.uploadCover()}> 上传图片 </div> </div>
+                        <input type="file" ref={(hiddenFileInput) => this.hiddenFileInput = hiddenFileInput} className="hidden-upload-file" onChange={(e) => this.uploadCoveFile(e)} />
                         <div className="cover-img-right">
                             <div className="cover-img-right-text"> 可选择以下封面 </div>
                             <div className="cover-img-right-imgs">
@@ -452,7 +481,7 @@ class Drafts extends React.Component {
                     </div>
                     <textarea value={this.state.input.descriptionInput} onChange={(e) => this._handleChangeDescription(e)}/>
                     <button className="button-commit" onClick={()=> this.commit()}> 提交 </button>
-                    <button className="button-save"> 保存 </button>
+                    <button className="button-save" onClick={() => this.saveDraft()}> 保存 </button>
                 </div>
             </div>
         )
