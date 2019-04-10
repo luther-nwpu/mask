@@ -22,7 +22,7 @@ export class MaskApp extends React.Component {
         <div className="content">
           <Route exact={true} path={`${this.state.match}`} component={ Home } />
           <Route path={`${this.state.match}personinfo`} component={ Person } />
-          <Route path={`${this.state.match}video/:id`} component = { VideoPage }/>
+          <Route path={`${this.state.match}haiyou/:id`} component = { VideoPage }/>
           <Route path={`${this.state.match}uploadfile`} component={ UploadVideo } />
         </div>
       </div>
