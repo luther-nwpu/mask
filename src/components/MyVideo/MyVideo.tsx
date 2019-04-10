@@ -55,7 +55,7 @@ export class MyVideo extends React.Component {
                                         <button> 编辑 </button>
                                     </div>
                                     <div className="third">
-                                        <img src={playSvg} />
+                                        <img src={playSvg} className="play" />
                                         {'dsa'}
                                         <img src={barrageSvg} />
                                         {'dsa'}
