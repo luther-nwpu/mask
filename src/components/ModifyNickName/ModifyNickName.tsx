@@ -28,7 +28,7 @@ class ModifyNickName extends React.Component {
             alert('更改失败')
         } else {
             const { cookies }= this.props
-            cookies.set('userinfo', res.result.userinfo, {
+            cookies.set('userinfo', res.result, {
                 maxAge: 7*24*60*60
             })
             this.props.storeUserInfo(res.result)        
