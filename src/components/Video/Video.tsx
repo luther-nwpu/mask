@@ -6,7 +6,6 @@ import nosound_svg from '@assets/nosound_btn_0.svg'
 import pause_svg from '@assets/pause_btn_0.svg'
 import playing_svg from '@assets/playing_btn_0.svg'
 import exit_full_svg from '@assets/exit_screen_btn_0.svg'
-import { BarrageBase } from '@models' 
 import Barrage from 'barrage-ui'
 import websocket from '@lib/Websocket'
 
@@ -262,7 +261,6 @@ export class Video extends React.Component<IProp, IState> {
               defaultColor: '#fff', // 弹幕默认颜色
             },
         })
-        console.log('777777777777777777777777')
         // 新增一条弹幕
         barrage.add({
             key: 'fctc651a9pm2j20bia8j', // 弹幕的唯一标识
@@ -403,7 +401,7 @@ export class Video extends React.Component<IProp, IState> {
         const fullscreen = document.fullscreen
         return (
             <div className="video-component">
-                <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer">
+                <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer" style={{ cursor: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inherit' : 'none' }}>
                     <video id="video" ref={(video) => this.video = video} className="video" src={this.props.src}></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls" ref={(controls) => this.controls = controls} style={{display: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inline-block' : 'none' }}>
