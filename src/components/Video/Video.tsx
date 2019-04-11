@@ -15,7 +15,9 @@ interface IProp {
     type?: any
 }
 interface IState {
+    showControls: Boolean,
     video: any,
+    showTabControls: Boolean,
     barrage: {        
         barrageText: '',
         barrageColor: '',
@@ -35,12 +37,15 @@ export class Video extends React.Component<IProp, IState> {
     soundWidth: string
     soundDom: any
     canvas: any
+    controls: any
 
     public constructor(props) {
         super(props)
     }
 
     public state: IState = {
+        showControls: true,
+        showTabControls: true,
         video: '',
         barrage: {        
             barrageText: '',
@@ -70,6 +75,43 @@ export class Video extends React.Component<IProp, IState> {
         this.video.ontimeupdate = () => this.updateVideo()
         this.progressDom.onmousedown = e => this.progress(e)
         this.soundDom.onmousedown = e => this.soundProgress(e)
+        let timer = null
+        let imouse = 0
+        this.videoPlayer.onclick = () => {
+            this.playOrPause()
+        }
+        this.videoPlayer.onmouseover = () => {
+            timer = setInterval(() => {
+                if (imouse == 0) {
+                    this.setState({
+                        showControls: false
+                    })
+                }
+                imouse = 0
+            }, 2000)
+        }
+        this.videoPlayer.onmousemove = () => {
+            imouse = 1
+            this.setState({
+                showControls: true
+            })
+        }
+        this.videoPlayer.onmouseout = () => {
+            clearInterval(timer)
+            this.setState({
+                showControls: false
+            })
+        }
+        this.controls.onmouseover = () => {
+            this.setState({
+                showTabControls: true
+            })
+        }
+        this.controls.onmouseout = () => {
+            this.setState({
+                showTabControls: false
+            })
+        }
         document.onkeydown = e => this.keydown(e)
         let playPromise = this.video.play()
         if (playPromise !== undefined) {
@@ -88,6 +130,10 @@ export class Video extends React.Component<IProp, IState> {
           })
         }
         this.loadBarrage()
+    }
+
+    public hiddenControls() {
+        console.log('36')
     }
 
     public loadBarrage() {
@@ -360,7 +406,7 @@ export class Video extends React.Component<IProp, IState> {
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer">
                     <video id="video" ref={(video) => this.video = video} className="video" src={this.props.src}></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
-                    <div className="controls">
+                    <div className="controls" ref={(controls) => this.controls = controls} style={{display: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inline-block' : 'none' }}>
                         <div className="progress" ref={(progress) => this.progressDom = progress}>
                             <b className="bg" ref={(bg) => this.bgDom = bg}></b>
                             <b className="buffer" style={{ width: this.processWidth }}></b>
