@@ -1,11 +1,8 @@
-class Websocket {
+export class Websocket {
   ws: WebSocket
   constructor(opts) {
     // tslint
-    this.ws = new WebSocket('ws:localhost:10011/1')
-    this.ws.onopen = () => {
-      this.ws.send(JSON.stringify({tunnelId: 'd', token: 'd'}))
-    }
+    this.ws = new WebSocket('ws:localhost:10011/haiyou/1/3b0b0aa0-5d35-11e9-b710-cb061bab7483')
   }
   
   openCallBack() {
@@ -27,13 +24,4 @@ class Websocket {
       }
     }
   }
-}
-
-let instance: Websocket = null
-
-export default function (opts = {}) {
-  if (!instance) {
-    instance = new Websocket(opts)
-  }
-  return instance
 }

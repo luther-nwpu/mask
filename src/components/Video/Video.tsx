@@ -7,7 +7,6 @@ import pause_svg from '@assets/pause_btn_0.svg'
 import playing_svg from '@assets/playing_btn_0.svg'
 import exit_full_svg from '@assets/exit_screen_btn_0.svg'
 import Barrage from 'barrage-ui'
-import websocket from '@lib/Websocket'
 
 interface IProp {
     src: string,
@@ -70,7 +69,6 @@ export class Video extends React.Component<IProp, IState> {
     }
 
     public componentDidMount() {
-        websocket().acceptMessage()
         this.video.ontimeupdate = () => this.updateVideo()
         this.progressDom.onmousedown = e => this.progress(e)
         this.soundDom.onmousedown = e => this.soundProgress(e)
