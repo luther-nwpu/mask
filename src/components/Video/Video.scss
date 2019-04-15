@@ -98,6 +98,18 @@
                     font-weight:normal;
                 }
             }
+            .middle {
+                line-height: 30px;
+                border-radius: 10px;
+                background-color:rgba(0,0,0, 0);
+                border: 1px solid #ff9600;
+                input {
+                    color: #F9FC05;
+                    background-color:rgba(0,0,0, 0);
+                    outline: none;
+                    border: none;
+                }
+            }
             .right{
                 flex:1;
                 display:flex;

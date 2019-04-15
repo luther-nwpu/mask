@@ -25,7 +25,7 @@ interface IState {
 }
 
 class Video extends React.Component<IProp, IState> {
-    props: IProp
+    props: any
     video:any
     videoPlayer: any
     // 设置progress 的宽度
@@ -128,10 +128,6 @@ class Video extends React.Component<IProp, IState> {
           })
         }
         this.loadBarrage()
-    }
-
-    public hiddenControls() {
-        console.log('36')
     }
 
     public loadBarrage() {
@@ -305,7 +301,6 @@ class Video extends React.Component<IProp, IState> {
         this.video.currentTime = this.video.duration * offset
         this.setState({})
         document.onmousemove = (event) => {
-            console.log(event)
             let offset = event.offsetX / this.progressDom.offsetWidth
             this.video.currentTime = this.video.duration * offset
             this.setState({})
@@ -398,6 +393,7 @@ class Video extends React.Component<IProp, IState> {
     }
     public render() {
         const fullscreen = document.fullscreen
+        const userId =  this.props.userInfo && this.props.userInfo.id
         return (
             <div className="video-component">
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer" style={{ cursor: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inherit' : 'none' }}>
@@ -419,7 +415,11 @@ class Video extends React.Component<IProp, IState> {
                                     <b className="now"> {this.video && this.getTimeStr(this.video.currentTime) || '00:00'} </b> / <b className="total"> {this.video && this.getTimeStr(this.video.duration) || '00:00'}</b>
                                 </span>
                             </div>
-                            <input />                
+                            <div className="middle">
+                                {
+                                    userId ? (<input/>) : (<div> dssadasfa </div>)
+                                }
+                            </div>
                             <div className="right">
                                 <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.onOffVolume() } className="sound-img" />
                                 <div className="sound-progress" ref={(sound) => this.soundDom = sound}>
