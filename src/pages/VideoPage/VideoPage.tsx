@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './VideoPage.scss'
-import { Video } from '@components'
+import Video from '@components/Video/Video'
 import support from '@assets/follow-btn-0.svg'
 import alreadtySupport from '@assets/follow-btn-1.svg'
 import * as _ from 'lodash'

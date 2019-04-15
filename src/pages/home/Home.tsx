@@ -1,6 +1,6 @@
 import './Home.scss'
 import React from 'react'
-import { Video } from '@components'
+import Video from '@components/Video/Video'
 export class Home extends React.Component {
   render () {
     return (

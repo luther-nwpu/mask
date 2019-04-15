@@ -7,6 +7,7 @@ import pause_svg from '@assets/pause_btn_0.svg'
 import playing_svg from '@assets/playing_btn_0.svg'
 import exit_full_svg from '@assets/exit_screen_btn_0.svg'
 import Barrage from 'barrage-ui'
+import { connect } from 'react-redux'
 
 interface IProp {
     src: string,
@@ -23,7 +24,7 @@ interface IState {
     }
 }
 
-export class Video extends React.Component<IProp, IState> {
+class Video extends React.Component<IProp, IState> {
     props: IProp
     video:any
     videoPlayer: any
@@ -74,7 +75,7 @@ export class Video extends React.Component<IProp, IState> {
         this.soundDom.onmousedown = e => this.soundProgress(e)
         let timer = null
         let imouse = 0
-        this.videoPlayer.onclick = () => {
+        this.video.onclick = () => {
             this.playOrPause()
         }
         this.videoPlayer.onmouseover = () => {
@@ -418,7 +419,7 @@ export class Video extends React.Component<IProp, IState> {
                                     <b className="now"> {this.video && this.getTimeStr(this.video.currentTime) || '00:00'} </b> / <b className="total"> {this.video && this.getTimeStr(this.video.duration) || '00:00'}</b>
                                 </span>
                             </div>
-                            <input/>                
+                            <input />                
                             <div className="right">
                                 <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.onOffVolume() } className="sound-img" />
                                 <div className="sound-progress" ref={(sound) => this.soundDom = sound}>
@@ -438,3 +439,12 @@ export class Video extends React.Component<IProp, IState> {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    const { userinfo } = state.todoApp
+    return {
+        userInfo: userinfo
+    }
+}
+
+export default connect(mapStateToProps, null)(Video)
