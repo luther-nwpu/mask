@@ -103,11 +103,20 @@
                 border-radius: 10px;
                 background-color:rgba(0,0,0, 0);
                 border: 1px solid #ff9600;
+                width: 200px;
+                color: #F9FC05;
+                font-weight: bolder;
+                font-size: 10px;
+                text-align: center;
                 input {
                     color: #F9FC05;
                     background-color:rgba(0,0,0, 0);
                     outline: none;
                     border: none;
+                }
+                .login {
+                    margin-right: 4px;
+                    color: #00a1d6;
                 }
             }
             .right{

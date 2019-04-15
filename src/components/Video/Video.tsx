@@ -8,6 +8,8 @@ import playing_svg from '@assets/playing_btn_0.svg'
 import exit_full_svg from '@assets/exit_screen_btn_0.svg'
 import Barrage from 'barrage-ui'
 import { connect } from 'react-redux'
+import { displayAuth } from '@store/actions/auth'
+import { AuthTab } from '@config'
 
 interface IProp {
     src: string,
@@ -391,6 +393,9 @@ class Video extends React.Component<IProp, IState> {
             this.setState({})
         }
     }
+    public handleLogin() {
+        this.props.displayAuth(true, AuthTab.LOGIN)
+    }
     public render() {
         const fullscreen = document.fullscreen
         const userId =  this.props.userInfo && this.props.userInfo.id
@@ -417,7 +422,7 @@ class Video extends React.Component<IProp, IState> {
                             </div>
                             <div className="middle">
                                 {
-                                    userId ? (<input/>) : (<div> dssadasfa </div>)
+                                    !userId ? (<input/>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
                                 }
                             </div>
                             <div className="right">
@@ -447,4 +452,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Video)
+const mapDispatchToProps = dispatch => ({
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Video)
