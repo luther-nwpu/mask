@@ -423,7 +423,7 @@ class Video extends React.Component<IProp, IState> {
                             </div>
                             <div className="middle">
                                 {
-                                    !userId ? (<input/>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
+                                    userId ? (<input/>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
                                 }
                             </div>
                             <div className="right">
