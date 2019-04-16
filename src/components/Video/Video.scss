@@ -99,7 +99,7 @@
                 }
             }
             .middle {
-                line-height: 30px;
+                line-height: 40px;
                 border-radius: 10px;
                 background-color:rgba(0,0,0, 0);
                 border: 1px solid #ff9600;
@@ -108,11 +108,24 @@
                 font-weight: bolder;
                 font-size: 10px;
                 text-align: center;
-                input {
-                    color: #F9FC05;
-                    background-color:rgba(0,0,0, 0);
-                    outline: none;
-                    border: none;
+                .send {
+                    display: flex;
+                    justify-content: space-between;
+                    line-height: 40px;
+                    input {
+                        padding-left: 10px;
+                        padding-right: 5px;
+                        width: 140px;
+                        color: #F9FC05;
+                        background-color:rgba(0,0,0, 0);
+                        outline: none;
+                        border: none;
+                    }
+                    button {
+                        background: #ff9600;
+                        border-radius: 10px;
+                        border: none;
+                    }
                 }
                 .login {
                     margin-right: 4px;

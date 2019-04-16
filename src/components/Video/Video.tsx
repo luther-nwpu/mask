@@ -15,18 +15,8 @@ interface IProp {
     src: string,
     type?: any
 }
-interface IState {
-    showControls: Boolean,
-    video: any,
-    showTabControls: Boolean,
-    barrage: {        
-        barrageText: '',
-        barrageColor: '',
-        barrageRange: ''
-    }
-}
 
-class Video extends React.Component<IProp, IState> {
+class Video extends React.Component<IProp, any> {
     props: any
     video:any
     videoPlayer: any
@@ -44,7 +34,9 @@ class Video extends React.Component<IProp, IState> {
         super(props)
     }
 
-    public state: IState = {
+    public state = {
+        inputFocus: false,
+        barrageInput: '',
         showControls: true,
         showTabControls: true,
         video: '',
@@ -67,8 +59,8 @@ class Video extends React.Component<IProp, IState> {
         this.setState({barrage: { ...this.state.barrage, barrageRange: event.target.value }})
     }
 
-    public sendBarrage() {
-        console.log(this.state.barrage.barrageText)
+    public sendBarrage(e) {
+        return false
     }
 
     public componentDidMount() {
@@ -271,12 +263,11 @@ class Video extends React.Component<IProp, IState> {
         barrage.play()
     }
     public keydown(e) {
-        if (e && e.keyCode == 37) this.video.currentTime -= 10
-        if (e && e.keyCode == 39) this.video.currentTime += 10
-        if (e && e.keyCode == 32 || e.keyCode == 13) this.playOrPause()
+        if (e && e.keyCode == 37 && !this.state.inputFocus) this.video.currentTime -= 10
+        if (e && e.keyCode == 39  && !this.state.inputFocus) this.video.currentTime += 10
+        if ((e && e.keyCode == 32 || e.keyCode == 13)  && !this.state.inputFocus) this.playOrPause()
 
         this.setState({})
-        return false
     }
 
     public updateVideo() {
@@ -397,6 +388,21 @@ class Video extends React.Component<IProp, IState> {
         document.exitFullscreen()
         this.props.displayAuth(true, AuthTab.LOGIN)
     }
+    public _handleSendBarrage(e) {
+        this.setState({
+            barrageInput: e.target.value
+        })
+    }
+    public _handleInputFocus() {
+        this.setState({
+            inputFocus: true
+        })
+    }
+    public _handleInputBlur() {
+        this.setState({
+            inputFocus: false
+        })
+    }
     public render() {
         const fullscreen = document.fullscreen
         const userId =  this.props.userInfo && this.props.userInfo.id
@@ -423,7 +429,7 @@ class Video extends React.Component<IProp, IState> {
                             </div>
                             <div className="middle">
                                 {
-                                    userId ? (<input/>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
+                                    userId ? (<div className="send"> <input onFocus={() => this._handleInputFocus()} onBlur={() => this._handleInputBlur()} value={this.state.barrageInput} onChange={(e) => this._handleSendBarrage(e)} onKeyDown={(e) => this.sendBarrage(e)}/> <button> 发送 </button> </div>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
                                 }
                             </div>
                             <div className="right">
