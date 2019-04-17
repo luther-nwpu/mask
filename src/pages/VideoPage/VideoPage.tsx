@@ -4,6 +4,7 @@ import Video from '@components/Video/Video'
 import support from '@assets/follow-btn-0.svg'
 import alreadtySupport from '@assets/follow-btn-1.svg'
 import * as _ from 'lodash'
+import {  Get } from '@lib/helper'
 
 export class VideoPage extends React.Component {
     public state = {
@@ -15,6 +16,7 @@ export class VideoPage extends React.Component {
             followNum: 10000
         },
         video: {
+            id: '',
             title: '[你好]，我爱你姚菊',
             category: {
                 name: '游戏',
@@ -34,6 +36,20 @@ export class VideoPage extends React.Component {
             collectNum: [],
             RevelentVideo: []
         }
+    }
+    props
+    public constructor(props) {
+        super(props)
+        console.log(props)
+    }
+    async componentWillMount() {
+        await this.getHaiyou()
+    }
+    async getHaiyou() {
+        const res = await Get('/api/haiyou/getHaiyouById', {
+            haiyouId: this.props.match.params.id
+        })
+        console.log(res)
     }
     public render() {
         return(

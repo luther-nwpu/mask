@@ -56,7 +56,17 @@ export function FilePost(url: string, file: any): Promise<any> {
   })
 }
 
-export async function GET(url: string): Promise<any> {
+export async function Get(url: string, params: Object): Promise<any> {
+  if (params) {  
+      let paramsArray = []
+      //拼接参数  
+      Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))  
+      if (url.search(/\?/) === -1) {  
+          url += '?' + paramsArray.join('&')  
+      } else {  
+          url += '&' + paramsArray.join('&')  
+      }  
+  }
   return new Promise<any>((resolve, reject) => {
     fetch(url, {
       method: 'GET',

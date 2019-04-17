@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { GET } from '@lib/helper'
+import { Get } from '@lib/helper'
 import './ArticleList.scss'
 import history from '@router'
 export class ArticleList extends React.Component {
@@ -22,7 +22,7 @@ export class ArticleList extends React.Component {
     this.getAllArticles()
   }
   public async getAllArticles() {
-    const res = await GET('/api/blog/getAllArticles')
+    const res = await Get('/api/blog/getAllArticles', {})
     const result = res.result
     this.setState({ articles: result.reduce((arr, value) => {
         arr.push({

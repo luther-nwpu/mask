@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { GET } from '@lib/helper'
+import { Get } from '@lib/helper'
 import './Admin.scss'
 import {ArticleList} from '@components'
 import history from '@router'
@@ -8,7 +8,7 @@ export class Admin extends React.Component {
     super(props)
   }
   public async getAllArticles() {
-    const res = await GET('/blog/getAllArticles')
+    const res = await Get('/blog/getAllArticles', {})
     console.log(res)
   }
   public switchToAddArticle() {

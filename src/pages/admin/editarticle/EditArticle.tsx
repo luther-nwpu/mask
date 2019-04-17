@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { GET,  Post } from '@lib/helper'
+import { Post } from '@lib/helper'
 import './EditArticle.scss'
 import {Editor} from '@components'
 import { UploadFile } from '../../../components/UploadFile/UploadFile'
