@@ -46,7 +46,7 @@ export class VideoPage extends React.Component {
         await this.getHaiyou()
     }
     async getHaiyou() {
-        const res = await Get('/api/haiyou/getHaiyouById', {
+        const res = await Get('/haiyou/getHaiyouById', {
             haiyouId: this.props.match.params.id
         })
         console.log(res)
