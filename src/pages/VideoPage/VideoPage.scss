@@ -21,6 +21,13 @@
                 margin-left: 20px;
             }
         }
+        .video-video {
+            display: flex;
+            .video-tab {
+                display: flex;
+                flex-direction: column;
+            }
+        }
     }
     .right-user {
         border: 1px solid #e2e2e2;

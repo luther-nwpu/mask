@@ -49,7 +49,20 @@ export class VideoPage extends React.Component {
         const res = await Get('/haiyou/getHaiyouById', {
             haiyouId: this.props.match.params.id
         })
-        console.log(res)
+        if(res.success) {
+            const result = res.result
+            const user = result.user
+            this.setState({
+                userinfo: {
+                    ...this.state.userinfo,
+                    userid: user.id,
+                    signature: user.signature,
+                    username: user.username,
+                    avator: user.picture && user.picture.url
+                }
+            })
+            console.log(res)
+        }
     }
     public render() {
         return(
@@ -86,6 +99,11 @@ export class VideoPage extends React.Component {
                         </span>
                     </div>
                     <div className="video-video">
+                        <div className="video-tab">
+                            <div className="tab">
+                                你好啊
+                            </div>
+                        </div>
                         <Video src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></Video>
                     </div>
                     <div className="video-support">

@@ -385,7 +385,11 @@ class Video extends React.Component<IProp, any> {
         }
     }
     public handleLogin() {
-        document.exitFullscreen()
+        if (this.isFullScreen()) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen()
+            }
+        } 
         this.props.displayAuth(true, AuthTab.LOGIN)
     }
     public _handleSendBarrage(e) {
