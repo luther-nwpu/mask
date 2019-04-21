@@ -1,8 +1,8 @@
 .video-component {
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 700px;
-    height: 400px;
+    width: 800px;
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;
     .barrage-canvas {
         position: absolute;
         z-index: 1000;
@@ -99,7 +99,7 @@
                 }
             }
             .middle {
-                line-height: 40px;
+                line-height: 30px;
                 border-radius: 10px;
                 background-color:rgba(0,0,0, 0);
                 border: 1px solid #ff9600;

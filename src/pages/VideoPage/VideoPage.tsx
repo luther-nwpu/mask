@@ -101,7 +101,18 @@ export class VideoPage extends React.Component {
                     <div className="video-video">
                         <div className="video-tab">
                             <div className="tab">
-                                你好啊
+                                <div className="tab-text">
+                                    <div className="dd">
+                                        你好啊
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tab">
+                                <div className="tab-text">
+                                    <div className="dd">
+                                        你好啊
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <Video src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></Video>
