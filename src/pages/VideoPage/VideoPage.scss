@@ -5,62 +5,65 @@
     justify-content: space-between;
     z-index: auto;
     .left-video {
-        border: 1px solid #e2e2e2;
-        padding: 20px;
-        background: white;
         margin-left: 60px;
         width: 63%;
-        border-radius: 10px;
         display: flex;
         flex-direction: column;
-        .video-title {
-            font-size: 17px;
-            font-weight: 500;
-        }
-        .video-description {
-            .time {
-                margin-left: 20px;
+        .video-main {
+            border: 1px solid #e2e2e2;
+            padding: 20px;
+            background: white;        
+            border-radius: 10px;
+            .video-title {
+                font-size: 17px;
+                font-weight: 500;
             }
-        }
-        .video-video {
-            display: flex;
-            .video-tab {
+            .video-description {
+                .time {
+                    margin-left: 20px;
+                }
+            }
+            .video-video {
                 display: flex;
-                flex-direction: column;
-                .tab > .tab-text {
-                    position: relative;
-                    display: inline-block;
-                    text-align: center;
-                    font-size: 15px;
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                    padding-left: 10px;
-                    padding-right: 10px;
-                    width: 20px;
-                    word-wrap: break-word;
-                    line-height: auto;
-                }
-                .tab > .tab-text::before {
-                    content: '';
-                    position: absolute;
-                    top: 0; 
-                    right: 0; 
-                    bottom: 0; 
-                    left: 0;
-                    z-index: 1;
-                    background: #ff9600;
-                    border: 1px solid rgba(0,0,0,.4);
-                    border-radius: .5em .5em .5em .5em;
-                    transform: perspective(50px) rotateY(-10deg);
-                    transform-origin: right;
-                }
-                .dd {
-                    position: relative;
-                    z-index: 2;
-                    color: #ffffff;
+                .video-tab {
+                    display: flex;
+                    flex-direction: column;
+                    .tab > .tab-text {
+                        position: relative;
+                        display: inline-block;
+                        text-align: center;
+                        font-size: 15px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        width: 20px;
+                        word-wrap: break-word;
+                        line-height: auto;
+                    }
+                    .tab > .tab-text::before {
+                        content: '';
+                        position: absolute;
+                        top: 0; 
+                        right: 0; 
+                        bottom: 0; 
+                        left: 0;
+                        z-index: 1;
+                        background: #ff9600;
+                        border: 1px solid rgba(0,0,0,.4);
+                        border-radius: .5em .5em .5em .5em;
+                        transform: perspective(50px) rotateY(-10deg);
+                        transform-origin: right;
+                    }
+                    .dd {
+                        position: relative;
+                        z-index: 2;
+                        color: #ffffff;
+                    }
                 }
             }
         }
+
     }
     .right-user {
         border: 1px solid #e2e2e2;

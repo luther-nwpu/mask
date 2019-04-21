@@ -68,64 +68,59 @@ export class VideoPage extends React.Component {
         return(
             <div className="videopage-component">
                 <div className="left-video">
-                    <div className="video-title">
-                        {this.state.video.title}
-                    </div>
-                    <div className="video-description">
-                        <span>
-                            {
-                                (() => {
-                                    const sear = (obj: Object, arr: any) => {
-                                       if (obj['category'] === undefined || obj['category'] === null) {
-                                           return arr
-                                       }
-                                       arr.push({name:obj['category'].name, id: obj['category'].id})
-                                       return sear(obj['category'], arr)
-                                    }
-                                    const result = sear(this.state.video, [])
-                                    console.log(result)
-                                    return (<span>{ result.reduce(function(accumulator: string, value: any, key: Number) {
-                                        if(key === result.length - 1) {
-                                            return accumulator + value.name
-                                        } else {
-                                            return accumulator + value.name + '>'
-                                        } 
-                                    }, '')} </span>)
-                                })()   
-                            }
-                        </span>
-                        <span className="time">
-                            {this.state.video.time}
-                        </span>
-                    </div>
-                    <div className="video-video">
-                        <div className="video-tab">
-                            <div className="tab">
-                                <div className="tab-text">
-                                    <div className="dd">
-                                        你好啊
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="tab">
-                                <div className="tab-text">
-                                    <div className="dd">
-                                        你好啊
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="video-main">
+                        <div className="video-title">
+                            {this.state.video.title}
                         </div>
-                        <Video src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></Video>
-                    </div>
-                    <div className="video-support">
+                        <div className="video-description">
+                            <span>
+                                {
+                                    (() => {
+                                        const sear = (obj: Object, arr: any) => {
+                                        if (obj['category'] === undefined || obj['category'] === null) {
+                                            return arr
+                                        }
+                                        arr.push({name:obj['category'].name, id: obj['category'].id})
+                                        return sear(obj['category'], arr)
+                                        }
+                                        const result = sear(this.state.video, [])
+                                        console.log(result)
+                                        return (<span>{ result.reduce(function(accumulator: string, value: any, key: Number) {
+                                            if(key === result.length - 1) {
+                                                return accumulator + value.name
+                                            } else {
+                                                return accumulator + value.name + '>'
+                                            } 
+                                        }, '')} </span>)
+                                    })()   
+                                }
+                            </span>
+                            <span className="time">
+                                {this.state.video.time}
+                            </span>
+                        </div>
+                        <div className="video-video">
+                            <div className="video-tab">
+                                <div className="tab">
+                                    <div className="tab-text">
+                                        <div className="dd">
+                                            你好啊
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="tab">
+                                    <div className="tab-text">
+                                        <div className="dd">
+                                            你好啊
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <Video src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></Video>
+                        </div>
 
                     </div>
-                    <div className="video-detail">
 
-                    </div>
-                    <div className="video-comment">
-
-                    </div>
                 </div>
                 <div className="right-user">
                     <div className="user-detail">
