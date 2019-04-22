@@ -131,13 +131,13 @@ export class VideoPage extends React.Component {
                                     dsakjffjksa
                                 </div>
                                 <div className="comment-bottom">
-                                    <span> # </span>
-                                    <span> 7小时前 </span>
-                                    <img src="" />
-                                    <span>7 </span>
-                                    <img src=""/>
-                                    <span>10</span>
-                                    <span>恢复</span>
+                                    <span className="comment-index"> #  {'7'} </span>
+                                    <span className="comment-time"> 7小时前 </span>
+                                    <div className="like"></div>
+                                    <span className="like-num"> 7 </span>
+                                    <div className="unlike"></div>
+                                    <span className="unlike-num">10</span>
+                                    <span className="comment-reply">回复</span>
                                 </div>
                             </div>
                         </div>
