@@ -63,7 +63,41 @@
                 }
             }
         }
+        .video-comments {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            .title {
+                font-size: 20px;
+                font-weight: 800;
+            }
+            .comment {
+                margin-top: 10px;
+                border: 1px solid #e2e2e2;
+                padding: 20px;
+                background: white;
+                border-radius: 10px;
+                display: flex;
+                img {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 35px;
+                }
+                .comment-content {
+                    margin-left: 10px;
+                    .comment-username {
+                        font-size: 20px;
+                        font-weight: 900;
+                    }
+                    .comment-text {
 
+                    }
+                    .comment-bottom {
+
+                    }
+                }
+            }
+        }
     }
     .right-user {
         border: 1px solid #e2e2e2;

@@ -118,9 +118,30 @@ export class VideoPage extends React.Component {
                             </div>
                             <Video src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></Video>
                         </div>
-
                     </div>
-
+                    <div className="video-comments">
+                        <span className="title"> 全部评论() </span>
+                        <div className="comment">
+                            <img src="dsadsa" />
+                            <div className="comment-content">
+                                <div className="comment-username">
+                                    dsafaf
+                                </div>
+                                <div className="comment-text">
+                                    dsakjffjksa
+                                </div>
+                                <div className="comment-bottom">
+                                    <span> # </span>
+                                    <span> 7小时前 </span>
+                                    <img src="" />
+                                    <span>7 </span>
+                                    <img src=""/>
+                                    <span>10</span>
+                                    <span>恢复</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="right-user">
                     <div className="user-detail">
