@@ -1,8 +1,9 @@
 .video-component {
-    width: 800px;
-    height: 450px;
     border-radius: 10px;
     overflow: hidden;
+    video {
+        border-radius: 10px;
+    }
     .barrage-canvas {
         position: absolute;
         z-index: 1000;
