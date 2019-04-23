@@ -237,7 +237,21 @@
                             }
                         }
                     }
+                    .sub-more {
+                        margin-top: 10px;
+                        color: #0467b8;
+                        font-weight: 700;
+                    }
                 }
+            }
+            .no-comment {
+                margin-top: 10px;
+                border: 1px solid #e2e2e2;
+                padding: 20px;
+                font-size: 20px;
+                border-radius: 10px;
+                font-weight: 600;
+                background: white;
             }
         }
     }

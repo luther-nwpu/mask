@@ -121,54 +121,65 @@ export class VideoPage extends React.Component {
                     </div>
                     <div className="video-comments">
                         <span className="title"> 全部评论(0) </span>
-                        <div className="comment">
-                            <img src="dsadsa" />
-                            <div className="comment-content">
-                                <div className="comment-username">
-                                    dsafaf
-                                </div>
-                                <div className="comment-text">
-                                    dsakjffjksa
-                                </div>
-                                <div className="comment-bottom">
-                                    <span className="comment-index"> #  {'7'} </span>
-                                    <span className="comment-time"> 7小时前 </span>
-                                    <div className="like"></div>
-                                    <span className="like-num"> 7 </span>
-                                    <div className="unlike"></div>
-                                    <span className="unlike-num">10</span>
-                                    <span className="comment-reply">回复</span>
-                                </div>
-                                <div className="sub-comments">
-                                    <div className="sub-comment">
-                                        <div className="line"></div>
-                                        <div className="sub-comment-content">
-                                            <img src="" />
-                                            <div className="sub-comment-description">
-                                                <div className="username">
-                                                    <span className="send">我</span>
-                                                    <span>回复</span>
-                                                    <span className="receive">你好啊</span>
-                                                    :
+                        {
+                            false ? (
+                                <div className="comment">
+                                    <img src="dsadsa" />
+                                    <div className="comment-content">
+                                        <div className="comment-username">
+                                            dsafaf
+                                        </div>
+                                        <div className="comment-text">
+                                            dsakjffjksa
+                                        </div>
+                                        <div className="comment-bottom">
+                                            <span className="comment-index"> #  {'7'} </span>
+                                            <span className="comment-time"> 7小时前 </span>
+                                            <div className="like"></div>
+                                            <span className="like-num"> 7 </span>
+                                            <div className="unlike"></div>
+                                            <span className="unlike-num">10</span>
+                                            <span className="comment-reply">回复</span>
+                                        </div>
+                                        <div className="sub-comments">
+                                            <div className="sub-comment">
+                                                <div className="line"></div>
+                                                <div className="sub-comment-content">
+                                                    <img src="" />
+                                                    <div className="sub-comment-description">
+                                                        <div className="username">
+                                                            <span className="send">我</span>
+                                                            <span>回复</span>
+                                                            <span className="receive">你好啊</span>
+                                                            :
+                                                        </div>
+                                                        <div className="sub-content">
+                                                            fasjfdsajfkjssflfsa
+                                                        </div>
+                                                        <div className="sub-comment-bottom">
+                                                            <span className="comment-index"> #  {'7'} </span>
+                                                            <span className="comment-time"> 7小时前 </span>
+                                                            <div className="like"></div>
+                                                            <span className="like-num"> 7 </span>
+                                                            <div className="unlike"></div>
+                                                            <span className="unlike-num">10</span>
+                                                            <span className="comment-reply">回复</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="sub-content">
-                                                    fasjfdsajfkjssflfsa
-                                                </div>
-                                                <div className="sub-comment-bottom">
-                                                    <span className="comment-index"> #  {'7'} </span>
-                                                    <span className="comment-time"> 7小时前 </span>
-                                                    <div className="like"></div>
-                                                    <span className="like-num"> 7 </span>
-                                                    <div className="unlike"></div>
-                                                    <span className="unlike-num">10</span>
-                                                    <span className="comment-reply">回复</span>
-                                                </div>
+                                            </div>
+                                            <div className="sub-more">
+                                                查看更多
                                             </div>
                                         </div>
                                     </div>
+                                </div>    
+                            ) : (
+                                <div className="no-comment">
+                                    当前并无评论
                                 </div>
-                            </div>
-                        </div>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="right-user">
