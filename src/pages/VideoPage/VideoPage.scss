@@ -85,12 +85,13 @@
                 }
                 .comment-content {
                     margin-left: 10px;
+                    margin-top: -2px;
                     .comment-username {
-                        font-size: 20px;
+                        font-size: 19px;
                         font-weight: 900;
                     }
                     .comment-text {
-
+                        font-size: 14px;
                     }
                     .comment-bottom {
                         margin-top: 5px;
@@ -146,6 +147,93 @@
                             background-size: 15px 15px;
                             &:hover {
                                 background-image: url('../../assets/unlike_btn_1.svg');
+                            }
+                        }
+                    }
+                }
+                .sub-comments {
+                    .sub-comment {
+                        .line {
+                            margin-top: 10px;
+                            width: 60%;
+                            height: 1px;
+                            background: #696464;
+                        }
+                        .sub-comment-content {
+                            margin-top: 10px;
+                            display: flex;
+                            img {
+                                width: 54px;
+                                height: 54px;
+                                border-radius: 27px;
+                            }
+                            .sub-comment-description {
+                                margin-left: 10px;
+                                .send {
+                                    color: #ff9600;
+                                    margin-right: 5px;
+                                }
+                                .receive {
+                                    color: #d40fee;
+                                    margin-left: 5px;
+                                    margin-right: 3px;
+                                }
+                                .sub-comment-bottom {
+                                    line-height: 18px;
+                                    .comment-index {
+                                        color: #797979;
+                                        font-size: 15px;
+                                        font-weight: 900;
+                                    }
+                                    .comment-time {
+                                        margin-left: 80px;
+                                        font-weight: 600;
+                                        font-size: 12px;
+                                        color: #696464;
+                                    }
+                                    .like-num {
+                                        margin-left: 2px;
+                                        font-size: 13px;
+                                        color: #d40fee;
+                                        font-weight: 600;
+                                    }
+                                    .unlike-num {
+                                        margin-left: 3px;
+                                        color: #2b0a30;
+                                        font-weight: 600;
+                                    }
+                                    .comment-reply {
+                                        margin-left: 40px;
+                                        font-weight: bolder;
+                                        &:hover {
+                                            color: #0467b8;
+                                        }
+                                    }
+                                    .like {
+                                        margin-left: 30px;
+                                        display: inline-block;
+                                        width: 15px;
+                                        height: 15px;
+                                        background-image: url('../../assets/like_btn_0.svg');
+                                        background-size: 15px 15px;
+                                        background-position-y: 1.5px;
+                                        &:hover {
+                                            background-image: url('../../assets/like_btn_1.svg')
+                                        }
+                                    }
+                                    .unlike {
+                                        margin-left: 20px;
+                                        display: inline-block;
+                                        width: 15px;
+                                        height: 15px;
+                                        background-position-y: 2px;
+                                        background-image: url('../../assets/unlike_btn_0.svg');
+                                        background-size: 15px 15px;
+                                        &:hover {
+                                            background-image: url('../../assets/unlike_btn_1.svg');
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
