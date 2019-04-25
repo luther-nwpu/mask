@@ -5,8 +5,10 @@ import support from '@assets/follow-btn-0.svg'
 import alreadtySupport from '@assets/follow-btn-1.svg'
 import * as _ from 'lodash'
 import {  Get } from '@lib/helper'
+import { displayAuth } from '@store/actions/auth'
+import { connect } from 'react-redux'
 
-export class VideoPage extends React.Component {
+class VideoPage extends React.Component {
     public state = {
         userinfo: {
             avator: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550510853565&di=4eddd8436a89c3e19043946f3e7fa8ed&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Feac4b74543a982265bd540e38782b9014b90ebda.jpg',
@@ -203,15 +205,69 @@ export class VideoPage extends React.Component {
                         </div>
                     </div>
                     <div className="video-barrage">
+                        <div className="barrage-title">
+                            弹幕列表
+                        </div>
+                        <div className="barrages">
+                            <div className="barrage-table">
+                                <span>时间</span>
+                                <span>弹幕内容(10)</span>
+                                <span> 发送时间 </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div className="video-input">
-
-                    </div>
-                    <div className="video-recommend">
-
+                        <input />
+                        <button>发送弹幕</button>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    const { userinfo } = state.todoApp
+    return {
+        userInfo: userinfo
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoPage)

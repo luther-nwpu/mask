@@ -374,5 +374,33 @@
                 }
             }
         }
+        .video-barrage {
+            margin-top: 10px;
+            .barrage-title {
+                background: #797979;
+                line-height: 30px;
+                border-radius: 3px;
+                font-size: 15px;
+                color: white;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            .barrages {
+                margin-top: 10px;
+                .barrage-table {
+                    display: flex;
+                    justify-content: space-between;
+                    font-weight: 400;
+                    font-size: 13px;
+                }
+                .barrage {
+                    display: flex;
+                    line-height: 20px;
+                    font-size: 12px;
+                    justify-content: space-between;
+                    font-weight: 300;
+                }
+            }
+        }
     }
 }
