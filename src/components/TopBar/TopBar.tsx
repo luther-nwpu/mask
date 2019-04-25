@@ -72,19 +72,30 @@ class TopBar extends Component {
                                 历史
                             </div>
                         </div>
-                        <div className="item">
-                            <div className="icon-account">
-                            </div>
-                            <div className="item-text" onClick={()=>this.login()}>    
-                                登录
-                            </div>
-                        </div>
-                        <div>
-                            |
-                        </div>
-                        <div className="item" onClick={()=>this.register()}>
-                            注册
-                        </div>
+                        {
+                            false ? (
+                                <div className="auth-item">
+                                    <div className="item">
+                                        <div className="icon-account">
+                                        </div>
+                                        <div className="item-text" onClick={()=>this.login()}>    
+                                            登录
+                                        </div>
+                                    </div>
+                                    <div>
+                                        |
+                                    </div>
+                                    <div className="item" onClick={()=>this.register()}>
+                                        注册
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="auth-detail">
+                                    <img />
+                                    <span> {'dsaaaaaaaad'} </span> 
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 {
