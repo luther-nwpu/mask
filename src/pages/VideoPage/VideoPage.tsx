@@ -247,11 +247,178 @@ class VideoPage extends React.Component {
                                     dsadsafhjasfj
                                 </span>
                             </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
+                            <div className="barrage">
+                                <span>
+                                    10:11
+                                </span>
+                                <span>
+                                    我喜欢你啊
+                                </span>
+                                <span>
+                                    dsadsafhjasfj
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div className="video-input">
-                        <input />
-                        <button>发送弹幕</button>
+                        {
+                            true ? (
+                                <div>
+                                    <input />
+                                    <button>发送</button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <span> 登录 </span>
+                                    或
+                                    <span> 注册 </span>
+                                    即可发送弹幕
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
