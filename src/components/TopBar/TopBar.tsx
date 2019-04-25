@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import Auth from '@components/Auth/Auth'
 import { displayAuth } from '@store/actions/auth'
 import { AuthTab } from '@config'
+import avator_default_jpg from '@assets/avator_default.jpg'
+
 class TopBar extends Component {
     state = {
         userinfo: null
@@ -91,8 +93,8 @@ class TopBar extends Component {
                                 </div>
                             ) : (
                                 <div className="auth-detail">
-                                    <img />
-                                    <span> {'dsaaaaaaaad'} </span> 
+                                    <img src={ avator_default_jpg } />
+                                    <span className="text"> {'dsaaaaaaaad'} </span> 
                                 </div>
                             )
                         }
