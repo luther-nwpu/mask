@@ -152,6 +152,15 @@
                 &:hover .icon {
                     background-image: url('../../assets/history_btn_1.svg');
                 }
+                .icon-subscribe {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px 18px;
+                    background-image: url('../../assets/subscribe_btn_0.svg');
+                }
+                &:hover .icon-subscribe {
+                    background-image: url('../../assets/subscribe_btn_1.svg');
+                }
                 .icon-account {
                     width: 18px;
                     height: 18px;

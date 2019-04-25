@@ -93,6 +93,13 @@ class TopBar extends Component {
                                 </div>
                             ) : (
                                 <div className="auth-detail">
+                                    <div className="item">
+                                        <div className="icon-subscribe">
+                                        </div>
+                                        <div className="item-text">
+                                            订阅
+                                        </div>
+                                    </div>
                                     <img src={ avator_default_jpg } />
                                     <span className="text"> {'dsaaaaaaaad'} </span> 
                                 </div>
