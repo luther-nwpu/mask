@@ -24,6 +24,7 @@ class TopBar extends Component {
         this.props.displayAuth(true, AuthTab.REGISTER)
     }
     render() {
+        const userinfo = this.props.userinfo
         return (
             <div className="topbar">
                 <div className="topbar-content">
@@ -75,7 +76,19 @@ class TopBar extends Component {
                             </div>
                         </div>
                         {
-                            false ? (
+                            userinfo && userinfo.userid ? (
+                                <div className="auth-detail">
+                                    <div className="item">
+                                        <div className="icon-subscribe">
+                                        </div>
+                                        <div className="item-text">
+                                            订阅
+                                        </div>
+                                    </div>
+                                    <img src={ avator_default_jpg } />
+                                    <span className="text"> {'dsaaaaaaaad'} </span> 
+                                </div>
+                            ) : (
                                 <div className="auth-item">
                                     <div className="item">
                                         <div className="icon-account">
@@ -90,18 +103,6 @@ class TopBar extends Component {
                                     <div className="item" onClick={()=>this.register()}>
                                         注册
                                     </div>
-                                </div>
-                            ) : (
-                                <div className="auth-detail">
-                                    <div className="item">
-                                        <div className="icon-subscribe">
-                                        </div>
-                                        <div className="item-text">
-                                            订阅
-                                        </div>
-                                    </div>
-                                    <img src={ avator_default_jpg } />
-                                    <span className="text"> {'dsaaaaaaaad'} </span> 
                                 </div>
                             )
                         }
@@ -119,9 +120,12 @@ class TopBar extends Component {
     }
 }
 const mapStateToProps = (state) => {
+    console.log('state', state)
+    const { userinfo } = state.todoApp
     const { isDisplay } = state.auth
     return {
-        isDisplay: isDisplay
+        isDisplay: isDisplay,
+        userinfo: userinfo
     }
 }
 const mapDispatchToProps = dispatch => ({
