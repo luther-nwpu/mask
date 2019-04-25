@@ -76,7 +76,7 @@ class TopBar extends Component {
                             </div>
                         </div>
                         {
-                            userinfo && userinfo.userid ? (
+                            userinfo && userinfo.email ? (
                                 <div className="auth-detail">
                                     <div className="item">
                                         <div className="icon-subscribe">
