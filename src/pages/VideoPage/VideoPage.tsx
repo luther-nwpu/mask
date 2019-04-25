@@ -121,6 +121,13 @@ export class VideoPage extends React.Component {
                     </div>
                     <div className="video-comments">
                         <span className="title"> 全部评论(0) </span>
+                        <div className="comment-send">
+                            <img src=""/>
+                            <textarea />
+                            <button>
+                                发表评论
+                            </button>
+                        </div>
                         {
                             false ? (
                                 <div className="comment">
