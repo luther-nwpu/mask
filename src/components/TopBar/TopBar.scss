@@ -190,5 +190,25 @@
             font-weight: 700;
             font-size: 16px;
         }
+        .closeBox {
+            margin-left: 5px;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            transition: transform 0.5s;
+            background-image: url('../../assets/arrow_0.svg');
+            background-size: 10px 10px;
+        }
+        .auth-detail-user {
+            display: flex;
+            align-items: center;
+            &:hover {
+                border-radius: 10px;
+                transition: transform .25s linear;
+                .closeBox {
+                    transform: rotate(180deg);
+                }
+            }
+        }
     }
 }

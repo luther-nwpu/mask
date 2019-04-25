@@ -85,8 +85,11 @@ class TopBar extends Component {
                                             订阅
                                         </div>
                                     </div>
-                                    <img src={ avator_default_jpg } />
-                                    <span className="text"> { userinfo.username } </span> 
+                                    <span className="auth-detail-user">    
+                                        <img src={ avator_default_jpg } />
+                                        <span className="text"> { userinfo.username } </span> 
+                                        <span className="closeBox"></span>
+                                    </span>
                                 </div>
                             ) : (
                                 <div className="auth-item">
