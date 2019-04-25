@@ -405,16 +405,16 @@ class VideoPage extends React.Component {
                     </div>
                     <div className="video-input">
                         {
-                            true ? (
+                            false ? (
                                 <div>
                                     <input />
                                     <button>发送</button>
                                 </div>
                             ) : (
                                 <div>
-                                    <span> 登录 </span>
+                                    <span className="login-text"> 登录 </span>
                                     或
-                                    <span> 注册 </span>
+                                    <span className="register-text"> 注册 </span>
                                     即可发送弹幕
                                 </div>
                             )
