@@ -7,6 +7,7 @@ import * as _ from 'lodash'
 import {  Get } from '@lib/helper'
 import { displayAuth } from '@store/actions/auth'
 import { connect } from 'react-redux'
+import { AuthTab } from '@config'
 
 class VideoPage extends React.Component {
     public state = {
@@ -65,6 +66,12 @@ class VideoPage extends React.Component {
             })
             console.log(res)
         }
+    }
+    handleLogin() {
+        this.props.displayAuth(true, AuthTab.LOGIN)
+    }
+    handleRegister() {
+        this.props.displayAuth(true, AuthTab.REGISTER)
     }
     public render() {
         return(
@@ -405,16 +412,16 @@ class VideoPage extends React.Component {
                     </div>
                     <div className="video-input">
                         {
-                            false ? (
-                                <div>
+                            true ? (
+                                <div className="barrage-input">
                                     <input />
                                     <button>发送</button>
                                 </div>
                             ) : (
                                 <div>
-                                    <span className="login-text"> 登录 </span>
+                                    <span className="login-text" onClick={() => this.handleLogin()}> 登录 </span>
                                     或
-                                    <span className="register-text"> 注册 </span>
+                                    <span className="register-text" onClick={() => this.handleRegister()}> 注册 </span>
                                     即可发送弹幕
                                 </div>
                             )

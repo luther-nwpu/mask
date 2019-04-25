@@ -430,9 +430,28 @@
         .video-input {
             margin-top: 10px;
             border: 1px solid #ff9600;
-            line-height: 40px;
+            line-height: 30px;
             border-radius: 10px;
             padding-left: 10px;
+            .barrage-input {
+                display: flex;
+                input {
+                    flex: 1;
+                    line-height: 30px;
+                    border: none;
+                    outline: none;
+                }
+                button {
+                    &:hover {
+                        opacity: 0.9;
+                    }
+                    border: none;
+                    color: white;
+                    outline: none;
+                    background: #8f5b0c;
+                    border-radius: 10px;               
+                }
+            }
             .login-text {
                 font-weight: 700;
                 color: #ff9600;
