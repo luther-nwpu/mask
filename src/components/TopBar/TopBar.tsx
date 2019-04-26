@@ -42,7 +42,7 @@ class TopBar extends Component {
                                 </span>
                             </div>
                             <div className="dropitem-content">
-                                    HelloWorld
+                                HelloWorld
                             </div>
                         </div>
                         <div className="dropitem">
