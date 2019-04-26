@@ -11,6 +11,12 @@ import history from '@router'
 import { withCookies, Cookies } from 'react-cookie'
 import loginout_svg from '@assets/loginout_btn_0.svg'
 import { storeUserInfo } from '@store/actions/todoApp'
+import woman_svg from '@assets/woman_btn_0.svg'
+import man_svg from '@assets/man_btn_0.svg'
+import sex_svg from '@assets/sex_know_0.svg'
+import autograph from '@assets/icon_autograph.png'
+import age from '@assets/icon_age.png'
+import location from '@assets/icon_location.png'
 
 class TopBar extends Component {
     state = {
@@ -109,15 +115,20 @@ class TopBar extends Component {
                                             <img className="drop-img" src={ avator_default_jpg } />
                                             <div className="auth-userinfo">
                                                 <div className="userinfo-username">
-                                                    { userinfo.username }
+                                                    { userinfo.username } <img src={ userinfo && userinfo.sex == '0' ? man_svg : (userinfo && userinfo.sex == '1' ? woman_svg : sex_svg) } />
                                                 </div>
-                                                <div>
-                                                    { userinfo.signature }
+                                                <div className="userinfo-age">
+                                                    <img src = {location}/> {userinfo.location || '火星'}
+                                                    <img src ={age} /> {userinfo.age || '20岁'}
                                                 </div>
+                                                <div className="userinfo-signature">
+                                                    <img src={autograph} /> { userinfo.signature || '您并没有签名' }
+                                                </div>
+
                                             </div>
                                             <span className="loginout" onClick={() => this.logout()}>
                                                 <img src={ loginout_svg }/>
-                                               <span className="loginout-text"> 退出</span>  </span>
+                                                <span className="loginout-text"> 退出</span>  </span>
                                         </div>
                                     </div>
                                 </div>
