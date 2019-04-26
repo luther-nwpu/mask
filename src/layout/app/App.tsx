@@ -3,7 +3,7 @@ import { instanceOf } from 'prop-types'
 import { Frame } from '../Frame'
 import { connect } from 'react-redux'
 import { withCookies, Cookies } from 'react-cookie'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import './App.scss'
 import { MaskApp, AdminApp } from '@layout'
 import { Footer } from '@components'
@@ -19,7 +19,6 @@ class App extends React.Component {
     super(props)
     const { cookies } = props
     this.state.cookies = cookies.cookies.user
-    console.log(cookies.cookies.userinfo)
     props.storeUserInfo( cookies.cookies.userinfo != undefined ? JSON.parse(cookies.cookies.userinfo) : {})
   }
   

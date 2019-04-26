@@ -7,6 +7,7 @@ import Auth from '@components/Auth/Auth'
 import { displayAuth } from '@store/actions/auth'
 import { AuthTab } from '@config'
 import avator_default_jpg from '@assets/avator_default.jpg'
+import history from '@router'
 
 class TopBar extends Component {
     state = {
@@ -22,6 +23,9 @@ class TopBar extends Component {
     }
     register() {
         this.props.displayAuth(true, AuthTab.REGISTER)
+    }
+    _handleToLinkPerson() {
+        history.push('/personinfo')
     }
     render() {
         const userinfo = this.props.userinfo
@@ -85,7 +89,7 @@ class TopBar extends Component {
                                             订阅
                                         </div>
                                     </div>
-                                    <span className="auth-detail-user">    
+                                    <span className="auth-detail-user" onClick={() => this._handleToLinkPerson()}>    
                                         <img src={ avator_default_jpg } />
                                         <span className="text"> { userinfo.username } </span> 
                                         <span className="closeBox"></span>
