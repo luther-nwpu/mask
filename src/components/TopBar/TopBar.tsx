@@ -112,7 +112,7 @@ class TopBar extends Component {
                                             <span className="closeBox"></span>
                                         </span>
                                         <div className="dropitem-content">
-                                            <img className="drop-img" src={ avator_default_jpg } />
+                                            <img className="drop-img" src={ avator_default_jpg } onClick={() => this._handleToLinkPerson()}/>
                                             <div className="auth-userinfo">
                                                 <div className="userinfo-username">
                                                     { userinfo.username } <img src={ userinfo && userinfo.sex == '0' ? man_svg : (userinfo && userinfo.sex == '1' ? woman_svg : sex_svg) } />
