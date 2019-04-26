@@ -28,10 +28,10 @@ class ModifyNickName extends React.Component {
             alert('更改失败')
         } else {
             const { cookies }= this.props
-            cookies.set('userinfo', res.result, {
+            cookies.set('userinfo', res.result.userinfo, {
                 maxAge: 7*24*60*60
             })
-            this.props.storeUserInfo(res.result)        
+            this.props.storeUserInfo(res.result.userinfo)        
             history.replace('personinfo')
         }
     }

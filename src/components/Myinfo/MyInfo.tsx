@@ -25,7 +25,7 @@ class MyInfo extends React.Component {
     }
     public render() {
         const userinfo = this.props.userinfo
-        console.log('userinfo', userinfo)
+        console.log('userin31213fo', userinfo)
         return (
             <div className="myinfo-component">
                 <div className="info-title">
