@@ -157,7 +157,7 @@ class Auth extends React.Component {
                 cookies.set('userinfo', res.result.userinfo, {
                     maxAge: maxAge
                 })
-                this.props.storeUserInfo(res.result.userInfo)
+                this.props.storeUserInfo(res.result.userinfo)
                 this.closeModal()
             } else {
                 this.dealError('login-password', '用户不存在或者密码错误')

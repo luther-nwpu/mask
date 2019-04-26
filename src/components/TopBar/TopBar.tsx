@@ -8,6 +8,9 @@ import { displayAuth } from '@store/actions/auth'
 import { AuthTab } from '@config'
 import avator_default_jpg from '@assets/avator_default.jpg'
 import history from '@router'
+import { withCookies, Cookies } from 'react-cookie'
+import loginout_svg from '@assets/loginout_btn_0.svg'
+import { storeUserInfo } from '@store/actions/todoApp'
 
 class TopBar extends Component {
     state = {
@@ -27,8 +30,15 @@ class TopBar extends Component {
     _handleToLinkPerson() {
         history.push('/personinfo')
     }
+    logout() {
+        this.props.storeUserInfo({})
+        const { cookies }= this.props
+        cookies.remove('Authorization')
+        cookies.remove('userinfo')
+    }
     render() {
         const userinfo = this.props.userinfo
+        console.log('userinfo', userinfo)
         return (
             <div className="topbar">
                 <div className="topbar-content">
@@ -89,11 +99,27 @@ class TopBar extends Component {
                                             订阅
                                         </div>
                                     </div>
-                                    <span className="auth-detail-user" onClick={() => this._handleToLinkPerson()}>    
-                                        <img src={ avator_default_jpg } />
-                                        <span className="text"> { userinfo.username } </span> 
-                                        <span className="closeBox"></span>
-                                    </span>
+                                    <div className="dropitem">
+                                        <span className="auth-detail-user" onClick={() => this._handleToLinkPerson()}>    
+                                            <img src={ avator_default_jpg } />
+                                            <span className="text"> { userinfo.username } </span> 
+                                            <span className="closeBox"></span>
+                                        </span>
+                                        <div className="dropitem-content">
+                                            <img className="drop-img" src={ avator_default_jpg } />
+                                            <div className="auth-userinfo">
+                                                <div className="userinfo-username">
+                                                    { userinfo.username }
+                                                </div>
+                                                <div>
+                                                    { userinfo.signature }
+                                                </div>
+                                            </div>
+                                            <span className="loginout" onClick={() => this.logout()}>
+                                                <img src={ loginout_svg }/>
+                                               <span className="loginout-text"> 退出</span>  </span>
+                                        </div>
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="auth-item">
@@ -127,7 +153,6 @@ class TopBar extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.log('state', state)
     const { userinfo } = state.todoApp
     const { isDisplay } = state.auth
     return {
@@ -136,6 +161,7 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab)),
+    storeUserInfo: userinfo => dispatch(storeUserInfo(userinfo))
 })
-export default connect(mapStateToProps, mapDispatchToProps)(TopBar)
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(TopBar))
