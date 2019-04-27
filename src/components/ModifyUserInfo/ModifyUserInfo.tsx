@@ -14,25 +14,26 @@ class ModifyUserInfo extends React.Component {
         super(props)
     }
     public state = {
-        nickNameInput: ''
+        locationInput: '',
+        signatureInput: '',
+        ageInput: '',
+        sexInput: '2'
     }
-    public _handleChangeInput(e) {
-        this.setState({
-            nickNameInput: e.target.value
-        })
-    } 
     public async changeNickName() {
-        const res = await TokenPost('auth/updateNickName', {
-            nickName: this.state.nickNameInput
+        const res = await TokenPost('auth/updateUserInfo', {
+            location: this.state.locationInput,
+            age: this.state.ageInput,
+            sex: this.state.sexInput,
+            signature: this.state.signatureInput
         })
         if(!res.success) {
             alert('更改失败')
         } else {
             const { cookies }= this.props
-            cookies.set('userinfo', res.result, {
+            cookies.set('userinfo', res.result.userinfo, {
                 maxAge: 7*24*60*60
             })
-            this.props.storeUserInfo(res.result)        
+            this.props.storeUserInfo(res.result.userinfo)        
             history.replace('personinfo')
         }
     }
@@ -41,6 +42,31 @@ class ModifyUserInfo extends React.Component {
     }
     public switchUploadVideo(link) {
         history.replace(link)
+    }
+    public _handleLocationInput(e) {
+        this.setState({
+            locationInput: e.target.value
+        })
+    }
+    public _handleAgeInput(e) {
+        this.setState({
+            ageInput: e.target.value
+        })
+    }
+    public _handleSignatureInput(e) {
+        this.setState({
+            signatureInput: e.target.value
+        })
+    }
+    public _handleSexInput(str) {
+        this.setState({
+            sexInput: str
+        })
+    }
+    public componentDidMount() {
+        this.setState({
+            sexInput: this.props.userInfo && this.props.userInfo.sex
+        })
     }
     public render() {
         return (
@@ -57,16 +83,16 @@ class ModifyUserInfo extends React.Component {
                     </div>
                 </div>
                 <div className="item">
-                    <span className="item-title">个性签名:</span> <textarea/>
+                    <span className="item-title">个性签名:</span> <textarea placeholder={this.props.userInfo && this.props.userInfo.signature} value={this.state.signatureInput} onChange={(e) => this._handleSignatureInput(e)}/>
                 </div>
                 <div className="item">
-                    <span className="item-title">年龄：</span> <input type="number" />
+                    <span className="item-title">年龄：</span> <input placeholder={this.props.userInfo && this.props.userInfo.age} type="number" value={this.state.ageInput} onChange={(e) => this._handleAgeInput(e)} />
                 </div>
                 <div className="item">
-                    <span className="item-title">性别: </span><input type="radio"/> 男 <input type="radio"/> 女 <input type="radio"/> 保密
+                    <span className="item-title">性别: </span><input type="radio" onChange={() => this._handleSexInput('0')} checked = { this.state.sexInput == '0'}/> 男 <input type="radio" onChange={() => this._handleSexInput('1')} checked = { this.state.sexInput == '1'}/> 女 <input type="radio"  onChange={() => this._handleSexInput('2')} checked = { this.state.sexInput == '2'}/> 保密
                 </div>
                 <div className="item">
-                    <span className="item-title">位置: </span><input />
+                    <span className="item-title">位置: </span><input placeholder={this.props.userInfo && this.props.userInfo.location} value={this.state.locationInput} onChange={(e)=>this._handleLocationInput(e) }/>
                 </div>
                 <div>
                     <button onClick={() => this.changeNickName()}>
