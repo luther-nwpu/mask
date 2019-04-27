@@ -16,6 +16,7 @@ import { connect } from 'react-redux'
 import avator_default_jpg from '@assets/avator_default.jpg'
 import { Post, TokenPost } from '@lib/helper'
 import { withCookies } from 'react-cookie'
+import { storeUserInfo } from '@store/actions/todoApp'
 
 class MyInfo extends React.Component {
     constructor(props) {
@@ -151,5 +152,7 @@ const mapStateToProps = (state) => {
         userinfo: userinfo
     }
 }
-
-export default withCookies(connect(mapStateToProps, null)(MyInfo))
+const mapDispatchToProps = dispatch => ({
+    storeUserInfo: (userInfo) => dispatch(storeUserInfo(userInfo))
+})
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(MyInfo))
