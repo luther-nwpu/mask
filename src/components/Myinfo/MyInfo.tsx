@@ -45,7 +45,7 @@ class MyInfo extends React.Component {
                             <img src={age} /> <span className="infocontent-text"> { userinfo && userinfo.age || '20岁' } </span>
                             <img src={autograph} /> <span  className="infocontent-text"> { userinfo && userinfo.location || '火星' } </span>
                             <img src={location} /><span  className="infocontent-text"> { userinfo && userinfo.signature || '您并没有签名'} </span>
-                            <span className="infodetailcontent">
+                            <span className="infodetailcontent" onClick={() => this.switchUploadVideo('personinfo?id=8')}>
                                 <img src = {editInfo} />
                                 编辑资料
                             </span>

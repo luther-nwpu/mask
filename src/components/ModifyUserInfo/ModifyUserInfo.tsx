@@ -6,6 +6,7 @@ import { withCookies } from 'react-cookie'
 import { storeUserInfo } from '@store/actions/todoApp'
 import { TokenPost } from '@lib/helper'
 import history from '@router'
+import edit from '@assets/edit_btn_0.svg'
 
 class ModifyUserInfo extends React.Component {
     props: any
@@ -38,6 +39,9 @@ class ModifyUserInfo extends React.Component {
     public switchPerson() {
         history.replace('personinfo')
     }
+    public switchUploadVideo(link) {
+        history.replace(link)
+    }
     public render() {
         return (
             <div className="modifyuserinfo-component">
@@ -46,10 +50,23 @@ class ModifyUserInfo extends React.Component {
                     <span className="title-text"> 编辑资料 </span>
                 </div>
                 <div className="item">
-                    昵称：{this.props.userInfo && this.props.userInfo.username}
+                    <span className="item-title"> 昵称：</span>{this.props.userInfo && this.props.userInfo.username}
+                    <div className="editinfo" onClick={() => this.switchUploadVideo('personinfo?id=7')}>
+                        <img src={edit} />
+                        修改昵称
+                    </div>
                 </div>
                 <div className="item">
-
+                    <span className="item-title">个性签名:</span> <textarea/>
+                </div>
+                <div className="item">
+                    <span className="item-title">年龄：</span> <input type="number" />
+                </div>
+                <div className="item">
+                    <span className="item-title">性别: </span><input type="radio"/> 男 <input type="radio"/> 女 <input type="radio"/> 保密
+                </div>
+                <div className="item">
+                    <span className="item-title">位置: </span><input />
                 </div>
                 <div>
                     <button onClick={() => this.changeNickName()}>
