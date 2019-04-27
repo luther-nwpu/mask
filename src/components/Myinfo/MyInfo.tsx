@@ -14,14 +14,55 @@ import email from '@assets/email_icon.svg'
 import history from '@router'
 import { connect } from 'react-redux'
 import avator_default_jpg from '@assets/avator_default.jpg'
+import { Post, TokenPost } from '@lib/helper'
+import { withCookies } from 'react-cookie'
 
 class MyInfo extends React.Component {
     constructor(props) {
         super(props)
     }
     props
+    uploadDom
     public switchUploadVideo(link) {
         history.replace(link)
+    }
+    public _handleUploadAvator() {
+        this.uploadDom.click()
+    }
+    public handleUploadAvator(e) {
+        const file = e.target.files[0]
+        if (!file) {
+            return
+        }
+        const url = 'upload/uploadImg'
+        const form = new FormData()
+        form.append('file', file)
+        // 此处的file字段由上传的api决定，可以是其它值
+        const xhr = new XMLHttpRequest()
+        xhr.open('POST', url, true)  // 第三个参数为async?，异步/同步
+        xhr.send(form)
+        xhr.onload = async () => {
+            //如果请求成功
+            if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                const res = JSON.parse(xhr.responseText)
+                if(res.success) {
+                    const res2 = await TokenPost('auth/updateAvator', {
+                        avatorId: res.result.id
+                    })
+                    if(!res2.success) {
+                        alert('更改失败')
+                    } else {
+                        const { cookies }= this.props
+                        cookies.set('userinfo', res2.result.userinfo, {
+                            maxAge: 7*24*60*60
+                        })
+                        this.props.storeUserInfo(res2.result.userinfo)
+                    }
+                } else {
+                    alert('上传失败')
+                }
+            }
+        }
     }
     public render() {
         const userinfo = this.props.userinfo
@@ -29,7 +70,8 @@ class MyInfo extends React.Component {
         return (
             <div className="myinfo-component">
                 <div className="info-title">
-                    <img className="avator-img" src={ userinfo && userinfo.avator || avator_default_jpg}/>
+                    <img className="avator-img" src={ userinfo && userinfo.avator || avator_default_jpg} onClick={() =>this._handleUploadAvator()}/>
+                    <input type="file" accept="image/png,image/gif" onChange={(e) => this.handleUploadAvator(e) }  ref={upload => this.uploadDom =upload} className="upload"/>
                     <div className="rightuserinfo">
                         <div className="infodetail">
                             <div className="nicksex">
@@ -110,4 +152,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(MyInfo)
+export default withCookies(connect(mapStateToProps, null)(MyInfo))
