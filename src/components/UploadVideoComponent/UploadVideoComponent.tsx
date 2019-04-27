@@ -38,7 +38,7 @@ class UploadVideoComponent extends React.Component {
                 <div className="upload-video" onClick={() => this.uploadVideo()}>
                     上传视频
                 </div>
-                <input id="uploadVideo" type="file" className="upload-input" onChange={(e) => this.uploadFile(e)}/>
+                <input id="uploadVideo" accept="video/*" type="file" className="upload-input" onChange={(e) => this.uploadFile(e)}/>
                 <div className="upload-text">
                     上传节目到好嗨哟，即表示你已经阅读并且同意遵守好嗨哟的<a>视频上传用户协议 </a>
                 </div>
