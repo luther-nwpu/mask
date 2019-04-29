@@ -8,6 +8,8 @@ export class MyMessage extends React.Component {
         messageArray: [
             {
                 userid: 0,
+                userName: 'Luther',
+                userAvator: '121',
                 messageArray: [
                     {
                         content: '',
