@@ -26,7 +26,8 @@ export class MyVideo extends React.Component {
                             picture: value.select_picture && value.select_picture.url,
                             category: value.partition && value.partition.split('_').join(' ') || '当前并未分类',
                             time: moment(value.update_at).format('YYYY-MM-DD'),
-                            label: value.label && value.label.split('_').join(' ') || '当前并无标签'
+                            label: value.label && value.label.split('_').join(' ') || '当前并无标签',
+                            name: value.title
                         }
                     })   
                 })
