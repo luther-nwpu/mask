@@ -43,7 +43,6 @@ class VideoPage extends React.Component {
     props
     public constructor(props) {
         super(props)
-        console.log(props)
     }
     async componentWillMount() {
         await this.getHaiyou()
@@ -64,7 +63,6 @@ class VideoPage extends React.Component {
                     avator: user.picture && user.picture.url
                 }
             })
-            console.log(res)
         }
     }
     handleLogin() {
@@ -93,7 +91,6 @@ class VideoPage extends React.Component {
                                         return sear(obj['category'], arr)
                                         }
                                         const result = sear(this.state.video, [])
-                                        console.log(result)
                                         return (<span>{ result.reduce(function(accumulator: string, value: any, key: Number) {
                                             if(key === result.length - 1) {
                                                 return accumulator + value.name

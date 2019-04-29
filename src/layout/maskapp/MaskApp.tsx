@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Home} from '@pages'
 import { Route, Switch } from 'react-router-dom'
 import './MaskApp.scss'
-import { Person } from '@pages'
+import { Person, DraftPage, HaiyouPage } from '@pages'
 import VideoPage from '@pages/VideoPage/VideoPage'
 import UploadVideo from '@pages/UploadVideo/UploadVideo'
 import TopBar from '@components/TopBar/TopBar'
@@ -21,10 +21,12 @@ export class MaskApp extends React.Component {
       <div className="mask-app">
         <TopBar></TopBar>
         <div className="content">
-          <Route exact={true} path={`${this.state.match}`} component={ Home } />
-          <Route path={`${this.state.match}personinfo`} component={ Person } />
-          <Route path={`${this.state.match}haiyou/:id`} component = { VideoPage }/>
-          <Route path={`${this.state.match}uploadfile`} component={ UploadVideo } />
+          <Route exact={ true } path={ `${this.state.match}`} component={ Home } />
+          <Route path={ `${this.state.match}personinfo`} component={ Person } />
+          <Route path={ `${this.state.match}haiyou/:id`} component = { VideoPage }/>
+          <Route path={ `${this.state.match}edithaiyou/:id`} component = { HaiyouPage } />
+          <Route path={ `${this.state.match}editdraft/:id`} component = { DraftPage } />
+          <Route path={ `${this.state.match}uploadfile`} component={ UploadVideo } />
         </div>
       </div>
     )

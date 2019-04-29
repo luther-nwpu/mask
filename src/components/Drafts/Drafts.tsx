@@ -37,7 +37,6 @@ class Drafts extends React.Component {
             xhr.upload.addEventListener('progress', (e) => {
                 if (e.lengthComputable) {
                     const progress = Math.round((e.loaded / e.total) * 100)
-                    console.log('process', progress)
                     this.state.uploadVideos[addIndex].uploadState = {
                         loaded: e.loaded,
                         total: e.total,
@@ -306,7 +305,6 @@ class Drafts extends React.Component {
             description: this.state.input.descriptionInput,
             draft_id: this.state.draftId
         })
-        console.log(res)
     }
     public _handleChangeDescription(e) {
         this.setState({input: {...this.state.input, descriptionInput: e.target.value}})

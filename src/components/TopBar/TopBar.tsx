@@ -46,7 +46,6 @@ class TopBar extends Component {
     }
     render() {
         const userinfo = this.props.userinfo
-        console.log('userinfo', userinfo)
         return (
             <div className="topbar">
                 <div className="topbar-content">

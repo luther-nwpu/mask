@@ -110,7 +110,6 @@ class Video extends React.Component<IProp, any> {
           playPromise.then(_ => {
             // Automatic playback started!
             // Show playing UI.
-            console.log(_)
             this.setState({})
           })
           .catch(error => {

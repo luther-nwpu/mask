@@ -51,9 +51,7 @@ export class UploadFile extends PureComponent<Props, {}> {
     }
     // 上传文件
     public upload = async () => {
-        console.log(this.state)
         const data = this.state.data
-        console.log(data)
         if (!data) {
             return
         }
