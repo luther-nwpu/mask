@@ -5,7 +5,8 @@ import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
 import { connect } from 'react-redux'
-import { Post, TokenPost } from '@lib/helper'
+import { TokenPost } from '@lib/helper'
+import history from '@router'
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -17,13 +18,15 @@ class Drafts extends React.Component {
     hiddenFileInput: any
     constructor(props) {
         super(props)
-        if(props.firstFile !== null) {
+    }
+    public componentWillMount() {
+        if(this.props.firstFile !== null) {
             const url = 'upload/firstvideo'
             const form = new FormData()        
-            form.append('file', props.firstFile)
+            form.append('file', this.props.firstFile)
             this.state.uploadVideos.push({
                 id: 0,
-                videoName: props.firstFile.name.split('.')[0],
+                videoName: this.props.firstFile.name.split('.')[0],
                 videoUrl: '',
                 uploadState: {
                   percent: '',
@@ -68,6 +71,8 @@ class Drafts extends React.Component {
                             draftId: res.result.draft.id,
                             uploadVideos: this.state.uploadVideos,
                             videoImgs: res.result.imgArr
+                        }, () => {
+                            history.replace('/editdraft/' + res.result.draft.id)
                         })
                     }
                 }
