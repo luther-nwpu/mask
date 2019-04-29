@@ -5,9 +5,10 @@ import barrageSvg from '@assets/barrage_btn_0.svg'
 import commentSvg from '@assets/comment_btn_0.svg'
 import playSvg from '@assets/play_btn_0.svg'
 import switchSvg from '@assets/switch_btn_0.svg'
-import { TokenGet } from '@lib/helper'
+import { TokenGet, TokenPost } from '@lib/helper'
 import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import moment from 'moment'
+import history from '@router'
 
 export class MyDrafts extends React.Component {
     constructor(props: any) {
@@ -17,6 +18,9 @@ export class MyDrafts extends React.Component {
         videos: []
     }
     public componentWillMount() {
+        this.getAllDraft()
+    }
+    public getAllDraft() {
         TokenGet('drafts/getAllDraft').then((res) => {
             if(res.success) {
                 this.setState({
@@ -30,6 +34,18 @@ export class MyDrafts extends React.Component {
                         }
                     })   
                 })
+            }
+        })
+    }
+    public switchToLink(link) {
+        history.push(link)
+    }
+    public deleteDraft(id) {
+        TokenPost('drafts/deleteDraft', {
+            id: id
+        }).then((res) => {
+            if(res.success) {
+                this.getAllDraft()
             }
         })
     }
@@ -62,7 +78,8 @@ export class MyDrafts extends React.Component {
                                         <div className="label">
                                             {value && value.label}
                                         </div>
-                                        <button> 编辑 </button>
+                                        <button onClick={() => this.switchToLink(`/editdraft/${value.id}`)}> 编辑 </button>
+                                        <button className="delete-btn" onClick={() => this.deleteDraft(value.id) }> 删除 </button>
                                     </div>
                                     <div className="third">
                                         <img src={playSvg} className="play" />
