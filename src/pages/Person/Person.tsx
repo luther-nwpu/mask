@@ -14,12 +14,12 @@ import video from '@assets/video_btn_0.svg'
 import * as queryString from 'query-string'
 import history from '@router'
 import draft_svg from '@assets/draft_btn_0.svg'
+import upload_btn_0 from '@assets/upload_btn_0.svg'
 
 export class Person extends React.Component {
     constructor(props) {
         super(props)
         const search = queryString.parse(props.location.search)
-        console.log((search && search.id) || UserMenu.MYUSERINFO)
         this.state = {
             tabNum: parseInt(search && search.id) || UserMenu.MYUSERINFO
         }
@@ -54,6 +54,9 @@ export class Person extends React.Component {
             default:
                 return null
         }
+    }
+    public switchToLink(link) {
+        history.push(link)
     }
     public render() {
         const tabNum = parseInt(queryString.parse(this.props.location.search).id) || UserMenu.MYUSERINFO
@@ -92,6 +95,7 @@ export class Person extends React.Component {
                             <img src={message} />
                             <div className="contentText"> 我的消息 </div>
                         </div>
+                        <button className="upload" onClick={() => this.switchToLink('/uploadfile')}> <img src={ upload_btn_0 }/> 上传视频 </button>
                     </div>
                     <div className="right">
                     { 

@@ -58,6 +58,21 @@
                     background-color: rgb(224, 240, 255); 
                 }
             }
+            .upload {
+                margin-left: 10px;
+                outline: none;
+                background: #ff9600;
+                border-radius: 10px;
+                line-height: 30px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-weight: 600;
+                color: #FFF;
+                img {
+                    vertical-align: middle;
+                    width: 20px;
+                }
+            }
         }
         .right {
             width: 100%;

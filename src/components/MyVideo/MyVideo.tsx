@@ -5,23 +5,33 @@ import barrageSvg from '@assets/barrage_btn_0.svg'
 import commentSvg from '@assets/comment_btn_0.svg'
 import playSvg from '@assets/play_btn_0.svg'
 import switchSvg from '@assets/switch_btn_0.svg'
+import { TokenGet } from '@lib/helper'
+import draft_default_png from '@assets/draft_default_btn_0.jpg'
+import moment from 'moment'
 
 export class MyVideo extends React.Component {
     constructor(props: any) {
         super(props)
     }
     public state = {
-        videos: [{
-            id: '1',
-            name: 'ddddddddd',
-            picture: 'da',
-            category: 'dsad dsada'
-        }, {
-            id: '1',
-            name: 'ddddddddd',
-            picture: 'da',
-            category: 'dsad dsada'
-        }]
+        videos: []
+    }
+    public componentWillMount() {
+        TokenGet('haiyou//getAllHaiyou').then((res) => {
+            if(res.success) {
+                this.setState({
+                    videos: res.result.map((value) => {
+                        return {
+                            id: value.id,
+                            picture: value.select_picture && value.select_picture.url,
+                            category: value.partition && value.partition.split('_').join(' ') || '当前并未分类',
+                            time: moment(value.update_at).format('YYYY-MM-DD'),
+                            label: value.label && value.label.split('_').join(' ') || '当前并无标签'
+                        }
+                    })   
+                })
+            }
+        })
     }
     public render() {
         return (
@@ -37,32 +47,32 @@ export class MyVideo extends React.Component {
                     this.state.videos.map((value, key) => {
                         return (
                             <div className="item" key={key}>
-                                <img src={value.picture} className="avator" />
+                                <img src={value.picture || draft_default_png } className="avator" />
                                 <div className="right-description">
                                     <div className="first"> 
-                                        <div className="category"> dsadsa dsadsad </div>
-                                        <div className="title"> {value.name} </div> 
+                                        <div className="category"> { value.category } </div>
+                                        <div className="title"> {value && value.name || '当前并未填写title'} </div> 
                                     </div>
                                     <div className="second">
                                         <div className="time">
-                                            2---121
+                                            {value && value.time}
                                         </div>
                                         <div className="line">
                                         </div>
                                         <div className="label">
-                                            label
+                                            {value && value.label}
                                         </div>
                                         <button> 编辑 </button>
                                     </div>
                                     <div className="third">
                                         <img src={playSvg} className="play" />
-                                        {'dsa'}
+                                        {'0'}
                                         <img src={barrageSvg} />
-                                        {'dsa'}
+                                        {'0'}
                                         <img src={commentSvg} />
-                                        {'dsa'}
+                                        {'0'}
                                         <img src={switchSvg} />
-                                        {'dsa'}
+                                        {'0'}
                                     </div>
                                 </div>
                             </div>
