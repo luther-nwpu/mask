@@ -6,6 +6,8 @@ import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
 import { TokenPost, TokenGet } from '@lib/helper'
 import history from '@router'
+import returnSvg from '@assets/return_btn_0.svg'
+
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -62,7 +64,7 @@ export class DraftPage extends React.Component {
                             url: value.url
                         }
                     }),
-                    selectCover: result.videoResult
+                    selectCover: result.select_picture
                 })
             }
         })
@@ -316,14 +318,18 @@ export class DraftPage extends React.Component {
         this.setState({input: { ...this.state.input, reprint: e.target.value }})
     }
     public async saveDraft() {
-        const res = await TokenPost('drafts/updateDraft', {
+        const res = await TokenPost('/drafts/updateDraft', {
             id: this.state.draftId,
-            picture_id: this.state.videoImgs.reduce((total, value) => {
+            picture_id: this.state.selectCover ? this.state.videoImgs.reduce((total, value) => {
                 if(value.id != this.state.selectCover.id) {
                     total.push(value.id)
                 }
                 return total
-            }, []).join('_') + '_' + this.state.selectCover.id,
+            }, []).join('_') + '_' + this.state.selectCover.id : 
+            this.state.videoImgs.reduce((total, value) => {
+                total.push(value.id)
+                return total
+            }, []).join('_'),
             video_id: this.state.uploadVideos.reduce((total, value) => {
                 total.push(value.id)
                 return total
@@ -370,11 +376,15 @@ export class DraftPage extends React.Component {
             }
         }
     }
+    switchToDraft() {
+        history.push('/personinfo?id=6')
+    }
 
     public render () {
         return (
             <div className="draftpage-component">
                 <div className="drafts-content">
+                    <div className="returnToDraft"><img src={returnSvg} className="return-img" onClick={() => this.switchToDraft()}/> </div>
                     {
                         this.state.openTab ? (<div onClick={() => this.closeOpenTab()} className="fixed-mask"> </div>) : ''
                     }
