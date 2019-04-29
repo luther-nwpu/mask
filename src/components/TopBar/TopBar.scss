@@ -137,6 +137,16 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
+                .icon-upload {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px 18px;
+                    background-image: url('../../assets/upload_btn_0.svg');
+                }
+                .item-upload-text {
+                    margin-left: 3px;
+                    font-weight: 700;
+                }
                 &:hover {
                     color: #ff9600;
                 }

@@ -17,7 +17,6 @@ import sex_svg from '@assets/sex_know_0.svg'
 import autograph from '@assets/icon_autograph.png'
 import age from '@assets/icon_age.png'
 import location from '@assets/icon_location.png'
-
 class TopBar extends Component {
     state = {
         userinfo: null
@@ -41,6 +40,9 @@ class TopBar extends Component {
         const { cookies }= this.props
         cookies.remove('Authorization')
         cookies.remove('userinfo')
+    }
+    switchToLink(link) {
+        history.push(link)
     }
     render() {
         const userinfo = this.props.userinfo
@@ -103,6 +105,13 @@ class TopBar extends Component {
                                         </div>
                                         <div className="item-text">
                                             订阅
+                                        </div>
+                                    </div>
+                                    <div className="item" onClick={() => this.switchToLink('/uploadfile')}>
+                                        <div className="icon-upload">
+                                        </div>
+                                        <div className="item-upload-text">
+                                            上传视频
                                         </div>
                                     </div>
                                     <div className="dropitem">
