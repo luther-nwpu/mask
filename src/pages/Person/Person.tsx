@@ -13,6 +13,7 @@ import ModifyUserInfo from '@components/ModifyUserInfo/ModifyUserInfo'
 import video from '@assets/video_btn_0.svg'
 import * as queryString from 'query-string'
 import history from '@router'
+import draft_svg from '@assets/draft_btn_0.svg'
 
 export class Person extends React.Component {
     constructor(props) {
@@ -66,6 +67,10 @@ export class Person extends React.Component {
                         <div className={tabNum === UserMenu.MYUSERINFO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYUSERINFO)}>
                             <img src={userinfo}/>
                             <div className="contentText"> 我的信息 </div>
+                        </div>
+                        <div className={tabNum === UserMenu.MYDRAFTS ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYDRAFTS)}>
+                            <img src={draft_svg} />
+                            <div className="contentText"> 我的草稿 </div>
                         </div>
                         <div className={tabNum === UserMenu.MYVIDEO ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYVIDEO)}>
                             <img src={video} />

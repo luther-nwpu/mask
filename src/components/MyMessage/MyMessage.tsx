@@ -4,9 +4,28 @@ export class MyMessage extends React.Component {
     constructor(props) {
         super(props)
     }
+    public state = {
+        messageArray: [
+            {
+                userid: 0,
+                messageArray: [
+                    {
+                        content: '',
+                        is_me: true
+                    }
+                ]
+            }
+        ]
+    }
     public render() {
         return (
-            <div>
+            <div className="message-component">
+                <div className="left-user">
+
+                </div>
+                <div className="right-content">
+
+                </div>
             </div>
         )
     }
