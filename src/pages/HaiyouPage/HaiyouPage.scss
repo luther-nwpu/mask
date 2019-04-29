@@ -17,6 +17,14 @@
         padding: 60px;
         padding-top: 30px;
         min-width: 840px;
+        .returnToDraft {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            .return-img {
+                width: 30px;
+            }
+        }
         input[type="radio"] {
             line-height: 30px;
         }

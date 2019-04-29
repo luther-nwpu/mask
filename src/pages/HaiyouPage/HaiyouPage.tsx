@@ -4,8 +4,9 @@ import videoImg from '@assets/download-video.png'
 import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
-import { connect } from 'react-redux'
-import { Post, TokenPost } from '@lib/helper'
+import { TokenPost } from '@lib/helper'
+import returnSvg from '@assets/return_btn_0.svg'
+import history from '@router'
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -264,8 +265,12 @@ export class HaiyouPage extends React.Component {
     public _handleChangeReprint(e) {
         this.setState({input: { ...this.state.input, reprint: e.target.value }})
     }
+
+    public switchToHaiyou() {
+        history.push('/personinfo?id=1')
+    }
     public async saveDraft() {
-        await TokenPost('drafts/updateDraft', {
+        await TokenPost('/drafts/updateDraft', {
             id: this.state.draftId,
             picture_id: this.state.videoImgs.reduce((total, value) => {
                 if(value.id != this.state.selectCover.id) {
@@ -319,6 +324,7 @@ export class HaiyouPage extends React.Component {
         return (
             <div className="haiyoupage-component">
                 <div className="drafts-content">
+                    <div className="returnToDraft"><img src={returnSvg} className="return-img" onClick={() => this.switchToHaiyou()}/> </div>
                     {
                         this.state.openTab ? (<div onClick={() => this.closeOpenTab()} className="fixed-mask"> </div>) : ''
                     }
