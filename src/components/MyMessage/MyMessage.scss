@@ -131,6 +131,52 @@
         }
         .right-content-content {
             flex: 1;
+            padding-left: 10px;
+            padding-right: 10px;
+            .message-item {
+                margin-top: 10px;
+                .item-time {
+                    color: rgb(138, 136, 136);
+                }
+                .item-content {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 15px;
+                        border:1px solid #000;
+                    }
+                    .item-content-right {
+                        margin-left: 10px;
+                        .title {
+                            font-weight: 300;
+                        }
+                        .content-text {
+                            position: relative;
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                            padding-right: 5px;
+                            padding-left: 5px;
+                            border-radius: 5px;
+                            background: rgb(180, 206, 245);
+                            &::before {
+                                content:'';
+                                position: absolute;
+                                left: -8px;
+                                top: 3px;
+                                width: 0px;
+                                height: 0px;
+                                border-right: 8px solid rgb(180, 206, 245);
+                                border-left: 8px solid #fff;
+                                border-top: 8px solid transparent;
+                                border-top-color: rgb(180, 206, 245);
+                            }
+                        }
+                    }
+                }
+            }
         }
         .send-message {
             padding-top: 5px;

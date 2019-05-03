@@ -87,7 +87,22 @@ export class MyMessage extends React.Component {
                         <span>{'dsa'}</span>
                     </div>
                     <div className="right-content-content">
-
+                        <div className="message-item">
+                            <div className="item-time">
+                                {'2015303320'}
+                            </div>
+                            <div className="item-content">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="send-message">
                         <div className="send-message-title">
