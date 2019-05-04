@@ -91,7 +91,84 @@ export class MyMessage extends React.Component {
                             <div className="item-time">
                                 {'2015303320'}
                             </div>
-                            <div className="item-content">
+                            <div className="item-content-0">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
+                                <img src={ chatroom_btn_jpg } />
+                                <div className="item-content-right">
+                                    <div className="title">
+                                        {'你好啊'}
+                                    </div>
+                                    <div className="content-text">
+                                        {'我不好'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="item-content-1">
                                 <img src={ chatroom_btn_jpg } />
                                 <div className="item-content-right">
                                     <div className="title">
