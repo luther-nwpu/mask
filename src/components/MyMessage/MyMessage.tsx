@@ -42,6 +42,16 @@ export class MyMessage extends React.Component {
             alert(err)
         })
     }
+    public fetchReadMyChat() {
+        TokenGet('/chat/readMyChat').then(res => {
+            if(res.success) {
+                this.setState({
+                    messageArray: res.result.allMessage,
+                    myId: res.result.myId           
+                })
+            }
+        })
+    }
     public dealReceiveMessage(payload) {
         this.state.messageArray.push(payload)
         this.setState({
