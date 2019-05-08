@@ -15,6 +15,9 @@
         overflow-y: auto;
         border: 1px solid #e2e2e2;
         min-width: 250px;
+        .empty-user {
+            margin-top: 20px;
+        }
         .left-user-title {
             background-color: #504d4d3d;
             padding-left: 10px;
@@ -122,6 +125,11 @@
         height: 600px;
         display: flex;
         flex-direction: column;
+        .empty-messages {
+            margin-top: 50px;
+            font-size: 20px;
+            font-weight: 300;
+        }
         .right-content-title {
             background-color: #FFF;
             border: 1px solid #e2e2e2;
