@@ -65,8 +65,10 @@ export async function TokenGet(url: string, params?: Object): Promise<any> {
         'Content-Type': 'application/json',
         Authorization: Cookies.get('Authorization'),
       })
-    }).then((response) => response.json())
-      .then((data: IResponse) => resolve(data))
+    }).then((response) => {
+
+      return response.json()
+    }).then((data: IResponse) => resolve(data))
       .catch((err) => reject(err))
   })
 }

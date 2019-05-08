@@ -2,12 +2,54 @@ import * as React from 'react'
 import './MyMessage.scss'
 import avator_default_jpg from '@assets/avator_default.jpg'
 import chatroom_btn_jpg from '@assets/chatroom_btn_0.jpg'
+import { Websocket } from '@lib/Websocket'
+import { TokenGet, tryCatch } from '@lib/helper'
+import { WebSocketType } from '@config'
 
 export class MyMessage extends React.Component {
     constructor(props) {
         super(props)
     }
+    public async componentWillMount() {
+        this.fetchGetTunnelId()
+        this.fecthGetChatByMe()
+    }
+    public fetchGetTunnelId() {
+        TokenGet('/socket/getTunnelId').then(res=> {
+            if(res.success) {
+                this.setState({
+                    ws: new Websocket({type: WebSocketType.CHAT, tunnelId: res.result})
+                })
+            }
+        }).catch(err => {
+            alert(err)
+        })
+    }
+    public fecthGetChatByMe() {
+        TokenGet('/chat/getAllChatByMe').then(res => {
+            if(res.success) {
+                console.log(res.result)
+            }
+        })
+    }
+    public _handleTextValue(e) {
+        this.setState({
+            messageInput: e.target.value
+        })
+    }
+    public handleSendMessage() {
+        this.state.ws.sendMessage({
+            action: 'sendMessage',
+            payload: {
+              content: this.state.messageInput,
+              date: new Date().getTime(),
+              suser_id: 1
+            }
+        })
+    }
     public state = {
+        ws: null,
+        messageInput: '',
         messageArray: [
             {
                 userid: 0,
@@ -185,9 +227,9 @@ export class MyMessage extends React.Component {
                         <div className="send-message-title">
                             好消息,好消息,请回复下好消息
                         </div>
-                        <textarea placeholder="请回复一下" />
+                        <textarea placeholder="请回复一下" value={this.state.messageInput} onChange={(e) => this._handleTextValue(e)} />
                         <div className="send-message-bottom">                        
-                            <div className="button">发送</div>
+                            <div className="button" onClick={() => this.handleSendMessage()}>发送</div>
                         </div>
                     </div>
                 </div>

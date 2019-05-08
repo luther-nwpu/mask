@@ -29,3 +29,8 @@ export enum UploadState {
     NOUPLOAD = 0,
     UPLOADING = 1,
 }
+// 连接时的选择的类型
+export enum WebSocketType {
+    CHAT = 'chat',
+    HAIYOU = 'haiyou'
+}
