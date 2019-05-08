@@ -121,7 +121,7 @@ export class MyMessage extends React.Component {
                         </div> 
                         :
                         userArray.map((value, key) => {
-                            return (<div key={key} className="user-item" onClick={() => this.handleSelectUser(value.other)}>
+                            return (<div key={key} className={ value.other == this.state.selectUser ? 'user-item-select' : 'user-item'} onClick={() => this.handleSelectUser(value.other)}>
                             <img src={ avator_default_jpg }/>
                             <div className="user-detail">
                                 <div className="detail-top">
@@ -162,16 +162,16 @@ export class MyMessage extends React.Component {
                                                 { value.create_at }
                                             </div>
                                             {
-                                                value.suser_id == this.state.myId ? 
+                                                value.user_id !== this.state.myId ? 
                                                 (
                                                     <div className="item-content-0">
                                                         <img src={ chatroom_btn_jpg } />
                                                         <div className="item-content-right">
                                                             <div className="title">
-                                                                {'你好啊'}
+                                                                {value.user.username}
                                                             </div>
                                                             <div className="content-text">
-                                                                {'我不好'}
+                                                                {value.content}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -181,10 +181,10 @@ export class MyMessage extends React.Component {
                                                         <img src={ chatroom_btn_jpg } />
                                                         <div className="item-content-right">
                                                             <div className="title">
-                                                                {'你好啊'}
+                                                                {value.suser.username}
                                                             </div>
                                                             <div className="content-text">
-                                                                {'我不好'}
+                                                                {value.content}
                                                             </div>
                                                         </div>
                                                     </div>

@@ -119,6 +119,61 @@
                 background-color: #d1cece;
             }
         }
+        .user-item-select {
+            background: #887474;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+            }
+            .user-detail {
+                flex: 1;
+                margin-left: 10px;
+                .detail-top {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    margin-top: 3px;
+                    .detail-name {
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+                    .detail-time {
+                        line-height: 18px;
+                        font-size: 10px;
+                        font-weight: 500;
+                        color: #a3a2a2;
+                    }
+                }
+                .detail-bottom {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 14px;
+                    font-weight: 300;
+                    .detail-num {
+                        font-size: 14px;
+                        text-align: center;
+                        line-height: normal;
+                        vertical-align: middle;
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 9px;
+                        background: red;
+                        color: white;
+                    }
+                }
+            }
+            &:hover {
+                background-color: #d1cece;
+            }
+        }
     }
     .right-content {
         flex: 1;
