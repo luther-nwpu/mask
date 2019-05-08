@@ -5,6 +5,7 @@ import chatroom_btn_jpg from '@assets/chatroom_btn_0.jpg'
 import { Websocket } from '@lib/Websocket'
 import { TokenGet, tryCatch } from '@lib/helper'
 import { WebSocketType } from '@config'
+import moment from 'moment'
 
 export class MyMessage extends React.Component {
     constructor(props) {
@@ -28,7 +29,10 @@ export class MyMessage extends React.Component {
     public fecthGetChatByMe() {
         TokenGet('/chat/getAllChatByMe').then(res => {
             if(res.success) {
-                console.log(res.result)
+                this.setState({
+                    messageArray: res.result.allMessage,
+                    myId: res.result.myId           
+                })
             }
         })
     }
@@ -50,49 +54,48 @@ export class MyMessage extends React.Component {
     public state = {
         ws: null,
         messageInput: '',
-        messageArray: [
-            {
-                userid: 0,
-                userName: 'Luther',
-                userAvator: null,
-                messageArray: [
-                    {
-                        content: '',
-                        is_me: true,
-                        send_time: '2019_0_0',
-                        is_read: true
-                    }
-                ]
-            },
-            {
-                userid: 0,
-                userName: 'Luther',
-                userAvator: null,
-                messageArray: [
-                    {
-                        content: '',
-                        is_me: true,
-                        send_time: '2019_0_0',
-                        is_read: true
-                    }
-                ]
-            },
-            {
-                userid: 0,
-                userName: 'Luther',
-                userAvator: null,
-                messageArray: [
-                    {
-                        content: '',
-                        is_me: true,
-                        send_time: '2019_0_0',
-                        is_read: true
-                    }
-                ]
-            }
-        ]
+        messageArray: [],
+        myId: 0
     }
     public render() {
+        const userObject = this.state.messageArray.reduce((total, value) => {
+            value.suser_id == this.state.myId ? (
+                total[value.user_id] == undefined ? total[value.user_id] = {
+                    userinfo: value.user,
+                    message: [value],
+                    unreadNum: 0
+                } : total[value.user_id].message = (() => {
+                    total[value.user_id].message.push(value)
+                    if(!value.is_read) {
+                        total[value.user_Id].unreadNum = total[value.user_id].unreadNum + 1
+                    }
+                    return total[value.user_id].message.sort()
+                })()
+         ) : total[value.suser_id] == undefined ? total[value.suser_id] = {
+            userinfo: value.suser,
+            message: [value],
+            unreadNum: 0
+        } : total[value.suser_id].message = (() => {
+            total[value.suser_id].message.push(value)
+            if(!value.is_read) {
+                total[value.suser_id].unreadNum = total[value.suser_id].unreadNum + 1
+            }
+            return total[value.suser_id].message.sort((a, b) => {
+                return a.create_at < b.create_at 
+            })
+        })()
+        return total
+        }, {})
+        const userArray = Object.keys(userObject).reduce((total, value) => {
+            total.push({
+                other: value,
+                ...userObject[value]
+            })
+            return total
+        }, []).sort((a, b) => {
+            return Number(a[a.message.length - 1].create_at > b[b.message.length - 1].create_at)
+        })
+        console.log(userArray)
         return (
             <div className="message-component">
                 <div className="left-user">
@@ -105,23 +108,28 @@ export class MyMessage extends React.Component {
                         <div className="search-img">
                         </div>                     
                     </div>
-                    <div className="user-item">
-                        <img src={ avator_default_jpg }/>
-                        <div className="user-detail">
-                            <div className="detail-top">
-                                <span className="detail-name">
-                                    {'Luther'}
-                                </span>
-                                <span className="detail-time">
-                                    {'2015-4-30'}
-                                </span>
+                    {
+                        userArray.map((value, key) => {
+                            return (<div key={key} className="user-item">
+                            <img src={ avator_default_jpg }/>
+                            <div className="user-detail">
+                                <div className="detail-top">
+                                    <span className="detail-name">
+                                        {value.userinfo.username}
+                                    </span>
+                                    <span className="detail-time">
+                                        {moment(value.message[value.message.length - 1].create_at).format('YYYY-MM-DD')}
+                                    </span>
+                                </div>
+                                <div className="detail-bottom">
+                                    <span> {value.message[value.message.length - 1].content} </span>
+                                    <span className="detail-num"> { '' || value.unreadNum }</span>
+                                </div>
                             </div>
-                            <div className="detail-bottom">
-                                <span> {'dcoafjhkfjsa'} </span>
-                                <span> {'dsadhs'}</span>
-                            </div>
-                        </div>
-                    </div>
+                        </div>)
+                        })
+                    }
+
                 </div>
                 <div className="right-content">
                     <div className="right-content-title">
