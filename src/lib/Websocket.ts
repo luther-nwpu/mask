@@ -12,6 +12,14 @@ interface MessageType {
     uid?: string
   }
 }
+
+enum Action {
+  SENDMESSAGE = 'sendMessage',
+  SENDBARRAGE = 'sendBarrage',
+  RECEIVEMESSAGE = 'receiveMessage',
+  RECEIVEBARRAGE = 'receiveBarrage'
+}
+
 export class Websocket {
   ws: WebSocket
   pendingMessagesArray: Array<string>
@@ -27,6 +35,10 @@ export class Websocket {
       default:
         break
     }
+  }
+
+  public getWs() {
+    return this.ws
   }
   
   public sendMessage(message: MessageType) {
@@ -57,9 +69,11 @@ export class Websocket {
   public acceptMessage() {
     this.ws.onmessage = (event) => {
       const msg = JSON.parse(event.data)
-      switch(msg.type) {
+      switch(msg.action){
         case 'id':
           console.log(msg)
+          break
+        case Action.RECEIVEMESSAGE:
           break
       }
     }

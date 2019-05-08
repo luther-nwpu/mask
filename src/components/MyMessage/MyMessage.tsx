@@ -6,8 +6,15 @@ import { Websocket } from '@lib/Websocket'
 import { TokenGet, tryCatch } from '@lib/helper'
 import { WebSocketType } from '@config'
 import moment from 'moment'
+enum Action {
+    SENDMESSAGE = 'sendMessage',
+    SENDBARRAGE = 'sendBarrage',
+    RECEIVEMESSAGE = 'receiveMessage',
+    RECEIVEBARRAGE = 'receiveBarrage'
+}
 
 export class MyMessage extends React.Component {
+    chatContent: any
     constructor(props) {
         super(props)
     }
@@ -20,10 +27,27 @@ export class MyMessage extends React.Component {
             if(res.success) {
                 this.setState({
                     ws: new Websocket({type: WebSocketType.CHAT, tunnelId: res.result})
+                }, () => {
+                    this.state.ws.getWs().onmessage = (event) => {
+                        console.log(event)
+                        const msg = JSON.parse(event.data)
+                        switch(msg.action) {
+                            case Action.RECEIVEMESSAGE:
+                                this.dealReceiveMessage(msg.payload)
+                        }
+                    }
                 })
             }
         }).catch(err => {
             alert(err)
+        })
+    }
+    public dealReceiveMessage(payload) {
+        this.state.messageArray.push(payload)
+        this.setState({
+            messageArray: this.state.messageArray
+        }, () => {
+            this._sliderContent()
         })
     }
     public fecthGetChatByMe() {
@@ -41,14 +65,20 @@ export class MyMessage extends React.Component {
             messageInput: e.target.value
         })
     }
+    public _sliderContent() {
+        this.chatContent.scrollTop = this.chatContent.scrollHeight
+    }
     public handleSendMessage() {
         this.state.ws.sendMessage({
-            action: 'sendMessage',
+            action: Action.SENDMESSAGE,
             payload: {
               content: this.state.messageInput,
               date: new Date().getTime(),
               suser_id: 1
             }
+        })
+        this.setState({
+            messageInput: ''
         })
     }
     public state = {
@@ -61,6 +91,8 @@ export class MyMessage extends React.Component {
     public handleSelectUser(other) {
         this.setState({
             selectUser: other
+        }, () => {
+            this._sliderContent()
         })
     }
     public render() {
@@ -72,9 +104,6 @@ export class MyMessage extends React.Component {
                     unreadNum: 0
                 } : total[value.user_id].message = (() => {
                     total[value.user_id].message.push(value)
-                    if(!value.is_read) {
-                        total[value.user_Id].unreadNum = total[value.user_id].unreadNum + 1
-                    }
                     return total[value.user_id].message.sort()
                 })()
          ) : total[value.suser_id] == undefined ? total[value.suser_id] = {
@@ -153,7 +182,7 @@ export class MyMessage extends React.Component {
                             <img src={ chatroom_btn_jpg } />
                             <span>{userObject[this.state.selectUser].userinfo.username}</span>
                         </div>
-                        <div className="right-content-content">
+                        <div ref={(chatContent) => this.chatContent = chatContent } className="right-content-content">
                             {
                                 userObject[this.state.selectUser].message.map((value, key) => {
                                     return (
