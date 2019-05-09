@@ -113,6 +113,9 @@ export class MyMessage extends React.Component {
                     message: [value],
                     unreadNum: 0
                 } : total[value.user_id].message = (() => {
+                    if(!value.is_read) {
+                        total[value.suser_id].unreadNum = total[value.suser_id].unreadNum + 1
+                    }
                     total[value.user_id].message.push(value)
                     return total[value.user_id].message.sort()
                 })()
@@ -122,9 +125,6 @@ export class MyMessage extends React.Component {
             unreadNum: 0
         } : total[value.suser_id].message = (() => {
             total[value.suser_id].message.push(value)
-            if(!value.is_read) {
-                total[value.suser_id].unreadNum = total[value.suser_id].unreadNum + 1
-            }
             return total[value.suser_id].message.sort((a, b) => {
                 return a.create_at < b.create_at 
             })
@@ -173,7 +173,7 @@ export class MyMessage extends React.Component {
                                 </div>
                                 <div className="detail-bottom">
                                     <span> {value.message[value.message.length - 1].content} </span>
-                                    <span className="detail-num"> { '' || value.unreadNum }</span>
+                                    <span className={ value.unreadNum == 0 ? 'no-num' : 'detail-num' }> { value.unreadNum == 0 ? '' : value.unreadNum }</span>
                                 </div>
                             </div>
                         </div>)

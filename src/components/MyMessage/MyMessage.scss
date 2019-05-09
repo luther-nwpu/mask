@@ -112,6 +112,10 @@
                         border-radius: 9px;
                         background: red;
                         color: white;
+                        display: inline-block;
+                    }
+                    .no-num {
+                        display: none;
                     }
                 }
             }
