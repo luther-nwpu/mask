@@ -239,6 +239,17 @@
                                     margin-left: 5px;
                                     margin-right: 3px;
                                 }
+                                .sub-comment-content {
+                                    input {
+                                        padding-left: 10px;
+                                        border-radius: 3px;
+                                        border: 1px solid #3e87cc;
+                                    }
+                                    button {
+                                        margin-left: 10px;
+                                        border-radius: 3px;
+                                    }
+                                }
                                 .sub-comment-bottom {
                                     line-height: 18px;
                                     .comment-index {

@@ -4,7 +4,7 @@ import Video from '@components/Video/Video'
 import support from '@assets/follow-btn-0.svg'
 import alreadtySupport from '@assets/follow-btn-1.svg'
 import * as _ from 'lodash'
-import {  Get, TokenPost } from '@lib/helper'
+import { Get, TokenPost, TokenGet } from '@lib/helper'
 import { displayAuth } from '@store/actions/auth'
 import { connect } from 'react-redux'
 import { AuthTab } from '@config'
@@ -12,7 +12,9 @@ import { AuthTab } from '@config'
 class VideoPage extends React.Component {
     public state = {
         textareaInput: '',
+        replyInput: '',
         comments: [],
+        selectReply: null,
         userinfo: {
             avator: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550510853565&di=4eddd8436a89c3e19043946f3e7fa8ed&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Feac4b74543a982265bd540e38782b9014b90ebda.jpg',
             userid: '',
@@ -45,6 +47,11 @@ class VideoPage extends React.Component {
     props
     public constructor(props) {
         super(props)
+    }
+    public _handleChangeReplyInput(e) {
+        this.setState({
+            replyInput: e.target.value
+        })
     }
     public fetchGetAllComment() {
         Get('/comment/getAllCommentsByHaiyouId', {
@@ -108,7 +115,50 @@ class VideoPage extends React.Component {
         this.props.displayAuth(true, AuthTab.REGISTER)
     }
     public _handleClickReply(key) {
-        console.log(key)
+        this.setState({
+            replyInput: '',
+            selectReply: key
+        })
+    }
+    public handleReplyComment() {
+        TokenPost('/comment/sendSubComment', {
+            commentId: this.state.comments[this.state.selectReply.key].id,
+            content: this.state.replyInput,
+            suserId: this.state.comments[this.state.selectReply.key].user.id,
+            haiyouId: this.props.match.params.id
+        }).then((res) => {
+            if(!res.success) {
+                alert('系统出现故障')
+            } else {
+                this.setState({
+                    comments: res.result
+                }, () => {
+                    this.setState({
+                        selectReply: null
+                    })
+                })
+            }
+        })
+    }
+    public handleReplySubComment() {
+        TokenPost('/comment/sendSubComment', {
+            commentId: this.state.comments[this.state.selectReply.key].id,
+            content: this.state.replyInput,
+            suserId: this.state.comments[this.state.selectReply.key].subComments[this.state.selectReply.key1].user.id,
+            haiyouId: this.props.match.params.id
+        }).then((res) => {
+            if(!res.success) {
+                alert('系统出现故障')
+            } else {
+                this.setState({
+                    comments: res.result
+                }, () => {
+                    this.setState({
+                        selectReply: null
+                    })
+                })
+            }
+        })
     }
     public render() {
         return(
@@ -187,50 +237,98 @@ class VideoPage extends React.Component {
                                                     {value.content}
                                                 </div>
                                                 <div className="comment-bottom">
-                                                    <span className="comment-index"> #  {key} </span>
+                                                    <span className="comment-index"> #  {key + 1} </span>
                                                     <span className="comment-time"> {value.create_at} </span>
                                                     <div className="like"></div>
                                                     <span className="like-num"> 7 </span>
                                                     <div className="unlike"></div>
                                                     <span className="unlike-num">10</span>
-                                                    <span className="comment-reply" onClick={() => this._handleClickReply(key)}>回复</span>
+                                                    <span className="comment-reply" onClick={() => this._handleClickReply({ type: 'comment', key: key, key1: null })}>回复</span>
                                                 </div>
                                                 <div className="sub-comments">
                                                     {
+                                                        this.state.selectReply && this.state.selectReply.type == 'comment' && this.state.selectReply.key == key 
+                                                        ? (                                                    
+                                                        <div className="sub-comment">
+                                                            <div className="line"></div>
+                                                            <div className="sub-comment-content">
+                                                                <img src="" />
+                                                                <div className="sub-comment-description">
+                                                                    <div className="username">
+                                                                        <span className="send">我</span>
+                                                                        <span>回复</span>
+                                                                        <span className="receive">{this.state.comments[this.state.selectReply.key].user.username}</span>
+                                                                        :
+                                                                    </div>
+                                                                    <div className="sub-comment-content">
+                                                                        <input type="text" value={this.state.replyInput} onChange={(e) => this._handleChangeReplyInput(e)} placeholder="请说出你想diss她的话"/>
+                                                                        <button onClick={() => this.handleReplyComment()}> 回复 </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        ) :
+                                                        ''
+                                                    }
+                                                    {
                                                         value.subComments.map((value1, key1) => {
                                                             return (
-                                                                <div className="sub-comment">
-                                                                    <div className="line"></div>
-                                                                    <div className="sub-comment-content">
-                                                                        <img src="" />
-                                                                        <div className="sub-comment-description">
-                                                                            <div className="username">
-                                                                                <span className="send">{value1.user.username}</span>
-                                                                                <span>回复</span>
-                                                                                <span className="receive">{value1.suser.username}</span>
-                                                                                :
-                                                                            </div>
-                                                                            <div className="sub-content">
-                                                                                {value1.content}
-                                                                            </div>
-                                                                            <div className="sub-comment-bottom">
-                                                                                <span className="comment-index"> #  {key1} </span>
-                                                                                <span className="comment-time"> {value1.create_at} </span>
-                                                                                <div className="like"></div>
-                                                                                <span className="like-num"> 7 </span>
-                                                                                <div className="unlike"></div>
-                                                                                <span className="unlike-num">10</span>
-                                                                                <span className="comment-reply">回复</span>
+                                                                <div key = {key1}>
+                                                                    <div className="sub-comment">
+                                                                        <div className="line"></div>
+                                                                        <div className="sub-comment-content">
+                                                                            <img src="" />
+                                                                            <div className="sub-comment-description">
+                                                                                <div className="username">
+                                                                                    <span className="send">{value1.user.username}</span>
+                                                                                    <span>回复</span>
+                                                                                    <span className="receive">{value1.suser.username}</span>
+                                                                                    :
+                                                                                </div>
+                                                                                <div className="sub-content">
+                                                                                    {value1.content}
+                                                                                </div>
+                                                                                <div className="sub-comment-bottom">
+                                                                                    <span className="comment-index"> #  {key1 + 1} </span>
+                                                                                    <span className="comment-time"> {value1.create_at} </span>
+                                                                                    <div className="like"></div>
+                                                                                    <span className="like-num"> 7 </span>
+                                                                                    <div className="unlike"></div>
+                                                                                    <span className="unlike-num">10</span>
+                                                                                    <span className="comment-reply" onClick={() => this._handleClickReply({ type: 'subcomment', key: key, key1: key1 })}>回复</span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    {
+                                                                        this.state.selectReply && this.state.selectReply.type == 'subcomment' && this.state.selectReply.key == key && this.state.selectReply.key1 == key1
+                                                                        ? (                                                    
+                                                                        <div className="sub-comment">
+                                                                            <div className="line"></div>
+                                                                            <div className="sub-comment-content">
+                                                                                <img src="" />
+                                                                                <div className="sub-comment-description">
+                                                                                    <div className="username">
+                                                                                        <span className="send">我</span>
+                                                                                        <span>回复</span>
+                                                                                        <span className="receive">{this.state.comments[this.state.selectReply.key].user.username}</span>
+                                                                                        :
+                                                                                    </div>
+                                                                                    <div className="sub-comment-content">
+                                                                                        <input type="text" value={this.state.replyInput} onChange={(e) => this._handleChangeReplyInput(e)} placeholder="请说出你想diss她的话"/>
+                                                                                        <button onClick={() => this.handleReplySubComment()}> 回复 </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        ) :
+                                                                        ''
+                                                                    }
                                                                 </div>
                                                             )
                                                         })
                                                     }
-                                                    <div className="sub-more">
-                                                        查看更多
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div> 
