@@ -12,14 +12,26 @@
         .video-main {
             border: 1px solid #e2e2e2;
             padding: 20px;
+            padding-top: 10px;
             background: white;        
             border-radius: 10px;
             .video-title {
-                font-size: 17px;
-                font-weight: 500;
+                margin-left: 40px;
+                font-size: 20px;
+                font-weight: 600;
             }
             .video-description {
+                margin-top: 5px;
+                margin-left: 40px;
                 .time {
+                    margin-left: 20px;
+                }
+            }
+            .video-play-detail {
+                margin-left: 40px;
+                margin-top: 4px;
+                margin-bottom: 5px;
+                .barrage {
                     margin-left: 20px;
                 }
             }

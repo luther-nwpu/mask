@@ -15,34 +15,8 @@ class VideoPage extends React.Component {
         replyInput: '',
         comments: [],
         selectReply: null,
-        userinfo: {
-            avator: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550510853565&di=4eddd8436a89c3e19043946f3e7fa8ed&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Feac4b74543a982265bd540e38782b9014b90ebda.jpg',
-            userid: '',
-            signature: '你好啊，小美女',
-            username: '闪亮的星空',
-            followNum: 10000
-        },
-        video: {
-            id: '',
-            title: '[你好]，我爱你姚菊',
-            category: {
-                name: '游戏',
-                id: 0,
-                category: {
-                    name: '竞技',
-                    id: 1,
-                    category: null
-                }
-            },
-            time: '2019-02-22 11:00:13',
-            playNum: 4000,
-            barrage: [],
-            videoUrl: '',
-            comment: [],
-            supportNum: [],
-            collectNum: [],
-            RevelentVideo: []
-        }
+        haiyou: null,
+        selectVideo: 0,
     }
     props
     public constructor(props) {
@@ -83,30 +57,23 @@ class VideoPage extends React.Component {
     }
     async componentWillMount() {
         this.fetchGetAllComment()
-        await this.getHaiyou()
+        this.getHaiyou()
     }
     _handleChangeTextArea(e) {
         this.setState({      
             textareaInput: e.target.value  
         })
     }
-    async getHaiyou() {
-        const res = await Get('/haiyou/getHaiyouById', {
+    getHaiyou() {
+        Get('/haiyou/getHaiyouById', {
             haiyouId: this.props.match.params.id
+        }).then((res) => {
+            if(res.success) {
+                this.setState({
+                    haiyou: res.result
+                })
+            }
         })
-        if(res.success) {
-            const result = res.result
-            const user = result.user
-            this.setState({
-                userinfo: {
-                    ...this.state.userinfo,
-                    userid: user.id,
-                    signature: user.signature,
-                    username: user.username,
-                    avator: user.picture && user.picture.url
-                }
-            })
-        }
     }
     handleLogin() {
         this.props.displayAuth(true, AuthTab.LOGIN)
@@ -166,36 +133,27 @@ class VideoPage extends React.Component {
                 <div className="left-video">
                     <div className="video-main">
                         <div className="video-title">
-                            {this.state.video.title}
+                            {this.state.haiyou && this.state.haiyou.title}
                         </div>
                         <div className="video-description">
                             <span>
                                 {
-                                    (() => {
-                                        const sear = (obj: Object, arr: any) => {
-                                        if (obj['category'] === undefined || obj['category'] === null) {
-                                            return arr
-                                        }
-                                        arr.push({name:obj['category'].name, id: obj['category'].id})
-                                        return sear(obj['category'], arr)
-                                        }
-                                        const result = sear(this.state.video, [])
-                                        return (<span>{ result.reduce(function(accumulator: string, value: any, key: Number) {
-                                            if(key === result.length - 1) {
-                                                return accumulator + value.name
-                                            } else {
-                                                return accumulator + value.name + '>'
-                                            } 
-                                        }, '')} </span>)
-                                    })()   
+                                    this.state.haiyou && this.state.haiyou.partition.split('_').join('>')
                                 }
                             </span>
                             <span className="time">
-                                {this.state.video.time}
+                                { this.state.haiyou && this.state.haiyou.create_at}
                             </span>
+                        </div>
+                        <div className="video-play-detail">
+                            <span>
+                                { '399' } 次播放
+                            </span>
+                            <span className="barrage"> 一共有 {'2313' } 条弹幕</span>
                         </div>
                         <div className="video-video">
                             <div className="video-tab">
+                                
                                 <div className="tab">
                                     <div className="tab-text">
                                         <div className="dd">
@@ -345,14 +303,14 @@ class VideoPage extends React.Component {
                 </div>
                 <div className="right-user">
                     <div className="user-detail">
-                        <img src ={this.state.userinfo.avator} className="avator" />
+                        <img src ={this.state.haiyou && this.state.haiyou.user.avator} className="avator" />
                         <div className="user-detail-description">
-                            <span className="username"> { this.state.userinfo.username }</span><span className="send-message"> <span>发消息</span></span> <span></span>
+                            <span className="username"> { this.state.haiyou && this.state.haiyou.user.username }</span><span className="send-message"> <span>发消息</span></span> <span></span>
                             <div>
-                                {this.state.userinfo.signature}
+                                { this.state.haiyou && this.state.haiyou.user.signature }
                             </div>
                             <div className="follow">
-                                <img src={support}/> 订阅 | {this.state.userinfo.followNum}
+                                <img src={support}/> 订阅 | {this.state.haiyou && this.state.haiyou.followNum}
                             </div>
                         </div>
                     </div>
