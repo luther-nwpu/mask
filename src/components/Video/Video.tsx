@@ -11,9 +11,19 @@ import { connect } from 'react-redux'
 import { displayAuth } from '@store/actions/auth'
 import { AuthTab } from '@config'
 import { Get } from '@lib/helper'
+import { WebSocketType } from '@config'
+import { Websocket } from '@lib/Websocket'
+import { storeBarrages } from '@store/actions/barrage'
 
 interface IProp {
     id: string
+}
+
+enum Action {
+    SENDMESSAGE = 'sendMessage',
+    SENDBARRAGE = 'sendBarrage',
+    RECEIVEMESSAGE = 'receiveMessage',
+    RECEIVEBARRAGE = 'receiveBarrage'
 }
 
 class Video extends React.Component<IProp, any> {
@@ -36,18 +46,16 @@ class Video extends React.Component<IProp, any> {
 
     public componentWillReceiveProps() {
         this.fetchGetVideo()
+        this.fetchGetBarrages()
     }
-    public fetchGetBarrage() {
-        
-    }
-    public fetchGetVideo() {
+    public fetchGetBarrages() {
         if(this.props.id) {
-            Get('/video/getVideoByVideoId', {
+            Get('/barrage/getAllBarrageByVideoId', {
                 videoId: this.props.id
             }).then((res) => {
                 if(res.success) {
                     this.setState({
-                        videoInfo: res.result
+                        barrages: res.result
                     })
                 } else {
                     alert('你好出错了')
@@ -56,7 +64,47 @@ class Video extends React.Component<IProp, any> {
         }
     }
 
+    public fetchGetVideo() {
+        if(this.props.id) {
+            Get('/video/getVideoByVideoId', {
+                videoId: this.props.id
+            }).then((res) => {
+                if(res.success) {
+                    this.props.storeBarrages(res.result)
+                } else {
+                    alert('你好出错了')
+                }
+            })
+        }
+    }
+
+    public fetchGetTunnelId() {
+        if(this.props.id) {
+            Get('/socket/getTunnelId', {}).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        ws: new Websocket({type: WebSocketType.CHAT, tunnelId: res.result})
+                    }, () => {
+                        this.state.ws.getWs().onmessage = (event) => {
+                            console.log(event)
+                            const msg = JSON.parse(event.data)
+                            switch(msg.action) {
+                                case Action.RECEIVEBARRAGE:
+                                    this.dealReceivebarrage(msg.payload)
+                            }
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+    public dealReceivebarrage(barrages) {
+        console.log(barrages)
+    }
+
     public state = {
+        ws: null,
         inputFocus: false,
         videoInfo: null,
         barrageInput: '',
@@ -479,13 +527,16 @@ class Video extends React.Component<IProp, any> {
 
 const mapStateToProps = (state) => {
     const { userinfo } = state.todoApp
+    const { barrages } = state.barrage
     return {
-        userInfo: userinfo
+        userInfo: userinfo,
+        barrages
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab)),
+    storeBarrages: (barrages) => dispatch(storeBarrages(barrages))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video)
