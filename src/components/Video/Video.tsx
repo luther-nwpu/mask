@@ -37,6 +37,9 @@ class Video extends React.Component<IProp, any> {
     public componentWillReceiveProps() {
         this.fetchGetVideo()
     }
+    public fetchGetBarrage() {
+        
+    }
     public fetchGetVideo() {
         if(this.props.id) {
             Get('/video/getVideoByVideoId', {
