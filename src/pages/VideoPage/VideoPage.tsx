@@ -127,6 +127,11 @@ class VideoPage extends React.Component {
             }
         })
     }
+    public handleSelectVideo(key) {
+        this.setState({
+            selectVideo: key
+        })
+    }
     public render() {
         return(
             <div className="videopage-component">
@@ -153,23 +158,21 @@ class VideoPage extends React.Component {
                         </div>
                         <div className="video-video">
                             <div className="video-tab">
-                                
-                                <div className="tab">
-                                    <div className="tab-text">
-                                        <div className="dd">
-                                            你好啊
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tab">
-                                    <div className="tab-text">
-                                        <div className="dd">
-                                            你好啊
-                                        </div>
-                                    </div>
-                                </div>
+                                {
+                                    this.state.haiyou && this.state.haiyou.videoArr.map((value, key) => {
+                                        return (
+                                            <div key={key} className="tab" onClick={() => this.handleSelectVideo(key)}>
+                                                <div className={ this.state.selectVideo == key ? 'tab-select' : `tab-text`}>
+                                                    <div className="dd">
+                                                        { value.name.length > 3 ? value.name.slice(0, 3) + ' ...' : value.name }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
-                            <Video src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></Video>
+                            <Video id={this.state.haiyou && this.state.haiyou.videoArr[this.state.selectVideo].id}></Video>
                         </div>
                     </div>
                     <div className="video-comments">

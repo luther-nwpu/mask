@@ -1,6 +1,9 @@
 .video-component {
     border-radius: 10px;
     overflow: hidden;
+    min-width: 700px;
+    max-width: 750px;
+    min-height: 400px;
     video {
         border-radius: 10px;
     }

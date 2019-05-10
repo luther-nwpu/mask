@@ -10,10 +10,10 @@ import Barrage from 'barrage-ui'
 import { connect } from 'react-redux'
 import { displayAuth } from '@store/actions/auth'
 import { AuthTab } from '@config'
+import { Get } from '@lib/helper'
 
 interface IProp {
-    src: string,
-    type?: any
+    id: string
 }
 
 class Video extends React.Component<IProp, any> {
@@ -34,12 +34,31 @@ class Video extends React.Component<IProp, any> {
         super(props)
     }
 
+    public componentWillReceiveProps() {
+        this.fetchGetVideo()
+    }
+    public fetchGetVideo() {
+        if(this.props.id) {
+            Get('/video/getVideoByVideoId', {
+                videoId: this.props.id
+            }).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        videoInfo: res.result
+                    })
+                } else {
+                    alert('你好出错了')
+                }
+            })
+        }
+    }
+
     public state = {
         inputFocus: false,
+        videoInfo: null,
         barrageInput: '',
         showControls: true,
         showTabControls: true,
-        video: '',
         barrage: {        
             barrageText: '',
             barrageColor: '',
@@ -412,7 +431,7 @@ class Video extends React.Component<IProp, any> {
         return (
             <div className="video-component">
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer" style={{ cursor: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inherit' : 'none' }}>
-                    <video id="video" ref={(video) => this.video = video} className="video" src={this.props.src}></video>
+                    <video id="video" ref={(video) => this.video = video} className="video" src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls" ref={(controls) => this.controls = controls} style={{display: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inline-block' : 'none' }}>
                         <div className="progress" ref={(progress) => this.progressDom = progress}>

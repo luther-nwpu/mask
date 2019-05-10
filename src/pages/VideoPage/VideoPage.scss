@@ -40,6 +40,33 @@
                 .video-tab {
                     display: flex;
                     flex-direction: column;
+                    .tab > .tab-select {
+                        position: relative;
+                        display: inline-block;
+                        text-align: center;
+                        font-size: 15px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        width: 20px;
+                        word-wrap: break-word;
+                        line-height: auto;
+                    }
+                    .tab > .tab-select::before {
+                        content: '';
+                        position: absolute;
+                        top: 0; 
+                        right: 0; 
+                        bottom: 0; 
+                        left: 0;
+                        z-index: 1;
+                        background: #aa126b;
+                        border: 1px solid rgba(0,0,0,.4);
+                        border-radius: .5em .5em .5em .5em;
+                        transform: perspective(50px) rotateY(-10deg);
+                        transform-origin: right;
+                    }
                     .tab > .tab-text {
                         position: relative;
                         display: inline-block;
