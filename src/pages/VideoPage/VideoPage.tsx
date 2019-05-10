@@ -4,13 +4,15 @@ import Video from '@components/Video/Video'
 import support from '@assets/follow-btn-0.svg'
 import alreadtySupport from '@assets/follow-btn-1.svg'
 import * as _ from 'lodash'
-import {  Get } from '@lib/helper'
+import {  Get, TokenPost } from '@lib/helper'
 import { displayAuth } from '@store/actions/auth'
 import { connect } from 'react-redux'
 import { AuthTab } from '@config'
 
 class VideoPage extends React.Component {
     public state = {
+        textareaInput: '',
+        comments: [],
         userinfo: {
             avator: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550510853565&di=4eddd8436a89c3e19043946f3e7fa8ed&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Feac4b74543a982265bd540e38782b9014b90ebda.jpg',
             userid: '',
@@ -44,8 +46,42 @@ class VideoPage extends React.Component {
     public constructor(props) {
         super(props)
     }
+    public fetchGetAllComment() {
+        Get('/comment/getAllCommentsByHaiyouId', {
+            id: this.props.match.params.id
+        }).then((res) => {
+            if(!res.success) {
+                alert('系统出现故障')
+            } else {
+                this.setState({
+                    comments: res.result
+                })
+            }
+        })
+    }
+    handleSendComment() {
+        TokenPost('/comment/sendComment', {
+            content: this.state.textareaInput,
+            haiyouId: this.props.match.params.id
+        }).then((res) => {
+            if(res.success) {      
+                this.setState({
+                    textareaInput: '',
+                    comments: res.result
+                })
+            } else {
+                alert('发送失败')
+            }
+        })
+    }
     async componentWillMount() {
+        this.fetchGetAllComment()
         await this.getHaiyou()
+    }
+    _handleChangeTextArea(e) {
+        this.setState({      
+            textareaInput: e.target.value  
+        })
     }
     async getHaiyou() {
         const res = await Get('/haiyou/getHaiyouById', {
@@ -129,8 +165,8 @@ class VideoPage extends React.Component {
                         <span className="title"> 全部评论(0) </span>
                         <div className="comment-send">
                             <img src=""/>
-                            <textarea />
-                            <button>
+                            <textarea value={this.state.textareaInput} onChange={(e) => this._handleChangeTextArea(e)}/>
+                            <button onClick={() => this.handleSendComment()}>
                                 发表评论
                             </button>
                         </div>
