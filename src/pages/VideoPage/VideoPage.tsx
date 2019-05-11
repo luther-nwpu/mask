@@ -8,10 +8,12 @@ import { Get, TokenPost, TokenGet } from '@lib/helper'
 import { displayAuth } from '@store/actions/auth'
 import { connect } from 'react-redux'
 import { AuthTab } from '@config'
+import { dispatchSendBarrage } from '@store/actions/barrage'
 
 class VideoPage extends React.Component {
     public state = {
         textareaInput: '',
+        barrageInput: '',
         replyInput: '',
         comments: [],
         selectReply: null,
@@ -38,6 +40,12 @@ class VideoPage extends React.Component {
                     comments: res.result
                 })
             }
+        })
+    }
+    handleSendBarrage() {
+        this.props.dispatchSendBarrage(this.state.barrageInput)
+        this.setState({
+            barrageInput: ''
         })
     }
     handleSendComment() {
@@ -105,6 +113,11 @@ class VideoPage extends React.Component {
                     })
                 })
             }
+        })
+    }
+    public _handleChangeBarrageInput(e) {
+        this.setState({
+            barrageInput: e.target.value
         })
     }
     public handleReplySubComment() {
@@ -520,8 +533,8 @@ class VideoPage extends React.Component {
                         {
                             true ? (
                                 <div className="barrage-input">
-                                    <input />
-                                    <button>发送</button>
+                                    <input value={this.state.barrageInput} onChange={(e) => this._handleChangeBarrageInput(e)}/>
+                                    <button onClick={() => this.handleSendBarrage()}>发送</button>
                                 </div>
                             ) : (
                                 <div>
@@ -547,7 +560,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab))
+    displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab)),
+    dispatchSendBarrage: (content) => dispatch(dispatchSendBarrage(content))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoPage)

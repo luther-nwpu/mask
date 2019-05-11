@@ -13,7 +13,7 @@ import { AuthTab } from '@config'
 import { Get } from '@lib/helper'
 import { WebSocketType } from '@config'
 import { Websocket } from '@lib/Websocket'
-import { storeBarrages } from '@store/actions/barrage'
+import { storeBarrages, pushBarrage } from '@store/actions/barrage'
 
 interface IProp {
     id: string
@@ -47,6 +47,8 @@ class Video extends React.Component<IProp, any> {
     public componentWillReceiveProps(props) {
         this.fetchGetVideo(props.id)
         this.fetchGetBarrages(props.id)
+        this.fetchGetTunnelId(props.id)
+        this.sendBarrageFromOtherComponenet(props.barrageContent)
     }
     public fetchGetBarrages(id) {
         if(id && this.props.id !== id) {
@@ -62,6 +64,19 @@ class Video extends React.Component<IProp, any> {
         }
     }
 
+    public sendBarrageFromOtherComponenet(barrageContent) {
+        if (barrageContent !== '' && this.props.barrageContent != barrageContent) {
+            this.state.ws.sendMessage({
+                action: Action.SENDBARRAGE,
+                payload: {
+                    text: barrageContent,
+                    videoTime: this.video.currentTime,
+                    fontColor: this.getRandomColor(),
+                    fontSize: Math.floor(Math.random()*10) + 3
+                }
+            })
+        }
+    }
     public fetchGetVideo(id) {
         if(id && this.props.id !== id) {
             Get('/video/getVideoByVideoId', {
@@ -78,15 +93,15 @@ class Video extends React.Component<IProp, any> {
         }
     }
 
+
     public fetchGetTunnelId(id) {
         if(id && this.props.id !== id) {
             Get('/socket/getTunnelId', {}).then((res) => {
                 if(res.success) {
                     this.setState({
-                        ws: new Websocket({type: WebSocketType.CHAT, tunnelId: res.result})
+                        ws: new Websocket({type: WebSocketType.HAIYOU, haiyouId: id, tunnelId: res.result})
                     }, () => {
                         this.state.ws.getWs().onmessage = (event) => {
-                            console.log(event)
                             const msg = JSON.parse(event.data)
                             switch(msg.action) {
                                 case Action.RECEIVEBARRAGE:
@@ -99,8 +114,8 @@ class Video extends React.Component<IProp, any> {
         }
     }
 
-    public dealReceivebarrage(barrages) {
-        console.log(barrages)
+    public dealReceivebarrage(barrage) {
+        this.props.pushBarrage(barrage)
     }
 
     public state = {
@@ -338,6 +353,9 @@ class Video extends React.Component<IProp, any> {
 
         this.setState({})
     }
+    public getRandomColor() {
+        return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
+    }
 
     public updateVideo() {
         if (this.video.buffered.length) {
@@ -478,11 +496,16 @@ class Video extends React.Component<IProp, any> {
     }
     public fetchSendBarrage() {
         this.state.ws.sendMessage({
-            action: Action.SENDMESSAGE,
+            action: Action.SENDBARRAGE,
             payload: {
-              content: this.state.barrageInput,
-              date: this.video.currentTime
+                text: this.state.barrageInput,
+                videoTime: this.video.currentTime,
+                fontColor: this.getRandomColor(),
+                fontSize: Math.floor(Math.random()*10) + 3
             }
+        })
+        this.setState({
+            barrageInput: ''
         })
     }
     public render() {
@@ -536,16 +559,18 @@ class Video extends React.Component<IProp, any> {
 
 const mapStateToProps = (state) => {
     const { userinfo } = state.todoApp
-    const { barrages } = state.barrage
+    const { barrages, barrageContent } = state.barrage
     return {
         userInfo: userinfo,
-        barrages
+        barrages,
+        barrageContent
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab)),
-    storeBarrages: (barrages) => dispatch(storeBarrages(barrages))
+    storeBarrages: (barrages) => dispatch(storeBarrages(barrages)),
+    pushBarrage: (barrage) => dispatch(pushBarrage(barrage))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video)

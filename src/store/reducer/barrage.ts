@@ -1,4 +1,4 @@
-import { DISPATCHSENDBARRAGE, STOREBARRAGES } from '../actions/barrage'
+import { DISPATCHSENDBARRAGE, STOREBARRAGES, PUSHBARRAGE } from '../actions/barrage'
 
 export const barrage = (state = {
   barrages: [],
@@ -12,6 +12,11 @@ export const barrage = (state = {
       case DISPATCHSENDBARRAGE:
           return Object.assign({}, state, {
               barrageContent: action.content
+          })
+      case PUSHBARRAGE:
+          state.barrages.push(action.barrage)
+          return Object.assign({}, state, {
+              barrages: state.barrages
           })
       default:
           return state
