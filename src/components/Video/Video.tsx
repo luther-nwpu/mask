@@ -358,7 +358,8 @@ class Video extends React.Component<IProp, any> {
     }
 
     public updateVideo() {
-        if (this.video.buffered.length) {
+        if (this.video && this.video.buffered.length) {
+            console.log(this.video.currentTime)
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
             let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
