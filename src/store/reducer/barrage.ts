@@ -7,7 +7,9 @@ export const barrage = (state = {
   switch (action.type) {
       case STOREBARRAGES:
           return Object.assign({}, state, {
-              barrages: action.barrages
+              barrages: action.barrages.sort((a, b) => {
+                 return a.video_time - b.video_time
+              })
           })
       case DISPATCHSENDBARRAGE:
           return Object.assign({}, state, {
@@ -16,8 +18,10 @@ export const barrage = (state = {
       case PUSHBARRAGE:
           state.barrages.push(action.barrage)
           return Object.assign({}, state, {
-              barrages: state.barrages
-          })
+            barrages: state.barrages.sort((a, b) => {
+               return a.video_time - b.video_time
+            })
+        })
       default:
           return state
   }

@@ -9,6 +9,7 @@ import { displayAuth } from '@store/actions/auth'
 import { connect } from 'react-redux'
 import { AuthTab } from '@config'
 import { dispatchSendBarrage } from '@store/actions/barrage'
+import moment from 'moment'
 
 class VideoPage extends React.Component {
     public state = {
@@ -94,6 +95,15 @@ class VideoPage extends React.Component {
             replyInput: '',
             selectReply: key
         })
+    }
+    public getTimeStr(time) {
+        let h:any = Math.floor(time / 3600)
+        let m:any = Math.floor((time % 3600) / 60)
+        let s:any = Math.floor(time % 60)
+        h = h >= 10 ? h : '0' + h
+        m = m >= 10 ? m : '0' + m
+        s = s >= 10 ? s : '0' + s
+        return h === '00' ? m + ':' + s : h + ':' + m + ':' + s
     }
     public handleReplyComment() {
         TokenPost('/comment/sendSubComment', {
@@ -337,196 +347,26 @@ class VideoPage extends React.Component {
                         <div className="barrages">
                             <div className="barrage-table">
                                 <span>时间</span>
-                                <span>弹幕内容(10)</span>
+                                <span>弹幕内容({this.props.barrages && this.props.barrages.length || 0})</span>
                                 <span> 发送时间 </span>
                             </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
-                            <div className="barrage">
-                                <span>
-                                    10:11
-                                </span>
-                                <span>
-                                    我喜欢你啊
-                                </span>
-                                <span>
-                                    dsadsafhjasfj
-                                </span>
-                            </div>
+                            {
+                                this.props.barrages && this.props.barrages.map((value, key) => {
+                                    return (            
+                                        <div key={key} className="barrage">
+                                            <span>
+                                                {this.getTimeStr(value.video_time)}
+                                            </span>
+                                            <span style={{color: value.font_color}}>
+                                                {value.text}
+                                            </span>
+                                            <span>
+                                                {moment(value.create_at).format('YYYY-MM-DD')}
+                                            </span>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                     <div className="video-input">
@@ -554,8 +394,10 @@ class VideoPage extends React.Component {
 
 const mapStateToProps = (state) => {
     const { userinfo } = state.todoApp
+    const { barrages } = state.barrage
     return {
-        userInfo: userinfo
+        userInfo: userinfo,
+        barrages
     }
 }
 
