@@ -45,21 +45,56 @@ class Video extends React.Component<IProp, any> {
     }
 
     public componentWillReceiveProps(props) {
-        this.fetchGetVideo(props.id)
-        this.fetchGetBarrages(props.id)
-        this.fetchGetTunnelId(props.id)
+        Promise.all([this.fetchGetVideo(props.id), this.fetchGetBarrages(props.id), this.fetchGetTunnelId(props.id)]).then(() => {
+            let playPromise = this.video.play()
+            if (playPromise !== undefined) {
+              playPromise.then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+                this.setState({})
+              })
+              .catch(error => {
+                // Auto-play was prevented
+                // Show paused UI.
+                this.video.muted = true
+                this.video.play()
+                this.setState({})
+              })
+            }
+        })
         this.sendBarrageFromOtherComponenet(props.barrageContent)
+        this.handleBarragesToObject(props.barrages)
     }
+
+    public handleBarragesToObject(barrages) {
+        if (barrages && barrages.length != this.props.barrages.length) {
+            this.setState({
+                barragesObject: barrages.reduce((total, value) => {
+                    if(total[Math.floor(value.video_time)] == undefined) {
+                        total[Math.floor(value.video_time)] = [value]
+                    } else {
+                        total[Math.floor(value.video_time)].push(value)
+                    }
+                    return total
+                }, {})
+            })
+        }
+    }
+
     public fetchGetBarrages(id) {
         if(id && this.props.id !== id) {
             Get('/barrage/getAllBarrageByVideoId', {
                 videoId: id
             }).then((res) => {
                 if(res.success) {
+                    Promise.resolve('success')
                     this.props.storeBarrages(res.result)
                 } else {
                     alert('你好出错了')
                 }
+                setTimeout(() => {
+                    this.video.play()
+                }, 1000)
             })
         }
     }
@@ -77,6 +112,7 @@ class Video extends React.Component<IProp, any> {
             })
         }
     }
+
     public fetchGetVideo(id) {
         if(id && this.props.id !== id) {
             Get('/video/getVideoByVideoId', {
@@ -85,6 +121,8 @@ class Video extends React.Component<IProp, any> {
                 if(res.success) {
                     this.setState({
                         videoInfo: res.result
+                    }, () => {                
+                        Promise.resolve('success')
                     })
                 } else {
                     alert('你好出错了')
@@ -93,14 +131,14 @@ class Video extends React.Component<IProp, any> {
         }
     }
 
-
     public fetchGetTunnelId(id) {
         if(id && this.props.id !== id) {
             Get('/socket/getTunnelId', {}).then((res) => {
                 if(res.success) {
                     this.setState({
                         ws: new Websocket({type: WebSocketType.HAIYOU, haiyouId: id, tunnelId: res.result})
-                    }, () => {
+                    }, () => {                    
+                        Promise.resolve('success')
                         this.state.ws.getWs().onmessage = (event) => {
                             const msg = JSON.parse(event.data)
                             switch(msg.action) {
@@ -120,35 +158,16 @@ class Video extends React.Component<IProp, any> {
 
     public state = {
         ws: null,
+        barrageObject: {},
         inputFocus: false,
         videoInfo: null,
         barrageInput: '',
         showControls: true,
-        showTabControls: true,
-        barrage: {        
-            barrageText: '',
-            barrageColor: '',
-            barrageRange: ''
-        }
-    }
-
-    public handleBarrageText(event) {
-        this.setState({barrage: { ...this.state.barrage, barrageText: event.target.value }})
-    }
-
-    public handleBarrageColor(event) {
-        this.setState({barrage: { ...this.state.barrage, barrageColor: event.target.value }})
-    }
-
-    public handleBarrageRange(event) {
-        this.setState({barrage: { ...this.state.barrage, barrageRange: event.target.value }})
-    }
-
-    public sendBarrage(e) {
-        return false
+        showTabControls: true
     }
 
     public componentDidMount() {
+        this.video.pause()
         this.video.ontimeupdate = () => this.updateVideo()
         this.progressDom.onmousedown = e => this.progress(e)
         this.soundDom.onmousedown = e => this.soundProgress(e)
@@ -189,22 +208,6 @@ class Video extends React.Component<IProp, any> {
                 showTabControls: false
             })
         }
-        document.onkeydown = e => this.keydown(e)
-        let playPromise = this.video.play()
-        if (playPromise !== undefined) {
-          playPromise.then(_ => {
-            // Automatic playback started!
-            // Show playing UI.
-            this.setState({})
-          })
-          .catch(error => {
-            // Auto-play was prevented
-            // Show paused UI.
-            this.video.muted = true
-            this.video.play()
-            this.setState({})
-          })
-        }
         this.loadBarrage()
     }
 
@@ -213,118 +216,10 @@ class Video extends React.Component<IProp, any> {
             container: this.videoPlayer, // 父级容器或ID
             data: [
                 {
-                  'key': '7g43mm0rpp1l67eh6qjo8',
-                  'time': 500,
-                  'text': '绿色走一波',
-                  'color': '#0f0',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'n8alq5l22d8qqbuhgst68g',
-                  'time': 1200,
-                  'text': '我膨胀了',
-                  'fontFamily': 'SimSun',
-                  'fontSize': 32,
-                  'color': 'yellow',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'atb8ctt81egh8hf45u7n2g',
-                  'time': 2500,
-                  'text': '妈妈咪呀',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'bl9a602defoehsiahgi7vo',
-                  'time': 3300,
-                  'text': '富贵使我们相遇',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'p0su7gh4s88fjtqv0bmdog',
-                  'time': 4000,
-                  'text': '要想生活过得去',
-                  'color': '#0f0',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
                   'key': 'udfel3ppv5ggrfqo4nlbng',
                   'time': 4400,
                   'text': '你且在这里不要走动，待我去买两斤橘子',
                   'color': '#f00',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': '68ts93rle7gtv1i9die5ig',
-                  'time': 4800,
-                  'text': '我们都一样',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'dcprmrcmdcg4btqej0mung',
-                  'time': 5200,
-                  'text': 'Remember me',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': '9jgn02iii6b8qmkq2v2hg',
-                  'time': 5680,
-                  'text': 'LoL',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'im73i1lka0ooavb86gb048',
-                  'time': 6600,
-                  'text': '(-_-)|||',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'hrbvbcuekoqm7aacufgk8',
-                  'time': 7200,
-                  'text': '天哪噜',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'f95vsgh50qob6ip3r617b',
-                  'time': 8300,
-                  'text': '富强 民主 文明 和谐 自由 平等 公正 法治 爱国 敬业 诚信 友善',
-                  'color': '#f00',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'u7bo393jvv8dkccb2ml0e',
-                  'time': 9210,
-                  'text': '啦啦啦啦啦啦啦拉',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'muafgllnsg20op35brg9',
-                  'time': 10000,
-                  'text': '我是谁 我从哪里来 我为什么要看这个',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'hjv3sllm12tbh85r2qor8',
-                  'time': 12000,
-                  'text': '2333333333333333',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'r7u5mvu1l7g1hk7cvnddig',
-                  'time': 12000,
-                  'text': '2333333333333333',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': '0o51j9psnj8qn3bnfq9kag',
-                  'time': 12000,
-                  'text': '2333333333333333',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                },
-                {
-                  'key': 'fkgm2nerakgr71jloi9d38',
-                  'time': 12000,
-                  'text': '2333333333333333',
                   'createdAt': '2019-01-13T13:34:47.126Z'
                 }
               ], // 弹幕数据
@@ -346,20 +241,13 @@ class Video extends React.Component<IProp, any> {
         // 播放弹幕
         barrage.play()
     }
-    public keydown(e) {
-        if (e && e.keyCode == 37 && !this.state.inputFocus) this.video.currentTime -= 10
-        if (e && e.keyCode == 39  && !this.state.inputFocus) this.video.currentTime += 10
-        if ((e && e.keyCode == 32 || e.keyCode == 13)  && !this.state.inputFocus) this.playOrPause()
 
-        this.setState({})
-    }
     public getRandomColor() {
         return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
     }
 
     public updateVideo() {
         if (this.video && this.video.buffered.length) {
-            console.log(this.video.currentTime)
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
             let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
@@ -535,7 +423,7 @@ class Video extends React.Component<IProp, any> {
                             </div>
                             <div className="middle">
                                 {
-                                    username ? (<div className="send"> <input onFocus={() => this._handleInputFocus()} onBlur={() => this._handleInputBlur()} value={this.state.barrageInput} onChange={(e) => this._handleSendBarrage(e)} onKeyDown={(e) => this.sendBarrage(e)}/> <button onClick={() => this.fetchSendBarrage()}> 发送 </button> </div>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
+                                    username ? (<div className="send"> <input onFocus={() => this._handleInputFocus()} onBlur={() => this._handleInputBlur()} value={this.state.barrageInput} onChange={(e) => this._handleSendBarrage(e)}/> <button onClick={() => this.fetchSendBarrage()}> 发送 </button> </div>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
                                 }
                             </div>
                             <div className="right">
