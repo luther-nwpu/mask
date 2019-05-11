@@ -234,20 +234,15 @@ class Video extends React.Component<IProp, any> {
 
     public updateVideo() {
         if (this.video && this.video.buffered.length) {
-            if(!this.middletime) {
-                this.middletime = setTimeout(() => {
-                    this.state.barragesObject && this.state.barragesObject[Math.floor(this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video.currentTime)].map((value) => {
-                        this.state.barragePlayer.add({
-                            key: value.key,
-                            time: (value.video_time - Math.floor(this.video.currentTime)) * 1000,
-                            text: value.text,
-                            fontSize: value.font_size,
-                            color: value.font_color
-                        })
-                    })
-                }, 1000)
-                this.setState({})
-            }
+            this.state.barragesObject && this.state.barragesObject[Math.floor(this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video.currentTime)].map((value) => {
+                this.state.barragePlayer.add({
+                    key: value.key,
+                    time: (value.video_time - Math.floor(this.video.currentTime)) * 1000,
+                    text: value.text,
+                    fontSize: value.font_size,
+                    color: value.font_color
+                })
+            })
             this.state.barragePlayer.play()
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
@@ -391,7 +386,7 @@ class Video extends React.Component<IProp, any> {
                 text: this.state.barrageInput,
                 videoTime: this.video.currentTime,
                 fontColor: this.getRandomColor(),
-                fontSize: Math.floor(Math.random()*10) + 10
+                fontSize: Math.floor(Math.random()*10) + 20
             }
         })
         this.setState({
