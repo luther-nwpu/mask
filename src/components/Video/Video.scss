@@ -104,7 +104,7 @@
             }
             .middle {
                 line-height: 30px;
-                border-radius: 10px;
+                border-radius: 3px;
                 background-color:rgba(0,0,0, 0);
                 border: 1px solid #ff9600;
                 width: 200px;
@@ -117,7 +117,7 @@
                     justify-content: space-between;
                     line-height: 40px;
                     input {
-                        padding-left: 10px;
+                        padding-left: 5px;
                         padding-right: 5px;
                         width: 140px;
                         color: #F9FC05;
@@ -127,7 +127,7 @@
                     }
                     button {
                         background: #ff9600;
-                        border-radius: 10px;
+                        border-radius: 3px;
                         border: none;
                     }
                 }

@@ -476,9 +476,18 @@ class Video extends React.Component<IProp, any> {
             inputFocus: false
         })
     }
+    public fetchSendBarrage() {
+        this.state.ws.sendMessage({
+            action: Action.SENDMESSAGE,
+            payload: {
+              content: this.state.barrageInput,
+              date: this.video.currentTime
+            }
+        })
+    }
     public render() {
         const fullscreen = document.fullscreen
-        const userId =  this.props.userInfo && this.props.userInfo.id
+        const username =  this.props.userInfo && this.props.userInfo.username
         return (
             <div className="video-component">
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer" style={{ cursor: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inherit' : 'none' }}>
@@ -502,7 +511,7 @@ class Video extends React.Component<IProp, any> {
                             </div>
                             <div className="middle">
                                 {
-                                    userId ? (<div className="send"> <input onFocus={() => this._handleInputFocus()} onBlur={() => this._handleInputBlur()} value={this.state.barrageInput} onChange={(e) => this._handleSendBarrage(e)} onKeyDown={(e) => this.sendBarrage(e)}/> <button> 发送 </button> </div>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
+                                    username ? (<div className="send"> <input onFocus={() => this._handleInputFocus()} onBlur={() => this._handleInputBlur()} value={this.state.barrageInput} onChange={(e) => this._handleSendBarrage(e)} onKeyDown={(e) => this.sendBarrage(e)}/> <button onClick={() => this.fetchSendBarrage()}> 发送 </button> </div>) : (<div> <span className="login" onClick={() => this.handleLogin() }>登录 </span>即可发弹幕 </div>)
                                 }
                             </div>
                             <div className="right">

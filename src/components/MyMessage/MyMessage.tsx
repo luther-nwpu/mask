@@ -29,7 +29,6 @@ export class MyMessage extends React.Component {
                     ws: new Websocket({type: WebSocketType.CHAT, tunnelId: res.result})
                 }, () => {
                     this.state.ws.getWs().onmessage = (event) => {
-                        console.log(event)
                         const msg = JSON.parse(event.data)
                         switch(msg.action) {
                             case Action.RECEIVEMESSAGE:
