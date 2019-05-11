@@ -14,6 +14,7 @@ import { Get } from '@lib/helper'
 import { WebSocketType } from '@config'
 import { Websocket } from '@lib/Websocket'
 import { storeBarrages, pushBarrage } from '@store/actions/barrage'
+import throttle from 'lodash/throttle'
 
 interface IProp {
     id: string
@@ -42,6 +43,7 @@ class Video extends React.Component<IProp, any> {
 
     public constructor(props) {
         super(props)
+        this.AddBarrage = throttle(this.AddBarrage, 1000)
     }
 
     public componentWillReceiveProps(props) {
@@ -230,19 +232,21 @@ class Video extends React.Component<IProp, any> {
     public getRandomColor() {
         return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
     }
-    middletime
 
+    public AddBarrage() {
+        this.state.barragesObject && this.state.barragesObject[Math.floor(this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video.currentTime)].map((value) => {
+            this.state.barragePlayer.add({
+                key: value.key,
+                time: (value.video_time - Math.floor(this.video.currentTime)) * 1000,
+                text: value.text,
+                fontSize: value.font_size,
+                color: value.font_color
+            })
+        })
+    }
     public updateVideo() {
         if (this.video && this.video.buffered.length) {
-            this.state.barragesObject && this.state.barragesObject[Math.floor(this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video.currentTime)].map((value) => {
-                this.state.barragePlayer.add({
-                    key: value.key,
-                    time: (value.video_time - Math.floor(this.video.currentTime)) * 1000,
-                    text: value.text,
-                    fontSize: value.font_size,
-                    color: value.font_color
-                })
-            })
+            this.AddBarrage()
             this.state.barragePlayer.play()
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
