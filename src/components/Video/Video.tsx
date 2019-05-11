@@ -44,30 +44,14 @@ class Video extends React.Component<IProp, any> {
         super(props)
     }
 
-    public componentWillReceiveProps() {
-        this.fetchGetVideo()
-        this.fetchGetBarrages()
+    public componentWillReceiveProps(props) {
+        this.fetchGetVideo(props.id)
+        this.fetchGetBarrages(props.id)
     }
-    public fetchGetBarrages() {
-        if(this.props.id) {
+    public fetchGetBarrages(id) {
+        if(id && this.props.id !== id) {
             Get('/barrage/getAllBarrageByVideoId', {
-                videoId: this.props.id
-            }).then((res) => {
-                if(res.success) {
-                    this.setState({
-                        barrages: res.result
-                    })
-                } else {
-                    alert('你好出错了')
-                }
-            })
-        }
-    }
-
-    public fetchGetVideo() {
-        if(this.props.id) {
-            Get('/video/getVideoByVideoId', {
-                videoId: this.props.id
+                videoId: id
             }).then((res) => {
                 if(res.success) {
                     this.props.storeBarrages(res.result)
@@ -78,8 +62,24 @@ class Video extends React.Component<IProp, any> {
         }
     }
 
-    public fetchGetTunnelId() {
-        if(this.props.id) {
+    public fetchGetVideo(id) {
+        if(id && this.props.id !== id) {
+            Get('/video/getVideoByVideoId', {
+                videoId: id
+            }).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        videoInfo: res.result
+                    })
+                } else {
+                    alert('你好出错了')
+                }
+            })
+        }
+    }
+
+    public fetchGetTunnelId(id) {
+        if(id && this.props.id !== id) {
             Get('/socket/getTunnelId', {}).then((res) => {
                 if(res.success) {
                     this.setState({
