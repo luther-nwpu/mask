@@ -157,8 +157,9 @@ class Video extends React.Component<IProp, any> {
     }
 
     public state = {
+        barragePlayer: null,
         ws: null,
-        barrageObject: {},
+        barragesObject: {},
         inputFocus: false,
         videoInfo: null,
         barrageInput: '',
@@ -167,7 +168,6 @@ class Video extends React.Component<IProp, any> {
     }
 
     public componentDidMount() {
-        this.video.pause()
         this.video.ontimeupdate = () => this.updateVideo()
         this.progressDom.onmousedown = e => this.progress(e)
         this.soundDom.onmousedown = e => this.soundProgress(e)
@@ -212,42 +212,43 @@ class Video extends React.Component<IProp, any> {
     }
 
     public loadBarrage() {
-        const barrage = new Barrage({
-            container: this.videoPlayer, // 父级容器或ID
-            data: [
-                {
-                  'key': 'udfel3ppv5ggrfqo4nlbng',
-                  'time': 4400,
-                  'text': '你且在这里不要走动，待我去买两斤橘子',
-                  'color': '#f00',
-                  'createdAt': '2019-01-13T13:34:47.126Z'
-                }
-              ], // 弹幕数据
-            config: {
-              // 全局配置项
-              duration: 20000, // 弹幕循环周期(单位：毫秒)
-              defaultColor: '#fff', // 弹幕默认颜色
-            },
+        this.setState({
+            barragePlayer: new Barrage({
+                container: this.videoPlayer, // 父级容器或ID
+                data: [], // 弹幕数据
+                config: {
+                  // 全局配置项
+                  duration: 20000, // 弹幕循环周期(单位：毫秒)
+                  defaultColor: '#fff', // 弹幕默认颜色
+                },
+            })
+        }, () => {
+            this.state.barragePlayer.play()
         })
-        // 新增一条弹幕
-        barrage.add({
-            key: 'fctc651a9pm2j20bia8j', // 弹幕的唯一标识
-            time: 1000, // 弹幕出现的时间(单位：毫秒)
-            text: '这是新增的一条弹幕', // 弹幕文本内容
-            fontSize: 24, // 该条弹幕的字号大小(单位：像素)，会覆盖全局设置
-            color: '#0ff', // 该条弹幕的颜色，会覆盖全局设置
-        })
-        
-        // 播放弹幕
-        barrage.play()
     }
 
     public getRandomColor() {
         return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
     }
+    middletime
 
     public updateVideo() {
         if (this.video && this.video.buffered.length) {
+            if(!this.middletime) {
+                this.middletime = setTimeout(() => {
+                    this.state.barragesObject && this.state.barragesObject[Math.floor(this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video.currentTime)].map((value) => {
+                        this.state.barragePlayer.add({
+                            key: value.key,
+                            time: (value.video_time - Math.floor(this.video.currentTime)) * 1000,
+                            text: value.text,
+                            fontSize: value.font_size,
+                            color: value.font_color
+                        })
+                    })
+                }, 1000)
+                this.setState({})
+            }
+            this.state.barragePlayer.play()
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
             let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
@@ -390,7 +391,7 @@ class Video extends React.Component<IProp, any> {
                 text: this.state.barrageInput,
                 videoTime: this.video.currentTime,
                 fontColor: this.getRandomColor(),
-                fontSize: Math.floor(Math.random()*10) + 3
+                fontSize: Math.floor(Math.random()*10) + 10
             }
         })
         this.setState({
