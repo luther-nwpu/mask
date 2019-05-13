@@ -15,6 +15,7 @@ import { WebSocketType } from '@config'
 import { Websocket } from '@lib/Websocket'
 import { storeBarrages, pushBarrage } from '@store/actions/barrage'
 import throttle from 'lodash/throttle'
+import uuid from 'uuid'
 
 interface IProp {
     id: string
@@ -43,7 +44,7 @@ class Video extends React.Component<IProp, any> {
 
     public constructor(props) {
         super(props)
-        this.AddBarrage = throttle(this.AddBarrage, 1000)
+        this.AddBarrage = throttle(this.AddBarrage, 500)
     }
 
     public componentWillReceiveProps(props) {
@@ -103,13 +104,21 @@ class Video extends React.Component<IProp, any> {
 
     public sendBarrageFromOtherComponenet(barrageContent) {
         if (barrageContent !== '' && this.props.barrageContent != barrageContent) {
+            this.state.barragePlayer.add({
+                key: uuid.v4(),
+                time: 0,
+                text: barrageContent,
+                fontSize: Math.floor(Math.random()*10) + 20,
+                color: this.getRandomColor()
+            })
+            this.state.barragePlayer.play()
             this.state.ws.sendMessage({
                 action: Action.SENDBARRAGE,
                 payload: {
                     text: barrageContent,
                     videoTime: this.video.currentTime,
                     fontColor: this.getRandomColor(),
-                    fontSize: Math.floor(Math.random()*10) + 3
+                    fontSize: Math.floor(Math.random()*10) + 20
                 }
             })
         }
@@ -384,6 +393,14 @@ class Video extends React.Component<IProp, any> {
         })
     }
     public fetchSendBarrage() {
+        this.state.barragePlayer.add({
+            key: uuid.v4(),
+            time: 0,
+            text: this.state.barrageInput,
+            fontSize: Math.floor(Math.random()*10) + 20,
+            color: this.getRandomColor()
+        })
+        this.state.barragePlayer.play()
         this.state.ws.sendMessage({
             action: Action.SENDBARRAGE,
             payload: {
