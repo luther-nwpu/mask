@@ -161,7 +161,7 @@ class VideoPage extends React.Component {
                 <div className="left-video">
                     <div className="video-main">
                         <div className="video-title">
-                            {this.state.haiyou && this.state.haiyou.title}
+                            { this.state.haiyou && this.state.haiyou.title }
                         </div>
                         <div className="video-description">
                             <span>
@@ -175,9 +175,9 @@ class VideoPage extends React.Component {
                         </div>
                         <div className="video-play-detail">
                             <span>
-                                { '399' } 次播放
+                                { this.state.haiyou && this.state.haiyou.hot } 次播放
                             </span>
-                            <span className="barrage"> 一共有 {'2313' } 条弹幕</span>
+                            <span className="barrage"> 一共有 { this.props.barrages && this.props.barrages.length || 0 } 条弹幕</span>
                         </div>
                         <div className="video-video">
                             <div className="video-tab">
