@@ -336,7 +336,7 @@ class VideoPage extends React.Component {
                                 { this.state.haiyou && this.state.haiyou.user.signature }
                             </div>
                             <div className="follow">
-                                <img src={support}/> 订阅 | {this.state.haiyou && this.state.haiyou.followNum}
+                                <img src={support}/> <span> { this.state.haiyou && this.state.haiyou.subscribe == null ? '订阅' : '已订阅' } | { this.state.haiyou && this.state.haiyou.followNum } </span>
                             </div>
                         </div>
                     </div>
