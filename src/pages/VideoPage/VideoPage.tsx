@@ -155,6 +155,42 @@ class VideoPage extends React.Component {
             selectVideo: key
         })
     }
+    public handleClickSubscribe(userId) {
+        if (this.state.haiyou && this.state.haiyou.subscribe == null) {
+            TokenPost('/subscribe/subscribeUser', {
+                suserId: userId
+            }).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        haiyou: {
+                            ...this.state.haiyou,
+                            followNum: this.state.haiyou && this.state.haiyou.followNum + 1,
+                            subscribe: res.result
+                        }
+                    })
+                } else {
+                    alert(res.result)
+                }
+            })
+        } else {
+            TokenPost('/subscribe/unSubscribeUser', {
+                subscriberId: this.state.haiyou && this.state.haiyou.subscribe.id
+            }).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        haiyou: {
+                            ...this.state.haiyou,
+                            followNum: this.state.haiyou && this.state.haiyou.followNum - 1,
+                            subscribe: null
+                        }
+                    })
+                } else {
+                    
+                    alert(res.result)
+                }
+            })
+        }
+    }
     public render() {
         return(
             <div className="videopage-component">
@@ -335,7 +371,7 @@ class VideoPage extends React.Component {
                             <div>
                                 { this.state.haiyou && this.state.haiyou.user.signature }
                             </div>
-                            <div className="follow">
+                            <div className="follow" onClick={() => this.handleClickSubscribe(this.state.haiyou && this.state.haiyou.user_id)}>
                                 <img src={support}/> <span> { this.state.haiyou && this.state.haiyou.subscribe == null ? '订阅' : '已订阅' } | { this.state.haiyou && this.state.haiyou.followNum } </span>
                             </div>
                         </div>
