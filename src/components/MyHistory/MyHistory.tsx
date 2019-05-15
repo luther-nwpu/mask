@@ -4,6 +4,7 @@ import { TokenGet, TokenPost } from '@lib/helper'
 import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import moment from 'moment'
 import history_empty_svg from '@assets/history_btn_2.svg'
+import history from '@router'
 export class MyHistory extends React.Component {
     constructor(props: any) {
         super(props)
@@ -35,6 +36,10 @@ export class MyHistory extends React.Component {
         })
     }
 
+    public switchToHaiyou(id) {
+        history.push(`/haiyou/${id}`)
+    }
+
     public state = {
         historyArr: []
     }
@@ -57,7 +62,7 @@ export class MyHistory extends React.Component {
                 {
                     historyOrderArr.map((value, key) => {
                         return (
-                            <div key={key} className="history-item">
+                            <div key={key} className="history-item" onClick={() => this.switchToHaiyou(value.id)}>
                                 <img src = {draft_default_png} />
                                 <div className="item-bottom">
                                     <div className="item-title">

@@ -243,10 +243,10 @@ class Video extends React.Component<IProp, any> {
     }
 
     public AddBarrage() {
-        this.state.barragesObject && this.state.barragesObject[Math.floor(this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video.currentTime)].map((value) => {
+        this.state.barragesObject && this.state.barragesObject[Math.floor(this.video && this.video.currentTime)] && this.state.barragesObject[Math.floor(this.video && this.video.currentTime)].map((value) => {
             this.state.barragePlayer.add({
                 key: value.key,
-                time: (value.video_time - Math.floor(this.video.currentTime)) * 1000,
+                time: (value.video_time - Math.floor(this.video && this.video.currentTime)) * 1000,
                 text: value.text,
                 fontSize: value.font_size,
                 color: value.font_color
@@ -266,7 +266,7 @@ class Video extends React.Component<IProp, any> {
     }
 
     public onOffVolume() {
-        if(this.video.muted) {
+        if(this.video && this.video.muted) {
             this.video.muted = false
         } else {
             this.video.muted = true
