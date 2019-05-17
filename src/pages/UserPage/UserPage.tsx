@@ -5,10 +5,34 @@ import avator_jpg from '@assets/avator_default.jpg'
 import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import man_svg from '@assets/man_btn_0.svg'
 import woman_svg from '@assets/woman_btn_0.svg'
+import { Get } from '@lib/helper'
 
 export class UserPage extends React.Component {
     getRandomColor () {
         return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
+    }
+    props
+    fetchGetHaiyousByUserId() {
+        Get('/haiyou/getAllHaiyouByUserId', {
+            userId: this.props.match.params.id
+        }).then(res => {
+            if(res.success) {
+                const result = res.result
+                this.setState({
+                    haiyous: result.haiyous,
+                    subscribe: result.subscribe,
+                    userinfo: result.user
+                })
+            }
+        })
+    }
+    public componentWillMount() {
+        this.fetchGetHaiyousByUserId()
+    }
+    public state = {
+        haiyous: [],
+        userinfo: {},
+        subscribe: null
     }
     public render() {
         return (
