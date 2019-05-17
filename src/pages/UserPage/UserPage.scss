@@ -1,3 +1,111 @@
 .userpage-component {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .userpage-content {
+        width: 70%;
+        border-radius: 3px;
+        min-height: 750px;
+        border: 1px solid darkcyan;
+        overflow: hidden;
+        .username {    
+            position: relative;
+            .cover-img {
+                width: 100%;
+                height: 210px;
+            }
+            .userinfo {
+                position: absolute;
+                bottom: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .left {
+                    margin-left: 10px;
+                    display: flex;
+                    .user-detail {
+                        margin-left: 15px;
+                        .title {
+                            margin-top: 15px;
+                            letter-spacing: 1px;
+                            font-size: 25px;
+                            font-weight: 800;
+                            color: #FFFFFF;
+                            line-height: 30px;
+                            .sex-svg {
+                                width: 20px;
+                            }
+                        }
+                        .signature {
+                            margin-top: 6px;
+                            line-height: 20px;
+                            letter-spacing: 1px;
+                            font-size: 20px;
+                            font-weight: 300;
+                            color: rgb(212, 209, 209);
+                        }
+                    }
+                }
+                .right {
+                    display: flex;
+                    margin-right: 30px;
+                    .subscribe-user {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        margin-right: 20px;
+                        line-height: 30px;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: #FFFFFF;
+                        border-radius: 4px;
+                        background: rgb(27, 140, 206);
+                        &:hover {
+                            opacity: 0.9;
+                        }
+                    }
+                    .send-message {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        margin-right: 20px;
+                        line-height: 30px;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: #FFFFFF;
+                        border-radius: 4px;
+                        background: rgb(9, 158, 71);
+                        &:hover {
+                            opacity: 0.9;
+                        }
+                    }
+                }
+                .avator-img {
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 45px;
+                }  
+            }
+        }
+        .haiyous {
+            padding-left: 10px;
+            padding-right: 10px;
+            .haiyous-title {
+                font-size: 20px;
+                margin-bottom: 3px;
+            }
+            .all-haiyous {
+                display: flex;
+                flex-flow: wrap;    
+            }
+            .haiyou-item {        
+                margin-left: 10px;
+                margin-bottom: 10px;
+                .item-img {
+                    width: 150px;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
 }
