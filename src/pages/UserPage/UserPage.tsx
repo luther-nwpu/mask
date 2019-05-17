@@ -5,8 +5,9 @@ import avator_jpg from '@assets/avator_default.jpg'
 import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import man_svg from '@assets/man_btn_0.svg'
 import woman_svg from '@assets/woman_btn_0.svg'
-import { Get } from '@lib/helper'
+import { Get, TokenPost } from '@lib/helper'
 import watch_svg from '@assets/watch_btn_0.svg'
+import earth_svg from '@assets/earth_btn_0.svg'
 
 export class UserPage extends React.Component {
     getRandomColor () {
@@ -35,6 +36,33 @@ export class UserPage extends React.Component {
         userinfo: {},
         subscribe: null
     }
+    public subscribeUser(userId) {
+        if (this.state.subscribe == null) {
+            TokenPost('/subscribe/subscribeUser', {
+                suserId: userId
+            }).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        subscribe: res.result
+                    })
+                } else {
+                    alert(res.result)
+                }
+            })
+        } else {
+            TokenPost('/subscribe/unSubscribeUser', {
+                subscriberId: this.state.subscribe && this.state.subscribe.id
+            }).then((res) => {
+                if(res.success) {
+                    this.setState({
+                        subscribe: res.result
+                    })
+                } else {
+                    alert(res.result)
+                }
+            })
+        }
+    }
     public render() {
         return (
             <div className="userpage-component">
@@ -55,7 +83,7 @@ export class UserPage extends React.Component {
                                 </div>
                             </div>
                             <div className="right">
-                                <button className="subscribe-user">
+                                <button className="subscribe-user" onClick={() => this.subscribeUser(this.state.userinfo && this.state.userinfo['id'])}>
                                    { this.state.subscribe ? '已订阅' : '订阅' }
                                 </button>
                                 <button className="send-message">
@@ -78,6 +106,16 @@ export class UserPage extends React.Component {
                             
                         </div>
                         <div className="all-haiyous">
+                            {
+                                this.state.haiyous.length == 0 ? 
+                                (
+                                    <div className="empty-haiyous">
+                                        <img src={ earth_svg } />小哥哥好久都没有光临这里了，请转去<a href = "/">{ '其他小姐姐那里'.split(' ').map((value, key) => {
+                                            return (<span key={key} style={{ color: this.getRandomColor() }}> { value } </span>)
+                                        }) }</a>。
+                                    </div>
+                                ) : ''
+                            }
                             {
                                 this.state.haiyous.map((value, key) => {
                                     return (
