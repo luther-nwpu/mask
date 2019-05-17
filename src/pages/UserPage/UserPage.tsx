@@ -6,6 +6,7 @@ import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import man_svg from '@assets/man_btn_0.svg'
 import woman_svg from '@assets/woman_btn_0.svg'
 import { Get } from '@lib/helper'
+import watch_svg from '@assets/watch_btn_0.svg'
 
 export class UserPage extends React.Component {
     getRandomColor () {
@@ -45,18 +46,17 @@ export class UserPage extends React.Component {
                                 <img className="avator-img" src={ avator_jpg } />
                                 <div className="user-detail">
                                     <div className="title">
-                                       <span> dsafjafa </span>
-                                       <img className="sex-svg" src={man_svg} />
+                                       <span> { this.state.userinfo && this.state.userinfo['username'] } </span>
+                                       <img className="sex-svg" src={ this.state.userinfo && this.state.userinfo['sex'] ? man_svg : woman_svg } />
                                     </div>
                                     <div className="signature">
-                                        dsadsadafad
+                                        { this.state.userinfo && this.state.userinfo['signature'] || '您当前并没有签名'  }
                                     </div>
                                 </div>
-                                
                             </div>
                             <div className="right">
                                 <button className="subscribe-user">
-                                    订阅
+                                   { this.state.subscribe ? '已订阅' : '订阅' }
                                 </button>
                                 <button className="send-message">
                                     发消息
@@ -78,38 +78,30 @@ export class UserPage extends React.Component {
                             
                         </div>
                         <div className="all-haiyous">
-                            <div className="haiyou-item">
-                                <img className="item-img" src = { draft_default_png } />
-                                <div className="item-detail">
-                                    <div>
-                                        dddddddddddddddddddd
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="haiyou-item">
-                                <img className="item-img" src = { draft_default_png } />
-                                <div className="item-detail">
-                                    <div>
-                                        dddddddddddddddddddd
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="haiyou-item">
-                                <img className="item-img" src = { draft_default_png } />
-                                <div className="item-detail">
-                                    <div>
-                                        dddddddddddddddddddd
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="haiyou-item">
-                                <img className="item-img" src = { draft_default_png } />
-                                <div className="item-detail">
-                                    <div>
-                                        dddddddddddddddddddd
-                                    </div>
-                                </div>
-                            </div>
+                            {
+                                this.state.haiyous.map((value, key) => {
+                                    return (
+                                        <div key={key} className="haiyou-item">
+                                            <img className="item-img" src = { draft_default_png } />
+                                            <div className="item-detail">
+                                                <div className="user-title" style={{ color: this.getRandomColor()}}>
+                                                    { value && value.title || 'haiyou, 不能为空的哦' }
+                                                </div>
+                                                <div className="user-detail" style={{ color: this.getRandomColor() }}>
+                                                    <div className="label">
+                                                        { value && value.label.split('_').join(' ') || 'No No No Label' }
+                                                    </div>
+                                                    <div className="watch">
+                                                        <img className="watch-img" src={ watch_svg } />
+                                                        { value && value.hot || 0}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            
                         </div>
                       
                     </div>
