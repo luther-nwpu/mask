@@ -34,3 +34,10 @@ export enum WebSocketType {
     CHAT = 'chat',
     HAIYOU = 'haiyou'
 }
+
+// 找回密码的过程
+export enum step {
+    FILLEMAIL = 0,
+    RESETPASSWORD = 1,
+    FINISH = 2
+}
