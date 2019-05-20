@@ -16,12 +16,16 @@ import history from '@router'
 import draft_svg from '@assets/draft_btn_0.svg'
 import upload_btn_0 from '@assets/upload_btn_0.svg'
 
-export class Person extends React.Component {
+interface IState {
+    tabNum: any
+}
+
+export class Person extends React.Component<null, IState> {
     constructor(props) {
         super(props)
         const search = queryString.parse(props.location.search)
         this.state = {
-            tabNum: isNaN(parseInt(search && search.id)) ? UserMenu.MYUSERINFO : parseInt(search && search.id) 
+            tabNum: parseInt(search && search.id) || UserMenu.MYUSERINFO
         }
     }
     props: any
