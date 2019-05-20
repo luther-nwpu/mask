@@ -6,6 +6,7 @@
   "author": "luther(luthernpu@gmail.com)",
   "license": "MIT",
   "dependencies": {
+    "@types/core-js": "^2.5.0",
     "@types/history": "^4.6.2",
     "@types/js-cookie": "^2.2.2",
     "@types/lodash": "^4.14.121",
