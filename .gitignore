@@ -8,3 +8,4 @@ yarn.lock
 yarn-error.log
 # ignore package-lock.json
 package-lock.json
+!node_modules/barrage-ui/index.js

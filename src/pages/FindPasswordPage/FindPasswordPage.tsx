@@ -61,6 +61,9 @@ export class FindPasswordPage extends React.Component {
             }, 1000)
         }
     }
+    public handleResetPassword() {
+        console.log()
+    }
     public render() {
         return (
             <div className="findpassword-page">
@@ -92,7 +95,7 @@ export class FindPasswordPage extends React.Component {
                                     <div className="password">                                    
                                         <input value = { this.state.passwordInput } onChange = {(e) => this._handleChangePasswordInput(e)} placeholder="请输入密码" type="password"/>
                                     </div>
-                                    <button className ="reset-password"> 重置密码 </button> 
+                                    <button className ="reset-password" onClick={ () => this.handleResetPassword() }> 重置密码 </button> 
                                 </div>
                             ) :
                             (
