@@ -21,7 +21,7 @@ export class Person extends React.Component {
         super(props)
         const search = queryString.parse(props.location.search)
         this.state = {
-            tabNum: parseInt(search && search.id) || UserMenu.MYUSERINFO
+            tabNum: isNaN(parseInt(search && search.id)) ? UserMenu.MYUSERINFO : parseInt(search && search.id) 
         }
     }
     props: any

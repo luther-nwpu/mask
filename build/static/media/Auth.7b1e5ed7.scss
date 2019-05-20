@@ -1,0 +1,245 @@
+.auth-component {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background:rgba(0,0,0,0.3);
+    .modal {
+        min-width: 500px;
+        border-radius: 10px;
+        background-color: white;
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        .title {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 2px solid #e4e6ea;
+            line-height: 30px;
+            font-size: 15px;
+            .item {
+                padding-left: 10px;
+                padding-right: 10px;
+                color: black;
+                height: 100%;
+            }
+            .item_select {
+                height: 100%;
+                box-sizing: content-box;
+                padding-left: 10px;
+                padding-right: 10px;
+                color: #ff9600;
+                border-bottom: 2px solid #ff9600;
+            }
+        }
+        .auth-content {
+            padding-top: 20px;
+            display: flex;
+            flex-direction: row;
+            .left {
+                width: 170px;
+                display: flex;
+                flex-direction: column;
+                .login {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: normal;
+                    margin-top: 10px;
+                    .login-item {
+                        line-height: normal;
+                    }
+                    .item {
+                        margin-top: 20px;
+                        display: flex;
+                        flex-direction: row;
+                        line-height: normal;
+                        align-items: center;
+                        justify-content: space-between;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
+                        .judgelogin {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        }
+                        .switchFindPassword {
+                            color: black;
+                            a {
+                                color: black;
+                                text-decoration: none;
+                            }
+                            a:hover {
+                                color: blue;
+                                text-decoration-line: underline;
+                            }
+                        }
+                        button {
+                            line-height: 30px;
+                            text-align: center;
+                            border: none;
+                            width: 100%;
+                            border-radius: 10px;
+                            color: white;
+                            background: #ff9600;
+                            outline: none;
+                            &:hover {
+                                opacity: 0.9;
+                            }
+                        }
+                    }
+                }
+                .register {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: normal;
+                    .item-username {  
+                        margin-top: 5px;
+                        line-height: normal;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
+                    }
+                    .item {                    
+                        margin-top: 13px;
+                        line-height: normal;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
+                    }
+                    .check {
+                        margin-top: 13px;
+                        display: flex;
+                        flex-direction: row;
+                        position: relative;
+                        .item-error {
+                            position: absolute;
+                            background-color: #fffbe1;
+                            line-height: 30px;
+                            color: red;
+                            width: 98%;
+                            font-weight: 700;
+                            top: -30px;
+                            padding-left: 5px;
+                            img {
+                                width: 15px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-noerror {
+                            display: none;
+                        }
+                        input {
+                            width: 79px;
+                        }
+                        button {
+                            width: 85px;
+                        }
+                    }
+                    .register-item {
+                        margin-top: 10px;
+                        button {
+                            line-height: 30px;
+                            text-align: center;
+                            border: none;
+                            width: 100%;
+                            border-radius: 10px;
+                            color: white;
+                            background: #ff9600;
+                            &:hover {
+                                opacity: 0.9;
+                            }
+                        }
+                    }
+                    .account-item {
+                        margin-top: 10px;
+                    }
+
+                }
+            }
+            .right {
+                margin-left: 30px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 300px;
+                }
+            }
+        }
+        .close {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: 10px;
+            top: 10px;
+            background-image: url('../../assets/close_btn_0.svg');
+            background-size: 30px 30px;
+            &:hover {
+                background-image: url('../../assets/close_btn_1.svg');
+                background-size: 100% 100%;
+                transform:rotate(180deg);
+                transition:transform 1s ease;
+            }
+        }
+    }
+}

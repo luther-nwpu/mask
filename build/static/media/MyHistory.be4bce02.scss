@@ -1,0 +1,62 @@
+.myhistory-component {
+    padding: 30px;
+    display: flex;
+    flex-flow: wrap;
+    .empty-history {
+        margin-top: 200px;
+        margin-left: 300px;
+        display: flex;
+        align-items: center;
+        img {
+            width: 40px;
+        }
+        .text {
+            margin-left: 10px;
+            font-size: 25px;
+            font-weight: 700;
+        }
+    }
+    .history-item {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        border: 1px solid #8b2475;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        position: relative;
+        img {
+            border-radius: 5px;
+            width: 180px;
+            height: 120px;
+        }
+        .item-bottom {
+            padding-left: 5px;
+            .item-title {
+                font-size: 20px;
+                line-height: 25px;
+            }
+            .item-time {
+                font-weight: 500;
+                color: rgb(95, 95, 95);
+                font-size: 10px;
+                line-height: 20px;
+            }
+        }
+        &:hover {
+            border-color: chartreuse;
+            .close-img {
+                display: block;
+            }
+        }
+        .close-img {
+            position: absolute;
+            display: none;
+            right: 0px;
+            top: 0px;
+            width: 30px;
+            height: 30px;
+            background-image: url('../../assets/close_btn_3.svg');
+            background-size: 30px 30px;
+        }
+    }
+}
