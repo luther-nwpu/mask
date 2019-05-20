@@ -16,11 +16,7 @@ import history from '@router'
 import draft_svg from '@assets/draft_btn_0.svg'
 import upload_btn_0 from '@assets/upload_btn_0.svg'
 
-interface IState {
-    tabNum: any
-}
-
-export class Person extends React.Component<null, IState> {
+export class Person extends React.Component {
     constructor(props) {
         super(props)
         const search = queryString.parse(props.location.search)
@@ -30,7 +26,7 @@ export class Person extends React.Component<null, IState> {
     }
     props: any
     public state = {
-        tabNum: null
+        tabNum: UserMenu.MYUSERINFO
     }
     public changeTabNum(value: any) {
         history.replace(`personinfo?id=${value}`)
