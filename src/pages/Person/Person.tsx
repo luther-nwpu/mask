@@ -30,7 +30,7 @@ export class Person extends React.Component<null, IState> {
     }
     props: any
     public state = {
-        tabNum: UserMenu.MYUSERINFO
+        tabNum: null
     }
     public changeTabNum(value: any) {
         history.replace(`personinfo?id=${value}`)
