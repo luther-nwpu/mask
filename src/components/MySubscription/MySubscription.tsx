@@ -63,10 +63,10 @@ export class MySubscription extends React.Component {
                                 <img src={ avator_default_jpg } />
                                 <div className="item-description">
                                     <div className="username">
-                                        { value.suser.username }
+                                        { value.suser && value.suser.username }
                                     </div>
                                     <div className="signature">
-                                        { value.suser.signature || '您当前并没有签名' }
+                                        { value.suser && value.suser.signature || '您当前并没有签名' }
                                     </div>
                                     <div className="item-bottom">
                                         订阅者： { value.subscribeCount }
