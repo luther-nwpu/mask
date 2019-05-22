@@ -52,7 +52,7 @@ class TopBar extends Component {
                     <div className="left">
                         <a href ="/"> <img src={logo} /> </a>
                         <div className="dropitem">
-                            <div className="item">
+                            <div className="item" onClick={() => this.switchToLink('/')}>
                                 首页
                             </div>
                         </div>
