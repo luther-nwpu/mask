@@ -89,11 +89,16 @@ class TopBar extends Component {
                         </div>
                     </div>
                     <div className="right">
-                        <div className="item">
-                            <div className="icon">
+                        <div className="dropitem">    
+                            <div className="item">
+                                <div className="icon">
                             </div>
-                            <div className="item-text">
-                                历史
+                                <div className="item-text">
+                                    历史
+                                </div>
+                            </div>
+                        <div className="dropitem-content">
+                                HelloWorld
                             </div>
                         </div>
                         {
