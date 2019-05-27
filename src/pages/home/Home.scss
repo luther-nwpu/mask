@@ -1,5 +1,8 @@
-.mask-app {
+.home-page {
     width: 100%;
     display: flex;
     flex-direction: column;
+    .swiper {
+        height: 199px;
+    }
 }
