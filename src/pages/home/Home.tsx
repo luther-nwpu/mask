@@ -23,6 +23,7 @@ const data = {
       'width':995,//幻灯片的宽度
       'height':335,//幻灯片的高度
       'imgWidth':690,//幻灯片第一帧的宽度
+      'imgHeight': 500,
       'interval': 2000,//幻灯片滚动的间隔时间
       'scale':0.85, //记录显示比例关系
       'number':3,

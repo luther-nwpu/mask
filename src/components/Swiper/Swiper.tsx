@@ -134,15 +134,15 @@ export class Swiper extends Component {
     }
     // 变化的属性
     rotateStyle(self, next) {
-            let left = Number.parseInt(next.style.left)
-            let top = Number.parseInt(next.style.top)
-            let width = Number.parseInt(next.style.width)
-            let height = Number.parseInt(next.style.height)
-            let zIndex = Number.parseInt(next.style.zIndex)
-            let opacity = parseFloat(next.style.opacity).toFixed(2)
-            this.animate(self, {left:left,width:width,height:height,zIndex:zIndex,opacity: opacity,top:top}, 300, 'QuadEaseIn', () => {
-                ++this.LOOPNUM 
-            })
+      let left = Number.parseInt(next.style.left)
+      let top = Number.parseInt(next.style.top)
+      let width = Number.parseInt(next.style.width)
+      let height = Number.parseInt(next.style.height)
+      let zIndex = Number.parseInt(next.style.zIndex)
+      let opacity = parseFloat(next.style.opacity).toFixed(2)
+      this.animate(self, {left:left,width:width,height:height,zIndex:zIndex,opacity: opacity,top:top}, 300, 'QuadEaseIn', () => {
+          ++this.LOOPNUM 
+      })
     }
 
     // 点击左侧按钮
@@ -181,52 +181,52 @@ export class Swiper extends Component {
 
     // 木马旋转
     playCarousel(direction) {
-            let len = this.itemsArr.length
-            if(direction == 'left'){
-                this.setState({
-                    activeIndex: this.state.activeIndex-1
-                }, () => {
-                    if(this.state.activeIndex < 0){
-                        this.setState({
-                            activeIndex: (len-1)
-                        })
-                       
-                    }
-                })
-               
+      let len = this.itemsArr.length
+      if(direction == 'left'){
+          this.setState({
+              activeIndex: this.state.activeIndex-1
+          }, () => {
+              if(this.state.activeIndex < 0){
+                  this.setState({
+                      activeIndex: (len-1)
+                  })
+                  
+              }
+          })
+          
 
-                this.itemsArr.forEach((item, index) => {
-                    let self = item
-                    let next = this.itemsArr[index+1]
-                    if(index == (len-1)){
-                        next = this.itemsArr[0]
-                    }
-                    
-                    this.rotateStyle(self, next)
-                })
-                
-            }else if(direction == 'right'){
-                this.setState({
-                    activeIndex: this.state.activeIndex+1
-                }, () => {
-                    if(this.state.activeIndex > (len-1)){
-                        this.setState({
-                            activeIndex: 0
-                        })
-                    }
-                })
-                
-                this.itemsArr.forEach((item, index) => {
+          this.itemsArr.forEach((item, index) => {
+              let self = item
+              let next = this.itemsArr[index+1]
+              if(index == (len-1)){
+                  next = this.itemsArr[0]
+              }
+              
+              this.rotateStyle(self, next)
+          })
+          
+      }else if(direction == 'right'){
+          this.setState({
+              activeIndex: this.state.activeIndex+1
+          }, () => {
+              if(this.state.activeIndex > (len-1)){
+                  this.setState({
+                      activeIndex: 0
+                  })
+              }
+          })
+          
+          this.itemsArr.forEach((item, index) => {
 
-                    let self = item
-                    let prev = this.itemsArr[index-1]
-                    if(index == 0){
-                        prev = this.itemsArr[len-1]
-                    }
-                    
-                    this.rotateStyle(self, prev)
-                })
-            }
+              let self = item
+              let prev = this.itemsArr[index-1]
+              if(index == 0){
+                  prev = this.itemsArr[len-1]
+              }
+              
+              this.rotateStyle(self, prev)
+          })
+      }
     }
 
     // 自己动
@@ -322,21 +322,19 @@ export class Swiper extends Component {
             zIndex = index-middleIndex
             opacity = 1 - middleIndex/index
         }
-
         switch(this.props.lunboObject.vertical){
             case 'bottom':
-                imgTop = Number(this.props.lunboObject.height - this.props.lunboObject.imgHeight*scale)
+                imgTop = Number(this.props.lunboObject.height - (this.props.lunboObject.imgHeight || 0)* scale)
             break
             case 'center':
-                imgTop = Number((this.props.lunboObject.height - this.props.lunboObject.imgHeight*scale)/2)
+                imgTop = Number((this.props.lunboObject.height - (this.props.lunboObject.imgHeight || 0 )*scale)/2)
             break
             default:
-
+              break
         }
-
         return {
             width: Number(this.props.lunboObject.imgWidth*scale),
-            height: Number(this.props.lunboObject.imgHeight*scale), 
+            height: Number((this.props.lunboObject.imgHeight || 0 )*scale), 
             left: Number(imgleft),
             zIndex:zIndex,
             opacity:opacity,
@@ -348,6 +346,7 @@ export class Swiper extends Component {
         const btnWidth = (this.props.lunboObject.width-this.props.lunboObject.imgWidth) / 2
         
         return (
+          <div className="swiper-component">
             <div className="poster-main" style={{width:this.props.lunboObject.width}} onMouseOver={this.mouseHandle.bind(this)} onMouseLeave={this.mouseHandle.bind(this)}>
                 <div className="poster-prev-btn" style={{width:btnWidth}} onClick={()=>this.clickPrev()}></div>
                 <div className="dots-wrap" style={{marginLeft: - Number(24*this.props.lunboObject.number / 2 + 4)}}>
@@ -367,7 +366,9 @@ export class Swiper extends Component {
                    }
                 </ul>
                 <div className="poster-next-btn" style={{width:btnWidth}} onClick={() => this.clickNext()}></div>
-            </div>)
+            </div>
+        </div>    
+      )
     }
 }
 
