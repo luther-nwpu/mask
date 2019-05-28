@@ -111,7 +111,7 @@ class Auth extends React.Component {
             this.dealError('register-username', '邮箱格式不正确')
             return
         } else {
-            const [res, error] = await tryCatch(Post('auth/sendEmail', { email: this.state.register.account }))
+            const [res, error] = await tryCatch(Post('/api/auth/sendEmail', { email: this.state.register.account }))
             if (error) {
                 alert(error)
             } else {
@@ -183,7 +183,7 @@ class Auth extends React.Component {
         } else if(this.state.register.checkCode === '') {
             this.dealError('register-checkcode', '请输入验证码')
         } else {
-           const [res, error] = await tryCatch(Post('/api/auth/register', {
+           const [res, error] = await tryCatch(Post('auth/register', {
                email: this.state.register.account,
                checkcode: this.state.register.checkCode,
                password: this.state.register.password
