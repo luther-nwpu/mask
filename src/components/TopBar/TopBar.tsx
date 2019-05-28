@@ -82,7 +82,7 @@ class TopBar extends Component {
                         </div>
                         <div className="dropitem">
                             <div className="input">
-                                <input type = "text" />
+                                <input type = "text"  placeholder = "好嗨哟，好开心哦"/>
                                 <div className="icon">
                                 </div>
                             </div>

@@ -1,6 +1,12 @@
 import './Home.scss'
 import React from 'react'
 import { Swiper } from '@components'
+import index_svg from '@assets/index_btn_0.svg'
+import game_svg from '@assets/game_btn_0.svg'
+import life_svg from '@assets/life_btn_0.svg'
+import happy_svg from '@assets/happy_btn_0.svg'
+import video_svg from '@assets/video_btn_1.svg'
+import music_svg from '@assets/music_btn_0.svg'
 const data = {
   imgArray: [
       require('./img/1.jpg'),
@@ -40,6 +46,69 @@ export class Home extends React.Component {
       <div className="home-page">
         <div className="swiper">
           <Swiper lunboObject={data.lunboObject} imgArray={data.imgArray} title={data.title} linkArray={data.linkArray} />
+        </div>
+        <div className="category">
+          <div className="category-title">
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={index_svg}/>
+              </div>
+              <div className="title">
+                首页
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={game_svg}/>
+              </div>
+              <div className="title">
+                游戏
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={life_svg}/>
+              </div>
+              <div className="title">
+                生活
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={happy_svg}/>
+              </div>
+              <div className="title">
+                娱乐
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={video_svg}/>
+              </div>
+              <div className="title">
+                影视
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={music_svg}/>
+              </div>
+              <div className="title">
+                音乐
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={game_svg}/>
+              </div>
+              <div className="title">
+                科技
+              </div>
+            </div>
+          </div>
+          <div className="dd">
+
+          </div>
         </div>
       </div>
     )
