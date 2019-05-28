@@ -5,6 +5,7 @@
   "description": "Finish The Nwpu Order Admin.",
   "author": "luther(luthernpu@gmail.com)",
   "license": "MIT",
+  "homepage": ".",
   "dependencies": {
     "@types/core-js": "^2.5.0",
     "@types/history": "^4.6.2",
