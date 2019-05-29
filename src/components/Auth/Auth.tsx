@@ -144,7 +144,7 @@ class Auth extends React.Component {
             this.dealError('login-password', '请输入密码')
             return
         } else {
-            const res = await Post('/auth/login', {
+            const res = await Post('/api/auth/login', {
                 email: this.state.login.username,
                 password: this.state.login.password
             })

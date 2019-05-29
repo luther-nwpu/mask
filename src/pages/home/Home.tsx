@@ -7,6 +7,17 @@ import life_svg from '@assets/life_btn_0.svg'
 import happy_svg from '@assets/happy_btn_0.svg'
 import video_svg from '@assets/video_btn_1.svg'
 import music_svg from '@assets/music_btn_0.svg'
+import technology_svg from '@assets/technology_btn_0.svg'
+import animation_svg from '@assets/animation_btn_0.svg'
+import fashion_svg from '@assets/fashion_btn_0.svg'
+import fandrama_svg from '@assets/fandrama_btn_0.svg'
+import record_svg from '@assets/record_btn_0.svg'
+import ghost_svg from '@assets/ghost_btn_0.svg'
+import digital_svg from '@assets/digital_btn_0.svg'
+import ads_svg from '@assets/ads_btn_0.svg'
+import tvseries_svg from '@assets/tvseries_btn_0.svg'
+import movie_svg from '@assets/movie_btn_0.svg'
+import country_svg from '@assets/country_btn_0.svg'
 const data = {
   imgArray: [
       require('./img/1.jpg'),
@@ -99,17 +110,101 @@ export class Home extends React.Component {
             </div>
             <div className="category-item">
               <div className="icon">
-                <img className="index_svg" src={game_svg}/>
+                <img className="index_svg" src={technology_svg}/>
               </div>
               <div className="title">
                 科技
               </div>
             </div>
-          </div>
-          <div className="dd">
-
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={digital_svg}/>
+              </div>
+              <div className="title">
+                数码
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={animation_svg}/>
+              </div>
+              <div className="title">
+                动画
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={fashion_svg}/>
+              </div>
+              <div className="title">
+                时尚
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={fandrama_svg}/>
+              </div>
+              <div className="title">
+                番剧
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={record_svg}/>
+              </div>
+              <div className="title">
+                记录片
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={ghost_svg}/>
+              </div>
+              <div className="title">
+                鬼畜
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={ads_svg}/>
+              </div>
+              <div className="title">
+                广告
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={country_svg}/>
+              </div>
+              <div className="title">
+                国创
+              </div>
+            </div>           
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={tvseries_svg}/>
+              </div>
+              <div className="title">
+                电视剧
+              </div>
+            </div>
+            <div className="category-item">
+              <div className="icon">
+                <img className="index_svg" src={movie_svg}/>
+              </div>
+              <div className="title">
+                电影
+              </div>
+            </div>
           </div>
         </div>
+        
+        <div className="home-content">
+            <div className="category-content">
+              
+              ddd
+            </div>
+          </div>
       </div>
     )
   }
