@@ -86,7 +86,7 @@ class Video extends React.Component<IProp, any> {
 
     public fetchGetBarrages(id) {
         if(id && this.props.id !== id) {
-            Get('/barrage/getAllBarrageByVideoId', {
+            Get('/api/barrage/getAllBarrageByVideoId', {
                 videoId: id
             }).then((res) => {
                 if(res.success) {
@@ -126,7 +126,7 @@ class Video extends React.Component<IProp, any> {
 
     public fetchGetVideo(id) {
         if(id && this.props.id !== id) {
-            Get('/video/getVideoByVideoId', {
+            Get('/api/video/getVideoByVideoId', {
                 videoId: id
             }).then((res) => {
                 if(res.success) {
@@ -144,7 +144,7 @@ class Video extends React.Component<IProp, any> {
 
     public fetchGetTunnelId(id) {
         if(id && this.props.id !== id) {
-            Get('/socket/getTunnelId', {}).then((res) => {
+            Get('/api/socket/getTunnelId', {}).then((res) => {
                 if(res.success) {
                     this.setState({
                         ws: new Websocket({type: WebSocketType.HAIYOU, haiyouId: id, tunnelId: res.result})

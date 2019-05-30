@@ -195,7 +195,7 @@ class Drafts extends React.Component {
         this.hiddenFileInput.click()
     }
     public uploadFile(e) {
-        const url = 'upload/video'
+        const url = '/api/upload/video'
         const form = new FormData()
         form.append('file', e.target.files[0])
         this.state.uploadVideos.push({
@@ -296,7 +296,7 @@ class Drafts extends React.Component {
         })
     }
     public async commit() {
-        const res = await TokenPost('haiyou/commitHaiyou', {
+        const res = await TokenPost('/api/haiyou/commitHaiyou', {
             video_id: this.state.uploadVideos.reduce((total, value) => {
                 total.push(value.id)
                 return total
@@ -325,7 +325,7 @@ class Drafts extends React.Component {
         this.setState({input: { ...this.state.input, reprint: e.target.value }})
     }
     public async saveDraft() {
-        await TokenPost('drafts/updateDraft', {
+        await TokenPost('/api/drafts/updateDraft', {
             id: this.state.draftId,
             picture_id: this.state.videoImgs.reduce((total, value) => {
                 if(value.id != this.state.selectCover.id) {
@@ -347,7 +347,7 @@ class Drafts extends React.Component {
         })
     }
     public uploadCoveFile(e) {
-        const url = 'upload/uploadImg'
+        const url = '/api/upload/uploadImg'
         const form = new FormData()
         form.append('file', e.target.files[0])
         // 此处的file字段由上传的api决定，可以是其它值

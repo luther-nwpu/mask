@@ -15,7 +15,7 @@ export class UserPage extends React.Component {
     }
     props
     fetchGetHaiyousByUserId() {
-        Get('/haiyou/getAllHaiyouByUserId', {
+        Get('/api/haiyou/getAllHaiyouByUserId', {
             userId: this.props.match.params.id
         }).then(res => {
             if(res.success) {

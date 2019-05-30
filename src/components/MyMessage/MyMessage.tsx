@@ -23,7 +23,7 @@ export class MyMessage extends React.Component {
         this.fecthGetChatByMe()
     }
     public fetchGetTunnelId() {
-        TokenGet('/socket/getTunnelId').then(res=> {
+        TokenGet('/api/socket/getTunnelId').then(res=> {
             if(res.success) {
                 this.setState({
                     ws: new Websocket({type: WebSocketType.CHAT, tunnelId: res.result})
@@ -42,7 +42,7 @@ export class MyMessage extends React.Component {
         })
     }
     public fetchReadMyChat() {
-        TokenGet('/chat/readMyChat').then(res => {
+        TokenGet('/api/chat/readMyChat').then(res => {
             if(res.success) {
                 this.setState({
                     messageArray: res.result.allMessage,
@@ -60,7 +60,7 @@ export class MyMessage extends React.Component {
         })
     }
     public fecthGetChatByMe() {
-        TokenGet('/chat/getAllChatByMe').then(res => {
+        TokenGet('/api/chat/getAllChatByMe').then(res => {
             if(res.success) {
                 this.setState({
                     messageArray: res.result.allMessage,

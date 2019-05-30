@@ -17,7 +17,7 @@ export class MyVideo extends React.Component {
         videos: []
     }
     public componentWillMount() {
-        TokenGet('haiyou//getAllHaiyou').then((res) => {
+        TokenGet('/api/haiyou//getAllHaiyou').then((res) => {
             if(res.success) {
                 this.setState({
                     videos: res.result.map((value) => {

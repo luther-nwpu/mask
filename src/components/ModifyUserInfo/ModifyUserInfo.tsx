@@ -20,7 +20,7 @@ class ModifyUserInfo extends React.Component {
         sexInput: '2'
     }
     public async changeNickName() {
-        const res = await TokenPost('auth/updateUserInfo', {
+        const res = await TokenPost('/api/auth/updateUserInfo', {
             location: this.state.locationInput,
             age: this.state.ageInput,
             sex: this.state.sexInput,

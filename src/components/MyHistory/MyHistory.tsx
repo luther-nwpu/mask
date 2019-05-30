@@ -15,7 +15,7 @@ export class MyHistory extends React.Component {
     }
 
     public fetchGetAllHistoryByMe() {
-        TokenGet('/history/getAllHistoryByMe').then((res) => {
+        TokenGet('/api/history/getAllHistoryByMe').then((res) => {
             if(res.success) {
                 this.setState({
                     historyArr: res.result
@@ -25,7 +25,7 @@ export class MyHistory extends React.Component {
     }
 
     public fetchDeleteHistory(id) {
-        TokenPost('/history/deleteHistoryById', {
+        TokenPost('/api/history/deleteHistoryById', {
             id
         }).then((res) => {
             if(res.success) {

@@ -35,7 +35,7 @@ class MyInfo extends React.Component {
         if (!file) {
             return
         }
-        const url = 'upload/uploadImg'
+        const url = '/api/upload/uploadImg'
         const form = new FormData()
         form.append('file', file)
         // 此处的file字段由上传的api决定，可以是其它值
@@ -47,7 +47,7 @@ class MyInfo extends React.Component {
             if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
                 const res = JSON.parse(xhr.responseText)
                 if(res.success) {
-                    const res2 = await TokenPost('auth/updateAvator', {
+                    const res2 = await TokenPost('/api/auth/updateAvator', {
                         avatorId: res.result.id
                     })
                     if(!res2.success) {

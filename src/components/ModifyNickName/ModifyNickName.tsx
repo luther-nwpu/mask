@@ -21,7 +21,7 @@ class ModifyNickName extends React.Component {
         })
     } 
     public async changeNickName() {
-        const res = await TokenPost('auth/updateNickName', {
+        const res = await TokenPost('/api/auth/updateNickName', {
             nickName: this.state.nickNameInput
         })
         if(!res.success) {

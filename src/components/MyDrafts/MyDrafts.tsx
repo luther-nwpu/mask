@@ -21,7 +21,7 @@ export class MyDrafts extends React.Component {
         this.getAllDraft()
     }
     public getAllDraft() {
-        TokenGet('drafts/getAllDraft').then((res) => {
+        TokenGet('/api/drafts/getAllDraft').then((res) => {
             if(res.success) {
                 this.setState({
                     videos: res.result.map((value) => {
@@ -42,7 +42,7 @@ export class MyDrafts extends React.Component {
         history.push(link)
     }
     public deleteDraft(id) {
-        TokenPost('drafts/deleteDraft', {
+        TokenPost('/api/drafts/deleteDraft', {
             id: id
         }).then((res) => {
             if(res.success) {

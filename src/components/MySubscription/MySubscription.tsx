@@ -13,7 +13,7 @@ export class MySubscription extends React.Component {
     }
 
     public fetchGetAllSubscribe() {
-        TokenGet('/subscribe/getAllSubscribeByMe').then((res) => {
+        TokenGet('/api/subscribe/getAllSubscribeByMe').then((res) => {
             if(res.success) {
                 this.setState({
                     subscribeUsers: res.result
@@ -28,7 +28,7 @@ export class MySubscription extends React.Component {
 
     public handleUnSubscribe(e, id) {
         e.stopPropagation()
-        TokenPost('/subscribe/unSubscribeUser', {
+        TokenPost('/api/subscribe/unSubscribeUser', {
             subscriberId: id
         }).then((res) => {
             if(res.success) {
