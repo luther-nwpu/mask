@@ -12,8 +12,62 @@
     .home-content {
         display: flex;
         flex-direction: column;
-        .category-content {
-            
+        width: 100%;
+        align-items: center;
+        .content-item {
+            margin-top: 20px;
+            padding: 20px;
+            width: 75%;
+            background: white;
+            border-radius: 6px;
+            .item-title {
+                display: flex;
+                align-items: center;
+                .img-class{
+                    width: 30px;
+                }
+                .text-class {
+                    margin-left: 10px;
+                    line-height: 30px;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+            .videos-content {
+                display: flex;
+                flex-wrap: wrap;
+                .video-item {
+                    margin-top: 10px;
+                    margin-right: 10px;
+                    width: 200px;
+                    .draft-img {
+                        height: 150px;
+                        width: 200px;
+                        border-radius: 10px;
+                    }
+                    .video-title {
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+                    .video-detail {
+                        margin-top: 3px;
+                        display: flex;
+                        justify-content: space-between;
+                        padding-right: 5px;
+                        .watch {
+                            font-weight: 500;
+
+                            display: flex;
+                            align-items: center;
+                            .watch-img {
+                                width: 20px;
+                                
+                                margin-right: 3px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     .category {

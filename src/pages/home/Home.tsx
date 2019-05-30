@@ -18,6 +18,9 @@ import ads_svg from '@assets/ads_btn_0.svg'
 import tvseries_svg from '@assets/tvseries_btn_0.svg'
 import movie_svg from '@assets/movie_btn_0.svg'
 import country_svg from '@assets/country_btn_0.svg'
+import draft_default_png from '@assets/draft_default_btn_0.jpg'
+import watch_svg from '@assets/watch_btn_0.svg'
+
 const data = {
   imgArray: [
       require('./img/1.jpg'),
@@ -52,6 +55,9 @@ const data = {
 const intervalTime = 2000
 const transitionTime = '2s'
 export class Home extends React.Component {
+  getRandomColor () {
+    return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
+  }
   render () {
     return (
       <div className="home-page">
@@ -64,7 +70,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={index_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 首页
               </div>
             </div>
@@ -72,7 +78,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={game_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 游戏
               </div>
             </div>
@@ -80,7 +86,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={life_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 生活
               </div>
             </div>
@@ -88,7 +94,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={happy_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 娱乐
               </div>
             </div>
@@ -96,7 +102,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={video_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 影视
               </div>
             </div>
@@ -104,7 +110,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={music_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 音乐
               </div>
             </div>
@@ -112,7 +118,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={technology_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 科技
               </div>
             </div>
@@ -120,7 +126,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={digital_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 数码
               </div>
             </div>
@@ -128,7 +134,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={animation_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 动画
               </div>
             </div>
@@ -136,7 +142,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={fashion_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 时尚
               </div>
             </div>
@@ -144,7 +150,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={fandrama_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 番剧
               </div>
             </div>
@@ -152,7 +158,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={record_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 记录片
               </div>
             </div>
@@ -160,7 +166,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={ghost_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 鬼畜
               </div>
             </div>
@@ -168,7 +174,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={ads_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 广告
               </div>
             </div>
@@ -176,7 +182,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={country_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 国创
               </div>
             </div>           
@@ -184,7 +190,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={tvseries_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 电视剧
               </div>
             </div>
@@ -192,7 +198,7 @@ export class Home extends React.Component {
               <div className="icon">
                 <img className="index_svg" src={movie_svg}/>
               </div>
-              <div className="title">
+              <div className="title" style={{color: this.getRandomColor()}}>
                 电影
               </div>
             </div>
@@ -200,9 +206,119 @@ export class Home extends React.Component {
         </div>
         
         <div className="home-content">
-            <div className="category-content">
-              
-              ddd
+            <div className="content-item">
+              <div className="item-title">
+                <img src={game_svg} className="img-class" />
+                <span className="text-class"> 游戏 </span>
+                <span className="right-content"> 一种7000个视频</span>
+              </div>
+              <div className="videos-content">
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="video-item">
+                      <img src={draft_default_png} className="draft-img" />
+                      <div className="video-title" style={{ color: this.getRandomColor()}}>
+                        { 'haiyou, 不能为空的哦' }
+                      </div>
+                      <div className="video-detail" style={{ color: this.getRandomColor() }}>
+                          <div className="label">
+                              { /*value && value.label.split('_').join(' ') */ 'No No No Label' }
+                          </div>
+                          <div className="watch">
+                              <img className="watch-img" src={ watch_svg } />
+                              { /* value && value.hot*/ 0}
+                          </div>
+                      </div>
+                  </div>
+              </div>
             </div>
           </div>
       </div>

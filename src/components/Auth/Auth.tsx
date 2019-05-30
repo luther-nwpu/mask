@@ -183,7 +183,7 @@ class Auth extends React.Component {
         } else if(this.state.register.checkCode === '') {
             this.dealError('register-checkcode', '请输入验证码')
         } else {
-           const [res, error] = await tryCatch(Post('auth/register', {
+           const [res, error] = await tryCatch(Post('/api/auth/register', {
                email: this.state.register.account,
                checkcode: this.state.register.checkCode,
                password: this.state.register.password
