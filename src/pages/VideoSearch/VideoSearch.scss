@@ -38,11 +38,11 @@
     }
     .user-list {
         margin-top: 10px;
-        padding: 20px;
-        background: rgb(230, 226, 226);
         width: 80%;
-        border-radius: 10px;
-        .user-top {
+        .user-top {        
+            border-radius: 10px;
+            padding: 20px;
+            background: rgb(230, 226, 226);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -65,14 +65,73 @@
                 background-image: url('../../assets/arrow_btn_1.svg');
             }
         }
+        .user-content {
+            .empty-user {
+                margin-left: 40px;           
+                margin-top: 40px;
+                display: flex;
+                align-items: center;
+                .empty-img {
+                    width: 100px;
+                }
+                .empty-text {
+                    margin-left: 10px;
+                    font-size: 23px;
+                    color: cornflowerblue;
+                }
+            }
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            .user-item {
+                margin-right: 10px;
+                margin-bottom: 10px;
+                background: white;
+                border-radius: 7px;
+                width: 140px;
+                padding: 10px;
+                .avator-class {
+                    border: 1px solid hsla(337, 100%, 51%, 0.685);
+                    width: 130px;
+                    height: 130px;
+                    border-radius: 65px;
+                }
+                .item-detail {
+                    margin-top: 4px;
+                    .detail-title {
+                        font-size: 15px;
+                        font-weight: 700;
+                    }
+                    .detail-content {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .detail-signature {
+                            color: rgb(117, 117, 117);
+                            font-weight: 600;
+                        }
+                        .detail-fans {
+                            display: flex;
+                            align-items: center;
+                            .fans-img {
+                                width: 20px;
+                            }
+                            .fans-num {
+                                margin-left: 3px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     .video-list {
         margin-top: 10px;
         width: 80%;
-        padding: 20px;
-        background: wheat;
-        border-radius: 10px;
         .video-top {
+            background: wheat;
+            border-radius: 10px;            
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -93,6 +152,56 @@
                 height: 30px;
                 background-size: 30px 30px;
                 background-image: url('../../assets/arrow_btn_1.svg');
+            }
+        }
+        .video-content {
+            display: flex;
+            flex-wrap: wrap;
+            .empty-video {
+                margin-left: 40px;           
+                margin-top: 40px;
+                display: flex;
+                align-items: center;
+                .empty-img {
+                    width: 100px;
+                    border-radius: 50px;
+                }
+                .empty-text {
+                    margin-left:10px;
+                    font-size: 23px;
+                    color: rgb(8, 231, 157);
+                }
+            }
+            .video-item {
+                margin-top: 10px;
+                margin-right: 10px;
+                width: 200px;
+                .draft-img {
+                    height: 150px;
+                    width: 200px;
+                    border-radius: 10px;
+                }
+                .video-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                .video-detail {
+                    margin-top: 3px;
+                    display: flex;
+                    justify-content: space-between;
+                    padding-right: 5px;
+                    .watch {
+                        font-weight: 500;
+
+                        display: flex;
+                        align-items: center;
+                        .watch-img {
+                            width: 20px;
+                            
+                            margin-right: 3px;
+                        }
+                    }
+                }
             }
         }
     }
