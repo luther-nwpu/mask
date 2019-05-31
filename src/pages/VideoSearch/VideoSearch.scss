@@ -1,0 +1,99 @@
+.videosearch-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    .video-search {
+        padding: 20px;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        .logo {
+            width: 150px;
+        }
+        .search-input {
+            width: 200px;
+            padding-left: 4px;
+            margin-left: 10px;
+            line-height: 27px;
+            border-radius: 5px;
+        }
+        .search-btn {
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgb(135, 145, 140);
+            padding: 3px;
+            border-radius: 3px;
+            background: #dddddd;
+            .text {
+                margin-left: 2px;
+                color: brown;
+                font-size: 15px;
+            }
+            &:active {
+                opacity: 0.8;
+            }
+        }
+    }
+    .user-list {
+        margin-top: 10px;
+        padding: 20px;
+        background: rgb(230, 226, 226);
+        width: 80%;
+        border-radius: 10px;
+        .user-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .left {
+                font-size: 15px;
+                color: rgb(255, 108, 4);
+                font-weight: 800;
+            }
+            .right {
+                width: 30px;
+                height: 30px;
+                background-size: 30px 30px;
+                background-image: url('../../assets/arrow_btn_0.svg');
+            }
+            .right-select {
+                transform: rotate(90deg);
+                width: 30px;
+                height: 30px;
+                background-size: 30px 30px;
+                background-image: url('../../assets/arrow_btn_1.svg');
+            }
+        }
+    }
+    .video-list {
+        margin-top: 10px;
+        width: 80%;
+        padding: 20px;
+        background: wheat;
+        border-radius: 10px;
+        .video-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .left {
+                font-size: 15px;
+                color: rgb(4, 84, 255);
+                font-weight: 800;
+            }
+            .right {
+                width: 30px;
+                height: 30px;
+                background-size: 30px 30px;
+                background-image: url('../../assets/arrow_btn_0.svg');
+            }
+            .right-select {
+                transform: rotate(90deg);
+                width: 30px;
+                height: 30px;
+                background-size: 30px 30px;
+                background-image: url('../../assets/arrow_btn_1.svg');
+            }
+        }
+    }
+}
