@@ -253,15 +253,15 @@ class Video extends React.Component<IProp, any> {
         })
     }
     public updateVideo(e) {
-        if (this.video && this.video.buffered.length) {
-            // this.AddBarrage()
-            // this.state.barragePlayer.play()
-            // let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
-            // this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
-            // let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
-            // this.processCurrentWidth = offset + 'px'
-            // this.setState({})
-        }
+        // if (this.video && this.video.buffered.length) {
+        //     // this.AddBarrage()
+        //     // this.state.barragePlayer.play()
+        //     // let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
+        //     // this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
+        //     // let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
+        //     // this.processCurrentWidth = offset + 'px'
+        //     // this.setState({})
+        // }
     }
 
     public onOffVolume() {
