@@ -17,6 +17,8 @@ import sex_svg from '@assets/sex_know_0.svg'
 import autograph from '@assets/icon_autograph.png'
 import age from '@assets/icon_age.png'
 import location from '@assets/icon_location.png'
+import play_svg from '@assets/play_btn_1.svg'
+
 class TopBar extends Component {
     state = {
         userinfo: null
@@ -25,6 +27,9 @@ class TopBar extends Component {
     constructor(props: any) {
         super(props)
         this.state.userinfo = props.userinfo
+    }
+    getRandomColor () {
+        return '#'+('00000'+ (Math.random()*0x1000000<<0).toString(16)).substr(-6)
     }
     login() {
         this.props.displayAuth(true, AuthTab.LOGIN)
@@ -63,14 +68,79 @@ class TopBar extends Component {
                                 </span>
                             </div>
                             <div className="dropitem-content">
-                                HelloWorld
+                                <div className="category">
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        游戏
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        生活
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        娱乐
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        影视
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        音乐
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        科技
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        数码
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        动画
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        时尚
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        番剧
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        纪录片
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        鬼畜
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        广告
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        国创
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        电视剧
+                                    </span>
+                                    <span className="category-item" style={{background: this.getRandomColor(), color: this.getRandomColor()}} >
+                                        电影
+                                    </span>
+                                </div>     
                             </div>
                         </div>
                         <div className="dropitem">
                             <div className="item">
                                 热门
-                                <span className="closeBox" >
+                                <span className="closeBox">
                                 </span>
+                            </div>
+                            <div className="dropitem-content">
+                                <div className="hot">
+                                    <div className="hot-item">
+                                        <img src={play_svg} className="play-img"/> <span  style={{color: this.getRandomColor()}}>我喜欢你好久了</span>
+                                    </div>
+                                    <div className="hot-item">
+                                        <img src={play_svg} className="play-img"/> <span  style={{color: this.getRandomColor()}}>我喜欢你好久了</span>
+                                    </div>
+                                    <div className="hot-item">
+                                        <img src={play_svg} className="play-img"/> <span style={{color: this.getRandomColor()}}>我喜欢你好久了</span>
+                                    </div>
+                                    <div className="hot-item">
+                                        <img src={play_svg} className="play-img"/> <span style={{color: this.getRandomColor()}}>我喜欢你好久了</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="dropitem">
@@ -78,6 +148,13 @@ class TopBar extends Component {
                                 排行榜
                                 <span className="closeBox">
                                 </span>
+                            </div>
+                            <div className="dropitem-content">
+                                <div className="board">
+                                    <div className="border-item">
+                                        <span className="num"> 1 </span> <span style={{color: this.getRandomColor()}}>你是我天边最美的云彩。</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="dropitem">
@@ -97,8 +174,12 @@ class TopBar extends Component {
                                     历史
                                 </div>
                             </div>
-                        <div className="dropitem-content">
-                                HelloWorld
+                            <div className="dropitem-content">
+                                <div className="history">
+                                    <div className="history-item">
+                                        <span className="time">2018-9-10 </span> <span className="history-text"> 你好啊 </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {
