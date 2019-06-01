@@ -152,7 +152,7 @@ class TopBar extends Component {
                             <div className="dropitem-content">
                                 <div className="board">
                                     <div className="border-item">
-                                        <span className="num"> 1 </span> <span style={{color: this.getRandomColor()}}>你是我天边最美的云彩。</span>
+                                        <span className="num" style={{ background: this.getRandomColor() }}> 1 </span> <span style={{color: this.getRandomColor()}}>你是我天边最美的云彩。</span>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +177,15 @@ class TopBar extends Component {
                             <div className="dropitem-content">
                                 <div className="history">
                                     <div className="history-item">
-                                        <span className="time">2018-9-10 </span> <span className="history-text"> 你好啊 </span>
+                                        <span className="time">2018-9-10 </span> <span className="history-text" style={{color: this.getRandomColor()}}> 你好啊 </span>
+                                    </div>
+                                    <div className="history-item">
+                                        <span className="time">2018-9-10 </span> <span className="history-text" style={{color: this.getRandomColor()}}> 你好啊 </span>                                      
+                                    </div>                                    
+                                    <div className="history-item">
+                                        <span className="time">2018-9-10 </span> <span className="history-text" style={{color: this.getRandomColor()}}> 你好啊 </span>
+                                   
+                                      
                                     </div>
                                 </div>
                             </div>
