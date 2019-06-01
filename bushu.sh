@@ -1,2 +1,2 @@
-rm -rf /static/public;
-mv build/ /static/public;
+rm -rf /static/public && 
+mv build/ /static/public
