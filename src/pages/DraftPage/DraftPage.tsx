@@ -27,7 +27,7 @@ export class DraftPage extends React.Component {
         this.getDraftById(this.props.match.params.id)
     }
     getDraftById(id) {
-        TokenGet('/drafts/getDraftById', {
+        TokenGet('/api/drafts/getDraftById', {
             id: id
         }).then((res) => {
             if(res.success) {
@@ -284,7 +284,7 @@ export class DraftPage extends React.Component {
         })
     }
     public async commit() {
-        const res = await TokenPost('/haiyou/commitHaiyou', {
+        const res = await TokenPost('/api/haiyou/commitHaiyou', {
             video_id: this.state.uploadVideos.reduce((total, value) => {
                 total.push(value.id)
                 return total
@@ -318,7 +318,7 @@ export class DraftPage extends React.Component {
         this.setState({input: { ...this.state.input, reprint: e.target.value }})
     }
     public async saveDraft() {
-        const res = await TokenPost('/drafts/updateDraft', {
+        const res = await TokenPost('/api/drafts/updateDraft', {
             id: this.state.draftId,
             picture_id: this.state.selectCover ? this.state.videoImgs.reduce((total, value) => {
                 if(value.id != this.state.selectCover.id) {
