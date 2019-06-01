@@ -96,7 +96,7 @@ class Video extends React.Component<IProp, any> {
                     alert('你好出错了')
                 }
                 setTimeout(() => {
-                    this.video.play()
+                //    this.video.play()
                 }, 1000)
             })
         }
