@@ -21,7 +21,7 @@ class Drafts extends React.Component {
     }
     public componentWillMount() {
         if(this.props.firstFile !== null) {
-            const url = 'upload/firstvideo'
+            const url = '/api/upload/firstvideo'
             const form = new FormData()        
             form.append('file', this.props.firstFile)
             this.state.uploadVideos.push({

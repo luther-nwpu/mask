@@ -29,7 +29,7 @@ export class MyNotify extends React.Component {
                     <div className="mynotify-item">
                         <img src={ avator_jpg } className="avator" />
                         <span>向你发送了消息: </span>
-                        <span> 我好爱你哦 </span>
+                        <span className="message"> 我好爱你哦 </span>
                     </div>
                 </div>
             </div>
