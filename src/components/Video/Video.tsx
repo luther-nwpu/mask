@@ -179,47 +179,45 @@ class Video extends React.Component<IProp, any> {
     }
 
     public componentDidMount() {
-        // this.video.addEventListener('timeupdate', (e) => this.updateVideo(e), false)
-
-        // this.progressDom.onmousedown = e => this.progress(e)
-        // this.soundDom.onmousedown = e => this.soundProgress(e)
-        // let timer = null
-        // let imouse = 0
-        // this.video.onclick = () => {
-        //     this.playOrPause()
-        // }
-        // this.videoPlayer.onmouseover = () => {
-        //     timer = setInterval(() => {
-        //         if (imouse == 0) {
-        //             this.setState({
-        //                 showControls: false
-        //             })
-        //         }
-        //         imouse = 0
-        //     }, 2000)
-        // }
-        // this.videoPlayer.onmousemove = () => {
-        //     imouse = 1
-        //     this.setState({
-        //         showControls: true
-        //     })
-        // }
-        // this.videoPlayer.onmouseout = () => {
-        //     clearInterval(timer)
-        //     this.setState({
-        //         showControls: false
-        //     })
-        // }
-        // this.controls.onmouseover = () => {
-        //     this.setState({
-        //         showTabControls: true
-        //     })
-        // }
-        // this.controls.onmouseout = () => {
-        //     this.setState({
-        //         showTabControls: false
-        //     })
-        // }
+        this.progressDom.onmousedown = e => this.progress(e)
+        this.soundDom.onmousedown = e => this.soundProgress(e)
+        let timer = null
+        let imouse = 0
+        this.video.onclick = () => {
+            this.playOrPause()
+        }
+        this.videoPlayer.onmouseover = () => {
+            timer = setInterval(() => {
+                if (imouse == 0) {
+                    this.setState({
+                        showControls: false
+                    })
+                }
+                imouse = 0
+            }, 2000)
+        }
+        this.videoPlayer.onmousemove = () => {
+            imouse = 1
+            this.setState({
+                showControls: true
+            })
+        }
+        this.videoPlayer.onmouseout = () => {
+            clearInterval(timer)
+            this.setState({
+                showControls: false
+            })
+        }
+        this.controls.onmouseover = () => {
+            this.setState({
+                showTabControls: true
+            })
+        }
+        this.controls.onmouseout = () => {
+            this.setState({
+                showTabControls: false
+            })
+        }
         // this.loadBarrage()
     }
 
@@ -255,15 +253,15 @@ class Video extends React.Component<IProp, any> {
         })
     }
     public updateVideo(e) {
-        // if (this.video && this.video.buffered.length) {
-        //     // this.AddBarrage()
-        //     // this.state.barragePlayer.play()
-        //     // let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
-        //     // this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
-        //     // let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
-        //     // this.processCurrentWidth = offset + 'px'
-        //     // this.setState({})
-        // }
+        if (this.video && this.video.buffered.length) {
+            // this.AddBarrage()
+            this.state.barragePlayer.play()
+            let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
+            this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
+            let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
+            this.processCurrentWidth = offset + 'px'
+            this.setState({})
+        }
     }
 
     public onOffVolume() {
