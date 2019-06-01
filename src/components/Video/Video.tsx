@@ -49,21 +49,21 @@ class Video extends React.Component<IProp, any> {
 
     public componentWillReceiveProps(props) {
         Promise.all([this.fetchGetVideo(props.id), this.fetchGetBarrages(props.id), this.fetchGetTunnelId(props.id)]).then(() => {
-            let playPromise = this.video.play()
-            if (playPromise !== undefined) {
-              playPromise.then(_ => {
-                // Automatic playback started!
-                // Show playing UI.
-                this.setState({})
-              })
-              .catch(error => {
-                // Auto-play was prevented
-                // Show paused UI.
-                this.video.muted = true
-                this.video.play()
-                this.setState({})
-              })
-            }
+            // let playPromise = this.video.play()
+            // if (playPromise !== undefined) {
+            //   playPromise.then(_ => {
+            //     // Automatic playback started!
+            //     // Show playing UI.
+            //     this.setState({})
+            //   })
+            //   .catch(error => {
+            //     // Auto-play was prevented
+            //     // Show paused UI.
+            //     this.video.muted = true
+            //     this.video.play()
+            //     this.setState({})
+            //   })
+            // }
         })
         this.sendBarrageFromOtherComponenet(props.barrageContent)
         this.handleBarragesToObject(props.barrages)
