@@ -44,7 +44,7 @@ class Video extends React.Component<IProp, any> {
 
     public constructor(props) {
         super(props)
-    //    this.AddBarrage = throttle(this.AddBarrage, 500)
+        this.AddBarrage = throttle(this.AddBarrage, 500)
     }
 
     // public componentWillReceiveProps(props) {

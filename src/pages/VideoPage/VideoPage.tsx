@@ -31,7 +31,7 @@ class VideoPage extends React.Component {
         })
     }
     public fetchGetAllComment() {
-        Get('/comment/getAllCommentsByHaiyouId', {
+        Get('/api/comment/getAllCommentsByHaiyouId', {
             id: this.props.match.params.id
         }).then((res) => {
             if(!res.success) {
@@ -50,7 +50,7 @@ class VideoPage extends React.Component {
         })
     }
     handleSendComment() {
-        TokenPost('/comment/sendComment', {
+        TokenPost('/api/comment/sendComment', {
             content: this.state.textareaInput,
             haiyouId: this.props.match.params.id
         }).then((res) => {
@@ -74,7 +74,7 @@ class VideoPage extends React.Component {
         })
     }
     getHaiyou() {
-        Get('/haiyou/getHaiyouById', {
+        Get('/api/haiyou/getHaiyouById', {
             haiyouId: this.props.match.params.id
         }).then((res) => {
             if(res.success) {
@@ -106,7 +106,7 @@ class VideoPage extends React.Component {
         return h === '00' ? m + ':' + s : h + ':' + m + ':' + s
     }
     public handleReplyComment() {
-        TokenPost('/comment/sendSubComment', {
+        TokenPost('/api/comment/sendSubComment', {
             commentId: this.state.comments[this.state.selectReply.key].id,
             content: this.state.replyInput,
             suserId: this.state.comments[this.state.selectReply.key].user.id,
@@ -131,7 +131,7 @@ class VideoPage extends React.Component {
         })
     }
     public handleReplySubComment() {
-        TokenPost('/comment/sendSubComment', {
+        TokenPost('/api/comment/sendSubComment', {
             commentId: this.state.comments[this.state.selectReply.key].id,
             content: this.state.replyInput,
             suserId: this.state.comments[this.state.selectReply.key].subComments[this.state.selectReply.key1].user.id,
@@ -157,7 +157,7 @@ class VideoPage extends React.Component {
     }
     public handleClickSubscribe(userId) {
         if (this.state.haiyou && this.state.haiyou.subscribe == null) {
-            TokenPost('/subscribe/subscribeUser', {
+            TokenPost('/api/subscribe/subscribeUser', {
                 suserId: userId
             }).then((res) => {
                 if(res.success) {
@@ -173,7 +173,7 @@ class VideoPage extends React.Component {
                 }
             })
         } else {
-            TokenPost('/subscribe/unSubscribeUser', {
+            TokenPost('/api/subscribe/unSubscribeUser', {
                 subscriberId: this.state.haiyou && this.state.haiyou.subscribe.id
             }).then((res) => {
                 if(res.success) {
@@ -185,7 +185,6 @@ class VideoPage extends React.Component {
                         }
                     })
                 } else {
-                    
                     alert(res.result)
                 }
             })
