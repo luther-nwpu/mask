@@ -1,0 +1,60 @@
+.mynotify-component {
+    padding: 20px;
+    .mynotify-content {
+        display: flex;
+        flex-direction: column;
+        .mynotify-item {
+            height: 100px;
+            margin-top: 30px;
+            border-radius: 10px;
+            border: 1px solid #440a0a;
+            display: flex;
+            padding-left: 40px;
+            align-items: center;
+            font-size: 15px;
+            .user-detail {
+                margin-left: 8px;
+                display: flex;
+                flex-direction: column;
+                margin-right: 7px;
+                .username {
+                    font-size: 20px;
+                    color: #e204ff;
+                }
+                .signature {
+                    font-size: 13px;
+                    color: #646464;
+                }
+            }
+            &:hover {
+                border: 1px solid #a8ec09;
+            }
+            .avator {
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+                margin-right: 3px;
+            }
+            .draft-img {
+                margin-left: 19px;
+                width: 90px;
+                border-radius: 5px;
+            }
+            .video-detail {
+                display: flex;
+                flex-direction: column;
+                margin-left: 10px;
+                margin-right: 4px;
+                .video-title {
+                    font-size: 18px;
+                }
+                .label-text {
+                    font-size: 13px;
+                }
+            }
+            .message {
+                margin-right: 3px;
+            }
+        }
+    }
+}
