@@ -6,7 +6,7 @@ import message from '@assets/message_btn_0.svg'
 import subscription from '@assets/subscription_btn_0.svg'
 import userinfo from '@assets/userinfo_btn_0.svg'
 import { UserMenu } from '@config'
-import { MyHistory, MyDynamic, MyMessage, MySubscription, MyVideo, MyDrafts } from '@components'
+import { MyHistory, MyNotify, MyMessage, MySubscription, MyVideo, MyDrafts } from '@components'
 import MyInfo from '@components/Myinfo/MyInfo'
 import ModifyNickName from '@components/ModifyNickName/ModifyNickName'
 import ModifyUserInfo from '@components/ModifyUserInfo/ModifyUserInfo'
@@ -39,8 +39,8 @@ export class Person extends React.Component {
                 return (<MyHistory />)
             case UserMenu.MESSAGE:
                 return (<MyMessage />)
-            case UserMenu.MYDYNAMIC:
-                return (<MyDynamic />)
+            case UserMenu.MYNOTIFY:
+                return (<MyNotify />)
             case UserMenu.SUBSCRIPTION:
                 return (<MySubscription />)
             case UserMenu.MYVIDEO:
@@ -79,9 +79,9 @@ export class Person extends React.Component {
                             <img src={video} />
                             <div className="contentText"> 我的视频 </div>
                         </div>
-                        <div className={tabNum === UserMenu.MYDYNAMIC ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYDYNAMIC)}>
+                        <div className={tabNum === UserMenu.MYNOTIFY ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.MYNOTIFY)}>
                             <img src={dynamic} />
-                            <div className="contentText"> 我的动态 </div>
+                            <div className="contentText"> 我的通知 </div>
                         </div>
                         <div className={tabNum === UserMenu.SUBSCRIPTION ? 'item-select' : 'item' } onClick={() => this.changeTabNum(UserMenu.SUBSCRIPTION)}>
                             <img src={subscription}/>

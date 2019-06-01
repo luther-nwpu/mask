@@ -11,7 +11,7 @@ export enum AuthTab {
 export enum UserMenu {
     MYUSERINFO = 0,
     MYVIDEO = 1,
-    MYDYNAMIC = 2,
+    MYNOTIFY = 2,
     SUBSCRIPTION = 3,
     HISTORY = 4,
     MESSAGE = 5,
