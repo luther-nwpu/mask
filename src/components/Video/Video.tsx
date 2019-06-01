@@ -180,7 +180,7 @@ class Video extends React.Component<IProp, any> {
 
     public componentDidUpdate() {
         document.getElementById('video').ontimeupdate = () => this.updateVideo()
-        this.video.ontimeupdate = () => this.updateVideo()
+        // this.video.ontimeupdate = () => this.updateVideo()
         // this.progressDom.onmousedown = e => this.progress(e)
         // this.soundDom.onmousedown = e => this.soundProgress(e)
         // let timer = null
