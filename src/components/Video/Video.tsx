@@ -180,7 +180,7 @@ class Video extends React.Component<IProp, any> {
 
     public componentDidMount() {
         // this.progressDom.onmousedown = e => this.progress(e)
-        this.soundDom.onmousedown = e => this.soundProgress(e)
+        // this.soundDom.onmousedown = e => this.soundProgress(e)
         // let timer = null
         // let imouse = 0
         // this.video.onclick = () => {
