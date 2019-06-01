@@ -179,7 +179,7 @@ class Video extends React.Component<IProp, any> {
     }
 
     public componentDidMount() {
-        this.video.addEventListener('timeupdate', (e) => this.updateVideo(e), false)
+        // this.video.addEventListener('timeupdate', (e) => this.updateVideo(e), false)
 
         // this.progressDom.onmousedown = e => this.progress(e)
         // this.soundDom.onmousedown = e => this.soundProgress(e)
@@ -220,7 +220,7 @@ class Video extends React.Component<IProp, any> {
         //         showTabControls: false
         //     })
         // }
-        this.loadBarrage()
+        // this.loadBarrage()
     }
 
     public loadBarrage() {
@@ -421,7 +421,7 @@ class Video extends React.Component<IProp, any> {
         return (
             <div className="video-component">
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer" style={{ cursor: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inherit' : 'none' }}>
-                    <video id="video" ref={(video) => this.video = video} className="video" src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></video>
+                    <video onTimeUpdate={(e) => this.updateVideo(e)} className="video" src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls" ref={(controls) => this.controls = controls} style={{display: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inline-block' : 'none' }}>
                         <div className="progress" ref={(progress) => this.progressDom = progress}>
