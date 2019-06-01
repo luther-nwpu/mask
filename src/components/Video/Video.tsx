@@ -178,7 +178,7 @@ class Video extends React.Component<IProp, any> {
         showTabControls: true
     }
 
-    public componentDidUpdate() {
+    public componentDidMount() {
         document.getElementById('video').ontimeupdate = () => this.updateVideo()
         // this.video.ontimeupdate = () => this.updateVideo()
         // this.progressDom.onmousedown = e => this.progress(e)
