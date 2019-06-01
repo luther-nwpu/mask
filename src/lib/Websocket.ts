@@ -27,10 +27,10 @@ export class Websocket {
     this.pendingMessagesArray = new Array<string>()
     switch(opts.type) {
       case WebSocketType.CHAT:
-        this.ws = new WebSocket(`ws:localhost:10011/${opts.type}/${opts.tunnelId}`)
+        this.ws = new WebSocket(`ws:129.28.153.58:10011/${opts.type}/${opts.tunnelId}`)
         break
       case WebSocketType.HAIYOU:
-        this.ws = new WebSocket(`ws:localhost:10011/${opts.type}/${opts.haiyouId}/${opts.tunnelId}`)
+        this.ws = new WebSocket(`ws:129.28.153.58:10011/${opts.type}/${opts.haiyouId}/${opts.tunnelId}`)
         break
       default:
         break

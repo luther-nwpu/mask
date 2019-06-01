@@ -24,6 +24,7 @@ export class DraftPage extends React.Component {
         }
     }
     public componentDidMount() {
+        console.log(this.props)
         this.getDraftById(this.props.match.params.id)
     }
     getDraftById(id) {
