@@ -279,6 +279,7 @@
             position: relative;
             display: inline-block;
             height: 40px;
+
             &:hover {
                 border-radius: 10px;
                 transition: transform .25s linear;
@@ -290,6 +291,41 @@
                 }
             }
             .dropitem-content {
+                .subscribe {
+                    width: 200px;
+                    .subscribe-item {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .subscribe-left {
+                            display:flex;
+                            .avator {
+                                width: 50px;
+                                height: 50px;
+                                border-radius: 25px;
+                            }
+                            .user-detail {
+                                margin-right: 10px;
+                                .user-title {
+                                    font-size: 15px;
+                                    line-height: 20px;
+                                }
+                                .signature {
+                                    font-size: 13px;
+                                    color: #6d6d6d;
+                                    line-height: 20px;
+                                }
+                            }
+                        }
+                        .subscribe-right {
+                            line-height: 20px;
+                            .watch-img {
+                                width: 20px;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
                 display: none;
                 position: absolute;
                 border: 1px solid #e4e6ea;

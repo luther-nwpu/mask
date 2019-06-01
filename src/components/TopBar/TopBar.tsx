@@ -18,6 +18,8 @@ import autograph from '@assets/icon_autograph.png'
 import age from '@assets/icon_age.png'
 import location from '@assets/icon_location.png'
 import play_svg from '@assets/play_btn_1.svg'
+import avator_jpg from '@assets/avator_default.jpg'
+import watch_svg from '@assets/watch_btn_0.svg'
 
 class TopBar extends Component {
     state = {
@@ -193,11 +195,33 @@ class TopBar extends Component {
                         {
                             userinfo && userinfo.email ? (
                                 <div className="auth-detail">
-                                    <div className="item">
-                                        <div className="icon-subscribe">
+                                    <div className="dropitem">
+                                        <div className="item">
+                                            <div className="icon-subscribe">
+                                            </div>
+                                            <div className="item-text">
+                                                订阅
+                                            </div>
                                         </div>
-                                        <div className="item-text">
-                                            订阅
+                                        <div className="dropitem-content">
+                                            <div className="subscribe">
+                                                <div className="subscribe-item">
+                                                    <div className="subscribe-left">
+                                                        <img src={avator_jpg} className="avator" />
+                                                        <div className="user-detail">
+                                                            <div className="user-title" style = {{color: this.getRandomColor()}}>
+                                                                胖炸
+                                                            </div>
+                                                            <div className="signature">
+                                                                你是我的最爱
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="subscribe-right">
+                                                        <img src={watch_svg} className="watch-img" /> <span> 0 </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="item" onClick={() => this.switchToLink('/uploadfile')}>
