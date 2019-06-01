@@ -180,45 +180,45 @@ class Video extends React.Component<IProp, any> {
 
     public componentDidUpdate() {
         this.video.ontimeupdate = () => this.updateVideo()
-        this.progressDom.onmousedown = e => this.progress(e)
-        this.soundDom.onmousedown = e => this.soundProgress(e)
-        let timer = null
-        let imouse = 0
-        this.video.onclick = () => {
-            this.playOrPause()
-        }
-        this.videoPlayer.onmouseover = () => {
-            timer = setInterval(() => {
-                if (imouse == 0) {
-                    this.setState({
-                        showControls: false
-                    })
-                }
-                imouse = 0
-            }, 2000)
-        }
-        this.videoPlayer.onmousemove = () => {
-            imouse = 1
-            this.setState({
-                showControls: true
-            })
-        }
-        this.videoPlayer.onmouseout = () => {
-            clearInterval(timer)
-            this.setState({
-                showControls: false
-            })
-        }
-        this.controls.onmouseover = () => {
-            this.setState({
-                showTabControls: true
-            })
-        }
-        this.controls.onmouseout = () => {
-            this.setState({
-                showTabControls: false
-            })
-        }
+        // this.progressDom.onmousedown = e => this.progress(e)
+        // this.soundDom.onmousedown = e => this.soundProgress(e)
+        // let timer = null
+        // let imouse = 0
+        // this.video.onclick = () => {
+        //     this.playOrPause()
+        // }
+        // this.videoPlayer.onmouseover = () => {
+        //     timer = setInterval(() => {
+        //         if (imouse == 0) {
+        //             this.setState({
+        //                 showControls: false
+        //             })
+        //         }
+        //         imouse = 0
+        //     }, 2000)
+        // }
+        // this.videoPlayer.onmousemove = () => {
+        //     imouse = 1
+        //     this.setState({
+        //         showControls: true
+        //     })
+        // }
+        // this.videoPlayer.onmouseout = () => {
+        //     clearInterval(timer)
+        //     this.setState({
+        //         showControls: false
+        //     })
+        // }
+        // this.controls.onmouseover = () => {
+        //     this.setState({
+        //         showTabControls: true
+        //     })
+        // }
+        // this.controls.onmouseout = () => {
+        //     this.setState({
+        //         showTabControls: false
+        //     })
+        // }
         this.loadBarrage()
     }
 
