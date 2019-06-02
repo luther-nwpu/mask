@@ -47,27 +47,27 @@ class Video extends React.Component<IProp, any> {
         this.AddBarrage = throttle(this.AddBarrage, 500)
     }
 
-    // public componentWillReceiveProps(props) {
-    //     Promise.all([this.fetchGetVideo(props.id), this.fetchGetBarrages(props.id), this.fetchGetTunnelId(props.id)]).then(() => {
-    //         let playPromise = this.video.play()
-    //         if (playPromise !== undefined) {
-    //           playPromise.then(_ => {
-    //             // Automatic playback started!
-    //             // Show playing UI.
-    //             this.setState({})
-    //           })
-    //           .catch(error => {
-    //             // Auto-play was prevented
-    //             // Show paused UI.
-    //             this.video.muted = true
-    //             this.video.play()
-    //             this.setState({})
-    //           })
-    //         }
-    //     })
-    //     this.sendBarrageFromOtherComponenet(props.barrageContent)
-    //     this.handleBarragesToObject(props.barrages)
-    // }
+    public componentWillReceiveProps(props) {
+        Promise.all([this.fetchGetVideo(props.id), this.fetchGetBarrages(props.id), this.fetchGetTunnelId(props.id)]).then(() => {
+            let playPromise = this.video.play()
+            if (playPromise !== undefined) {
+              playPromise.then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+                this.setState({})
+              })
+              .catch(error => {
+                // Auto-play was prevented
+                // Show paused UI.
+                this.video.muted = true
+                this.video.play()
+                this.setState({})
+              })
+            }
+        })
+        this.sendBarrageFromOtherComponenet(props.barrageContent)
+        this.handleBarragesToObject(props.barrages)
+    }
 
     public handleBarragesToObject(barrages) {
         if (barrages && barrages.length != this.props.barrages.length) {
@@ -259,8 +259,8 @@ class Video extends React.Component<IProp, any> {
     }
     public updateVideo(e) {
         if (this.video && this.video.buffered.length) {
-            // this.AddBarrage()
-            // this.state.barragePlayer.play()
+            this.AddBarrage()
+            this.state.barragePlayer.play()
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
             let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
