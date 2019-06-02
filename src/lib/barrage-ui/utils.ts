@@ -28,8 +28,6 @@ export const getImageData = (url, renderWidth, renderHeight, dx, dy, dw, dh) =>
     )
   })
 
-export const requestAnimationFrame =
-  window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame
+export const requestAnimationFrame = window.requestAnimationFrame
 
 export const cancelAnimationFrame = window.cancelAnimationFrame

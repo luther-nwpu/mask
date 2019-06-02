@@ -238,7 +238,7 @@ class Video extends React.Component<IProp, any> {
                 },
             })
         }, () => {
-            this.state.barragePlayer.play()
+            // is.state.barragePlayer.play()
         })
     }
 

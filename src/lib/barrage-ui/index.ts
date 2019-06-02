@@ -364,7 +364,7 @@ export default class Barrage {
   _play() {
     // 创建动画任务
     if (!this.animation)
-      this.animation = requestAnimationFrame(() => this._render())
+      this.animation = window.requestAnimationFrame(() => this._render())
   }
 
   goto(progress) {
