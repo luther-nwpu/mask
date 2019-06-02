@@ -428,69 +428,6 @@ class Video extends React.Component<IProp, any> {
             barrageInput: ''
         })
     }
-    handleVolumeChange(e) {
-        console.log('66666', e)
-    }
-    handleLoadStart(e) {
-        console.log(e)
-    }
-    handleWaiting(e) {
-        console.log(e)
-    }
-    handleCanPlay(e) {
-        console.log(e)
-    }
-    handleCanPlayThrough(e) {
-        console.log(e)
-    }
-    handlePlaying(e) {
-        console.log(e)
-    }
-    handleEnded(e) {
-        console.log(e)
-    }
-    handleSeeking(e) {
-        console.log(e)
-    }
-    handleSeeked(e) {
-        console.log(e)
-    }
-    handlePlay(e) {
-        console.log(e)
-    }
-    handlePause(e) {
-        console.log(e)
-    }
-    handleProgress(e) {
-        console.log(e)
-    }
-    handleDurationChange(e) {
-        console.log(e)
-    } 
-    handleRateChange(e) {
-        console.log(e)
-    }
-    handleLoadedData(e) {
-        console.log(e)
-    }
-    handleLoadedMetaData(e) {
-        console.log(e)
-    }
-    handleError(e) {
-        console.log(e)
-    }
-    handleSuspend(e) {
-        console.log(e)
-    }
-    handleAbort(e){
-        console.log(e)
-    }
-    handleEmptied(e) {
-        console.log(e)
-    }
-    handleStalled(e) {
-        console.log(e)
-    }
     public render() {
         const fullscreen = document.fullscreen
         const username =  this.props.userInfo && this.props.userInfo.username
@@ -506,28 +443,28 @@ class Video extends React.Component<IProp, any> {
                         autoPlay={this.state.videoDom.autoPlay}
                         poster={this.state.videoDom.poster}
                         src={this.state.videoDom.src}
-                        onLoadStart={(e) => this.handleLoadStart(e)}
-                        onWaiting={(e) => this.handleWaiting(e)}
-                        onCanPlay={(e) => this.handleCanPlay(e)}
-                        onCanPlayThrough={(e) => this.handleCanPlayThrough(e)}
-                        onPlaying={(e) => this.handlePlaying(e)}
-                        onEnded={(e) => this.handleEnded(e)}
-                        onSeeking={(e) => this.handleSeeking(e)}
-                        onSeeked={(e) => this.handleSeeked(e)}
-                        onPlay={(e) => this.handlePlay(e)}
-                        onPause={(e) => this.handlePause(e)}
-                        onProgress={(e) => this.handleProgress(e)}
-                        onDurationChange={(e) => this.handleDurationChange(e)}
-                        onError={(e) => this.handleError(e)}
-                        onSuspend={(e) => this.handleSuspend(e)}
-                        onAbort={(e) => this.handleAbort(e)}
-                        onEmptied={(e) => this.handleEmptied(e)}
-                        onStalled={(e) => this.handleStalled(e)}
-                        onLoadedMetadata={(e) => this.handleLoadedMetaData(e)}
-                        onLoadedData={(e) => this.handleLoadedData(e)}
-                        onRateChange={(e) => this.handleRateChange(e)}
-                        onTimeUpdate={(e) => this.updateVideo(e)} onClick={() => this.playOrPause()} 
-                        onVolumeChange={ (e) => this.handleVolumeChange(e)}></video>
+                        // onLoadStart={(e) => this.handleLoadStart(e)}
+                        // onWaiting={(e) => this.handleWaiting(e)}
+                        // onCanPlay={(e) => this.handleCanPlay(e)}
+                        // onCanPlayThrough={(e) => this.handleCanPlayThrough(e)}
+                        // onPlaying={(e) => this.handlePlaying(e)}
+                        // onEnded={(e) => this.handleEnded(e)}
+                        // onSeeking={(e) => this.handleSeeking(e)}
+                        // onSeeked={(e) => this.handleSeeked(e)}
+                        // onPlay={(e) => this.handlePlay(e)}
+                        // onPause={(e) => this.handlePause(e)}
+                        // onProgress={(e) => this.handleProgress(e)}
+                        // onDurationChange={(e) => this.handleDurationChange(e)}
+                        // onError={(e) => this.handleError(e)}
+                        // onSuspend={(e) => this.handleSuspend(e)}
+                        // onAbort={(e) => this.handleAbort(e)}
+                        // onEmptied={(e) => this.handleEmptied(e)}
+                        // onStalled={(e) => this.handleStalled(e)}
+                        // onLoadedMetadata={(e) => this.handleLoadedMetaData(e)}
+                        // onLoadedData={(e) => this.handleLoadedData(e)}
+                        // onRateChange={(e) => this.handleRateChange(e)}
+                        // onVolumeChange={ (e) => this.handleVolumeChange(e)}
+                        onTimeUpdate={(e) => this.updateVideo(e)} onClick={() => this.playOrPause()} ></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls" ref={(controls) => this.controls = controls} style={{display: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inline-block' : 'none' }}>
                         <div className="progress" ref={(progress) => this.progressDom = progress}>
