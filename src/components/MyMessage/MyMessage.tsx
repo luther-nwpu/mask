@@ -6,6 +6,8 @@ import { Websocket } from '@lib/Websocket'
 import { TokenGet, tryCatch } from '@lib/helper'
 import { WebSocketType } from '@config'
 import moment from 'moment'
+import { withCookies, Cookies } from 'react-cookie'
+import { connect } from 'react-redux'
 enum Action {
     SENDMESSAGE = 'sendMessage',
     SENDBARRAGE = 'sendBarrage',
@@ -13,11 +15,12 @@ enum Action {
     RECEIVEBARRAGE = 'receiveBarrage'
 }
 
-export class MyMessage extends React.Component {
+class MyMessage extends React.Component {
     chatContent: any
     constructor(props) {
         super(props)
     }
+    props
     public async componentWillMount() {
         this.fetchGetTunnelId()
         this.fecthGetChatByMe()
@@ -105,6 +108,7 @@ export class MyMessage extends React.Component {
         })
     }
     public render() {
+        const userinfo = this.props.userinfo
         const userObject = this.state.messageArray.reduce((total, value) => {
             value.suser_id == this.state.myId ? (
                 total[value.user_id] == undefined ? total[value.user_id] = {
@@ -248,3 +252,12 @@ export class MyMessage extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    const { userinfo } = state.todoApp
+    return {
+        userinfo: userinfo
+    }
+}
+
+export default withCookies(connect(mapStateToProps, null)(MyMessage))
