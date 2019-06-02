@@ -2,7 +2,7 @@ import {
   requestAnimationFrame,
   cancelAnimationFrame,
   loadImage,
-} from './utils'
+} from '@lib/barrage-ui/utils'
 import 'core-js/fn/object/entries'
 
 // 支持通过 barrage.setConfig() 接口修改的配置项
@@ -358,7 +358,7 @@ export default class Barrage {
       this.afterRender(this.ctx, this.progress, this.animState)
 
     // 执行下一帧
-    if (this.animation) requestAnimationFrame(() => this._render())
+    if (this.animation) window.requestAnimationFrame(() => this._render())
   }
 
   _play() {
@@ -390,7 +390,7 @@ export default class Barrage {
 
   pause() {
     if (this.animation) {
-      cancelAnimationFrame(this.animation)
+      window.cancelAnimationFrame(this.animation)
       this.animation = undefined
 
       // 保存暂停时的进度
