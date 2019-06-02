@@ -223,7 +223,7 @@ class Video extends React.Component<IProp, any> {
                 showTabControls: false
             })
         }
-        // this.loadBarrage()
+        this.loadBarrage()
     }
 
     public loadBarrage() {
