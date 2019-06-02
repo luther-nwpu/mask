@@ -186,8 +186,6 @@ class TopBar extends Component {
                                     </div>                                    
                                     <div className="history-item">
                                         <span className="time">2018-9-10 </span> <span className="history-text" style={{color: this.getRandomColor()}}> 你好啊 </span>
-                                   
-                                      
                                     </div>
                                 </div>
                             </div>
@@ -233,12 +231,12 @@ class TopBar extends Component {
                                     </div>
                                     <div className="dropitem">
                                         <span className="auth-detail-user" onClick={() => this._handleToLinkPerson()}>    
-                                            <img src={ avator_default_jpg } />
+                                            <img src={ userinfo.avator || avator_default_jpg } />
                                             <span className="text"> { userinfo.username } </span> 
                                             <span className="closeBox"></span>
                                         </span>
                                         <div className="dropitem-content">
-                                            <img className="drop-img" src={ avator_default_jpg } onClick={() => this._handleToLinkPerson()}/>
+                                            <img className="drop-img" src={ userinfo.avator || avator_default_jpg } onClick={() => this._handleToLinkPerson()}/>
                                             <div className="auth-userinfo">
                                                 <div className="userinfo-username">
                                                     { userinfo.username } <img src={ userinfo && userinfo.sex == '0' ? man_svg : (userinfo && userinfo.sex == '1' ? woman_svg : sex_svg) } />

@@ -171,7 +171,7 @@ class Video extends React.Component<IProp, any> {
         barragePlayer: null,
         ws: null,
         videoDom: {
-            muted: false,
+            muted: true,
             src: 'https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4',
             autoPlay: true,
             poster: '', // 封面
