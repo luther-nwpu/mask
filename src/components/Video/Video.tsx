@@ -49,21 +49,21 @@ class Video extends React.Component<IProp, any> {
 
     // public componentWillReceiveProps(props) {
     //     Promise.all([this.fetchGetVideo(props.id), this.fetchGetBarrages(props.id), this.fetchGetTunnelId(props.id)]).then(() => {
-    //         // let playPromise = this.video.play()
-    //         // if (playPromise !== undefined) {
-    //         //   playPromise.then(_ => {
-    //         //     // Automatic playback started!
-    //         //     // Show playing UI.
-    //         //     this.setState({})
-    //         //   })
-    //         //   .catch(error => {
-    //         //     // Auto-play was prevented
-    //         //     // Show paused UI.
-    //         //     this.video.muted = true
-    //         //     this.video.play()
-    //         //     this.setState({})
-    //         //   })
-    //         // }
+    //         let playPromise = this.video.play()
+    //         if (playPromise !== undefined) {
+    //           playPromise.then(_ => {
+    //             // Automatic playback started!
+    //             // Show playing UI.
+    //             this.setState({})
+    //           })
+    //           .catch(error => {
+    //             // Auto-play was prevented
+    //             // Show paused UI.
+    //             this.video.muted = true
+    //             this.video.play()
+    //             this.setState({})
+    //           })
+    //         }
     //     })
     //     this.sendBarrageFromOtherComponenet(props.barrageContent)
     //     this.handleBarragesToObject(props.barrages)
@@ -96,7 +96,7 @@ class Video extends React.Component<IProp, any> {
                     alert('你好出错了')
                 }
                 setTimeout(() => {
-                //    this.video.play()
+                    this.video.play()
                 }, 1000)
             })
         }
@@ -170,6 +170,14 @@ class Video extends React.Component<IProp, any> {
     public state = {
         barragePlayer: null,
         ws: null,
+        videoDom: {
+            muted: false,
+            src: 'https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4',
+            autoPlay: true,
+            poster: '', // 封面
+            loop: false,
+            playsInline: false
+        },
         barragesObject: {},
         inputFocus: false,
         videoInfo: null,
@@ -252,7 +260,7 @@ class Video extends React.Component<IProp, any> {
     public updateVideo(e) {
         if (this.video && this.video.buffered.length) {
             // this.AddBarrage()
-            this.state.barragePlayer.play()
+            // this.state.barragePlayer.play()
             let bufferEnd = this.video.buffered.end(this.video.buffered.length - 1)
             this.processWidth = (bufferEnd / this.video.duration) * this.progressDom.clientWidth + 'px'
             let offset = (this.video.currentTime / this.video.duration) * this.bgDom.clientWidth
@@ -262,12 +270,22 @@ class Video extends React.Component<IProp, any> {
     }
 
     public onOffVolume() {
-        if(this.video && this.video.muted) {
+        if(this.state.videoDom.muted) {
             this.video.muted = false
+            this.setState({
+                videoDom: {
+                    ...this.state.videoDom,
+                    muted: false
+                }
+            })
         } else {
-            this.video.muted = true
+            this.setState({
+                videoDom: {
+                    ...this.state.videoDom,
+                    muted: true
+                }
+            })
         }
-        this.setState({})
     }
 
     public progress(e) {
@@ -410,13 +428,106 @@ class Video extends React.Component<IProp, any> {
             barrageInput: ''
         })
     }
+    handleVolumeChange(e) {
+        console.log('66666', e)
+    }
+    handleLoadStart(e) {
+        console.log(e)
+    }
+    handleWaiting(e) {
+        console.log(e)
+    }
+    handleCanPlay(e) {
+        console.log(e)
+    }
+    handleCanPlayThrough(e) {
+        console.log(e)
+    }
+    handlePlaying(e) {
+        console.log(e)
+    }
+    handleEnded(e) {
+        console.log(e)
+    }
+    handleSeeking(e) {
+        console.log(e)
+    }
+    handleSeeked(e) {
+        console.log(e)
+    }
+    handlePlay(e) {
+        console.log(e)
+    }
+    handlePause(e) {
+        console.log(e)
+    }
+    handleProgress(e) {
+        console.log(e)
+    }
+    handleDurationChange(e) {
+        console.log(e)
+    } 
+    handleRateChange(e) {
+        console.log(e)
+    }
+    handleLoadedData(e) {
+        console.log(e)
+    }
+    handleLoadedMetaData(e) {
+        console.log(e)
+    }
+    handleError(e) {
+        console.log(e)
+    }
+    handleSuspend(e) {
+        console.log(e)
+    }
+    handleAbort(e){
+        console.log(e)
+    }
+    handleEmptied(e) {
+        console.log(e)
+    }
+    handleStalled(e) {
+        console.log(e)
+    }
     public render() {
         const fullscreen = document.fullscreen
         const username =  this.props.userInfo && this.props.userInfo.username
         return (
             <div className="video-component">
                 <div ref={(videoPlayer) => this.videoPlayer = videoPlayer} className="eplayer" style={{ cursor: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inherit' : 'none' }}>
-                    <video onTimeUpdate={(e) => this.updateVideo(e)} onClick={() => this.playOrPause()} className="video" src="https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo/1500_a5a9fa0998476beed1d02aed4f5a79dc.mp4"></video>
+                    <video
+                        ref = {(video) => this.video = video}
+                        className="video"         
+                        muted={this.state.videoDom.muted}
+                        loop={this.state.videoDom.loop}
+                        playsInline={this.state.videoDom.playsInline}
+                        autoPlay={this.state.videoDom.autoPlay}
+                        poster={this.state.videoDom.poster}
+                        src={this.state.videoDom.src}
+                        onLoadStart={(e) => this.handleLoadStart(e)}
+                        onWaiting={(e) => this.handleWaiting(e)}
+                        onCanPlay={(e) => this.handleCanPlay(e)}
+                        onCanPlayThrough={(e) => this.handleCanPlayThrough(e)}
+                        onPlaying={(e) => this.handlePlaying(e)}
+                        onEnded={(e) => this.handleEnded(e)}
+                        onSeeking={(e) => this.handleSeeking(e)}
+                        onSeeked={(e) => this.handleSeeked(e)}
+                        onPlay={(e) => this.handlePlay(e)}
+                        onPause={(e) => this.handlePause(e)}
+                        onProgress={(e) => this.handleProgress(e)}
+                        onDurationChange={(e) => this.handleDurationChange(e)}
+                        onError={(e) => this.handleError(e)}
+                        onSuspend={(e) => this.handleSuspend(e)}
+                        onAbort={(e) => this.handleAbort(e)}
+                        onEmptied={(e) => this.handleEmptied(e)}
+                        onStalled={(e) => this.handleStalled(e)}
+                        onLoadedMetadata={(e) => this.handleLoadedMetaData(e)}
+                        onLoadedData={(e) => this.handleLoadedData(e)}
+                        onRateChange={(e) => this.handleRateChange(e)}
+                        onTimeUpdate={(e) => this.updateVideo(e)} onClick={() => this.playOrPause()} 
+                        onVolumeChange={ (e) => this.handleVolumeChange(e)}></video>
                     <div className={(() => this.getVideoStateClassName())()} onClick={() => this.continuePlay()}></div>
                     <div className="controls" ref={(controls) => this.controls = controls} style={{display: (this.state.showControls || this.state.showTabControls) || !(this.video && !(this.video.paused || this.video.ended || this.video.seeking || this.video.readyState < this.video.HAVE_FUTURE_DATA)) ? 'inline-block' : 'none' }}>
                         <div className="progress" ref={(progress) => this.progressDom = progress}>
@@ -440,10 +551,10 @@ class Video extends React.Component<IProp, any> {
                                 }
                             </div>
                             <div className="right">
-                                <img src={ this.video && this.video.muted ? nosound_svg : sound_svg } onClick={() => this.onOffVolume() } className="sound-img" />
+                                <img src={ this.state.videoDom.muted ? nosound_svg : sound_svg } onClick={() => this.onOffVolume() } className="sound-img" />
                                 <div className="sound-progress" ref={(sound) => this.soundDom = sound}>
                                     <span className="sound-line"></span> 
-                                    <div className="sound-current" style={{width: ((this.video && this.video.muted == false && this.video.volume) || 0) * 100  + 'px'}}>
+                                    <div className="sound-current" style={{width: ((this.state.videoDom.muted == false && this.video && this.video.volume) || 0) * 100  + 'px'}}>
                                         <div className="sound-dot"></div>
                                         <div className="sound-cycle"></div>
                                     </div>
