@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { AuthTab } from '@config'
 import { dispatchSendBarrage } from '@store/actions/barrage'
 import moment from 'moment'
+import avator_default_jpg from '@assets/avator_default.jpg'
 
 class VideoPage extends React.Component {
     public state = {
@@ -191,6 +192,7 @@ class VideoPage extends React.Component {
         }
     }
     public render() {
+        const userinfo = this.props.userinfo
         return(
             <div className="videopage-component">
                 <div className="left-video">
@@ -236,7 +238,7 @@ class VideoPage extends React.Component {
                     <div className="video-comments">
                         <span className="title"> 全部评论({this.state.comments.length}) </span>
                         <div className="comment-send">
-                            <img src=""/>
+                            <img src={userinfo.avator}/>
                             <textarea value={this.state.textareaInput} onChange={(e) => this._handleChangeTextArea(e)}/>
                             <button onClick={() => this.handleSendComment()}>
                                 发表评论
@@ -247,7 +249,7 @@ class VideoPage extends React.Component {
                                 this.state.comments.map((value, key) => {
                                     return (
                                         <div className="comment" key = {key}>
-                                            <img src="dsadsa" />
+                                            <img src={value && value.user && value.picture && value.user.pictrue['url'] || avator_default_jpg} />
                                             <div className="comment-content">
                                                 <div className="comment-username">
                                                     {value.user.username}
@@ -364,7 +366,7 @@ class VideoPage extends React.Component {
                 </div>
                 <div className="right-user">
                     <div className="user-detail">
-                        <img src ={this.state.haiyou && this.state.haiyou.user.avator} className="avator" />
+                        <img src ={this.state.haiyou && this.state.haiyou.user['picture'] && this.state.haiyou.user['picture']['url']} className="avator" />
                         <div className="user-detail-description">
                             <span className="username"> { this.state.haiyou && this.state.haiyou.user.username }</span><span className="send-message"> <span>发消息</span></span> <span></span>
                             <div>

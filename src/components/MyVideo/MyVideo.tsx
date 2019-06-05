@@ -8,6 +8,7 @@ import switchSvg from '@assets/switch_btn_0.svg'
 import { TokenGet } from '@lib/helper'
 import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import moment from 'moment'
+import history from '@router'
 
 export class MyVideo extends React.Component {
     constructor(props: any) {
@@ -34,6 +35,9 @@ export class MyVideo extends React.Component {
             }
         })
     }
+    public switchToLink(link) {
+        history.push(link)
+    }
     public render() {
         return (
             <div className="myvideo-component">
@@ -47,7 +51,7 @@ export class MyVideo extends React.Component {
                     :
                     this.state.videos.map((value, key) => {
                         return (
-                            <div className="item" key={key}>
+                            <div className="item" key={key} onClick={() => this.switchToLink(`/haiyou${value&&value.id}`)}>
                                 <img src={value.picture || draft_default_png } className="avator" />
                                 <div className="right-description">
                                     <div className="first"> 
@@ -63,7 +67,7 @@ export class MyVideo extends React.Component {
                                         <div className="label">
                                             {value && value.label}
                                         </div>
-                                        <button> 编辑 </button>
+                                        <button onClick={() => this.switchToLink('/edithaiyou')}> 编辑 </button>
                                     </div>
                                     <div className="third">
                                         <img src={playSvg} className="play" />
