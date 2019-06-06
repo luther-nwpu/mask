@@ -82,6 +82,7 @@ class MyMessage extends React.Component {
         this.chatContent.scrollTop = this.chatContent.scrollHeight
     }
     public handleSendMessage() {
+        this.props.clearFirstUser()
         this.state.ws.sendMessage({
             action: Action.SENDMESSAGE,
             payload: {
