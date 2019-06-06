@@ -8,6 +8,7 @@ import { WebSocketType } from '@config'
 import moment from 'moment'
 import { withCookies, Cookies } from 'react-cookie'
 import { connect } from 'react-redux'
+import { clearFirstUser } from '@store/actions/chat'
 enum Action {
     SENDMESSAGE = 'sendMessage',
     SENDBARRAGE = 'sendBarrage',
@@ -135,19 +136,24 @@ class MyMessage extends React.Component {
         return total
         }, {})
         const userArray = Object.keys(userObject).reduce((total, value) => {
-            total.push({
-                other: value,
-                ...userObject[value]
-            })
+            if(this.props.firstUser && this.props.firstUser.id != value) {    
+                total.push({
+                    other: value,
+                    ...userObject[value]
+                })
+            }
             return total
         }, []).sort((a, b) => {
             return Number(a[a.message.length - 1].create_at > b[b.message.length - 1].create_at)
         })
+        if(this.props.firstUser) {
+            userArray.unshift(userObject[this.props.firstUser.id] || { other: this.props.firstUser.id, message: [], unreadNum: 0 })
+        }
         return (
             <div className="message-component">
                 <div className="left-user">
                     <div className="left-user-title">
-                        <img src ={ chatroom_btn_jpg } /> 
+                        <img src ={ userinfo.avator || chatroom_btn_jpg } /> 
                         <span>好嗨哟撩你了</span>
                     </div>
                     <div className="user-search">
@@ -255,9 +261,14 @@ class MyMessage extends React.Component {
 
 const mapStateToProps = (state) => {
     const { userinfo } = state.todoApp
+    const { user } = state.chat
     return {
-        userinfo: userinfo
+        userinfo: userinfo,
+        firstUser: user
     }
 }
+const mapDispatchToProps = dispatch => ({
+    clearFirstUser: () => dispatch(clearFirstUser())
+})
 
-export default withCookies(connect(mapStateToProps, null)(MyMessage))
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(MyMessage))

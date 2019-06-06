@@ -11,6 +11,8 @@ import { AuthTab } from '@config'
 import { dispatchSendBarrage } from '@store/actions/barrage'
 import moment from 'moment'
 import avator_default_jpg from '@assets/avator_default.jpg'
+import { chatFirstUser } from '../../store/actions/chat'
+import history from '@router'
 
 class VideoPage extends React.Component {
     public state = {
@@ -84,6 +86,14 @@ class VideoPage extends React.Component {
                 })
             }
         })
+    }
+    handleSendMessage () {
+        if(!this.props.userinfo) {
+            this.props.displayAuth(true, AuthTab.LOGIN)     
+        } else {
+            this.props.chatFirstUser(this.state.haiyou.user)
+            history.push('/personinfo?id=5')
+        }
     }
     handleLogin() {
         this.props.displayAuth(true, AuthTab.LOGIN)
@@ -368,7 +378,7 @@ class VideoPage extends React.Component {
                     <div className="user-detail">
                         <img src ={this.state.haiyou && this.state.haiyou.user['picture'] && this.state.haiyou.user['picture']['url']} className="avator" />
                         <div className="user-detail-description">
-                            <span className="username"> { this.state.haiyou && this.state.haiyou.user.username }</span><span className="send-message"> <span>发消息</span></span> <span></span>
+                            <span className="username"> { this.state.haiyou && this.state.haiyou.user.username }</span><span className="send-message" onClick={() => this.handleSendMessage()}> <span>发消息</span></span> <span></span>
                             <div>
                                 { this.state.haiyou && this.state.haiyou.user.signature }
                             </div>
@@ -440,7 +450,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
     displayAuth: (isDisplay, authTab) => dispatch(displayAuth(isDisplay, authTab)),
-    dispatchSendBarrage: (content) => dispatch(dispatchSendBarrage(content))
+    dispatchSendBarrage: (content) => dispatch(dispatchSendBarrage(content)),
+    chatFirstUser: (user) => dispatch(chatFirstUser(user))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoPage)
