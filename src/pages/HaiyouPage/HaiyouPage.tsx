@@ -5,8 +5,9 @@ import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
 import { TokenPost, TokenGet } from '@lib/helper'
-import returnSvg from '@assets/return_btn_0.svg'
 import history from '@router'
+import returnSvg from '@assets/return_btn_0.svg'
+
 const processStyle = {
     width: '100%',
     height: '1px',
@@ -18,13 +19,57 @@ export class HaiyouPage extends React.Component {
     hiddenFileInput: any
     constructor(props) {
         super(props)
-    }
-    public openSignTab = function() {
-        this.setState({openTab: true})
+        window.onbeforeunload = () => {
+            return '你要离开吗'
+        }
     }
     public componentDidMount() {
         this.getHaiyouById(this.props.match.params.id)
     }
+    public openSignTab = function() {
+        this.setState({openTab: true})
+    }
+    public deleteHaiyou() {
+        TokenPost('/api/haiyou/deleteHaiyou', {
+            id: this.props.match.params.id
+        }).then((res) => {
+            if(res.success) {
+                history.push('/personinfo?id=1')
+            } else {
+                alert('delete error')
+            }
+        })
+    }
+    
+    public saveHaiyou() {
+        TokenPost('/api/haiyou/updateHaiyou', {
+            id: this.props.match.params.id,
+            video_id: this.state.uploadVideos.reduce((total, value) => {
+                total.push(value.id)
+                return total
+            }, []).join('_'),
+            picture_id: this.state.selectCover && this.state.selectCover.id,
+            title: this.state.input.titleInput,
+            type: this.state.input.reprint == null,
+            reprint:  this.state.input.reprint == null ? '' : this.state.input.reprint,
+            partition: this.state.myCategory.one + '_' + this.state.myCategory.two,
+            label: this.state.labels.join('_'),
+            description: this.state.input.descriptionInput,
+            spare_picture: this.state.videoImgs.reduce((total, value) => {
+                if(value.id != this.state.selectCover.id) {
+                    total.push(value.id)
+                }
+                return total
+            }, []).join('_') + '_' + this.state.selectCover.id,
+        }).then((res) => {
+            if(res.success) {
+                history.push('/personinfo?id=1')
+            } else {
+                alert('add error')
+            }
+        })
+    }
+    
     getHaiyouById(id) {
         TokenGet('/api/haiyou/getHaiyouById', {
             id: id
@@ -167,7 +212,6 @@ export class HaiyouPage extends React.Component {
         videoImgs: [
             {
                 id: '',
-                name: '',
                 url: '',
             }
         ]
@@ -238,7 +282,6 @@ export class HaiyouPage extends React.Component {
         this.setState({myCategory:{one:one, two: two}}, () => {
             this.closeOpenTab()
         })
-        
     }
     public selectOne(one) {
         this.setState({one: one})
@@ -279,6 +322,7 @@ export class HaiyouPage extends React.Component {
             selectCover: this.state.videoImgs[key]
         })
     }
+
     public _handleChangeDescription(e) {
         this.setState({input: {...this.state.input, descriptionInput: e.target.value}})
     }
@@ -293,37 +337,6 @@ export class HaiyouPage extends React.Component {
         this.setState({input: { ...this.state.input, reprint: e.target.value }})
     }
 
-    public switchToHaiyou() {
-        history.push('/personinfo?id=1')
-    }
-    public saveHaiyou() {
-        TokenPost('/api/haiyou/updateHaiyou', {
-            id: this.props.match.params.id,
-            video_id: this.state.uploadVideos.reduce((total, value) => {
-                total.push(value.id)
-                return total
-            }, []).join('_'),
-            picture_id: this.state.selectCover && this.state.selectCover.id,
-            title: this.state.input.titleInput,
-            type: this.state.input.reprint == null,
-            reprint:  this.state.input.reprint == null ? '' : this.state.input.reprint,
-            partition: this.state.myCategory.one + '_' + this.state.myCategory.two,
-            label: this.state.labels.join('_'),
-            description: this.state.input.descriptionInput,
-            spare_picture: this.state.videoImgs.reduce((total, value) => {
-                if(value.id != this.state.selectCover.id) {
-                    total.push(value.id)
-                }
-                return total
-            }, []).join('_') + '_' + this.state.selectCover.id,
-        }).then((res) => {
-            if(res.success) {
-                history.push('/personinfo?id=1')
-            } else {
-                alert('add error')
-            }
-        })
-    }
     public uploadCoveFile(e) {
         const url = 'upload/uploadImg'
         const form = new FormData()
@@ -352,23 +365,15 @@ export class HaiyouPage extends React.Component {
             }
         }
     }
-    public deleteHaiyou() {
-        TokenPost('/api/haiyou/deleteHaiyou', {
-            id: this.props.match.params.id
-        }).then((res) => {
-            if(res.success) {
-                history.push('/personinfo?id=1')
-            } else {
-                alert('delete error')
-            }
-        })
+    switchToDraft() {
+        history.push('/personinfo?id=6')
     }
 
     public render () {
         return (
             <div className="haiyoupage-component">
                 <div className="drafts-content">
-                    <div className="returnToDraft"><img src={returnSvg} className="return-img" onClick={() => this.switchToHaiyou()}/> </div>
+                    <div className="returnToDraft"><img src={returnSvg} className="return-img" onClick={() => this.switchToDraft()}/> </div>
                     {
                         this.state.openTab ? (<div onClick={() => this.closeOpenTab()} className="fixed-mask"> </div>) : ''
                     }
@@ -473,11 +478,13 @@ export class HaiyouPage extends React.Component {
                         简介
                     </div>
                     <textarea value={this.state.input.descriptionInput} onChange={(e) => this._handleChangeDescription(e)}/>
-                    <button className="button-commit" onClick={()=> this.deleteHaiyou()}> 删除 </button>
+                    <button className="button-commit" onClick={()=> this.deleteHaiyou()}>  删除 </button>
                     <button className="button-save" onClick={() => this.saveHaiyou()}> 保存 </button>
                 </div>
             </div>
         )
     }
-
 }
+
+
+
