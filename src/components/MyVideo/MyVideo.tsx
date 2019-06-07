@@ -65,7 +65,7 @@ export class MyVideo extends React.Component {
                     this.state.videos.map((value, key) => {
                         return (
                             <div className="item" key={key} onClick={() => this.switchToLink(`/edithaiyou/${value&&value.id}`)}>
-                                <img src={value.picture && value['picture']['url'] || draft_default_png } className="avator" />
+                                <img src={(value['picture'] && value['picture']['url']) } className="avator" />
                                 <div className="right-description">
                                     <div className="first"> 
                                         <div className="category"> { value.category } </div>
