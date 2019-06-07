@@ -28,7 +28,7 @@ export class MyVideo extends React.Component {
                     videos: res.result.map((value) => {
                         return {
                             id: value.id,
-                            picture: value.select_picture && value.select_picture.url,
+                            picture: value.picture && value.picture.url,
                             category: value.partition && value.partition.split('_').join(' ') || '当前并未分类',
                             time: moment(value.update_at).format('YYYY-MM-DD'),
                             label: value.label && value.label.split('_').join(' ') || '当前并无标签',
@@ -65,7 +65,7 @@ export class MyVideo extends React.Component {
                     this.state.videos.map((value, key) => {
                         return (
                             <div className="item" key={key} onClick={() => this.switchToLink(`/edithaiyou/${value&&value.id}`)}>
-                                <img src={(value['picture'] && value['picture']['url']) } className="avator" />
+                                <img src={value.picture || draft_default_png } className="avator" />
                                 <div className="right-description">
                                     <div className="first"> 
                                         <div className="category"> { value.category } </div>
