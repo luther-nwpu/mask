@@ -14,6 +14,7 @@ import avator_default_jpg from '@assets/avator_default.jpg'
 import { chatFirstUser } from '../../store/actions/chat'
 import history from '@router'
 
+
 class VideoPage extends React.Component {
     public state = {
         textareaInput: '',
@@ -248,7 +249,7 @@ class VideoPage extends React.Component {
                     <div className="video-comments">
                         <span className="title"> 全部评论({this.state.comments.length}) </span>
                         <div className="comment-send">
-                            <img src={userinfo.avator}/>
+                            <img src={userinfo && userinfo.avator || avator_default_jpg }/>
                             <textarea value={this.state.textareaInput} onChange={(e) => this._handleChangeTextArea(e)}/>
                             <button onClick={() => this.handleSendComment()}>
                                 发表评论
