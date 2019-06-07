@@ -4,7 +4,7 @@ import videoImg from '@assets/download-video.png'
 import downloadSuccess from '@assets/download-success.png'
 import coverImg from '@assets/video-img.png'
 import selectImg from '@assets/select-img-btn.png'
-import { TokenPost } from '@lib/helper'
+import { TokenPost, TokenGet } from '@lib/helper'
 import returnSvg from '@assets/return_btn_0.svg'
 import history from '@router'
 const processStyle = {
@@ -22,9 +22,53 @@ export class HaiyouPage extends React.Component {
     public openSignTab = function() {
         this.setState({openTab: true})
     }
+    public componentDidMount() {
+        this.getHaiyouById(this.props.match.params.id)
+    }
+    getHaiyouById(id) {
+        TokenGet('/api/haiyou/getHaiyouById', {
+            id: id
+        }).then((res) => {
+            if(res.success) {
+                const result = res.result
+                console.log(result)
+                this.setState({
+                    input: {
+                        ...this.state.input,
+                        titleInput: result.title || '',
+                        reprint: result.reprint,
+                        descriptionInput: result.description || ''
+                    },
+                    uploadVideos: result.videoResult.map(value => {
+                        return {
+                            videoId: value.id,
+                            videoUrl: value.url,
+                            videoName: value.name,
+                            uploadState: {
+                                total: 100,
+                                loaded: 100,
+                                percent: '100%'
+                            }
+                        }
+                    }),
+                    labels: result.label && result.label.split('_') || [],
+                    myCategory: {
+                        one: result.partition && result.partition.split('_')[0] || '游戏',
+                        two: result.partition && result.partition.split('_')[0] || '单机游戏',
+                    },
+                    videoImgs: result.pictureResult.map(value => {
+                        return {
+                            id: value.id,
+                            url: value.url
+                        }
+                    }),
+                    selectCover: result.picture_id
+                })
+            }
+        })
+    }
     props
     public state = {
-        draftId: 0,
         input: {
             labelInput: '',
             titleInput: '',
@@ -235,23 +279,6 @@ export class HaiyouPage extends React.Component {
             selectCover: this.state.videoImgs[key]
         })
     }
-    public async commit() {
-        const res = await TokenPost('haiyou/commitHaiyou', {
-            video_id: this.state.uploadVideos.reduce((total, value) => {
-                total.push(value.id)
-                return total
-            }, []).join('_'),
-            picture_id: this.state.selectCover && this.state.selectCover.id,
-            title: this.state.input.titleInput,
-            type: this.state.input.reprint == null,
-            reprint:  this.state.input.reprint == null ? '' : this.state.input.reprint,
-            partition: this.state.myCategory.one + '_' + this.state.myCategory.two,
-            label: this.state.labels.join('_'),
-            description: this.state.input.descriptionInput,
-            draft_id: this.state.draftId
-        })
-        console.log(res)
-    }
     public _handleChangeDescription(e) {
         this.setState({input: {...this.state.input, descriptionInput: e.target.value}})
     }
@@ -269,26 +296,32 @@ export class HaiyouPage extends React.Component {
     public switchToHaiyou() {
         history.push('/personinfo?id=1')
     }
-    public async saveDraft() {
-        await TokenPost('/drafts/updateDraft', {
-            id: this.state.draftId,
-            picture_id: this.state.videoImgs.reduce((total, value) => {
-                if(value.id != this.state.selectCover.id) {
-                    total.push(value.id)
-                }
-                return total
-            }, []).join('_') + '_' + this.state.selectCover.id,
+    public saveHaiyou() {
+        TokenPost('/api/haiyou/updateHaiyou', {
+            id: this.props.match.params.id,
             video_id: this.state.uploadVideos.reduce((total, value) => {
                 total.push(value.id)
                 return total
             }, []).join('_'),
+            picture_id: this.state.selectCover && this.state.selectCover.id,
             title: this.state.input.titleInput,
             type: this.state.input.reprint == null,
             reprint:  this.state.input.reprint == null ? '' : this.state.input.reprint,
             partition: this.state.myCategory.one + '_' + this.state.myCategory.two,
             label: this.state.labels.join('_'),
             description: this.state.input.descriptionInput,
-            select_picture: this.state.selectCover.id
+            spare_picture: this.state.videoImgs.reduce((total, value) => {
+                if(value.id != this.state.selectCover.id) {
+                    total.push(value.id)
+                }
+                return total
+            }, []).join('_') + '_' + this.state.selectCover.id,
+        }).then((res) => {
+            if(res.success) {
+                history.push('/personinfo?id=1')
+            } else {
+                alert('add error')
+            }
         })
     }
     public uploadCoveFile(e) {
@@ -318,6 +351,17 @@ export class HaiyouPage extends React.Component {
                 }
             }
         }
+    }
+    public deleteHaiyou() {
+        TokenPost('/api/haiyou/deleteHaiyou', {
+            id: this.props.match.params.id
+        }).then((res) => {
+            if(res.success) {
+                history.push('/personinfo?id=1')
+            } else {
+                alert('delete error')
+            }
+        })
     }
 
     public render () {
@@ -429,8 +473,8 @@ export class HaiyouPage extends React.Component {
                         简介
                     </div>
                     <textarea value={this.state.input.descriptionInput} onChange={(e) => this._handleChangeDescription(e)}/>
-                    <button className="button-commit" onClick={()=> this.commit()}> 提交 </button>
-                    <button className="button-save" onClick={() => this.saveDraft()}> 保存 </button>
+                    <button className="button-commit" onClick={()=> this.deleteHaiyou()}> 删除 </button>
+                    <button className="button-save" onClick={() => this.saveHaiyou()}> 保存 </button>
                 </div>
             </div>
         )

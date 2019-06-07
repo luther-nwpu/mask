@@ -9,6 +9,7 @@ import { TokenGet } from '@lib/helper'
 import draft_default_png from '@assets/draft_default_btn_0.jpg'
 import moment from 'moment'
 import history from '@router'
+import { TokenPost } from '@lib/helper'
 
 export class MyVideo extends React.Component {
     constructor(props: any) {
@@ -18,6 +19,9 @@ export class MyVideo extends React.Component {
         videos: []
     }
     public componentWillMount() {
+        this.getAllHaiyou()
+    }
+    public getAllHaiyou() {
         TokenGet('/api/haiyou/getAllHaiyou').then((res) => {
             if(res.success) {
                 this.setState({
@@ -32,6 +36,15 @@ export class MyVideo extends React.Component {
                         }
                     })   
                 })
+            }
+        })
+    }
+    public deleteHaiyou(id) {
+        TokenPost('/api/haiyou/deleteHaiyou', {
+            id
+        }).then((res) => {
+            if(res.success) {
+                this.getAllHaiyou()
             }
         })
     }
@@ -67,6 +80,7 @@ export class MyVideo extends React.Component {
                                         <div className="label">
                                             {value && value.label}
                                         </div>
+                                        <button  className="delete-btn" onClick={() => this.deleteHaiyou(value.id) } > 删除</button>
                                         <button onClick={() => this.switchToLink('/edithaiyou')}> 编辑 </button>
                                     </div>
                                     <div className="third">
