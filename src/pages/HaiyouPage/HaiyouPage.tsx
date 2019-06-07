@@ -84,7 +84,7 @@ export class HaiyouPage extends React.Component {
                         reprint: result.reprint,
                         descriptionInput: result.description || ''
                     },
-                    uploadVideos: result.videoResult.map(value => {
+                    uploadVideos: result.videoArr.map(value => {
                         return {
                             videoId: value.id,
                             videoUrl: value.url,
