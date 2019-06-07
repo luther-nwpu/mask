@@ -72,7 +72,7 @@ export class HaiyouPage extends React.Component {
     
     getHaiyouById(id) {
         TokenGet('/api/haiyou/getHaiyouById', {
-            id: id
+            haiyouId: id
         }).then((res) => {
             if(res.success) {
                 const result = res.result
